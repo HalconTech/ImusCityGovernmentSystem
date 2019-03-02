@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
 
             <Image Source="Images/imuslogo.png" Stretch="UniformToFill"  />
-            <TextBlock Grid.Row="1" TextAlignment="Center" Text="Electronic Government Application System" TextWrapping="Wrap" FontWeight="Bold" FontSize="14"/>
+            <TextBlock Grid.Row="1" TextAlignment="Center" Text="Government Integrated System of Imus" TextWrapping="Wrap" FontWeight="Bold" FontSize="14"/>
         </Grid>
         <Grid Margin="25" Name="CredentialsGrid" Grid.Column="1">
             <Grid.RowDefinitions>
