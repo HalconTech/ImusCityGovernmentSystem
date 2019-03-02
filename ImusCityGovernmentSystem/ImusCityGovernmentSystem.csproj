@@ -128,6 +128,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckDisbursementDataTable.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Check Disbursement\Report\AccountantCheckDisbursementReport.cs">
+      <DependentUpon>AccountantCheckDisbursementReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Check Disbursement\Report\CheckRegisterReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -467,6 +473,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Check Disbursement\Report\AccountantCheckDisbursementReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AccountantCheckDisbursementReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Check Disbursement\Report\CheckRegisterReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CheckRegisterReport.cs</LastGenOutput>
