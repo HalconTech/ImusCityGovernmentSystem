@@ -29,6 +29,7 @@ namespace ImusCityGovernmentSystem
         {
             InitializeComponent();
             usernametb.Focus();
+            string peter = "pasturan";
         }
 
         protected override void OnClosed(EventArgs e)
