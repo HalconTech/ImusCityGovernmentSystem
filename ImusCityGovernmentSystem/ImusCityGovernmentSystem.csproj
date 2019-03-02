@@ -120,6 +120,9 @@
     <Compile Include="Check Disbursement\CheckDisbursementListWindow.xaml.cs">
       <DependentUpon>CheckDisbursementListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Check Disbursement\CheckDisbursementWindow.xaml.cs">
+      <DependentUpon>CheckDisbursementWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Check Disbursement\Data\CheckDisbursementDataTable.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -217,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Check Disbursement\CheckDisbursementListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Check Disbursement\CheckDisbursementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

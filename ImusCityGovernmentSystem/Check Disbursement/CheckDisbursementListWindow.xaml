@@ -7,75 +7,67 @@
                       TitleCaps="False"
                       BorderThickness="0"
                       WindowStartupLocation="CenterScreen"
-                      Height="606"
+                      Height="663"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
-                      Width="462.5"  Loaded="MetroWindow_Loaded">
+                      Width="551"  Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="350"></RowDefinition>
             <RowDefinition Height="17"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+
         </Grid.RowDefinitions>
-        <GroupBox Header="Details" Margin="0,0,0,5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="24"></RowDefinition>
-                    <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition Height="20"></RowDefinition>
-                    <RowDefinition Height="20"></RowDefinition>
-                    <RowDefinition Height="20"></RowDefinition>
-                    <RowDefinition Height="20"></RowDefinition>
-                    <RowDefinition ></RowDefinition>
-                    <RowDefinition Height="24"></RowDefinition>
-                    <RowDefinition Height="24"></RowDefinition>
-                    <RowDefinition Height="24"></RowDefinition>
-                </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition ></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Voucher No." FontWeight="Bold" FontSize="16"></TextBlock>
+            <TextBlock x:Name="vouchernotb" Grid.Column="1" FontSize="16" Foreground="#FFB40000" FontWeight="Bold"/>
+            <TextBlock Text="Payment Type:" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+            <TextBlock Grid.Column="2" Text="Date:" FontWeight="Bold" FontSize="16"></TextBlock>
+            <TextBlock x:Name="datetb" Grid.Column="3" Foreground="#FFB40000" FontSize="16" FontWeight="Bold"/>
+            <Grid Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Voucher No." FontWeight="Bold" FontSize="16"></TextBlock>
-                <TextBlock x:Name="vouchernotb" Grid.Column="1" FontSize="16" Foreground="#FFB40000" FontWeight="Bold"/>
-                <TextBlock Text="Payment Type:" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
-                <TextBlock Grid.Column="2" Text="Date:" FontWeight="Bold" FontSize="16"></TextBlock>
-                <TextBlock x:Name="datetb" Grid.Column="3" Foreground="#FFB40000" FontSize="16" FontWeight="Bold"/>
-                <Grid Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <CheckBox x:Name="checkcb" Content="Check"></CheckBox>
-                    <CheckBox x:Name="cashcb" Grid.Column="1" Content="Cash"></CheckBox>
-                    <CheckBox x:Name="otherscb" Grid.Column="2" Content="Others"></CheckBox>
-                </Grid>
-                <TextBlock Grid.Row="2" Text="Payee:" FontWeight="Bold"></TextBlock>
-                <TextBlock x:Name="payeetb" Grid.ColumnSpan="3" Grid.Row="2" Grid.Column="1"/>
-                <TextBlock Grid.Row="3" Text="Project Name:" FontWeight="Bold"></TextBlock>
-                <TextBlock x:Name="projectnametb" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"></TextBlock>
-                <TextBlock Grid.Row="4" Text="Department:" FontWeight="Bold"></TextBlock>
-                <TextBlock x:Name="departmenttb" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"></TextBlock>
-                <TextBlock Grid.Row="5" Text="Description:" FontWeight="Bold"></TextBlock>
-                <TextBox x:Name="descriptiontb" Grid.Row="6" TextWrapping="Wrap" Grid.ColumnSpan="4" ></TextBox>
-  
-                <CheckBox x:Name="obligatedcb" Grid.Row="7" Content="Allotment obligated for the purpose as indicated above" Grid.ColumnSpan="4"></CheckBox>
-                <CheckBox x:Name="documentcb" Grid.Row="8" Content="Supporting documents completed" Grid.ColumnSpan="4"></CheckBox>
-                <TextBlock Text="Amount:" FontWeight="Bold" FontSize="16" Grid.Row="9"></TextBlock>
-                <TextBlock x:Name="amounttb" Grid.Column="1" FontSize="16" Grid.ColumnSpan="3" Grid.Row="9" Foreground="#FFB40000" FontWeight="Bold"/>
+                <CheckBox x:Name="checkcb" Content="Check"></CheckBox>
+                <CheckBox x:Name="cashcb" Grid.Column="1" Content="Cash"></CheckBox>
+                <CheckBox x:Name="otherscb" Grid.Column="2" Content="Others"></CheckBox>
             </Grid>
-        </GroupBox>
+            <TextBlock Grid.Row="2" Text="Payee:" FontWeight="Bold"></TextBlock>
+            <TextBlock x:Name="payeetb" Grid.ColumnSpan="3" Grid.Row="2" Grid.Column="1"/>
+            <TextBlock Grid.Row="3" Text="Project Name:" FontWeight="Bold"></TextBlock>
+            <TextBlock x:Name="projectnametb" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"></TextBlock>
+            <TextBlock Grid.Row="4" Text="Department:" FontWeight="Bold"></TextBlock>
+            <TextBlock x:Name="departmenttb" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"></TextBlock>
+            <TextBlock Grid.Row="5" Text="Description:" FontWeight="Bold"></TextBlock>
+            <TextBox x:Name="descriptiontb" Grid.Row="6" TextWrapping="Wrap" Grid.ColumnSpan="4" ></TextBox>
+
+            <CheckBox x:Name="obligatedcb" Grid.Row="7" Content="Allotment obligated for the purpose as indicated above" Grid.ColumnSpan="4"></CheckBox>
+            <CheckBox x:Name="documentcb" Grid.Row="8" Content="Supporting documents completed" Grid.ColumnSpan="4"></CheckBox>
+            <TextBlock Text="Amount:" FontWeight="Bold" FontSize="16" Grid.Row="9"></TextBlock>
+            <TextBlock x:Name="amounttb" Grid.Column="1" FontSize="16" Grid.ColumnSpan="3" Grid.Row="9" Foreground="#FFB40000" FontWeight="Bold"/>
+        </Grid>
         <TextBlock Text="Voucher List" Grid.Row="1" FontWeight="Bold"></TextBlock>
-        <ListBox Name="voucherlistlb"  BorderBrush="Black" BorderThickness="1" Grid.Row="2" SelectionChanged="voucherlistlb_SelectionChanged" Margin="0,0,0,5" ></ListBox>
-        <Button x:Name="addbtn" Grid.Row="3" Click="addbtn_Click">
-            <StackPanel Orientation="Horizontal">
-                <iconPacks:PackIconModern Width="17" Height="17" Kind="Add" />
-                <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Text="Create Disbursement Entry" />
-            </StackPanel>
-        </Button>
+        <ListBox Name="voucherlistlb"  BorderBrush="Black" BorderThickness="1" Grid.Row="2" SelectionChanged="voucherlistlb_SelectionChanged" Margin="0" ></ListBox>
     </Grid>
     </Controls:MetroWindow>

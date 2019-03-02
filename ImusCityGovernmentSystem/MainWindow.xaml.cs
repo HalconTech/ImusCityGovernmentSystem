@@ -67,9 +67,9 @@ namespace ImusCityGovernmentSystem
         private void checkdisbursementbtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            Check_Disbursement.CheckDisbursementListWindow check = new Check_Disbursement.CheckDisbursementListWindow();
-            check.Show();
+            ImusCityGovernmentSystem.Check_Disbursement.CheckDisbursementWindow check = new Check_Disbursement.CheckDisbursementWindow();
             Mouse.OverrideCursor = null;
+            check.ShowDialog();         
         }
 
         private void departmentbtn_Click(object sender, RoutedEventArgs e)

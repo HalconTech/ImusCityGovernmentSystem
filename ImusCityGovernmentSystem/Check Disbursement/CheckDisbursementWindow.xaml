@@ -1,0 +1,45 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.Check_Disbursement.CheckDisbursementWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        BorderThickness="0"
+        Title="Check Disbursement"
+    
+        WindowTransitionsEnabled="False"  Height="410.849" Width="533.071"   ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"   TitleCaps="False"  >
+    <Grid>
+   
+     
+        <WrapPanel Margin="45" HorizontalAlignment="Center">
+            <Controls:Tile x:Name="disbursementlistbtn" Background="#CC0050EF"    Title="Disbursement List" TitleFontSize="12" Click="disbursementlistbtn_Click" >
+                <Rectangle Fill="White" Height="50" Width="50">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_list}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="adddisbursementbtn"   Background="#CC0050EF"    Title="Add New Disbursement" TitleFontSize="12" Click="adddisbursementbtn_Click"  >
+                <Rectangle Fill="White" Height="50" Width="40">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_page_add}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="payeebtn"   Background="#CC0050EF"    Title="Payee Management" TitleFontSize="12" Click="payeebtn_Click"  >
+                <Rectangle Fill="White" Height="50" Width="60">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_people_multiple}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="fundbtn"   Background="#CC0050EF"    Title="Fund Management" TitleFontSize="12" Click="fundbtn_Click"  >
+                <Rectangle Fill="White" Height="50" Width="50">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_money}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+        </WrapPanel>
+    </Grid>
+   
+</Controls:MetroWindow>

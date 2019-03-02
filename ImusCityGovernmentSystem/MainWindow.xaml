@@ -225,7 +225,7 @@
                         </MenuItem>
                     </MenuItem>
                  
-                    <MenuItem x:Name="payeebtn"    VerticalContentAlignment="Center"  Header="Payee Management" Click="payeebtn_Click"    >
+                    <MenuItem x:Name="payeebtn" Visibility="Collapsed"   VerticalContentAlignment="Center"  Header="Payee Management" Click="payeebtn_Click"    >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="16" Height="14">
                                 <Rectangle.OpacityMask>
@@ -234,7 +234,7 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="fundbtn"    VerticalContentAlignment="Center"  Header="Fund Management" Click="fundbtn_Click"    >
+                    <MenuItem x:Name="fundbtn"  Visibility="Collapsed"   VerticalContentAlignment="Center"  Header="Fund Management" Click="fundbtn_Click"    >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="16" Height="14">
                                 <Rectangle.OpacityMask>
