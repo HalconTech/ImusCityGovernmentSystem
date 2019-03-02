@@ -1,0 +1,1406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ImusCityHallModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AuditTrail">
+          <Key>
+            <PropertyRef Name="AuditTrailID" />
+          </Key>
+          <Property Name="AuditTrailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" />
+          <Property Name="Activity" Type="nvarchar" MaxLength="250" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="ComputerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModuleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Check">
+          <Key>
+            <PropertyRef Name="CheckID" />
+          </Key>
+          <Property Name="CheckID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisbursementID" Type="int" />
+          <Property Name="CheckNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="FundID" Type="int" />
+          <Property Name="CheckDescription" Type="text" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="DateStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Amount" Type="money" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar" MaxLength="150" />
+          <Property Name="DepartmentCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="DivisionID" Type="int" />
+        </EntityType>
+        <EntityType Name="Disbursement">
+          <Key>
+            <PropertyRef Name="DisbursementID" />
+          </Key>
+          <Property Name="DisbursementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayeeID" Type="int" />
+          <Property Name="PaymentTypeID" Type="int" />
+          <Property Name="VoucherNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Amount" Type="money" />
+          <Property Name="Obligated" Type="bit" />
+          <Property Name="DocCompleted" Type="bit" />
+          <Property Name="Certification" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="PayeeRepID" Type="int" />
+        </EntityType>
+        <EntityType Name="Division">
+          <Key>
+            <PropertyRef Name="DivisionID" />
+          </Key>
+          <Property Name="DivisionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DivisionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DivisionCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nickname" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeDepartmentID" Type="int" />
+          <Property Name="EmployeeStatusID" Type="int" />
+          <Property Name="EmployeePositionID" Type="int" />
+          <Property Name="DateHired" Type="date" />
+          <Property Name="DatePermanency" Type="date" />
+          <Property Name="DateEndContract" Type="date" />
+          <Property Name="ReasonForLeaving" Type="text" />
+          <Property Name="OtherReasonForLeaving" Type="text" />
+          <Property Name="DateResigned" Type="date" />
+          <Property Name="DateRetired" Type="date" />
+          <Property Name="PermanentAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="CurrentAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="ProvincialAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="TelephoneNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProvincialTelephoneNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PrimaryEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondaryEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="1" />
+          <Property Name="Birthday" Type="date" />
+          <Property Name="Birthplace" Type="nvarchar" MaxLength="50" />
+          <Property Name="CivilStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MotherName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Spouse" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpouseOccupation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Children" Type="int" />
+          <Property Name="Child1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Child2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Child3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Child4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Child5" Type="nvarchar" MaxLength="50" />
+          <Property Name="OtherChild" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="50" />
+          <Property Name="Religion" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="TIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="SSS" Type="nvarchar" MaxLength="50" />
+          <Property Name="PAG_IBIG" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhilHealth" Type="nvarchar" MaxLength="50" />
+          <Property Name="CedulaNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CedulaDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="CedulaPlace" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateEncoded" Type="datetime" />
+          <Property Name="Archive" Type="bit" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="NameSuffix" Type="nvarchar" MaxLength="100" />
+          <Property Name="BankAccountNo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmployeePosition">
+          <Key>
+            <PropertyRef Name="EmployeePositionID" />
+          </Key>
+          <Property Name="EmployeePositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeRankID" Type="int" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="EmployeePositionName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmployeeRank">
+          <Key>
+            <PropertyRef Name="EmployeeRankID" />
+          </Key>
+          <Property Name="EmployeeRankID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeRankName" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="EmployeeStatus">
+          <Key>
+            <PropertyRef Name="EmployeeStatusID" />
+          </Key>
+          <Property Name="EmployeeStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeStatusName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeStatusCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Fund">
+          <Key>
+            <PropertyRef Name="FundID" />
+          </Key>
+          <Property Name="FundID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FundName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FundCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LicensingCode">
+          <Key>
+            <PropertyRef Name="LicenseKey" />
+          </Key>
+          <Property Name="LicenseKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ExpirationDate" Type="date" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="MachineName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDemo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Payee">
+          <Key>
+            <PropertyRef Name="PayeeID" />
+          </Key>
+          <Property Name="PayeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayeeNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="150" />
+          <Property Name="CompanyAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="TIN" Type="nvarchar" MaxLength="20" />
+          <Property Name="LandlineNo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PayeeRepresentative">
+          <Key>
+            <PropertyRef Name="PayeeRepID" />
+          </Key>
+          <Property Name="PayeeRepID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PayeeID" Type="int" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Landline" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="PaymentTypeID" />
+          </Key>
+          <Property Name="PaymentTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PayeeRepresentativeView">
+          <Key>
+            <PropertyRef Name="PayeeRepID" />
+          </Key>
+          <Property Name="PayeeRepID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayeeID" Type="int" />
+          <Property Name="PayeeRepresentativeName" Type="nvarchar" MaxLength="101" />
+        </EntityType>
+        <Association Name="FK_Check_Disbursement">
+          <End Role="Disbursement" Type="Self.Disbursement" Multiplicity="0..1" />
+          <End Role="Check" Type="Self.Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursement">
+              <PropertyRef Name="DisbursementID" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="DisbursementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Division">
+          <End Role="Division" Type="Self.Division" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Division">
+              <PropertyRef Name="DivisionID" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="DivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Disbursement" Type="Self.Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_Disbursement">
+          <End Role="Payee" Type="Self.Payee" Multiplicity="0..1" />
+          <End Role="Disbursement" Type="Self.Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payee">
+              <PropertyRef Name="PayeeID" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="PayeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_PaymentType">
+          <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="0..1" />
+          <End Role="Disbursement" Type="Self.Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="PaymentTypeID" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="PaymentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmployeePosition">
+          <End Role="EmployeePosition" Type="Self.EmployeePosition" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeePosition">
+              <PropertyRef Name="EmployeePositionID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeePositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmployeeStatus">
+          <End Role="EmployeeStatus" Type="Self.EmployeeStatus" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeStatus">
+              <PropertyRef Name="EmployeeStatusID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeePosition_EmployeeRank">
+          <End Role="EmployeeRank" Type="Self.EmployeeRank" Multiplicity="0..1" />
+          <End Role="EmployeePosition" Type="Self.EmployeePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRank">
+              <PropertyRef Name="EmployeeRankID" />
+            </Principal>
+            <Dependent Role="EmployeePosition">
+              <PropertyRef Name="EmployeeRankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayeeRepresentative_Payee">
+          <End Role="Payee" Type="Self.Payee" Multiplicity="0..1" />
+          <End Role="PayeeRepresentative" Type="Self.PayeeRepresentative" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payee">
+              <PropertyRef Name="PayeeID" />
+            </Principal>
+            <Dependent Role="PayeeRepresentative">
+              <PropertyRef Name="PayeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ImusCityHallModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuditTrail" EntityType="Self.AuditTrail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Check" EntityType="Self.Check" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disbursement" EntityType="Self.Disbursement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeePosition" EntityType="Self.EmployeePosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeRank" EntityType="Self.EmployeeRank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fund" EntityType="Self.Fund" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LicensingCode" EntityType="Self.LicensingCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payee" EntityType="Self.Payee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayeeRepresentative" EntityType="Self.PayeeRepresentative" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayeeRepresentativeView" EntityType="Self.PayeeRepresentativeView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PayeeRepresentativeView].[PayeeRepID] AS [PayeeRepID], 
+    [PayeeRepresentativeView].[PayeeID] AS [PayeeID], 
+    [PayeeRepresentativeView].[PayeeRepresentativeName] AS [PayeeRepresentativeName]
+    FROM [dbo].[PayeeRepresentativeView] AS [PayeeRepresentativeView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Check_Disbursement" Association="Self.FK_Check_Disbursement">
+            <End Role="Disbursement" EntitySet="Disbursement" />
+            <End Role="Check" EntitySet="Check" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Division" Association="Self.FK_Department_Division">
+            <End Role="Division" EntitySet="Division" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_Department" Association="Self.FK_Disbursement_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Disbursement" EntitySet="Disbursement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_Disbursement" Association="Self.FK_Disbursement_Disbursement">
+            <End Role="Payee" EntitySet="Payee" />
+            <End Role="Disbursement" EntitySet="Disbursement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_PaymentType" Association="Self.FK_Disbursement_PaymentType">
+            <End Role="PaymentType" EntitySet="PaymentType" />
+            <End Role="Disbursement" EntitySet="Disbursement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeePosition" Association="Self.FK_Employee_EmployeePosition">
+            <End Role="EmployeePosition" EntitySet="EmployeePosition" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeeStatus" Association="Self.FK_Employee_EmployeeStatus">
+            <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeePosition_EmployeeRank" Association="Self.FK_EmployeePosition_EmployeeRank">
+            <End Role="EmployeeRank" EntitySet="EmployeeRank" />
+            <End Role="EmployeePosition" EntitySet="EmployeePosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayeeRepresentative_Payee" Association="Self.FK_PayeeRepresentative_Payee">
+            <End Role="Payee" EntitySet="Payee" />
+            <End Role="PayeeRepresentative" EntitySet="PayeeRepresentative" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ImusCityHallModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ImusCityHallEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="ImusCityHallModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="ImusCityHallModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="ImusCityHallModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUserRoles" EntityType="ImusCityHallModel.AspNetUserRole" />
+          <EntitySet Name="AspNetUsers" EntityType="ImusCityHallModel.AspNetUser" />
+          <EntitySet Name="Checks" EntityType="ImusCityHallModel.Check" />
+          <EntitySet Name="Departments" EntityType="ImusCityHallModel.Department" />
+          <EntitySet Name="Divisions" EntityType="ImusCityHallModel.Division" />
+          <EntitySet Name="EmployeePositions" EntityType="ImusCityHallModel.EmployeePosition" />
+          <EntitySet Name="EmployeeRanks" EntityType="ImusCityHallModel.EmployeeRank" />
+          <EntitySet Name="EmployeeStatus" EntityType="ImusCityHallModel.EmployeeStatu" />
+          <EntitySet Name="Funds" EntityType="ImusCityHallModel.Fund" />
+          <EntitySet Name="Payees" EntityType="ImusCityHallModel.Payee" />
+          <EntitySet Name="PayeeRepresentatives" EntityType="ImusCityHallModel.PayeeRepresentative" />
+          <EntitySet Name="PaymentTypes" EntityType="ImusCityHallModel.PaymentType" />
+          <EntitySet Name="sysdiagrams" EntityType="ImusCityHallModel.sysdiagram" />
+          <EntitySet Name="PayeeRepresentativeViews" EntityType="ImusCityHallModel.PayeeRepresentativeView" />
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="ImusCityHallModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRole" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="ImusCityHallModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="ImusCityHallModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="ImusCityHallModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRole" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Division" Association="ImusCityHallModel.FK_Department_Division">
+            <End Role="Division" EntitySet="Divisions" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeePosition_EmployeeRank" Association="ImusCityHallModel.FK_EmployeePosition_EmployeeRank">
+            <End Role="EmployeeRank" EntitySet="EmployeeRanks" />
+            <End Role="EmployeePosition" EntitySet="EmployeePositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayeeRepresentative_Payee" Association="ImusCityHallModel.FK_PayeeRepresentative_Payee">
+            <End Role="Payee" EntitySet="Payees" />
+            <End Role="PayeeRepresentative" EntitySet="PayeeRepresentatives" />
+          </AssociationSet>
+          <EntitySet Name="LicensingCodes" EntityType="ImusCityHallModel.LicensingCode" />
+          <EntitySet Name="Employees" EntityType="ImusCityHallModel.Employee" />
+          <AssociationSet Name="FK_Employee_Department" Association="ImusCityHallModel.FK_Employee_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeePosition" Association="ImusCityHallModel.FK_Employee_EmployeePosition">
+            <End Role="EmployeePosition" EntitySet="EmployeePositions" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeeStatus" Association="ImusCityHallModel.FK_Employee_EmployeeStatus">
+            <End Role="EmployeeStatu" EntitySet="EmployeeStatus" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <EntitySet Name="Disbursements" EntityType="ImusCityHallModel.Disbursement" />
+          <AssociationSet Name="FK_Check_Disbursement" Association="ImusCityHallModel.FK_Check_Disbursement">
+            <End Role="Disbursement" EntitySet="Disbursements" />
+            <End Role="Check" EntitySet="Checks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_Department" Association="ImusCityHallModel.FK_Disbursement_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_Disbursement" Association="ImusCityHallModel.FK_Disbursement_Disbursement">
+            <End Role="Payee" EntitySet="Payees" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_PaymentType" Association="ImusCityHallModel.FK_Disbursement_PaymentType">
+            <End Role="PaymentType" EntitySet="PaymentTypes" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <EntitySet Name="AuditTrails" EntityType="ImusCityHallModel.AuditTrail" />
+        </EntityContainer>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="ImusCityHallModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRole" ToRole="AspNetUserRole" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="ImusCityHallModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="ImusCityHallModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRole" Relationship="ImusCityHallModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRole" ToRole="AspNetRole" />
+          <NavigationProperty Name="AspNetUser" Relationship="ImusCityHallModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="ImusCityHallModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="ImusCityHallModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="ImusCityHallModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserRole" />
+        </EntityType>
+        <EntityType Name="Check">
+          <Key>
+            <PropertyRef Name="CheckID" />
+          </Key>
+          <Property Name="CheckID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisbursementID" Type="Int32" />
+          <Property Name="CheckNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FundID" Type="Int32" />
+          <Property Name="CheckDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="DateStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Disbursement" Relationship="ImusCityHallModel.FK_Check_Disbursement" FromRole="Check" ToRole="Disbursement" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DivisionID" Type="Int32" />
+          <NavigationProperty Name="Division" Relationship="ImusCityHallModel.FK_Department_Division" FromRole="Department" ToRole="Division" />
+          <NavigationProperty Name="Employees" Relationship="ImusCityHallModel.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Disbursements" Relationship="ImusCityHallModel.FK_Disbursement_Department" FromRole="Department" ToRole="Disbursement" />
+        </EntityType>
+        <EntityType Name="Division">
+          <Key>
+            <PropertyRef Name="DivisionID" />
+          </Key>
+          <Property Name="DivisionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DivisionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DivisionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Departments" Relationship="ImusCityHallModel.FK_Department_Division" FromRole="Division" ToRole="Department" />
+        </EntityType>
+        <EntityType Name="EmployeePosition">
+          <Key>
+            <PropertyRef Name="EmployeePositionID" />
+          </Key>
+          <Property Name="EmployeePositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeRankID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="EmployeePositionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EmployeeRank" Relationship="ImusCityHallModel.FK_EmployeePosition_EmployeeRank" FromRole="EmployeePosition" ToRole="EmployeeRank" />
+          <NavigationProperty Name="Employees" Relationship="ImusCityHallModel.FK_Employee_EmployeePosition" FromRole="EmployeePosition" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="EmployeeRank">
+          <Key>
+            <PropertyRef Name="EmployeeRankID" />
+          </Key>
+          <Property Name="EmployeeRankID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeRankName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EmployeePositions" Relationship="ImusCityHallModel.FK_EmployeePosition_EmployeeRank" FromRole="EmployeeRank" ToRole="EmployeePosition" />
+        </EntityType>
+        <EntityType Name="EmployeeStatu">
+          <Key>
+            <PropertyRef Name="EmployeeStatusID" />
+          </Key>
+          <Property Name="EmployeeStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeStatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeStatusCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="ImusCityHallModel.FK_Employee_EmployeeStatus" FromRole="EmployeeStatu" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Fund">
+          <Key>
+            <PropertyRef Name="FundID" />
+          </Key>
+          <Property Name="FundID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FundName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FundCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Payee">
+          <Key>
+            <PropertyRef Name="PayeeID" />
+          </Key>
+          <Property Name="PayeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayeeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TIN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LandlineNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PayeeRepresentatives" Relationship="ImusCityHallModel.FK_PayeeRepresentative_Payee" FromRole="Payee" ToRole="PayeeRepresentative" />
+          <NavigationProperty Name="Disbursements" Relationship="ImusCityHallModel.FK_Disbursement_Disbursement" FromRole="Payee" ToRole="Disbursement" />
+        </EntityType>
+        <EntityType Name="PayeeRepresentative">
+          <Key>
+            <PropertyRef Name="PayeeRepID" />
+          </Key>
+          <Property Name="PayeeRepID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PayeeID" Type="Int32" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Landline" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payee" Relationship="ImusCityHallModel.FK_PayeeRepresentative_Payee" FromRole="PayeeRepresentative" ToRole="Payee" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="PaymentTypeID" />
+          </Key>
+          <Property Name="PaymentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Disbursements" Relationship="ImusCityHallModel.FK_Disbursement_PaymentType" FromRole="PaymentType" ToRole="Disbursement" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="PayeeRepresentativeView">
+          <Key>
+            <PropertyRef Name="PayeeRepID" />
+          </Key>
+          <Property Name="PayeeRepID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayeeID" Type="Int32" />
+          <Property Name="PayeeRepresentativeName" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Type="ImusCityHallModel.AspNetRole" Role="AspNetRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ImusCityHallModel.AspNetUserRole" Role="AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="ImusCityHallModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ImusCityHallModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="ImusCityHallModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ImusCityHallModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Type="ImusCityHallModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ImusCityHallModel.AspNetUserRole" Role="AspNetUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Division">
+          <End Type="ImusCityHallModel.Division" Role="Division" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Division">
+              <PropertyRef Name="DivisionID" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="DivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeePosition_EmployeeRank">
+          <End Type="ImusCityHallModel.EmployeeRank" Role="EmployeeRank" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.EmployeePosition" Role="EmployeePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRank">
+              <PropertyRef Name="EmployeeRankID" />
+            </Principal>
+            <Dependent Role="EmployeePosition">
+              <PropertyRef Name="EmployeeRankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayeeRepresentative_Payee">
+          <End Type="ImusCityHallModel.Payee" Role="Payee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.PayeeRepresentative" Role="PayeeRepresentative" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payee">
+              <PropertyRef Name="PayeeID" />
+            </Principal>
+            <Dependent Role="PayeeRepresentative">
+              <PropertyRef Name="PayeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LicensingCode">
+          <Key>
+            <PropertyRef Name="LicenseKey" />
+          </Key>
+          <Property Name="LicenseKey" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="MachineName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDemo" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeDepartmentID" Type="Int32" />
+          <Property Name="EmployeeStatusID" Type="Int32" />
+          <Property Name="EmployeePositionID" Type="Int32" />
+          <Property Name="DateHired" Type="DateTime" Precision="0" />
+          <Property Name="DatePermanency" Type="DateTime" Precision="0" />
+          <Property Name="DateEndContract" Type="DateTime" Precision="0" />
+          <Property Name="ReasonForLeaving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OtherReasonForLeaving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateResigned" Type="DateTime" Precision="0" />
+          <Property Name="DateRetired" Type="DateTime" Precision="0" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ProvincialAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TelephoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProvincialTelephoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrimaryEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Birthplace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CivilStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MotherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Spouse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpouseOccupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Children" Type="Int32" />
+          <Property Name="Child1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Child2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Child3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Child4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Child5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OtherChild" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SSS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PAG_IBIG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhilHealth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CedulaNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CedulaDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CedulaPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateEncoded" Type="DateTime" Precision="3" />
+          <Property Name="Archive" Type="Boolean" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="NameSuffix" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BankAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Department" Relationship="ImusCityHallModel.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="EmployeePosition" Relationship="ImusCityHallModel.FK_Employee_EmployeePosition" FromRole="Employee" ToRole="EmployeePosition" />
+          <NavigationProperty Name="EmployeeStatu" Relationship="ImusCityHallModel.FK_Employee_EmployeeStatus" FromRole="Employee" ToRole="EmployeeStatu" />
+        </EntityType>
+        <Association Name="FK_Employee_Department">
+          <End Type="ImusCityHallModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmployeePosition">
+          <End Type="ImusCityHallModel.EmployeePosition" Role="EmployeePosition" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeePosition">
+              <PropertyRef Name="EmployeePositionID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeePositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmployeeStatus">
+          <End Type="ImusCityHallModel.EmployeeStatu" Role="EmployeeStatu" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeStatu">
+              <PropertyRef Name="EmployeeStatusID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Disbursement">
+          <Key>
+            <PropertyRef Name="DisbursementID" />
+          </Key>
+          <Property Name="DisbursementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayeeID" Type="Int32" />
+          <Property Name="PaymentTypeID" Type="Int32" />
+          <Property Name="VoucherNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <Property Name="ProjectName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Obligated" Type="Boolean" />
+          <Property Name="DocCompleted" Type="Boolean" />
+          <Property Name="Certification" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="PayeeRepID" Type="Int32" />
+          <NavigationProperty Name="Checks" Relationship="ImusCityHallModel.FK_Check_Disbursement" FromRole="Disbursement" ToRole="Check" />
+          <NavigationProperty Name="Department" Relationship="ImusCityHallModel.FK_Disbursement_Department" FromRole="Disbursement" ToRole="Department" />
+          <NavigationProperty Name="Payee" Relationship="ImusCityHallModel.FK_Disbursement_Disbursement" FromRole="Disbursement" ToRole="Payee" />
+          <NavigationProperty Name="PaymentType" Relationship="ImusCityHallModel.FK_Disbursement_PaymentType" FromRole="Disbursement" ToRole="PaymentType" />
+        </EntityType>
+        <Association Name="FK_Check_Disbursement">
+          <End Type="ImusCityHallModel.Disbursement" Role="Disbursement" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Check" Role="Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursement">
+              <PropertyRef Name="DisbursementID" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="DisbursementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_Department">
+          <End Type="ImusCityHallModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_Disbursement">
+          <End Type="ImusCityHallModel.Payee" Role="Payee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payee">
+              <PropertyRef Name="PayeeID" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="PayeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_PaymentType">
+          <End Type="ImusCityHallModel.PaymentType" Role="PaymentType" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="PaymentTypeID" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="PaymentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AuditTrail">
+          <Key>
+            <PropertyRef Name="AuditTrailID" />
+          </Key>
+          <Property Name="AuditTrailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDate" Type="DateTime" Precision="3" />
+          <Property Name="Activity" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ComputerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModuleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ImusCityHallModelStoreContainer" CdmEntityContainer="ImusCityHallEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="ImusCityHallModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="ImusCityHallModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="ImusCityHallModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="ImusCityHallModel.AspNetUserRole">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="ImusCityHallModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Checks">
+            <EntityTypeMapping TypeName="ImusCityHallModel.Check">
+              <MappingFragment StoreEntitySet="Check">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CheckDescription" ColumnName="CheckDescription" />
+                <ScalarProperty Name="FundID" ColumnName="FundID" />
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
+                <ScalarProperty Name="CheckID" ColumnName="CheckID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="ImusCityHallModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Divisions">
+            <EntityTypeMapping TypeName="ImusCityHallModel.Division">
+              <MappingFragment StoreEntitySet="Division">
+                <ScalarProperty Name="DivisionCode" ColumnName="DivisionCode" />
+                <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
+                <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeePositions">
+            <EntityTypeMapping TypeName="ImusCityHallModel.EmployeePosition">
+              <MappingFragment StoreEntitySet="EmployeePosition">
+                <ScalarProperty Name="EmployeePositionName" ColumnName="EmployeePositionName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EmployeeRankID" ColumnName="EmployeeRankID" />
+                <ScalarProperty Name="EmployeePositionID" ColumnName="EmployeePositionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeRanks">
+            <EntityTypeMapping TypeName="ImusCityHallModel.EmployeeRank">
+              <MappingFragment StoreEntitySet="EmployeeRank">
+                <ScalarProperty Name="EmployeeRankName" ColumnName="EmployeeRankName" />
+                <ScalarProperty Name="EmployeeRankID" ColumnName="EmployeeRankID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeStatus">
+            <EntityTypeMapping TypeName="ImusCityHallModel.EmployeeStatu">
+              <MappingFragment StoreEntitySet="EmployeeStatus">
+                <ScalarProperty Name="EmployeeStatusCode" ColumnName="EmployeeStatusCode" />
+                <ScalarProperty Name="EmployeeStatusName" ColumnName="EmployeeStatusName" />
+                <ScalarProperty Name="EmployeeStatusID" ColumnName="EmployeeStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Funds">
+            <EntityTypeMapping TypeName="ImusCityHallModel.Fund">
+              <MappingFragment StoreEntitySet="Fund">
+                <ScalarProperty Name="FundCode" ColumnName="FundCode" />
+                <ScalarProperty Name="FundName" ColumnName="FundName" />
+                <ScalarProperty Name="FundID" ColumnName="FundID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payees">
+            <EntityTypeMapping TypeName="ImusCityHallModel.Payee">
+              <MappingFragment StoreEntitySet="Payee">
+                <ScalarProperty Name="LandlineNo" ColumnName="LandlineNo" />
+                <ScalarProperty Name="TIN" ColumnName="TIN" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="PayeeNo" ColumnName="PayeeNo" />
+                <ScalarProperty Name="PayeeID" ColumnName="PayeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayeeRepresentatives">
+            <EntityTypeMapping TypeName="ImusCityHallModel.PayeeRepresentative">
+              <MappingFragment StoreEntitySet="PayeeRepresentative">
+                <ScalarProperty Name="Landline" ColumnName="Landline" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="PayeeID" ColumnName="PayeeID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="PayeeRepID" ColumnName="PayeeRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="ImusCityHallModel.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentType">
+                <ScalarProperty Name="PaymentCode" ColumnName="PaymentCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ImusCityHallModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayeeRepresentativeViews">
+            <EntityTypeMapping TypeName="ImusCityHallModel.PayeeRepresentativeView">
+              <MappingFragment StoreEntitySet="PayeeRepresentativeView">
+                <ScalarProperty Name="PayeeRepresentativeName" ColumnName="PayeeRepresentativeName" />
+                <ScalarProperty Name="PayeeID" ColumnName="PayeeID" />
+                <ScalarProperty Name="PayeeRepID" ColumnName="PayeeRepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LicensingCodes">
+            <EntityTypeMapping TypeName="ImusCityHallModel.LicensingCode">
+              <MappingFragment StoreEntitySet="LicensingCode">
+                <ScalarProperty Name="IsDemo" ColumnName="IsDemo" />
+                <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="LicenseKey" ColumnName="LicenseKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ImusCityHallModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="NameSuffix" ColumnName="NameSuffix" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Archive" ColumnName="Archive" />
+                <ScalarProperty Name="DateEncoded" ColumnName="DateEncoded" />
+                <ScalarProperty Name="CedulaPlace" ColumnName="CedulaPlace" />
+                <ScalarProperty Name="CedulaDate" ColumnName="CedulaDate" />
+                <ScalarProperty Name="CedulaNo" ColumnName="CedulaNo" />
+                <ScalarProperty Name="PhilHealth" ColumnName="PhilHealth" />
+                <ScalarProperty Name="PAG_IBIG" ColumnName="PAG_IBIG" />
+                <ScalarProperty Name="SSS" ColumnName="SSS" />
+                <ScalarProperty Name="TIN" ColumnName="TIN" />
+                <ScalarProperty Name="TaxStatus" ColumnName="TaxStatus" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="OtherChild" ColumnName="OtherChild" />
+                <ScalarProperty Name="Child5" ColumnName="Child5" />
+                <ScalarProperty Name="Child4" ColumnName="Child4" />
+                <ScalarProperty Name="Child3" ColumnName="Child3" />
+                <ScalarProperty Name="Child2" ColumnName="Child2" />
+                <ScalarProperty Name="Child1" ColumnName="Child1" />
+                <ScalarProperty Name="Children" ColumnName="Children" />
+                <ScalarProperty Name="SpouseOccupation" ColumnName="SpouseOccupation" />
+                <ScalarProperty Name="Spouse" ColumnName="Spouse" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="CivilStatus" ColumnName="CivilStatus" />
+                <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="SecondaryEmail" ColumnName="SecondaryEmail" />
+                <ScalarProperty Name="PrimaryEmail" ColumnName="PrimaryEmail" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="ProvincialTelephoneNo" ColumnName="ProvincialTelephoneNo" />
+                <ScalarProperty Name="TelephoneNo" ColumnName="TelephoneNo" />
+                <ScalarProperty Name="ProvincialAddress" ColumnName="ProvincialAddress" />
+                <ScalarProperty Name="CurrentAddress" ColumnName="CurrentAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="DateRetired" ColumnName="DateRetired" />
+                <ScalarProperty Name="DateResigned" ColumnName="DateResigned" />
+                <ScalarProperty Name="OtherReasonForLeaving" ColumnName="OtherReasonForLeaving" />
+                <ScalarProperty Name="ReasonForLeaving" ColumnName="ReasonForLeaving" />
+                <ScalarProperty Name="DateEndContract" ColumnName="DateEndContract" />
+                <ScalarProperty Name="DatePermanency" ColumnName="DatePermanency" />
+                <ScalarProperty Name="DateHired" ColumnName="DateHired" />
+                <ScalarProperty Name="EmployeePositionID" ColumnName="EmployeePositionID" />
+                <ScalarProperty Name="EmployeeStatusID" ColumnName="EmployeeStatusID" />
+                <ScalarProperty Name="EmployeeDepartmentID" ColumnName="EmployeeDepartmentID" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disbursements">
+            <EntityTypeMapping TypeName="ImusCityHallModel.Disbursement">
+              <MappingFragment StoreEntitySet="Disbursement">
+                <ScalarProperty Name="PayeeRepID" ColumnName="PayeeRepID" />
+                <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
+                <ScalarProperty Name="Certification" ColumnName="Certification" />
+                <ScalarProperty Name="DocCompleted" ColumnName="DocCompleted" />
+                <ScalarProperty Name="Obligated" ColumnName="Obligated" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+                <ScalarProperty Name="PayeeID" ColumnName="PayeeID" />
+                <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditTrails">
+            <EntityTypeMapping TypeName="ImusCityHallModel.AuditTrail">
+              <MappingFragment StoreEntitySet="AuditTrail">
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComputerName" ColumnName="ComputerName" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+                <ScalarProperty Name="AuditTrailID" ColumnName="AuditTrailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

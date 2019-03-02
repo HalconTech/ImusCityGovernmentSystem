@@ -1,0 +1,255 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.MainWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Electronic Government Application System" TitleCaps="False" WindowTitleBrush="#FF001834" WindowState="Maximized" Background="White" Height="733" Width="1386" ShowMaxRestoreButton="False"  WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded"  >
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Name="empname" />
+            <Button x:Name="btnlogout" Content="Sign-out" Click="btnlogout_Click"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <Window.Resources>
+        <Style x:Key="LargeTileStyle" TargetType="Controls:Tile">
+            <Setter Property="Width" Value="300" />
+            <Setter Property="Height" Value="125" />
+            <Setter Property="TitleFontSize" Value="10" />
+            <Setter Property="Background"  >
+
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0,0">
+                        <GradientStop Color="#FF00244D"/>
+                        <GradientStop Color="#FF003066" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+
+
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SmallTileStyle" TargetType="Controls:Tile">
+            <Setter Property="Width" Value="125" />
+            <Setter Property="Height" Value="125" />
+            <Setter Property="TitleFontSize" Value="10" />
+            <Setter Property="Background" >
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0,0">
+                        <GradientStop Color="#FF00244D"/>
+                        <GradientStop Color="#FF003066" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <DockPanel.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF707070" Offset="0"/>
+                <GradientStop Color="#FFA2A2A2" Offset="1"/>
+            </LinearGradientBrush>
+        </DockPanel.Background>
+        <Grid DockPanel.Dock="Top" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="600"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.ColumnSpan="4">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FF003F91" Offset="0.992"/>
+                        <GradientStop Color="#FF001F47"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Image Margin="7" Source="Images/imusseal.png" >
+
+            </Image>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Label  Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontFamily="Impact" FontSize="40" Foreground="White" Padding="0,5,5,0" HorizontalAlignment="Left" Content="Imus City Government " Background="Transparent" >
+                   
+                </Label>
+                <Label Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1"  FontSize="14" Foreground="White" Padding="0,0,5,5" HorizontalAlignment="Left" Content="ELECTRONIC GOVERNMENT APPLICATION SYSTEM">
+
+                </Label>
+
+            </Grid>
+
+            <Grid Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Name="lbldate" Grid.Row="1" VerticalContentAlignment="Bottom" Margin="0" HorizontalAlignment="Right" Grid.Column="3" Foreground="White"  FontSize="18" FontWeight="Bold" Padding="5,0,5,5"></Label>
+            </Grid>
+            <Menu Grid.Row="1" Grid.ColumnSpan="4" Height="30" Background="White"  >
+                <MenuItem Height="30" VerticalContentAlignment="Center"  Background="{x:Null}" >
+                    <MenuItem.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Fill="#FF002753" Width="15" Height="16" Margin="0,0,3,0">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Visual="{StaticResource appbar_app}" Stretch="Fill" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <Label VerticalContentAlignment="Center" Padding="5,0" Content="Modules" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </MenuItem.HeaderTemplate>
+
+                    <MenuItem x:Name="checkdisbursementbtn"   VerticalContentAlignment="Center"  Header="Check Disbursement" Click="checkdisbursementbtn_Click"   >
+                        <MenuItem.Icon>
+                            <Rectangle Fill="#FF002753" Width="14" Height="14">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_check}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                  
+                </MenuItem>
+                <MenuItem>
+                    <MenuItem.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Fill="#FF002753" Width="20" Height="16" Margin="0,0,3,0">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Visual="{StaticResource appbar_list_check}" Stretch="Fill" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <Label VerticalContentAlignment="Center" Padding="5,0" Content="Master File Maintenance" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </MenuItem.HeaderTemplate>
+                    <MenuItem  VerticalContentAlignment="Center"  Header="Employee Management" >
+                        <MenuItem.Icon>
+                            <Rectangle Fill="#FF002753" Width="14" Height="14">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_user}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                        <MenuItem x:Name="empmgntbtn"   VerticalContentAlignment="Center"  Header="Employee List" Click="empmgntbtn_Click"   >
+                            <MenuItem.Icon>
+                                <Rectangle Fill="#FF002753" Width="14" Height="14">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Visual="{StaticResource appbar_user}" Stretch="Fill" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </MenuItem.Icon>
+
+                        </MenuItem>
+                        <MenuItem x:Name="addempbtn"   VerticalContentAlignment="Center"  Header="Add New Employee" Click="addempbtn_Click">
+                            <MenuItem.Icon>
+                                <Rectangle Fill="#FF002753" Width="14" Height="14">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Visual="{StaticResource appbar_user_add}" Stretch="Fill" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </MenuItem.Icon>
+
+                        </MenuItem>
+                        <MenuItem x:Name="departmentbtn"    VerticalContentAlignment="Center"  Header="Department List" Click="departmentbtn_Click"    >
+                            <MenuItem.Icon>
+                                <Rectangle Fill="#FF002753" Width="13" Height="14">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Visual="{StaticResource appbar_box_layered}" Stretch="Fill" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="divisionbtn"    VerticalContentAlignment="Center"  Header="Division List" Click="divisionbtn_Click"    >
+                            <MenuItem.Icon>
+                                <Rectangle Fill="#FF002753" Width="13" Height="13">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Visual="{StaticResource appbar_notification_multiple}" Stretch="Fill" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="positionbtn"    VerticalContentAlignment="Center"  Header="Position List" Click="positionbtn_Click"    >
+                            <MenuItem.Icon>
+                                <Rectangle Fill="#FF002753" Width="13" Height="13">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Visual="{StaticResource appbar_graph_bar}" Stretch="Fill" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="ranktbn"    VerticalContentAlignment="Center"  Header="Rank List" Click="ranktbn_Click"    >
+                            <MenuItem.Icon>
+                                <Rectangle Fill="#FF002753" Width="13" Height="13">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Visual="{StaticResource appbar_graph_line}" Stretch="Fill" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="statusbtn"    VerticalContentAlignment="Center"  Header="Status List" Click="statusbtn_Click"    >
+                            <MenuItem.Icon>
+                                <Rectangle Fill="#FF002753" Width="10" Height="13">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Visual="{StaticResource appbar_people_status}" Stretch="Fill" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                 
+                    <MenuItem x:Name="payeebtn"    VerticalContentAlignment="Center"  Header="Payee Management" Click="payeebtn_Click"    >
+                        <MenuItem.Icon>
+                            <Rectangle Fill="#FF002753" Width="16" Height="14">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_group}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="fundbtn"    VerticalContentAlignment="Center"  Header="Fund Management" Click="fundbtn_Click"    >
+                        <MenuItem.Icon>
+                            <Rectangle Fill="#FF002753" Width="16" Height="14">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_money}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+         
+        </Grid>
+     
+        <TextBlock Visibility="Hidden" Name="demotb" Foreground="Black" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.5">DEMO MODE</TextBlock>
+
+
+    </DockPanel>
+</Controls:MetroWindow>

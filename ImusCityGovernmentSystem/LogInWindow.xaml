@@ -1,0 +1,56 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.LogInWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+
+        BorderThickness="0"
+                      GlowBrush="Black"
+        WindowTransitionsEnabled="False"  Height="229.349" Width="517.071"   ResizeMode="NoResize"
+       AllowsTransparency="True"   WindowStartupLocation="CenterScreen"  TitleCaps="False" Loaded="MetroWindow_Loaded"  >
+
+    <Grid Margin="0" Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Grid.RowSpan="2" Background="#FFCBCBCB"></Border>
+        <Grid Name="LogoGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition ></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Image Source="Images/imuslogo.png" Stretch="UniformToFill"  />
+            <TextBlock Grid.Row="1" TextAlignment="Center" Text="Electronic Government Application System" TextWrapping="Wrap" FontWeight="Bold" FontSize="14"/>
+        </Grid>
+        <Grid Margin="25" Name="CredentialsGrid" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                
+            </Grid.RowDefinitions>
+            <TextBox  x:Name="usernametb"  VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="Username" Margin="0,0,0,5" FontSize="14" KeyDown="usernametb_KeyDown"/>
+            <PasswordBox x:Name="passwordpb" VerticalContentAlignment="Center" Grid.Row="1" Controls:TextBoxHelper.Watermark="Password" Margin="0,0,0,5" FontSize="14" KeyDown="passwordpb_KeyDown"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="Rememberme" Content="Remember Me" Unchecked="Rememberme_Unchecked_1"/>
+                <Label Grid.Column="1" PreviewMouseDown="loginbtn_Click" VerticalAlignment="Center">
+                    <Hyperlink >Forgot Password?</Hyperlink>
+                </Label>
+            </Grid>            
+          
+            <Grid Name="ButtonGrid" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>                  
+                </Grid.ColumnDefinitions>
+                <Button  x:Name="loginbtn" Grid.Column="1" Content="Sign-In" Click="loginbtn_Click"></Button>
+            </Grid>       
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

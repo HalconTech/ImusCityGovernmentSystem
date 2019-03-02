@@ -1,0 +1,35 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.LicenseCodeWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="License Key"            
+                      TitleCaps="False"
+                      BorderThickness="1"
+                      WindowStartupLocation="CenterScreen"
+                      Height="139.367"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      Width="315.99" >
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="License Key"></TextBlock>
+        <TextBox BorderBrush="Black" Grid.Row="1" VerticalContentAlignment="Center" x:Name="licensekey"></TextBox>
+        <Grid Grid.Row="4" Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+             
+            </Grid.ColumnDefinitions>
+            <Button x:Name="acceptbtn" Content="Enter" Margin="0" Click="acceptbtn_Click" HorizontalAlignment="Right" Width="100"></Button>
+        </Grid>
+    </Grid>
+    </Controls:MetroWindow>
+
+
+

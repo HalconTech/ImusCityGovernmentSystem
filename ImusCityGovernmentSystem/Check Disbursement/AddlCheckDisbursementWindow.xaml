@@ -1,0 +1,88 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.Check_Disbursement.AddlCheckDisbursementWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="Add Disbursement"
+                      TitleCaps="False"
+                      BorderThickness="0"
+                      WindowStartupLocation="CenterScreen"
+                      Height="434.666"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      Width="608"  Loaded="MetroWindow_Loaded">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Details" Margin="0,0,0,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="28"></RowDefinition>
+                    <RowDefinition Height="33"></RowDefinition>
+                    <RowDefinition Height="33"></RowDefinition>
+                    <RowDefinition Height="33"></RowDefinition>
+                    <RowDefinition Height="33"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="24"></RowDefinition>
+                    <RowDefinition Height="24"></RowDefinition>
+                    <RowDefinition Height="28"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Voucher No." FontWeight="Bold" FontSize="16" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="vouchernotb" Grid.Column="1" FontSize="16" Foreground="#FFB40000" FontWeight="Bold" Margin="0,0,5,0"/>
+                <TextBlock Text="Payment Type:" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+                <ComboBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Name="paymenttypecb" Margin="0,5,0,0"></ComboBox>
+                <TextBlock Grid.Column="2" Text="Date:" FontWeight="Bold" FontSize="16"></TextBlock>
+                <DatePicker x:Name="datetb" Grid.Column="3" Foreground="#FFB40000" FontSize="16" FontWeight="Bold"/>
+                <Grid Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+              
+                <Grid Grid.Row="2" Grid.ColumnSpan="4" Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="135"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock  Text="Payee:" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                    <ComboBox VerticalContentAlignment="Center" Name="payeecb" Grid.Column="1" SelectionChanged="payeecb_SelectionChanged"></ComboBox>
+                    <TextBlock  Text="Payee Representative:" Grid.Column="2" FontWeight="Bold" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
+                    <ComboBox VerticalContentAlignment="Center" Name="payeerepcb" Grid.Column="3"></ComboBox>
+                </Grid>
+               
+                <TextBlock Grid.Row="3" Text="Project Name:" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                <TextBox VerticalContentAlignment="Center" x:Name="projectnametb" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,5,0,0"></TextBox>
+                <TextBlock Grid.Row="4" Text="Department:" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                <ComboBox VerticalContentAlignment="Center" x:Name="departmentcb" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,5,0,0"></ComboBox>
+                <TextBlock Grid.Row="5" Text="Description:" FontWeight="Bold"></TextBlock>
+                <TextBox x:Name="descriptiontb" Grid.Row="6" TextWrapping="Wrap" Grid.ColumnSpan="4" ></TextBox>
+
+                <CheckBox x:Name="obligatedcb" Grid.Row="7" Content="Allotment obligated for the purpose as indicated above" Grid.ColumnSpan="4"></CheckBox>
+                <CheckBox x:Name="documentcb" Grid.Row="8" Content="Supporting documents completed" Grid.ColumnSpan="4"></CheckBox>
+                <TextBlock Text="Amount:" FontWeight="Bold" FontSize="16" Grid.Row="9" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="amounttb" Grid.Column="1" FontSize="16" Grid.ColumnSpan="3" Grid.Row="9" Foreground="#FFB40000" FontWeight="Bold"/>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="savebtn" Grid.Row="3" Click="savebtn_Click">
+            <StackPanel Orientation="Horizontal">
+              
+                <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Text="Save" />
+            </StackPanel>
+        </Button>
+    </Grid>
+    </Controls:MetroWindow>
+

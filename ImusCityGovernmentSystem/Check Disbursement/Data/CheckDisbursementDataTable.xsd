@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CheckDisbursementDataTable" targetNamespace="http://tempuri.org/CheckDisbursementDataTable.xsd" xmlns:mstns="http://tempuri.org/CheckDisbursementDataTable.xsd" xmlns="http://tempuri.org/CheckDisbursementDataTable.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CheckDisbursementDataTable" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="CheckDisbursementDataTable" msprop:Generator_UserDSName="CheckDisbursementDataTable">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Payee" msprop:Generator_TableClassName="PayeeDataTable" msprop:Generator_TableVarName="tablePayee" msprop:Generator_TablePropName="Payee" msprop:Generator_RowDeletingName="PayeeRowDeleting" msprop:Generator_RowChangingName="PayeeRowChanging" msprop:Generator_RowEvHandlerName="PayeeRowChangeEventHandler" msprop:Generator_RowDeletedName="PayeeRowDeleted" msprop:Generator_UserTableName="Payee" msprop:Generator_RowChangedName="PayeeRowChanged" msprop:Generator_RowEvArgName="PayeeRowChangeEvent" msprop:Generator_RowClassName="PayeeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PayeeID" msprop:Generator_ColumnVarNameInTable="columnPayeeID" msprop:Generator_ColumnPropNameInRow="PayeeID" msprop:Generator_ColumnPropNameInTable="PayeeIDColumn" msprop:Generator_UserColumnName="PayeeID" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

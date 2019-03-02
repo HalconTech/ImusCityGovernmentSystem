@@ -1,0 +1,62 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.Payee.AddPayeeWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="Add New Payee"
+                 
+                      TitleCaps="False"
+                      BorderThickness="1"
+                      WindowStartupLocation="CenterScreen"
+                      Height="519.333"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      Width="452.333" Loaded="MetroWindow_Loaded">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Payee No."></TextBlock>
+        <TextBox PreviewTextInput="NumberValidationTextBox"  Grid.Row="1" VerticalContentAlignment="Center" Name="payeenotb"/>
+        <TextBlock Grid.Row="2" Text="Company Name"></TextBlock>
+        <TextBox Grid.Row="3" VerticalContentAlignment="Center" Name="companynametb"></TextBox>
+        <TextBlock Grid.Row="4" Text="Company Address"></TextBlock>
+        <TextBox Grid.Row="5" Name="companyaddresstb" VerticalContentAlignment="Center"></TextBox>
+        <TextBlock Grid.Row="6" Text="TIN No."></TextBlock>
+        <TextBox Grid.Row="7" VerticalContentAlignment="Center" Name="tinnotb"></TextBox>
+        <TextBlock Text="Contact No." Grid.Row="8"></TextBlock>
+        <TextBox Grid.Row="9" VerticalContentAlignment="Center" Name="contactnotb"></TextBox>
+        <Button x:Name="savebtn" Grid.Row="10" Content="Save" Margin="0,5,0,0" HorizontalAlignment="Right" Width="100" Click="savebtn_Click"></Button>
+        <TextBlock Grid.Row="11" Text="List of Representatives"></TextBlock>
+        <ListView Name="represetativelb" Grid.Row="12" BorderBrush="Black" BorderThickness="1" Margin="0,0,0,5">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Foreground="Black" IsChecked="{Binding IsSelected}"   Content="{Binding Name}" Margin="0,0,0,0" >
+                    </CheckBox>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="13" Click="Button_Click">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconModern Width="17" Height="17" Kind="Add" />
+                <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Text="Add Representative" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</Controls:MetroWindow>
+

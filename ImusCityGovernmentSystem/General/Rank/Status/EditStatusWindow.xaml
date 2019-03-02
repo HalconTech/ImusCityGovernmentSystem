@@ -1,0 +1,29 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.Rank.Status.EditStatusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Edit Status" Height="196.5" Width="389" TitleCaps="False" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" >
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".7*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right" Content="Status ID:" FontWeight="Bold"/>
+        <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" Content="Status Name:*" FontWeight="Bold"/>
+        <Label Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Right" Content="Status Code:*" FontWeight="Bold"/>
+
+        <Label Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Left" Content="" FontWeight="Bold" Name="lblStatusID"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="5,2" Controls:TextBoxHelper.Watermark="Status Name" Name="txtName"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="5,2" Controls:TextBoxHelper.Watermark="Status Code" Name="txtCode"/>
+
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Save" Name="btnUpdate"  Click="btnUpdate_Click" IsDefault="True" HorizontalAlignment="Right" Width="123"/>
+    </Grid>
+</Controls:MetroWindow>

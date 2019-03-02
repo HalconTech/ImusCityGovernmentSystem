@@ -1,0 +1,225 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.EmployeeModule.AddNewEmployeeWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="Add New Employee"
+                      TitleCaps="False"
+                      BorderThickness="0"
+                      WindowStartupLocation="CenterScreen"
+                      Height="606"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      Width="800" Loaded="MetroWindow_Loaded">
+
+    <Grid Margin="10" Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Name="ImageGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition Height="35" ></RowDefinition>
+                <RowDefinition Height="*" ></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border  BorderBrush="Black" BorderThickness="1">
+                <Border.Background>
+                    <ImageBrush ImageSource="/ImusCityGovernmentSystem;component/Images/photothumbnail.png"/>
+                </Border.Background>
+                <Image Name="empimage" Stretch="UniformToFill"></Image>
+            </Border>
+            <Button x:Name="browsebtn" Grid.Row="1" Content="Browse Photo" Margin="0,5,0,0" Click="browsebtn_Click"></Button>
+            <Grid Grid.Row="2" Height="35" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="savebtn" Content="Save" Margin="0,0,2.5,0" Click="savebtn_Click"></Button>
+                <Button x:Name="clearbtn" Content="Clear" Grid.Column="1" Margin="2.5,0,0,0" Click="clearbtn_Click"></Button>
+            </Grid>
+        </Grid>
+        <Border Margin="5,0,0,0" Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+            <TabControl   Grid.Column="1" Margin="5" >
+                <TabControl.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                                        <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="False">
+                                            <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    
+                </TabControl.Resources>
+                <TabItem Header="Employee Information" >
+                    <Grid>
+                      
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="17"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="17"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="17"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="17"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Employee No" FontWeight="Bold"></TextBlock>
+                            <TextBox  VerticalContentAlignment="Center" Name="employeenotb" Grid.Row="1"></TextBox>
+                            <TextBlock Text="Department" FontWeight="Bold" Grid.Row="2"></TextBlock>
+                            <ComboBox Grid.Row="3" VerticalContentAlignment="Center" Name="departmentcb">
+                               
+                            </ComboBox>
+                            <TextBlock Text="Position" FontWeight="Bold" Grid.Row="4"></TextBlock>
+                            <ComboBox Grid.Row="5" VerticalContentAlignment="Center" Name="positioncb"></ComboBox>
+                            <TextBlock Text="Employee Status" FontWeight="Bold" Grid.Row="6"></TextBlock>
+                            <ComboBox Grid.Row="7" VerticalContentAlignment="Center" Name="statuscb"></ComboBox>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="5,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="17"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="17"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="17"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="17"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Date Hired" FontWeight="Bold" Grid.Column="1"></TextBlock>
+                            <DatePicker Grid.Column="1" Name="datehiredp" Grid.Row="1" VerticalContentAlignment="Center"></DatePicker>
+                            <TextBlock Text="Date of Permanency" FontWeight="Bold" Grid.Row="2" Grid.Column="1"></TextBlock>
+                            <DatePicker Grid.Column="1" Grid.Row="3" Name="datepermanetdp" VerticalContentAlignment="Center"></DatePicker>
+                            <TextBlock Text="Date of Endo" FontWeight="Bold" Grid.Row="4" Grid.Column="1"></TextBlock>
+                            <DatePicker Grid.Column="1" Grid.Row="5" Name="dateendodp" VerticalContentAlignment="Center"></DatePicker>
+                            <TextBlock Text="Date of Resignation" FontWeight="Bold" Grid.Row="6" Grid.Column="1"></TextBlock>
+                            <DatePicker Grid.Column="1" Grid.Row="7" Name="dateresignationdp" VerticalContentAlignment="Center"></DatePicker>
+                        </Grid>                    
+                     
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Personal Information">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="First Name" FontWeight="Bold"></TextBlock>
+                        <TextBox Name="fnametb" VerticalContentAlignment="Center" Grid.Row="1"></TextBox>
+                        <TextBlock Text="Middle Name" Grid.Column="1" FontWeight="Bold" Margin="5,0,0,0"></TextBlock>
+                        <TextBox Name="mnametb" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5,0,0,0"></TextBox>
+                        <TextBlock Text="Last Name" FontWeight="Bold" Grid.Column="2" Margin="5,0,0,0"></TextBlock>
+                        <TextBox Name="lnametb" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0"></TextBox>
+                        <TextBlock Text="Name Suffix" FontWeight="Bold" Grid.Column="3" Margin="5,0,0,0"></TextBlock>
+                        <TextBox Name="namesuffixtb" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="3" Margin="5,0,0,0"></TextBox>
+                        <TextBlock Grid.Row="2" Text="Date of Birth" FontWeight="Bold"></TextBlock>
+                        <DatePicker VerticalContentAlignment="Center" Grid.Row="3" Name="birthdatedp"></DatePicker>
+                        <TextBlock Grid.Row="2" Text="Place of Birth" Grid.Column="1" FontWeight="Bold" Margin="5,0,0,0"></TextBlock>
+                        <TextBox VerticalContentAlignment="Center" Grid.ColumnSpan="3" Grid.Row="3" Grid.Column="1" Name="birthplacetb" Margin="5,0,0,0"></TextBox>
+                        <TextBlock Grid.Row="4" Text="Gender"  FontWeight="Bold"></TextBlock>
+                        <ComboBox VerticalContentAlignment="Center" Grid.Row="5" Name="genderdp">
+                            <ComboBoxItem>Male</ComboBoxItem>
+                            <ComboBoxItem>Female</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock Text="Citizenship" Grid.Row="4" Grid.Column="1" FontWeight="Bold" Margin="5,0,0,0"></TextBlock>
+                        <TextBox Name="citizenshiptb" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5,0,0,0"></TextBox>
+                        <TextBlock Text="Civil Status" FontWeight="Bold" Grid.Column="2" Grid.Row="4" Margin="5,0,0,0"></TextBlock>
+                        <ComboBox Name="civilstatuscb" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="2" Margin="5,0,0,0">
+                            <ComboBoxItem>Single</ComboBoxItem>
+                            <ComboBoxItem>Married</ComboBoxItem>
+                            <ComboBoxItem>Widowed</ComboBoxItem>
+                            <ComboBoxItem>Separated</ComboBoxItem>
+                            <ComboBoxItem>Divorced</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock Text="Religion" FontWeight="Bold" Grid.Column="3" Grid.Row="4" Margin="5,0,0,0"></TextBlock>
+                        <TextBox Name="religiontb" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="3" Margin="5,0,0,0"></TextBox>
+                        <TextBlock Grid.Row="6" Text="TIN No."  FontWeight="Bold"></TextBlock>
+                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="7" Name="tinnotb"></TextBox>
+                        <TextBlock Grid.Row="8" Text="PAG-IBIG No."  FontWeight="Bold"></TextBlock>
+                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="9" Name="pagibignotb"></TextBox>
+                        <TextBlock Grid.Row="10" Text="SSS No."  FontWeight="Bold"></TextBlock>
+                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="11" Name="sssnotb"></TextBox>
+                        <TextBlock Grid.Row="12" Text="PhilHealth No."  FontWeight="Bold"></TextBlock>
+                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="13" Name="philhealthnotb"></TextBox>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Contact Information">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="17"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Permanent Address" FontWeight="Bold"></TextBlock>
+                        <TextBox x:Name="permaddtb" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1"></TextBox>
+                        <CheckBox Grid.Row="2" Content="Set permanent address as current address" Grid.Column="1" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" ></CheckBox>
+                        <TextBlock Text="Current Address" FontWeight="Bold" Grid.Row="2" VerticalAlignment="Center" ></TextBlock>
+                        <TextBox x:Name="currentadd" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Grid.Row="3"></TextBox>
+                        <TextBlock Text="Landline No." Grid.Row="4" FontWeight="Bold"></TextBlock>
+                        <TextBox Name="landlinenotb" VerticalContentAlignment="Center"  Grid.Row="5"></TextBox>
+                        <TextBlock Text="Mobile No." Grid.Row="4" Grid.Column="1" FontWeight="Bold" Margin="5,0,0,0"></TextBlock>
+                        <TextBox Name="mobilenotb" Grid.Column="1" VerticalContentAlignment="Center"  Grid.Row="5" Margin="5,0,0,0"></TextBox>
+                        <TextBlock Text="Primary Email Address" Grid.Row="6" FontWeight="Bold" ></TextBlock>
+                        <TextBox Name="primaryemailtb" VerticalContentAlignment="Center" Grid.ColumnSpan="2"  Grid.Row="7"></TextBox>
+                        <TextBlock Text="Secondary Email Address" Grid.Row="8" FontWeight="Bold" ></TextBlock>
+                        <TextBox Name="secondaryemailtb" VerticalContentAlignment="Center" Grid.ColumnSpan="2"  Grid.Row="9"></TextBox>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Border>
+
+    </Grid>
+</Controls:MetroWindow>

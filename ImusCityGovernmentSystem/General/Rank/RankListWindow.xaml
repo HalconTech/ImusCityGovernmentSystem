@@ -1,0 +1,55 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.Rank.RankListWindow"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Rank Master List" Height="409" Width="684" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" TitleCaps="False">
+    <Grid Margin="10">
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" FontWeight="Bold">Search by:</Label>
+                <TextBox VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Name="txtSearch" Margin="0,0,5,0" KeyDown="txtSearch_KeyDown" />
+                <Button x:Name="searchbtn" Content="Search"  Grid.Row="0" Grid.Column="3"  IsDefault="True" Margin="0,0,2.5,0" Click="searchbtn_Click"/>
+                <Button x:Name="addbtn" Content="Create New"  Grid.Row="0" Grid.Column="4" Margin="2,0,0,0" Click="addbtn_Click"/>
+                <Button x:Name="refreshbtn" Content="Reload"  Grid.Row="1" Grid.Column="3" Margin="0,5,2.5,0" Click="refreshbtn_Click"/>
+                <Button x:Name="editbtn" Content="Edit Item"  Grid.Row="1" Grid.Column="4" Margin="2.5,5,0,0" Click="editbtn_Click"/>
+
+
+
+            </Grid>
+            <Grid  Grid.Column="0" Grid.Row="1"  Grid.ColumnSpan="2" Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="17"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="LIST OF RANK"  FontWeight="Bold" />
+                <DataGrid Grid.Row="1"  BorderThickness="1"  x:Name="dgRankList" IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Single" BorderBrush="Black" GridLinesVisibility="Vertical" HorizontalGridLinesBrush="Black"  >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Rank Name" Width="*" Binding="{Binding RankName}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>
+
