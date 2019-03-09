@@ -39,7 +39,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <CheckBox x:Name="Rememberme" Content="Remember Me" Unchecked="Rememberme_Unchecked_1"/>
-                <Label Grid.Column="1" PreviewMouseDown="loginbtn_Click" VerticalAlignment="Center">
+                <Label Grid.Column="1" PreviewMouseDown="Label_PreviewMouseDown"  VerticalAlignment="Center">
                     <Hyperlink >Forgot Password?</Hyperlink>
                 </Label>
             </Grid>            

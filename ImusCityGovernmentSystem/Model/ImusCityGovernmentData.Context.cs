@@ -46,5 +46,8 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Disbursement> Disbursements { get; set; }
         public virtual DbSet<AuditTrail> AuditTrails { get; set; }
+        public virtual DbSet<ReportParameter> ReportParameters { get; set; }
+        public virtual DbSet<SecurityQuestionBank> SecurityQuestionBanks { get; set; }
+        public virtual DbSet<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
     }
 }
