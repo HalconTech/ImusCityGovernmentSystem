@@ -26,7 +26,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
-               
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Border  BorderBrush="Black" BorderThickness="1">
                 <Border.Background>
@@ -41,16 +41,19 @@
             <GroupBox Grid.Row="2" Header="Name"  >
                 <TextBlock Name="nametb"  FontSize="14"></TextBlock>
             </GroupBox>
-            <GroupBox Grid.Row="3" Header="Position">
+            <GroupBox Grid.Row="3" Header="Division">
+                <TextBlock Name="divisiontb"  FontSize="14"></TextBlock>
+            </GroupBox>
+            <GroupBox Grid.Row="4" Header="Position">
                 <TextBlock Name="positiontb"  FontSize="14"></TextBlock>
             </GroupBox>
-            <GroupBox Grid.Row="4" Header="Department">
+            <GroupBox Grid.Row="5" Header="Department">
                 <TextBlock Name="departmenttb"  FontSize="14"></TextBlock>
             </GroupBox>
-            <GroupBox Grid.Row="5" Header="Email">
+            <GroupBox Grid.Row="6" Header="Email">
                 <TextBlock Name="emailtb"  FontSize="14"></TextBlock>
             </GroupBox>
-            <GroupBox Grid.Row="6" Header="Contact No.">
+            <GroupBox Grid.Row="7" Header="Contact No.">
                 <TextBlock Name="contactnotb"  FontSize="14"></TextBlock>
             </GroupBox>
          

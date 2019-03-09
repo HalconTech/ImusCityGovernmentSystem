@@ -56,6 +56,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                 Employee employee = db.Employees.Find(EmployeeID);
                 employeenotb.Text = employee.EmployeeNo;
                 nametb.Text = employee.FirstName + " " + employee.MiddleName + " " + employee.LastName;
+                divisiontb.Text = employee.Department.Division.DivisionName;
                 positiontb.Text = employee.EmployeePosition.EmployeePositionName;
                 departmenttb.Text = employee.Department.DepartmentName;
                 emailtb.Text = employee.PrimaryEmail;
