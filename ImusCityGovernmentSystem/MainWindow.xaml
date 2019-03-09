@@ -158,73 +158,25 @@
                                 </Rectangle.OpacityMask>
                             </Rectangle>
                         </MenuItem.Icon>
-                        <MenuItem x:Name="empmgntbtn"   VerticalContentAlignment="Center"  Header="Employee List" Click="empmgntbtn_Click"   >
-                            <MenuItem.Icon>
-                                <Rectangle Fill="#FF002753" Width="14" Height="14">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Visual="{StaticResource appbar_user}" Stretch="Fill" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </MenuItem.Icon>
-
-                        </MenuItem>
-                        <MenuItem x:Name="addempbtn"   VerticalContentAlignment="Center"  Header="Add New Employee" Click="addempbtn_Click">
-                            <MenuItem.Icon>
-                                <Rectangle Fill="#FF002753" Width="14" Height="14">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Visual="{StaticResource appbar_user_add}" Stretch="Fill" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </MenuItem.Icon>
-
-                        </MenuItem>
-                        <MenuItem x:Name="departmentbtn"    VerticalContentAlignment="Center"  Header="Department List" Click="departmentbtn_Click"    >
-                            <MenuItem.Icon>
-                                <Rectangle Fill="#FF002753" Width="13" Height="14">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Visual="{StaticResource appbar_box_layered}" Stretch="Fill" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem x:Name="divisionbtn"    VerticalContentAlignment="Center"  Header="Division List" Click="divisionbtn_Click"    >
-                            <MenuItem.Icon>
-                                <Rectangle Fill="#FF002753" Width="13" Height="13">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Visual="{StaticResource appbar_notification_multiple}" Stretch="Fill" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem x:Name="positionbtn"    VerticalContentAlignment="Center"  Header="Position List" Click="positionbtn_Click"    >
-                            <MenuItem.Icon>
-                                <Rectangle Fill="#FF002753" Width="13" Height="13">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Visual="{StaticResource appbar_graph_bar}" Stretch="Fill" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem x:Name="ranktbn"    VerticalContentAlignment="Center"  Header="Rank List" Click="ranktbn_Click"    >
-                            <MenuItem.Icon>
-                                <Rectangle Fill="#FF002753" Width="13" Height="13">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Visual="{StaticResource appbar_graph_line}" Stretch="Fill" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem x:Name="statusbtn"    VerticalContentAlignment="Center"  Header="Status List" Click="statusbtn_Click"    >
-                            <MenuItem.Icon>
-                                <Rectangle Fill="#FF002753" Width="10" Height="13">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Visual="{StaticResource appbar_people_status}" Stretch="Fill" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </MenuItem.Icon>
-                        </MenuItem>
                     </MenuItem>
-                 
+                    <MenuItem x:Name="departmentbtn"    VerticalContentAlignment="Center"  Header="Department" Click="departmentbtn_Click"    >
+                        <MenuItem.Icon>
+                            <Rectangle Fill="#FF002753" Width="13" Height="14">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_box_layered}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="divisionbtn"    VerticalContentAlignment="Center"  Header="Division" Click="divisionbtn_Click"    >
+                        <MenuItem.Icon>
+                            <Rectangle Fill="#FF002753" Width="13" Height="13">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_notification_multiple}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem x:Name="payeebtn" Visibility="Collapsed"   VerticalContentAlignment="Center"  Header="Payee Management" Click="payeebtn_Click"    >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="16" Height="14">

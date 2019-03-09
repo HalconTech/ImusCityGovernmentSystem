@@ -53,7 +53,7 @@ namespace ImusCityGovernmentSystem.General.Fund
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            fundlb.ItemsSource = db.Funds.OrderBy(m => m.FundName).ToList();
+            fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).ToList();
             fundlb.DisplayMemberPath = "FundName";
             fundlb.SelectedValuePath = "FundID";
         }
@@ -77,7 +77,7 @@ namespace ImusCityGovernmentSystem.General.Fund
                 SystemClass.InsertLog(audit);
             }
 
-            fundlb.ItemsSource = db.Funds.Where(m => m.FundName.Contains(searchtb.Text)).ToList();
+            fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).Where(m => m.FundName.Contains(searchtb.Text)).ToList();
             fundlb.DisplayMemberPath = "FundName";
             fundlb.SelectedValuePath = "FundID";
         }
@@ -97,7 +97,7 @@ namespace ImusCityGovernmentSystem.General.Fund
                 Mouse.OverrideCursor = null;
                 edit.ShowDialog();
                 db = new ImusCityHallEntities();
-                fundlb.ItemsSource = db.Funds.OrderBy(m => m.FundName).ToList();
+                fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).OrderBy(m => m.FundName).ToList();
                 fundlb.DisplayMemberPath = "FundName";
                 fundlb.SelectedValuePath = "FundID";
             }
@@ -111,7 +111,7 @@ namespace ImusCityGovernmentSystem.General.Fund
             Mouse.OverrideCursor = null;
             add.ShowDialog();
             db = new ImusCityHallEntities();
-            fundlb.ItemsSource = db.Funds.OrderBy(m => m.FundName).ToList();
+            fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).OrderBy(m => m.FundName).ToList();
             fundlb.DisplayMemberPath = "FundName";
             fundlb.SelectedValuePath = "FundID";
         }

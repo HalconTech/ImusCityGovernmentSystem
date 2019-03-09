@@ -28,7 +28,7 @@ namespace ImusCityGovernmentSystem.General.Payee
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            payeelb.ItemsSource = db.Payees.OrderBy(m => m.CompanyName).ToList();
+            payeelb.ItemsSource = db.Payees.OrderByDescending(m => m.PayeeID).ToList();
             payeelb.DisplayMemberPath = "CompanyName";
             payeelb.SelectedValuePath = "PayeeID";
         }
@@ -50,7 +50,7 @@ namespace ImusCityGovernmentSystem.General.Payee
                 SystemClass.InsertLog(audit);
             }
 
-            payeelb.ItemsSource = db.Payees.Where(m => m.CompanyName.Contains(searchtb.Text)).OrderBy(m => m.CompanyName).ToList();
+            payeelb.ItemsSource = db.Payees.Where(m => m.CompanyName.Contains(searchtb.Text)).OrderByDescending(m => m.PayeeID).ToList();
             payeelb.DisplayMemberPath = "CompanyName";
             payeelb.SelectedValuePath = "PayeeID";
         }
@@ -85,7 +85,7 @@ namespace ImusCityGovernmentSystem.General.Payee
             Mouse.OverrideCursor = null;
             add.ShowDialog();
             db = new ImusCityHallEntities();
-            payeelb.ItemsSource = db.Payees.OrderBy(m => m.CompanyName).ToList();
+            payeelb.ItemsSource = db.Payees.OrderByDescending(m => m.PayeeID).ToList();
             payeelb.DisplayMemberPath = "CompanyName";
             payeelb.SelectedValuePath = "PayeeID";
           
@@ -107,7 +107,7 @@ namespace ImusCityGovernmentSystem.General.Payee
                 Mouse.OverrideCursor = null;
                 edit.ShowDialog();
                 db = new ImusCityHallEntities();
-                payeelb.ItemsSource = db.Payees.OrderBy(m => m.CompanyName).ToList();
+                payeelb.ItemsSource = db.Payees.OrderByDescending(m => m.PayeeID).ToList();
                 payeelb.DisplayMemberPath = "CompanyName";
                 payeelb.SelectedValuePath = "PayeeID";
             }

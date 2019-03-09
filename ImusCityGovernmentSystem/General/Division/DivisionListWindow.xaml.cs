@@ -75,7 +75,7 @@ namespace ImusCityGovernmentSystem.General.Division
                         DList.Add(dl);
                     }
                     if (!String.IsNullOrEmpty(txtSearch.Text))
-                        DList = DList.Where(m => m.DivisionCode.ToUpper().Contains(txtSearch.Text) || m.DivisionName.ToUpper().Contains(txtSearch.Text)).ToList();
+                        DList = DList.OrderByDescending(m => m.DivisionID).Where(m => m.DivisionCode.ToUpper().Contains(txtSearch.Text) || m.DivisionName.ToUpper().Contains(txtSearch.Text)).ToList();
                     dgDivisionList.ItemsSource = DList;
                 }
             }
@@ -149,7 +149,7 @@ namespace ImusCityGovernmentSystem.General.Division
 
                         DList.Add(dl);
                     }
-                    dgDivisionList.ItemsSource = DList;
+                    dgDivisionList.ItemsSource = DList.OrderByDescending(m => m.DivisionID);
                 }
             }
             catch (Exception ex)

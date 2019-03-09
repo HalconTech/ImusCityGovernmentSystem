@@ -7,7 +7,7 @@
                       TitleCaps="False"
                       BorderThickness="1"
                       WindowStartupLocation="CenterScreen"
-                      Height="320.034"
+                      Height="344.534"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
@@ -16,30 +16,30 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="17"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
 
             <RowDefinition Height="17"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
 
             <RowDefinition Height="17"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
 
             <RowDefinition Height="35"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Security Question #1" Grid.Row="0"></TextBlock>
+        <TextBlock Text="Security Question #1" Grid.Row="0" FontWeight="Bold"></TextBlock>
         <ComboBox Grid.Row="1" Name="cbSecurityQuestion1" Controls:TextBoxHelper.Watermark="Choose a security question."/>
-        <TextBox Name="txtAnswer1" Grid.Row="2" Controls:TextBoxHelper.Watermark="Answer"/>
+        <TextBox VerticalContentAlignment="Center" Name="txtAnswer1" Grid.Row="2" Controls:TextBoxHelper.Watermark="Answer" Margin="0,5,0,0"/>
 
-        <TextBlock Text="Security Question #2" Grid.Row="3"></TextBlock>
+        <TextBlock Text="Security Question #2" Grid.Row="3" FontWeight="Bold"></TextBlock>
         <ComboBox Grid.Row="4" Name="cbSecurityQuestion2" Controls:TextBoxHelper.Watermark="Choose a security question."/>
-        <TextBox Name="txtAnswer2" Grid.Row="5" Controls:TextBoxHelper.Watermark="Answer"/>
+        <TextBox VerticalContentAlignment="Center" Name="txtAnswer2" Grid.Row="5" Controls:TextBoxHelper.Watermark="Answer" Margin="0,5,0,0"/>
 
-        <TextBlock Text="Security Question #3" Grid.Row="6"></TextBlock>
+        <TextBlock Text="Security Question #3" Grid.Row="6" FontWeight="Bold"></TextBlock>
         <ComboBox Grid.Row="7" Name="cbSecurityQuestion3" Controls:TextBoxHelper.Watermark="Choose a security question."/>
-        <TextBox Name="txtAnswer3" Grid.Row="8" Controls:TextBoxHelper.Watermark="Answer"/>
+        <TextBox VerticalContentAlignment="Center" Name="txtAnswer3" Grid.Row="8" Controls:TextBoxHelper.Watermark="Answer" Margin="0,5,0,0"/>
 
         <Grid Grid.Row="9" Margin="0,5,0,0">
 

@@ -77,7 +77,7 @@ namespace ImusCityGovernmentSystem.General.Department
                         DList.Add(dl);
                     }
                
-                    dgDepartmentList.ItemsSource = DList;
+                    dgDepartmentList.ItemsSource = DList.OrderByDescending(m => m.DepartmentID);
                 }
             }
             catch (Exception ex)
@@ -135,7 +135,7 @@ namespace ImusCityGovernmentSystem.General.Department
                 DList = new List<DepartmentList>();
                 using (var db = new ImusCityHallEntities())
                 {
-                    var get = db.Departments.OrderBy(m => m.DepartmentName).ToList();
+                    var get = db.Departments.OrderByDescending(m => m.DepartmentID).ToList();
 
                     foreach (var item in get)
                     {

@@ -69,7 +69,7 @@ namespace ImusCityGovernmentSystem.General.Rank
                     }
                     if (!String.IsNullOrEmpty(txtSearch.Text))
                         RList = RList.Where(m => m.RankName.ToUpper().Contains(txtSearch.Text)).ToList();
-                    dgRankList.ItemsSource = RList;
+                    dgRankList.ItemsSource = RList.OrderByDescending(m => m.RankID);
                 }
             }
             catch (Exception ex)
@@ -146,7 +146,7 @@ namespace ImusCityGovernmentSystem.General.Rank
                         RList.Add(rl);
 
                     }
-                    dgRankList.ItemsSource = RList;
+                    dgRankList.ItemsSource = RList.OrderByDescending(m => m.RankID);
                 }
             }
             catch (Exception ex)

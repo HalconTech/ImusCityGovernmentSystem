@@ -40,5 +40,37 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             Mouse.OverrideCursor = null;
             addemp.ShowDialog();
         }
+
+        private void departmentbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            Department.DepartmentListWindow department = new Department.DepartmentListWindow();
+            Mouse.OverrideCursor = null;
+            department.ShowDialog();
+        }
+
+        private void divionbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            Division.DivisionListWindow division = new Division.DivisionListWindow();
+            Mouse.OverrideCursor = null;
+            division.ShowDialog();
+        }
+
+        private void positionbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            Position.PositionWindowList postion = new Position.PositionWindowList();
+            Mouse.OverrideCursor = null;
+            postion.ShowDialog();
+        }
+
+        private void rankbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            Rank.RankListWindow rank = new Rank.RankListWindow();
+            Mouse.OverrideCursor = null;
+            rank.ShowDialog();
+        }
     }
 }
