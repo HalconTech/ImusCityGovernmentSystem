@@ -146,6 +146,9 @@
       <DependentUpon>DisbursementVoucherReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="General\EmployeeModule\EmployeeModuleWindow.xaml.cs">
+      <DependentUpon>EmployeeModuleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\AuditTrail.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
@@ -266,6 +269,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="General\EmployeeModule\EmployeeListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\EmployeeModule\EmployeeModuleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

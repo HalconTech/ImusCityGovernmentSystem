@@ -1,0 +1,31 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.EmployeeModule.EmployeeModuleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        BorderThickness="0"
+        Title="Employee Module"
+    
+        WindowTransitionsEnabled="False"  Height="451.349" Width="888.571"   ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"   TitleCaps="False"  >
+    <Grid>
+
+
+        <WrapPanel Margin="45" HorizontalAlignment="Center">
+            <Controls:Tile x:Name="employeelistbtn" Background="#CC0050EF"    Title="Employee List" TitleFontSize="12" Click="employeelistbtn_Click">
+                <Rectangle Fill="White" Height="50" Width="60">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_people_profile}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="addempbtn" Background="#CC0050EF"    Title="Create New Employee" TitleFontSize="12" Click="addempbtn_Click">
+                <Rectangle Fill="White" Height="50" Width="50">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_user_add}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+        </WrapPanel>
+    </Grid>
+
+</Controls:MetroWindow>
