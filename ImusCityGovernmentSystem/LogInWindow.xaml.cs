@@ -74,20 +74,36 @@ namespace ImusCityGovernmentSystem
                         var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
                         string pass = "";
                         var asp = db.AspNetUsers.Where(m => m.UserName == usernametb.Text).FirstOrDefault();
-                        App.EmployeeID = db.Employees.FirstOrDefault(m => m.EmployeeNo == usernametb.Text).EmployeeID;
+
                         if (asp != null)
                         {
                             pass = passwordHasher.VerifyHashedPassword(asp.PasswordHash, passwordpb.Password).ToString();
                         }
+                        else
+                        {
+                            MessageBox.Show("Log-in failed!");
+                            Mouse.OverrideCursor = null;
+                            return;
+                        }
                         if (pass == "Success")
                         {
                             Mouse.OverrideCursor = Cursors.Wait;
+                            var emp = db.Employees.FirstOrDefault(m => m.EmployeeNo == usernametb.Text);
+                            App.EmployeeID = emp.EmployeeID;
+
                             if (passwordpb.Password == "imuscitygov")
                             {
                                 Mouse.OverrideCursor = null;
-                                MessageBox.Show("Please change your default password");
+                                MessageBox.Show("Please change your default password.");
                                 ChangePasswordWindow password = new ChangePasswordWindow();
                                 password.Show();
+                            }
+                            else if (emp.SecurityQuestionUsers.Count < 3)
+                            {
+                                Mouse.OverrideCursor = null;
+                                MessageBox.Show("Please set-up your security questions.");
+                                SecurityQuestion secquestion = new SecurityQuestion();
+                                secquestion.Show();
                             }
                             else
                             {
@@ -108,6 +124,8 @@ namespace ImusCityGovernmentSystem
                         else
                         {
                             MessageBox.Show("Log-in failed!");
+                            Mouse.OverrideCursor = null;
+                            return;
                         }
                     }
                 }
@@ -205,6 +223,62 @@ namespace ImusCityGovernmentSystem
             }
         }
 
+        private void Label_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
 
+                if (String.IsNullOrEmpty(usernametb.Text))
+                {
+                    MessageBox.Show("Please input your username.");
+                }
+                else
+                {
+
+                    using (var db = new ImusCityHallEntities())
+                    {
+
+                        //var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
+                        //string pass = "";
+                        var asp = db.AspNetUsers.Where(m => m.UserName == usernametb.Text).FirstOrDefault();
+
+                        if (asp != null)
+                        {
+                            var emp = db.Employees.FirstOrDefault(m => m.EmployeeNo == asp.UserName);
+                            App.EmployeeID = emp.EmployeeID;
+
+                            if (emp.SecurityQuestionUsers.Count < 3)
+                            {
+                                Mouse.OverrideCursor = null;
+                                MessageBox.Show("Please set-up your security questions.");
+                                SecurityQuestion secquestion = new SecurityQuestion();
+                                secquestion.Show();
+                            }
+                            else
+                            {
+                                Mouse.OverrideCursor = null;
+                                MessageBox.Show("Please answer one (1) security question.");
+                                ForgotPassword fp = new ForgotPassword();
+                                fp.Show();
+
+                            }
+                            //pass = passwordHasher.VerifyHashedPassword(asp.PasswordHash, passwordpb.Password).ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Incorrect username!");
+                            Mouse.OverrideCursor = null;
+                            return;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            Mouse.OverrideCursor = null;
+        }
     }
 }

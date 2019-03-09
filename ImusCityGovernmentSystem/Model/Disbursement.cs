@@ -33,10 +33,12 @@ namespace ImusCityGovernmentSystem.Model
         public string Certification { get; set; }
         public byte[] DateStamp { get; set; }
         public Nullable<int> PayeeRepID { get; set; }
+        public string ObligationRequestNo { get; set; }
     
         public virtual ICollection<Check> Checks { get; set; }
         public virtual Department Department { get; set; }
         public virtual Payee Payee { get; set; }
         public virtual PaymentType PaymentType { get; set; }
+        public virtual PayeeRepresentative PayeeRepresentative { get; set; }
     }
 }

@@ -1,0 +1,49 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.SecurityQuestion"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="Security Question"            
+                      TitleCaps="False"
+                      BorderThickness="1"
+                      WindowStartupLocation="CenterScreen"
+                      Height="320.034"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      Width="350.99" >
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Security Question #1" Grid.Row="0"></TextBlock>
+        <ComboBox Grid.Row="1" Name="cbSecurityQuestion1" Controls:TextBoxHelper.Watermark="Choose a security question."/>
+        <TextBox Name="txtAnswer1" Grid.Row="2" Controls:TextBoxHelper.Watermark="Answer"/>
+
+        <TextBlock Text="Security Question #2" Grid.Row="3"></TextBlock>
+        <ComboBox Grid.Row="4" Name="cbSecurityQuestion2" Controls:TextBoxHelper.Watermark="Choose a security question."/>
+        <TextBox Name="txtAnswer2" Grid.Row="5" Controls:TextBoxHelper.Watermark="Answer"/>
+
+        <TextBlock Text="Security Question #3" Grid.Row="6"></TextBlock>
+        <ComboBox Grid.Row="7" Name="cbSecurityQuestion3" Controls:TextBoxHelper.Watermark="Choose a security question."/>
+        <TextBox Name="txtAnswer3" Grid.Row="8" Controls:TextBoxHelper.Watermark="Answer"/>
+
+        <Grid Grid.Row="9" Margin="0,5,0,0">
+
+            <Button x:Name="savebtn" Content="Save" Margin="0" Click="savebtn_Click"></Button>
+        </Grid>
+    </Grid>
+    </Controls:MetroWindow>

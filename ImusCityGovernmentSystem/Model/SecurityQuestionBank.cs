@@ -12,12 +12,16 @@ namespace ImusCityGovernmentSystem.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Fund
+    public partial class SecurityQuestionBank
     {
-        public int FundID { get; set; }
-        public string FundName { get; set; }
-        public string FundCode { get; set; }
-        public string Branch { get; set; }
-        public string AccountNumber { get; set; }
+        public SecurityQuestionBank()
+        {
+            this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
+        }
+    
+        public int SecurityQuestionID { get; set; }
+        public string Question { get; set; }
+    
+        public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
     }
 }

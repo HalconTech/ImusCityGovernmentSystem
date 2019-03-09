@@ -14,6 +14,12 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class Employee
     {
+        public Employee()
+        {
+            this.Checks = new HashSet<Check>();
+            this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
+        }
+    
         public int EmployeeID { get; set; }
         public string EmployeeNo { get; set; }
         public string Title { get; set; }
@@ -73,5 +79,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual Department Department { get; set; }
         public virtual EmployeePosition EmployeePosition { get; set; }
         public virtual EmployeeStatu EmployeeStatu { get; set; }
+        public virtual ICollection<Check> Checks { get; set; }
+        public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
     }
 }

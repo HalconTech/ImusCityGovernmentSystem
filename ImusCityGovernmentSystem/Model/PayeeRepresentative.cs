@@ -14,6 +14,11 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class PayeeRepresentative
     {
+        public PayeeRepresentative()
+        {
+            this.Disbursements = new HashSet<Disbursement>();
+        }
+    
         public int PayeeRepID { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -21,7 +26,9 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> PayeeID { get; set; }
         public string MobileNo { get; set; }
         public string Landline { get; set; }
+        public string EmployeeNo { get; set; }
     
         public virtual Payee Payee { get; set; }
+        public virtual ICollection<Disbursement> Disbursements { get; set; }
     }
 }
