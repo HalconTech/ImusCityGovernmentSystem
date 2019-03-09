@@ -527,6 +527,13 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetCheckRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="FundID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetDisbursementVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DisbursementID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ImusCityHallModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -732,6 +739,13 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="SecurityQuestionBank" EntitySet="SecurityQuestionBanks" />
             <End Role="SecurityQuestionUser" EntitySet="SecurityQuestionUsers" />
           </AssociationSet>
+          <FunctionImport Name="GetCheckRegister" ReturnType="Collection(ImusCityHallModel.GetCheckRegister_Result)">
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="FundID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDisbursementVoucher" ReturnType="Collection(ImusCityHallModel.GetDisbursementVoucher_Result)">
+            <Parameter Name="DisbursementID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1289,6 +1303,32 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetCheckRegister_Result">
+          <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Branch" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CheckNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="GetDisbursementVoucher_Result">
+          <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="TIN_EmpNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ObligationRequestNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyAddress" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Unit_Project" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="DepartmentCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="Obligated" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="DocumentCompleted" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="Certification" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="PaymentName" Nullable="true" MaxLength="50" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1612,6 +1652,40 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCheckRegister" FunctionName="ImusCityHallModel.Store.GetCheckRegister">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ImusCityHallModel.GetCheckRegister_Result">
+                <ScalarProperty Name="FundName" ColumnName="FundName" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDisbursementVoucher" FunctionName="ImusCityHallModel.Store.GetDisbursementVoucher">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ImusCityHallModel.GetDisbursementVoucher_Result">
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="TIN_EmpNo" ColumnName="TIN_EmpNo" />
+                <ScalarProperty Name="ObligationRequestNo" ColumnName="ObligationRequestNo" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="Unit_Project" ColumnName="Unit_Project" />
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Obligated" ColumnName="Obligated" />
+                <ScalarProperty Name="DocumentCompleted" ColumnName="DocumentCompleted" />
+                <ScalarProperty Name="Certification" ColumnName="Certification" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="PaymentName" ColumnName="PaymentName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
+using ImusCityGovernmentSystem.CheckDisbursement.Report;
+
 namespace ImusCityGovernmentSystem
 {
     /// <summary>
@@ -21,6 +23,9 @@ namespace ImusCityGovernmentSystem
     /// </summary>
     public partial class ReportWindow : MetroWindow
     {
+        ReportDocument report;
+        public List<DisbursementVoucherModel> DVList = new List<DisbursementVoucherModel>();
+
         public ReportWindow()
         {
             InitializeComponent();
@@ -28,13 +33,16 @@ namespace ImusCityGovernmentSystem
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            ReportDocument report = new ReportDocument();
-            using (ImusCityHallEntities db = new ImusCityHallEntities())
+
+            if (App.ReportID == 1)
             {
-                report.SetDataSource(from c in db.Payees
-                                     select new { c.PayeeID });
+                if(DVList.Count != 0)
+                {
+                    report = new DisbursementVoucherReport();
+                    report.SetDataSource(DVList);
+                    reportviewer.ViewerCore.ReportSource = report;
+                }
             }
-            reportviewer.ViewerCore.ReportSource = report;
         }
     }
 }

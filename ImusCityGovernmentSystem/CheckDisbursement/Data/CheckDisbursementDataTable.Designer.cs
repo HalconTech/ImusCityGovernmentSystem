@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace ImusCityGovernmentSystem.Check_Disbursement.Data {
+namespace ImusCityGovernmentSystem.CheckDisbursement.Data {
     
     
     /// <summary>

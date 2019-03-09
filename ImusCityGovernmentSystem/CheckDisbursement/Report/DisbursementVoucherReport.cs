@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImusCityGovernmentSystem.Check_Disbursement.Report {
+namespace ImusCityGovernmentSystem.CheckDisbursement.Report {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace ImusCityGovernmentSystem.Check_Disbursement.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class AccountantCheckDisbursementReport : ReportClass {
+    public class DisbursementVoucherReport : ReportClass {
         
-        public AccountantCheckDisbursementReport() {
+        public DisbursementVoucherReport() {
         }
         
         public override string ResourceName {
             get {
-                return "AccountantCheckDisbursementReport.rpt";
+                return "DisbursementVoucherReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,8 +41,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement.Report {
         
         public override string FullResourceName {
             get {
-                return "ImusCityGovernmentSystem.Check Disbursement.Report.AccountantCheckDisbursementRep" +
-                    "ort.rpt";
+                return "ImusCityGovernmentSystem.CheckDisbursement.Report.DisbursementVoucherReport.rpt";
             }
             set {
                 // Do nothing
@@ -91,9 +90,9 @@ namespace ImusCityGovernmentSystem.Check_Disbursement.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedAccountantCheckDisbursementReport : Component, ICachedReport {
+    public class CachedDisbursementVoucherReport : Component, ICachedReport {
         
-        public CachedAccountantCheckDisbursementReport() {
+        public CachedDisbursementVoucherReport() {
         }
         
         [Browsable(false)]
@@ -130,7 +129,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            AccountantCheckDisbursementReport rpt = new AccountantCheckDisbursementReport();
+            DisbursementVoucherReport rpt = new DisbursementVoucherReport();
             rpt.Site = this.Site;
             return rpt;
         }
