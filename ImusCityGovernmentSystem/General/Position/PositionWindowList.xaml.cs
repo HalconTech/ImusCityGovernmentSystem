@@ -84,7 +84,7 @@ namespace ImusCityGovernmentSystem.General.Position
                     }
                     if (!String.IsNullOrEmpty(txtSearch.Text))
                         PList = PList.Where(m => m.PositionName.ToUpper().Contains(txtSearch.Text) || m.Description.ToUpper().Contains(txtSearch.Text)).ToList();
-                    dgPositionList.ItemsSource = PList;
+                    dgPositionList.ItemsSource = PList.OrderByDescending(m => m.PositionID);
                 }
             }
             catch (Exception ex)
@@ -171,7 +171,7 @@ namespace ImusCityGovernmentSystem.General.Position
                         pl.IsActive = item.Active;
                         PList.Add(pl);
                     }             
-                    dgPositionList.ItemsSource = PList;
+                    dgPositionList.ItemsSource = PList.OrderByDescending(m => m.PositionID);
                 }
             }
             catch (Exception ex)

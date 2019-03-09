@@ -28,7 +28,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            voucherlistlb.ItemsSource = db.Disbursements.ToList();
+            voucherlistlb.ItemsSource = db.Disbursements.OrderByDescending(m => m.DisbursementID).ToList();
             voucherlistlb.DisplayMemberPath = "VoucherNo";
             voucherlistlb.SelectedValuePath = "DisbursementID";
             voucherlistlb.SelectedIndex = 0;

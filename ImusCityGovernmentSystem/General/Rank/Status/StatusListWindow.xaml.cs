@@ -70,7 +70,7 @@ namespace ImusCityGovernmentSystem.General.Rank.Status
                     }
                     if (!String.IsNullOrEmpty(txtSearch.Text))
                         SList = SList.Where(m => m.StatusName.ToUpper().Contains(txtSearch.Text) || m.StatusCode.ToUpper().Contains(txtSearch.Text)).ToList();
-                    dgStatusList.ItemsSource = SList;
+                    dgStatusList.ItemsSource = SList.OrderByDescending(m => m.StatusID);
                 }
             }
             catch (Exception ex)
@@ -147,7 +147,7 @@ namespace ImusCityGovernmentSystem.General.Rank.Status
 
                     }
 
-                    dgStatusList.ItemsSource = SList;
+                    dgStatusList.ItemsSource = SList.OrderByDescending(m => m.StatusID);
                 }
             }
             catch (Exception ex)

@@ -159,7 +159,7 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="departmentbtn"    VerticalContentAlignment="Center"  Header="Department List" Click="departmentbtn_Click"    >
+                    <MenuItem x:Name="departmentbtn"    VerticalContentAlignment="Center"  Header="Department" Click="departmentbtn_Click"    >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="13" Height="14">
                                 <Rectangle.OpacityMask>
@@ -168,7 +168,7 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="divisionbtn"    VerticalContentAlignment="Center"  Header="Division List" Click="divisionbtn_Click"    >
+                    <MenuItem x:Name="divisionbtn"    VerticalContentAlignment="Center"  Header="Division" Click="divisionbtn_Click"    >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="13" Height="13">
                                 <Rectangle.OpacityMask>
