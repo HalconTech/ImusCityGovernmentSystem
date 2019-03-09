@@ -12,12 +12,10 @@ namespace ImusCityGovernmentSystem.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Fund
+    public partial class ReportParameter
     {
-        public int FundID { get; set; }
-        public string FundName { get; set; }
-        public string FundCode { get; set; }
-        public string Branch { get; set; }
-        public string AccountNumber { get; set; }
+        public int ReportParameterID { get; set; }
+        public string CityAccountant { get; set; }
+        public string CItyTreasurer { get; set; }
     }
 }

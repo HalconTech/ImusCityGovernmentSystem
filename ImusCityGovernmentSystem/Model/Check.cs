@@ -22,7 +22,9 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<System.DateTime> DateCreated { get; set; }
         public byte[] DateStamp { get; set; }
         public Nullable<decimal> Amount { get; set; }
+        public Nullable<int> EmployeeID { get; set; }
     
         public virtual Disbursement Disbursement { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }
