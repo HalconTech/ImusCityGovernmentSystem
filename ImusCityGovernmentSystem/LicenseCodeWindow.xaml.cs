@@ -43,6 +43,10 @@ namespace ImusCityGovernmentSystem
             {
                 MessageBox.Show("Please enter a valid license key.");
             }
+            else if(license == null)
+            {
+                MessageBox.Show("Please enter a valid license key.");
+            }
             else if(license.ExpirationDate < DateTime.Now)
             {
                 MessageBox.Show("The license that youve entering is expired!");

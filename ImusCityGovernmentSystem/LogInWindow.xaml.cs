@@ -16,6 +16,7 @@ using ImusCityGovernmentSystem.Model;
 using System.Data.SqlClient;
 using System.IO.IsolatedStorage;
 using System.IO;
+using System.Data.Common;
 
 namespace ImusCityGovernmentSystem
 {
@@ -24,18 +25,15 @@ namespace ImusCityGovernmentSystem
     /// </summary>
     public partial class LogInWindow : MetroWindow
     {
-
         public LogInWindow()
         {
             InitializeComponent();
             usernametb.Focus();
 
         }
-
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-
             if (Rememberme.IsChecked == true)
             {
                 IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
@@ -45,16 +43,10 @@ namespace ImusCityGovernmentSystem
                     {
                         sw.WriteLine(usernametb.Text);
                         sw.WriteLine(passwordpb.Password);
-
                     }
                 }
             }
-
-
         }
-
-
-
         private void loginbtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -68,8 +60,7 @@ namespace ImusCityGovernmentSystem
                 {
                     using (var db = new ImusCityHallEntities())
                     {
-
-                        if (db.Database.Connection.State == System.Data.ConnectionState.Open)
+                        if (SystemClass.CheckConnection())
                         {
                             var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
                             string pass = "";
@@ -131,8 +122,8 @@ namespace ImusCityGovernmentSystem
                         }
                         else
                         {
-
-                        }                    
+                            MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                        }
                     }
                 }
             }
@@ -150,7 +141,6 @@ namespace ImusCityGovernmentSystem
                 loginbtn_Click(sender, e);
             }
         }
-
         private void passwordpb_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -158,48 +148,50 @@ namespace ImusCityGovernmentSystem
                 loginbtn_Click(sender, e);
             }
         }
-
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            ImusCityHallEntities db = new ImusCityHallEntities();
-            LicensingCode license = db.LicensingCodes.FirstOrDefault(m => m.MachineName == Environment.MachineName);
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                LicensingCode license = db.LicensingCodes.FirstOrDefault(m => m.MachineName == Environment.MachineName);
 
-            if (license == null)
-            {
-                MessageBox.Show("This software have not been licensed to this machine. Please input valid license key!");
-                LicenseCodeWindow lc = new LicenseCodeWindow();
-                lc.Show();
-                this.Close();
-            }
-            else if (license.ExpirationDate < DateTime.Now)
-            {
-                MessageBox.Show("This license that have been issued to this machine is expired! Please input new license");
-                LicenseCodeWindow lc = new LicenseCodeWindow();
-                lc.Show();
-                this.Close();
-            }
-            else
-            {
-                if (license.IsDemo == true)
+                if (license == null)
                 {
-                    App.LicenseKey = license.LicenseKey;
-                    this.Title = "GISI (DEMO MODE)";
+                    MessageBox.Show("This software have not been licensed to this machine. Please input valid license key!");
+                    LicenseCodeWindow lc = new LicenseCodeWindow();
+                    lc.Show();
+                    this.Close();
+                }
+                else if (license.ExpirationDate < DateTime.Now)
+                {
+                    MessageBox.Show("This license that have been issued to this machine is expired! Please input new license");
+                    LicenseCodeWindow lc = new LicenseCodeWindow();
+                    lc.Show();
+                    this.Close();
                 }
                 else
                 {
-                    App.LicenseKey = license.LicenseKey;
-                    this.Title = "GISI";
+                    if (license.IsDemo == true)
+                    {
+                        App.LicenseKey = license.LicenseKey;
+                        this.Title = "GISI (DEMO MODE)";
+                    }
+                    else
+                    {
+                        App.LicenseKey = license.LicenseKey;
+                        this.Title = "GISI";
+                    }
+
                 }
-
             }
-
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
         }
-
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-
-
             IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
             if (isolatedStorage.FileExists("login"))
             {
@@ -219,7 +211,6 @@ namespace ImusCityGovernmentSystem
 
             }
         }
-
         private void Rememberme_Unchecked_1(object sender, RoutedEventArgs e)
         {
             if (Rememberme.IsChecked == false)
@@ -228,13 +219,11 @@ namespace ImusCityGovernmentSystem
                 isolatedStorage.DeleteFile("login");
             }
         }
-
         private void Label_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-
                 if (String.IsNullOrEmpty(usernametb.Text))
                 {
                     MessageBox.Show("Please input your username.");

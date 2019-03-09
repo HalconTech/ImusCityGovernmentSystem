@@ -29,46 +29,24 @@ namespace ImusCityGovernmentSystem
             }
 
         }
-        public static bool TestConnectionEF()
+        public static bool CheckConnection()
         {
-            using (var db = new ImusCityHallEntities())
-            {
-                try
-                {
-                    db.Database.Connection.Open();
-                    if (db.Database.Connection.State == System.Data.ConnectionState.Open)
-                    {
-                        MessageBox.Show(@"INFO: ConnectionString: " + db.Database.Connection.ConnectionString
-                            + "\n DataBase: " + db.Database.Connection.Database
-                            + "\n DataSource: " + db.Database.Connection.DataSource
-                            + "\n ServerVersion: " + db.Database.Connection.ServerVersion
-                            + "\n TimeOut: " + db.Database.Connection.ConnectionTimeout);
-                        db.Database.Connection.Close();
-                        return true;
-                    }
-                    return false;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-        }
-        public static void CheckConnection()
-        {
-            ImusCityHallEntities db = new ImusCityHallEntities();
+
             try
             {
-                db.Database.Connection.Open();
-                db.Database.Connection.Close();
+                using (var db = new ImusCityHallEntities())
+                {
+                    db.Database.Connection.Open();
+                    db.Database.Connection.Close();
+                }
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
-                MessageBox.Show("System is not connected to database. Please contact the administrator. Thank you!");
-                return;
+                return false;
             }
-            return;
+            return true;
         }
+        
 
         public static void InsertLog(AuditTrailModel model)
         {
@@ -105,6 +83,6 @@ namespace ImusCityGovernmentSystem
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
 
-        
+        public  const string DBConnectionErrorMessage = "Please check database connection";
     }
 }
