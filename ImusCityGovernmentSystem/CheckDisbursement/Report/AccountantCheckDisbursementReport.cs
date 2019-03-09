@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImusCityGovernmentSystem.Check_Disbursement.Report {
+namespace ImusCityGovernmentSystem.CheckDisbursement.Report {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace ImusCityGovernmentSystem.Check_Disbursement.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CheckRegisterReport : ReportClass {
+    public class AccountantCheckDisbursementReport : ReportClass {
         
-        public CheckRegisterReport() {
+        public AccountantCheckDisbursementReport() {
         }
         
         public override string ResourceName {
             get {
-                return "CheckRegisterReport.rpt";
+                return "AccountantCheckDisbursementReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,8 @@ namespace ImusCityGovernmentSystem.Check_Disbursement.Report {
         
         public override string FullResourceName {
             get {
-                return "ImusCityGovernmentSystem.Check Disbursement.Report.CheckRegisterReport.rpt";
+                return "ImusCityGovernmentSystem.CheckDisbursement.Report.AccountantCheckDisbursementRepo" +
+                    "rt.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +91,9 @@ namespace ImusCityGovernmentSystem.Check_Disbursement.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCheckRegisterReport : Component, ICachedReport {
+    public class CachedAccountantCheckDisbursementReport : Component, ICachedReport {
         
-        public CachedCheckRegisterReport() {
+        public CachedAccountantCheckDisbursementReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +130,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CheckRegisterReport rpt = new CheckRegisterReport();
+            AccountantCheckDisbursementReport rpt = new AccountantCheckDisbursementReport();
             rpt.Site = this.Site;
             return rpt;
         }

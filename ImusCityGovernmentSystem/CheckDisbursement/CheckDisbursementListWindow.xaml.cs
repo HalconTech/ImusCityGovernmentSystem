@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
+using ImusCityGovernmentSystem;
 namespace ImusCityGovernmentSystem.Check_Disbursement
 {
     /// <summary>
@@ -21,6 +22,8 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
     public partial class CheckDisbursementListWindow : MetroWindow
     {
         ImusCityHallEntities db = new ImusCityHallEntities();
+        public List<DisbursementVoucherModel> DVList = new List<DisbursementVoucherModel>();
+
         public CheckDisbursementListWindow()
         {
             InitializeComponent();
@@ -38,27 +41,29 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
         {
             Mouse.OverrideCursor = Cursors.Wait;
             db = new ImusCityHallEntities();
+
             if (voucherlistlb.SelectedValue == null)
             {
                 return;
             }
             else
             {
+
                 int DisbursementID = (int)voucherlistlb.SelectedValue;
                 Disbursement dis = db.Disbursements.Find(DisbursementID);
                 vouchernotb.Text = dis.VoucherNo;
                 datetb.Text = dis.DateCreated.HasValue ? dis.DateCreated.Value.ToShortDateString() : null;
-                switch(dis.PaymentType.Name)
+                switch (dis.PaymentType.Name)
                 {
                     case "Check":
-                         checkcb.IsChecked = true;
-                         break;
+                        checkcb.IsChecked = true;
+                        break;
                     case "Cash":
-                         cashcb.IsChecked = true;
-                         break;
+                        cashcb.IsChecked = true;
+                        break;
                     case "Others":
-                         otherscb.IsChecked = true;
-                         break;
+                        otherscb.IsChecked = true;
+                        break;
                 }
                 payeetb.Text = dis.Payee.CompanyName;
                 projectnametb.Text = dis.ProjectName;
@@ -77,6 +82,58 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
         {
             AddlCheckDisbursementWindow add = new AddlCheckDisbursementWindow();
             add.Show();
+        }
+
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            db = new ImusCityHallEntities();
+            if (voucherlistlb.SelectedValue == null)
+            {
+                return;
+            }
+            else
+            {
+                int DisbursementID = (int)voucherlistlb.SelectedValue;
+
+                var disburse = db.GetDisbursementVoucher(DisbursementID).ToList();
+                foreach (var x in disburse)
+                {
+                    DisbursementVoucherModel dvl = new DisbursementVoucherModel();
+                    dvl.Amount = x.Amount.HasValue ? x.Amount.Value : 0;
+                    dvl.Certification = x.Certification;
+                    dvl.CompanyAddress = x.CompanyAddress;
+                    dvl.CompanyName = x.CompanyName;
+                    dvl.DateCreated = x.DateCreated.Value;
+                    dvl.DepartmentCode = x.DepartmentCode;
+                    dvl.Description = x.Description;
+                    dvl.DocumentCompleted = x.DocumentCompleted;
+                    dvl.Name = x.Name;
+                    dvl.Obligated = x.Obligated;
+                    dvl.ObligationRequestNo = x.ObligationRequestNo;
+                    dvl.TIN_EmpNo = x.TIN_EmpNo;
+                    dvl.Unit_Project = x.Unit_Project;
+                    dvl.VoucherNo = x.VoucherNo;
+                    dvl.PaymentName = x.PaymentName;
+                    DVList.Add(dvl);
+                }
+
+                if(DVList.Count != 0)
+                {
+                    ReportWindow rw = new ReportWindow();
+                    rw.DVList = DVList;
+                    App.ReportID = 1;
+                    rw.Show();
+
+                }
+                else
+                {
+                    MessageBox.Show("Report data source is empty.");
+                }
+                
+
+            }
+            Mouse.OverrideCursor = null;
         }
     }
 }

@@ -114,33 +114,33 @@
     <Compile Include="ChangePasswordWindow.xaml.cs">
       <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Check Disbursement\AddlCheckDisbursementWindow.xaml.cs">
+    <Compile Include="CheckDisbursement\AddlCheckDisbursementWindow.xaml.cs">
       <DependentUpon>AddlCheckDisbursementWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Check Disbursement\CheckDisbursementListWindow.xaml.cs">
+    <Compile Include="CheckDisbursement\CheckDisbursementListWindow.xaml.cs">
       <DependentUpon>CheckDisbursementListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Check Disbursement\CheckDisbursementWindow.xaml.cs">
+    <Compile Include="CheckDisbursement\CheckDisbursementWindow.xaml.cs">
       <DependentUpon>CheckDisbursementWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Check Disbursement\Data\CheckDisbursementDataTable.Designer.cs">
+    <Compile Include="CheckDisbursement\Data\CheckDisbursementDataTable.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckDisbursementDataTable.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Check Disbursement\Report\AccountantCheckDisbursementReport.cs">
+    <Compile Include="CheckDisbursement\Report\AccountantCheckDisbursementReport.cs">
       <DependentUpon>AccountantCheckDisbursementReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Check Disbursement\Report\CheckRegisterReport.cs">
+    <Compile Include="CheckDisbursement\Report\CheckRegisterReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckRegisterReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Check Disbursement\Report\DisbursementVoucherReport.cs">
+    <Compile Include="CheckDisbursement\Report\DisbursementVoucherReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DisbursementVoucherReport.rpt</DependentUpon>
@@ -210,7 +210,14 @@
     <Compile Include="LicenseCodeWindow.xaml.cs">
       <DependentUpon>LicenseCodeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\DisbursementVoucherModel.cs" />
     <Compile Include="Model\EmployeeRank.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetCheckRegister_Result.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetDisbursementVoucher_Result.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\LicensingCode.cs">
@@ -239,15 +246,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Check Disbursement\AddlCheckDisbursementWindow.xaml">
+    <Page Include="CheckDisbursement\AddlCheckDisbursementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Check Disbursement\CheckDisbursementListWindow.xaml">
+    <Page Include="CheckDisbursement\CheckDisbursementListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Check Disbursement\CheckDisbursementWindow.xaml">
+    <Page Include="CheckDisbursement\CheckDisbursementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -503,15 +510,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Check Disbursement\Report\AccountantCheckDisbursementReport.rpt">
+    <EmbeddedResource Include="CheckDisbursement\Report\AccountantCheckDisbursementReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AccountantCheckDisbursementReport.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Check Disbursement\Report\CheckRegisterReport.rpt">
+    <EmbeddedResource Include="CheckDisbursement\Report\CheckRegisterReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CheckRegisterReport.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Check Disbursement\Report\DisbursementVoucherReport.rpt">
+    <EmbeddedResource Include="CheckDisbursement\Report\DisbursementVoucherReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DisbursementVoucherReport.cs</LastGenOutput>
     </EmbeddedResource>
@@ -523,15 +530,15 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ImusCityGovernmentData.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Check Disbursement\Data\CheckDisbursementDataTable.xsc">
+    <None Include="CheckDisbursement\Data\CheckDisbursementDataTable.xsc">
       <DependentUpon>CheckDisbursementDataTable.xsd</DependentUpon>
     </None>
-    <None Include="Check Disbursement\Data\CheckDisbursementDataTable.xsd">
+    <None Include="CheckDisbursement\Data\CheckDisbursementDataTable.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>CheckDisbursementDataTable.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Check Disbursement\Data\CheckDisbursementDataTable.xss">
+    <None Include="CheckDisbursement\Data\CheckDisbursementDataTable.xss">
       <DependentUpon>CheckDisbursementDataTable.xsd</DependentUpon>
     </None>
     <None Include="Model\ImusCityGovernmentData.Context.tt">

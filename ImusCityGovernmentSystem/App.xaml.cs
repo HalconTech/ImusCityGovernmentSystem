@@ -15,5 +15,6 @@ namespace ImusCityGovernmentSystem
     {
         public static int EmployeeID;
         public static string LicenseKey;
+        public static int ReportID;
     }
 }

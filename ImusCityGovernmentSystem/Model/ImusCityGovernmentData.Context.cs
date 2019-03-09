@@ -12,6 +12,8 @@ namespace ImusCityGovernmentSystem.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ImusCityHallEntities : DbContext
     {
@@ -49,5 +51,27 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<ReportParameter> ReportParameters { get; set; }
         public virtual DbSet<SecurityQuestionBank> SecurityQuestionBanks { get; set; }
         public virtual DbSet<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
+    
+        public virtual ObjectResult<GetCheckRegister_Result> GetCheckRegister(Nullable<System.DateTime> date, Nullable<int> fundID)
+        {
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            var fundIDParameter = fundID.HasValue ?
+                new ObjectParameter("FundID", fundID) :
+                new ObjectParameter("FundID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckRegister_Result>("GetCheckRegister", dateParameter, fundIDParameter);
+        }
+    
+        public virtual ObjectResult<GetDisbursementVoucher_Result> GetDisbursementVoucher(Nullable<int> disbursementID)
+        {
+            var disbursementIDParameter = disbursementID.HasValue ?
+                new ObjectParameter("DisbursementID", disbursementID) :
+                new ObjectParameter("DisbursementID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDisbursementVoucher_Result>("GetDisbursementVoucher", disbursementIDParameter);
+        }
     }
 }
