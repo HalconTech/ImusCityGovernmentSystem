@@ -238,6 +238,9 @@
     <Compile Include="Test2.xaml.cs">
       <DependentUpon>Test2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Test1.xaml.cs">
+      <DependentUpon>Test1.xaml</DependentUpon>
+    </Compile>
     <Page Include="ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -429,6 +432,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Test2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

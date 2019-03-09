@@ -127,5 +127,13 @@ namespace ImusCityGovernmentSystem
             addemp.Show();
             Mouse.OverrideCursor = null;
         }
+
+        private void empmanagebtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            General.EmployeeModule.EmployeeModuleWindow employee = new General.EmployeeModule.EmployeeModuleWindow();
+            Mouse.OverrideCursor = null;
+            employee.ShowDialog();
+        }
     }
 }
