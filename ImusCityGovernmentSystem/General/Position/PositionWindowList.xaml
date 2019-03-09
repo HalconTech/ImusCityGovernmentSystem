@@ -48,7 +48,7 @@
                         <DataGridTextColumn Header="Position Name" Width="*" Binding="{Binding PositionName}"/>
                         <DataGridTextColumn Header="Description" Width="2*" Binding="{Binding Description}"/>
                         <DataGridTextColumn Header="Rank" Width="*" Binding="{Binding Rank}"/>
-                        <DataGridTextColumn Header="IsActive" Width=".5*" Binding="{Binding IsActive}"/>
+                       
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

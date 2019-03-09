@@ -72,5 +72,13 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             Mouse.OverrideCursor = null;
             rank.ShowDialog();
         }
+
+        private void statusbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            Rank.Status.StatusListWindow status = new Rank.Status.StatusListWindow();
+            Mouse.OverrideCursor = null;
+            status.ShowDialog();
+        }
     }
 }

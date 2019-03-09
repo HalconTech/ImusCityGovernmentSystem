@@ -60,73 +60,79 @@ namespace ImusCityGovernmentSystem
             Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-
                 if (String.IsNullOrEmpty(usernametb.Text) || String.IsNullOrEmpty(passwordpb.Password))
                 {
                     MessageBox.Show("Please input your sign-in credentials");
                 }
                 else
                 {
-
                     using (var db = new ImusCityHallEntities())
                     {
 
-                        var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
-                        string pass = "";
-                        var asp = db.AspNetUsers.Where(m => m.UserName == usernametb.Text).FirstOrDefault();
+                        if (db.Database.Connection.State == System.Data.ConnectionState.Open)
+                        {
+                            var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
+                            string pass = "";
+                            var asp = db.AspNetUsers.Where(m => m.UserName == usernametb.Text).FirstOrDefault();
 
-                        if (asp != null)
-                        {
-                            pass = passwordHasher.VerifyHashedPassword(asp.PasswordHash, passwordpb.Password).ToString();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Log-in failed!");
-                            Mouse.OverrideCursor = null;
-                            return;
-                        }
-                        if (pass == "Success")
-                        {
-                            Mouse.OverrideCursor = Cursors.Wait;
-                            var emp = db.Employees.FirstOrDefault(m => m.EmployeeNo == usernametb.Text);
-                            App.EmployeeID = emp.EmployeeID;
-
-                            if (passwordpb.Password == "imuscitygov")
+                            if (asp != null)
                             {
-                                Mouse.OverrideCursor = null;
-                                MessageBox.Show("Please change your default password.");
-                                ChangePasswordWindow password = new ChangePasswordWindow();
-                                password.Show();
-                            }
-                            else if (emp.SecurityQuestionUsers.Count < 3)
-                            {
-                                Mouse.OverrideCursor = null;
-                                MessageBox.Show("Please set-up your security questions.");
-                                SecurityQuestion secquestion = new SecurityQuestion();
-                                secquestion.Show();
+                                pass = passwordHasher.VerifyHashedPassword(asp.PasswordHash, passwordpb.Password).ToString();
                             }
                             else
                             {
-                                var audit = new AuditTrailModel
-                                {
-                                    Activity = "Log-in to the system",
-                                    ModuleName = this.GetType().Name,
-                                    EmployeeID = App.EmployeeID
-                                };
+                                MessageBox.Show("Log-in failed!");
+                                Mouse.OverrideCursor = null;
+                                return;
+                            }
 
-                                SystemClass.InsertLog(audit);
-                                MainWindow mw = new MainWindow();
-                                mw.Password = passwordpb.Password;
-                                mw.Show();
-                                this.Close();
+                            if (pass == "Success")
+                            {
+                                Mouse.OverrideCursor = Cursors.Wait;
+                                var emp = db.Employees.FirstOrDefault(m => m.EmployeeNo == usernametb.Text);
+                                App.EmployeeID = emp.EmployeeID;
+
+                                if (passwordpb.Password == "imuscitygov")
+                                {
+                                    Mouse.OverrideCursor = null;
+                                    MessageBox.Show("Please change your default password.");
+                                    ChangePasswordWindow password = new ChangePasswordWindow();
+                                    password.Show();
+                                }
+                                else if (emp.SecurityQuestionUsers.Count < 3)
+                                {
+                                    Mouse.OverrideCursor = null;
+                                    MessageBox.Show("Please set-up your security questions.");
+                                    SecurityQuestion secquestion = new SecurityQuestion();
+                                    secquestion.Show();
+                                }
+                                else
+                                {
+                                    var audit = new AuditTrailModel
+                                    {
+                                        Activity = "Log-in to the system",
+                                        ModuleName = this.GetType().Name,
+                                        EmployeeID = App.EmployeeID
+                                    };
+
+                                    SystemClass.InsertLog(audit);
+                                    MainWindow mw = new MainWindow();
+                                    mw.Password = passwordpb.Password;
+                                    mw.Show();
+                                    this.Close();
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Log-in failed!");
+                                Mouse.OverrideCursor = null;
+                                return;
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Log-in failed!");
-                            Mouse.OverrideCursor = null;
-                            return;
-                        }
+
+                        }                    
                     }
                 }
             }
@@ -280,5 +286,7 @@ namespace ImusCityGovernmentSystem
             }
             Mouse.OverrideCursor = null;
         }
+
+
     }
 }

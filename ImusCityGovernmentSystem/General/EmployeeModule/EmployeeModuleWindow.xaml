@@ -39,7 +39,7 @@
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>
-            <Controls:Tile x:Name="statusbtn"   Background="#CC0050EF"    Title="Employee Status List" TitleFontSize="12">
+            <Controls:Tile x:Name="statusbtn"   Background="#CC0050EF"    Title="Employment Status List" TitleFontSize="12" Click="statusbtn_Click">
                 <Rectangle Fill="White" Height="40" Width="40">
                     <Rectangle.OpacityMask>
                         <VisualBrush Visual="{StaticResource appbar_people_status}" Stretch="Fill" />
