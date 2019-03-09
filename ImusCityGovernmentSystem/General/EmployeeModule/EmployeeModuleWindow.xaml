@@ -5,23 +5,44 @@
         BorderThickness="0"
         Title="Employee Module"
     
-        WindowTransitionsEnabled="False"  Height="451.349" Width="888.571"   ResizeMode="NoResize"
+        WindowTransitionsEnabled="False"  Height="411.349" Width="547.904"   ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"   TitleCaps="False"  >
     <Grid>
 
 
         <WrapPanel Margin="45" HorizontalAlignment="Center">
             <Controls:Tile x:Name="employeelistbtn" Background="#CC0050EF"    Title="Employee List" TitleFontSize="12" Click="employeelistbtn_Click">
-                <Rectangle Fill="White" Height="50" Width="60">
+                <Rectangle Fill="White" Height="40" Width="50">
                     <Rectangle.OpacityMask>
                         <VisualBrush Visual="{StaticResource appbar_people_profile}" Stretch="Fill" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>
             <Controls:Tile x:Name="addempbtn" Background="#CC0050EF"    Title="Create New Employee" TitleFontSize="12" Click="addempbtn_Click">
-                <Rectangle Fill="White" Height="50" Width="50">
+                <Rectangle Fill="White" Height="40" Width="40">
                     <Rectangle.OpacityMask>
                         <VisualBrush Visual="{StaticResource appbar_user_add}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="positionbtn"  Background="#CC0050EF"    Title=" Employee Position List" TitleFontSize="12" Click="positionbtn_Click">
+                <Rectangle Fill="White" Height="40" Width="40">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_layer}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="rankbtn"  Background="#CC0050EF"    Title="Employee Rank List" TitleFontSize="12" Click="rankbtn_Click">
+                <Rectangle Fill="White" Height="40" Width="50">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_people_up}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="statusbtn"   Background="#CC0050EF"    Title="Employee Status List" TitleFontSize="12">
+                <Rectangle Fill="White" Height="40" Width="40">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_people_status}" Stretch="Fill" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>

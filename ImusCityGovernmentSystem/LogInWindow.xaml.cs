@@ -177,12 +177,12 @@ namespace ImusCityGovernmentSystem
                 if (license.IsDemo == true)
                 {
                     App.LicenseKey = license.LicenseKey;
-                    this.Title = "EGAS (DEMO MODE)";
+                    this.Title = "GISI (DEMO MODE)";
                 }
                 else
                 {
                     App.LicenseKey = license.LicenseKey;
-                    this.Title = "EGAS";
+                    this.Title = "GISI";
                 }
 
             }
