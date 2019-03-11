@@ -96,6 +96,7 @@ namespace ImusCityGovernmentSystem
                                     MessageBox.Show("Please set-up your security questions.");
                                     SecurityQuestion secquestion = new SecurityQuestion();
                                     secquestion.Show();
+                                    //
                                 }
                                 else
                                 {
