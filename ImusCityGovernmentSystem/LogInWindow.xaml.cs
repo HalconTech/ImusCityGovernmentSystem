@@ -58,9 +58,9 @@ namespace ImusCityGovernmentSystem
                 }
                 else
                 {
-                    using (var db = new ImusCityHallEntities())
+                    if (SystemClass.CheckConnection())
                     {
-                        if (SystemClass.CheckConnection())
+                        using (var db = new ImusCityHallEntities())
                         {
                             var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
                             string pass = "";
@@ -119,12 +119,15 @@ namespace ImusCityGovernmentSystem
                                 Mouse.OverrideCursor = null;
                                 return;
                             }
-                        }
-                        else
-                        {
-                            MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+
+
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                    }
+
                 }
             }
             catch (Exception ex)

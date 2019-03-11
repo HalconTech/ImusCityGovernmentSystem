@@ -83,7 +83,6 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             AddlCheckDisbursementWindow add = new AddlCheckDisbursementWindow();
             add.Show();
         }
-
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -129,9 +128,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 else
                 {
                     MessageBox.Show("Report data source is empty.");
-                }
-                
-
+                }              
             }
             Mouse.OverrideCursor = null;
         }
