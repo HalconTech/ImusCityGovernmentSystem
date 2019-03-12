@@ -20,7 +20,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
     /// </summary>
     public partial class AddlCheckDisbursementWindow : MetroWindow
     {
-        ImusCityHallEntities db = new ImusCityHallEntities();
+
         public AddlCheckDisbursementWindow()
         {
             InitializeComponent();
@@ -28,21 +28,30 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            payeecb.ItemsSource = db.Payees.OrderBy(m => m.CompanyName).ToList();
-            payeecb.DisplayMemberPath = "CompanyName";
-            payeecb.SelectedValuePath = "PayeeID";
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                payeecb.ItemsSource = db.Payees.OrderBy(m => m.CompanyName).ToList();
+                payeecb.DisplayMemberPath = "CompanyName";
+                payeecb.SelectedValuePath = "PayeeID";
 
 
 
-            paymenttypecb.ItemsSource = db.PaymentTypes.ToList();
-            paymenttypecb.DisplayMemberPath = "Name";
-            paymenttypecb.SelectedValuePath = "PaymentTypeID";
-            paymenttypecb.SelectedIndex = 0;
+                paymenttypecb.ItemsSource = db.PaymentTypes.ToList();
+                paymenttypecb.DisplayMemberPath = "Name";
+                paymenttypecb.SelectedValuePath = "PaymentTypeID";
+                paymenttypecb.SelectedIndex = 0;
 
-            departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentName).ToList();
-            departmentcb.DisplayMemberPath = "DepartmentName";
-            departmentcb.SelectedValuePath = "DepartmentID";
-            departmentcb.SelectedIndex = 0;
+                departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentName).ToList();
+                departmentcb.DisplayMemberPath = "DepartmentName";
+                departmentcb.SelectedValuePath = "DepartmentID";
+                departmentcb.SelectedIndex = 0;
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+
         }
 
         private void savebtn_Click(object sender, RoutedEventArgs e)
@@ -57,7 +66,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 {
                     MessageBox.Show("Please select payment type");
                 }
-                else if(String.IsNullOrEmpty(vouchernotb.Text))
+                else if (String.IsNullOrEmpty(vouchernotb.Text))
                 {
                     MessageBox.Show("Please enter voucher number");
                 }
@@ -65,7 +74,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 {
                     MessageBox.Show("Please select department");
                 }
-                else if(String.IsNullOrEmpty(descriptiontb.Text))
+                else if (String.IsNullOrEmpty(descriptiontb.Text))
                 {
                     MessageBox.Show("Please enter description");
                 }
@@ -99,7 +108,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                     SystemClass.InsertLog(audit);
                 }
 
-            
+
 
             }
             catch (Exception ex)
@@ -113,16 +122,25 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
 
         private void payeecb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (payeecb.SelectedValue == null)
+            if (SystemClass.CheckConnection())
             {
-                return;
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                if (payeecb.SelectedValue == null)
+                {
+                    return;
+                }
+                else
+                {
+                    payeerepcb.ItemsSource = db.PayeeRepresentativeViews.Where(m => m.PayeeID == (int)payeecb.SelectedValue).OrderBy(m => m.PayeeRepresentativeName).ToList();
+                    payeerepcb.DisplayMemberPath = "PayeeRepresentativeName";
+                    payeerepcb.SelectedValuePath = "PayeeRepID";
+                }
             }
             else
             {
-                payeerepcb.ItemsSource = db.PayeeRepresentativeViews.Where(m => m.PayeeID == (int)payeecb.SelectedValue).OrderBy(m => m.PayeeRepresentativeName).ToList();
-                payeerepcb.DisplayMemberPath = "PayeeRepresentativeName";
-                payeerepcb.SelectedValuePath = "PayeeRepID";
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+           
         }
     }
 }

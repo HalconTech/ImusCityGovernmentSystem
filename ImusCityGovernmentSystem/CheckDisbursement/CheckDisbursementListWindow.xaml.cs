@@ -21,7 +21,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
     /// </summary>
     public partial class CheckDisbursementListWindow : MetroWindow
     {
-        ImusCityHallEntities db = new ImusCityHallEntities();
+
         public List<DisbursementVoucherModel> DVList = new List<DisbursementVoucherModel>();
 
         public CheckDisbursementListWindow()
@@ -31,50 +31,70 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            voucherlistlb.ItemsSource = db.Disbursements.OrderByDescending(m => m.DisbursementID).ToList();
-            voucherlistlb.DisplayMemberPath = "VoucherNo";
-            voucherlistlb.SelectedValuePath = "DisbursementID";
-            voucherlistlb.SelectedIndex = 0;
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                voucherlistlb.ItemsSource = db.Disbursements.OrderByDescending(m => m.DisbursementID).ToList();
+                voucherlistlb.DisplayMemberPath = "VoucherNo";
+                voucherlistlb.SelectedValuePath = "DisbursementID";
+                voucherlistlb.SelectedIndex = 0;
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+
         }
 
         private void voucherlistlb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            db = new ImusCityHallEntities();
-
-            if (voucherlistlb.SelectedValue == null)
+            if (SystemClass.CheckConnection())
             {
-                return;
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                db = new ImusCityHallEntities();
+                if (voucherlistlb.SelectedValue == null)
+                {
+                    return;
+                }
+                else
+                {
+
+                    int DisbursementID = (int)voucherlistlb.SelectedValue;
+                    Disbursement dis = db.Disbursements.Find(DisbursementID);
+                    vouchernotb.Text = dis.VoucherNo;
+                    datetb.Text = dis.DateCreated.HasValue ? dis.DateCreated.Value.ToShortDateString() : null;
+                    switch (dis.PaymentType.Name)
+                    {
+                        case "Check":
+                            checkcb.IsChecked = true;
+                            break;
+                        case "Cash":
+                            cashcb.IsChecked = true;
+                            break;
+                        case "Others":
+                            otherscb.IsChecked = true;
+                            break;
+                    }
+                    payeetb.Text = dis.Payee.CompanyName;
+                    projectnametb.Text = dis.ProjectName;
+                    departmenttb.Text = dis.Department.DepartmentName;
+                    descriptiontb.Text = dis.Description;
+                    obligatedcb.IsChecked = dis.Obligated;
+                    documentcb.IsChecked = dis.DocCompleted;
+                    amounttb.Text = String.Format("{0:n}", dis.Amount);
+                    Mouse.OverrideCursor = null;
+
+                }
             }
             else
             {
-
-                int DisbursementID = (int)voucherlistlb.SelectedValue;
-                Disbursement dis = db.Disbursements.Find(DisbursementID);
-                vouchernotb.Text = dis.VoucherNo;
-                datetb.Text = dis.DateCreated.HasValue ? dis.DateCreated.Value.ToShortDateString() : null;
-                switch (dis.PaymentType.Name)
-                {
-                    case "Check":
-                        checkcb.IsChecked = true;
-                        break;
-                    case "Cash":
-                        cashcb.IsChecked = true;
-                        break;
-                    case "Others":
-                        otherscb.IsChecked = true;
-                        break;
-                }
-                payeetb.Text = dis.Payee.CompanyName;
-                projectnametb.Text = dis.ProjectName;
-                departmenttb.Text = dis.Department.DepartmentName;
-                descriptiontb.Text = dis.Description;
-                obligatedcb.IsChecked = dis.Obligated;
-                documentcb.IsChecked = dis.DocCompleted;
-                amounttb.Text = String.Format("{0:n}", dis.Amount);
                 Mouse.OverrideCursor = null;
-
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+         
+
+            
             Mouse.OverrideCursor = null;
         }
 
@@ -86,50 +106,59 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            db = new ImusCityHallEntities();
-            if (voucherlistlb.SelectedValue == null)
+            if(SystemClass.CheckConnection())
             {
-                return;
-            }
-            else
-            {
-                int DisbursementID = (int)voucherlistlb.SelectedValue;
-
-                var disburse = db.GetDisbursementVoucher(DisbursementID).ToList();
-                foreach (var x in disburse)
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                db = new ImusCityHallEntities();
+                if (voucherlistlb.SelectedValue == null)
                 {
-                    DisbursementVoucherModel dvl = new DisbursementVoucherModel();
-                    dvl.Amount = x.Amount.HasValue ? x.Amount.Value : 0;
-                    dvl.Certification = x.Certification;
-                    dvl.CompanyAddress = x.CompanyAddress;
-                    dvl.CompanyName = x.CompanyName;
-                    dvl.DateCreated = x.DateCreated.Value;
-                    dvl.DepartmentCode = x.DepartmentCode;
-                    dvl.Description = x.Description;
-                    dvl.DocumentCompleted = x.DocumentCompleted;
-                    dvl.Name = x.Name;
-                    dvl.Obligated = x.Obligated;
-                    dvl.ObligationRequestNo = x.ObligationRequestNo;
-                    dvl.TIN_EmpNo = x.TIN_EmpNo;
-                    dvl.Unit_Project = x.Unit_Project;
-                    dvl.VoucherNo = x.VoucherNo;
-                    dvl.PaymentName = x.PaymentName;
-                    DVList.Add(dvl);
-                }
-
-                if(DVList.Count != 0)
-                {
-                    ReportWindow rw = new ReportWindow();
-                    rw.DVList = DVList;
-                    App.ReportID = 1;
-                    rw.Show();
-
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Report data source is empty.");
-                }              
+                    int DisbursementID = (int)voucherlistlb.SelectedValue;
+
+                    var disburse = db.GetDisbursementVoucher(DisbursementID).ToList();
+                    foreach (var x in disburse)
+                    {
+                        DisbursementVoucherModel dvl = new DisbursementVoucherModel();
+                        dvl.Amount = x.Amount.HasValue ? x.Amount.Value : 0;
+                        dvl.Certification = x.Certification;
+                        dvl.CompanyAddress = x.CompanyAddress;
+                        dvl.CompanyName = x.CompanyName;
+                        dvl.DateCreated = x.DateCreated.Value;
+                        dvl.DepartmentCode = x.DepartmentCode;
+                        dvl.Description = x.Description;
+                        dvl.DocumentCompleted = x.DocumentCompleted;
+                        dvl.Name = x.Name;
+                        dvl.Obligated = x.Obligated;
+                        dvl.ObligationRequestNo = x.ObligationRequestNo;
+                        dvl.TIN_EmpNo = x.TIN_EmpNo;
+                        dvl.Unit_Project = x.Unit_Project;
+                        dvl.VoucherNo = x.VoucherNo;
+                        dvl.PaymentName = x.PaymentName;
+                        DVList.Add(dvl);
+                    }
+
+                    if (DVList.Count != 0)
+                    {
+                        ReportWindow rw = new ReportWindow();
+                        rw.DVList = DVList;
+                        App.ReportID = 1;
+                        rw.Show();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Report data source is empty.");
+                    }
+                }
             }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+            
             Mouse.OverrideCursor = null;
         }
     }
