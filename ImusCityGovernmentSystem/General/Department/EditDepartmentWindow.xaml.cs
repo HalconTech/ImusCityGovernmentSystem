@@ -39,25 +39,33 @@ namespace ImusCityGovernmentSystem.General.Department
         {
             try
             {
-                using (var db = new ImusCityHallEntities())
+                if(SystemClass.CheckConnection())
                 {
-                    var find = db.Departments.Find(DepartmentID);
-                    find.DepartmentCode = txtCode.Text;
-                    find.DepartmentName = txtName.Text;
-                    find.DivisionID = Convert.ToInt32(cbDivision.SelectedValue);
-                    db.SaveChanges();
-
-                    var audit = new AuditTrailModel
+                    using (var db = new ImusCityHallEntities())
                     {
-                        Activity = "Updated an item in department list. DEPT ID: " + DepartmentID.ToString(),
-                        ModuleName = this.GetType().Name,
-                        EmployeeID = App.EmployeeID
-                    };
+                        var find = db.Departments.Find(DepartmentID);
+                        find.DepartmentCode = txtCode.Text;
+                        find.DepartmentName = txtName.Text;
+                        find.DivisionID = Convert.ToInt32(cbDivision.SelectedValue);
+                        db.SaveChanges();
 
-                    SystemClass.InsertLog(audit);
-                    MessageBox.Show("Department updated successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
+                        var audit = new AuditTrailModel
+                        {
+                            Activity = "Updated an item in department list. DEPT ID: " + DepartmentID.ToString(),
+                            ModuleName = this.GetType().Name,
+                            EmployeeID = App.EmployeeID
+                        };
+
+                        SystemClass.InsertLog(audit);
+                        MessageBox.Show("Department updated successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                    }
                 }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+               
             }
             catch (Exception ex)
             {
@@ -68,19 +76,27 @@ namespace ImusCityGovernmentSystem.General.Department
         {
             try
             {
-                using (var db = new ImusCityHallEntities())
+                if(SystemClass.CheckConnection())
                 {
-                    cbDivision.ItemsSource = db.Divisions.OrderBy(m => m.DivisionName).ToList();
-                    cbDivision.DisplayMemberPath = "DivisionCode";
-                    cbDivision.SelectedValuePath = "DivisionID";
-                    var find = db.Departments.Find(DepartmentID);
-                    lblDeptID.Content = find.DepartmentID.ToString();
-                    txtCode.Text = find.DepartmentCode;
-                    txtName.Text = find.DepartmentName;
-                    cbDivision.SelectedValue = find.DivisionID;
+                    using (var db = new ImusCityHallEntities())
+                    {
+                        cbDivision.ItemsSource = db.Divisions.OrderBy(m => m.DivisionName).ToList();
+                        cbDivision.DisplayMemberPath = "DivisionCode";
+                        cbDivision.SelectedValuePath = "DivisionID";
+                        var find = db.Departments.Find(DepartmentID);
+                        lblDeptID.Content = find.DepartmentID.ToString();
+                        txtCode.Text = find.DepartmentCode;
+                        txtName.Text = find.DepartmentName;
+                        cbDivision.SelectedValue = find.DivisionID;
 
 
+                    }
                 }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+              
             }
             catch (Exception ex)
             {

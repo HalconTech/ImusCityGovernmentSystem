@@ -58,59 +58,68 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
         {
             try
             {
-                if (payeecb.SelectedValue == null)
+                if (SystemClass.CheckConnection())
                 {
-                    MessageBox.Show("Please select payee");
-                }
-                else if (paymenttypecb.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select payment type");
-                }
-                else if (String.IsNullOrEmpty(vouchernotb.Text))
-                {
-                    MessageBox.Show("Please enter voucher number");
-                }
-                else if (departmentcb.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select department");
-                }
-                else if (String.IsNullOrEmpty(descriptiontb.Text))
-                {
-                    MessageBox.Show("Please enter description");
-                }
-                else if (String.IsNullOrEmpty(amounttb.Text))
-                {
-                    MessageBox.Show("Please enter amount");
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    if (payeecb.SelectedValue == null)
+                    {
+                        MessageBox.Show("Please select payee");
+                    }
+                    else if (paymenttypecb.SelectedValue == null)
+                    {
+                        MessageBox.Show("Please select payment type");
+                    }
+                    else if (String.IsNullOrEmpty(vouchernotb.Text))
+                    {
+                        MessageBox.Show("Please enter voucher number");
+                    }
+                    else if (departmentcb.SelectedValue == null)
+                    {
+                        MessageBox.Show("Please select department");
+                    }
+                    else if (String.IsNullOrEmpty(descriptiontb.Text))
+                    {
+                        MessageBox.Show("Please enter description");
+                    }
+                    else if (String.IsNullOrEmpty(amounttb.Text))
+                    {
+                        MessageBox.Show("Please enter amount");
+                    }
+                    else
+                    {
+                        Disbursement disbursement = new Disbursement();
+                        disbursement.PayeeID = (int)payeecb.SelectedValue;
+                        disbursement.PaymentTypeID = (int)paymenttypecb.SelectedValue;
+                        disbursement.VoucherNo = vouchernotb.Text;
+                        disbursement.DateCreated = DateTime.Now;
+                        disbursement.DepartmentID = (int)departmentcb.SelectedValue;
+                        disbursement.ProjectName = projectnametb.Text;
+                        disbursement.Description = descriptiontb.Text;
+                        disbursement.Amount = Convert.ToDecimal(amounttb.Text);
+                        disbursement.Obligated = obligatedcb.IsChecked;
+                        disbursement.DocCompleted = documentcb.IsChecked;
+                        db.Disbursements.Add(disbursement);
+                        db.SaveChanges();
+
+                        var audit = new AuditTrailModel
+                        {
+                            Activity = "Created disbursement document",
+                            ModuleName = this.GetType().Name,
+                            EmployeeID = App.EmployeeID
+                        };
+
+                        SystemClass.InsertLog(audit);
+                    }
                 }
                 else
                 {
-                    Disbursement disbursement = new Disbursement();
-                    disbursement.PayeeID = (int)payeecb.SelectedValue;
-                    disbursement.PaymentTypeID = (int)paymenttypecb.SelectedValue;
-                    disbursement.VoucherNo = vouchernotb.Text;
-                    disbursement.DateCreated = DateTime.Now;
-                    disbursement.DepartmentID = (int)departmentcb.SelectedValue;
-                    disbursement.ProjectName = projectnametb.Text;
-                    disbursement.Description = descriptiontb.Text;
-                    disbursement.Amount = Convert.ToDecimal(amounttb.Text);
-                    disbursement.Obligated = obligatedcb.IsChecked;
-                    disbursement.DocCompleted = documentcb.IsChecked;
-                    db.Disbursements.Add(disbursement);
-                    db.SaveChanges();
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
 
-                    var audit = new AuditTrailModel
-                    {
-                        Activity = "Created disbursement document",
-                        ModuleName = this.GetType().Name,
-                        EmployeeID = App.EmployeeID
-                    };
-
-                    SystemClass.InsertLog(audit);
                 }
 
-
-
             }
+
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
@@ -140,7 +149,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-           
+
         }
     }
 }

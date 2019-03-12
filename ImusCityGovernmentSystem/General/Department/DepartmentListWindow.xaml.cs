@@ -27,24 +27,32 @@ namespace ImusCityGovernmentSystem.General.Department
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtSearch.Text))
+            if(SystemClass.CheckConnection())
             {
+                if (String.IsNullOrEmpty(txtSearch.Text))
+                {
 
+                }
+                else
+                {
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Searched item in the department list. SEARCH KEY: " + txtSearch.Text,
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+                }
+
+                GetSearchedList(txtSearch.Text);
             }
             else
             {
-
-                var audit = new AuditTrailModel
-                {
-                    Activity = "Searched item in the department list. SEARCH KEY: " + txtSearch.Text,
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
-
-                SystemClass.InsertLog(audit);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-
-            GetSearchedList(txtSearch.Text);
+          
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -60,25 +68,33 @@ namespace ImusCityGovernmentSystem.General.Department
         {
             try
             {
-                DList = new List<DepartmentList>();
-                using (var db = new ImusCityHallEntities())
+                if(SystemClass.CheckConnection())
                 {
-                    var get = db.Departments.Where(m => m.DepartmentName.Contains(searchkey) || m.DepartmentCode.Contains(searchkey)).OrderBy(m => m.DepartmentName).ToList();
-
-                    foreach (var item in get)
+                    DList = new List<DepartmentList>();
+                    using (var db = new ImusCityHallEntities())
                     {
-                        DepartmentList dl = new DepartmentList();
-                        dl.DepartmentID = item.DepartmentID;
-                        dl.DepartmentCode = item.DepartmentCode;
-                        dl.DepartmentName = item.DepartmentName;
-                        dl.DivisionID = item.DivisionID;
-                        dl.DivisionName = item.Division.DivisionName;
+                        var get = db.Departments.Where(m => m.DepartmentName.Contains(searchkey) || m.DepartmentCode.Contains(searchkey)).OrderBy(m => m.DepartmentName).ToList();
 
-                        DList.Add(dl);
+                        foreach (var item in get)
+                        {
+                            DepartmentList dl = new DepartmentList();
+                            dl.DepartmentID = item.DepartmentID;
+                            dl.DepartmentCode = item.DepartmentCode;
+                            dl.DepartmentName = item.DepartmentName;
+                            dl.DivisionID = item.DivisionID;
+                            dl.DivisionName = item.Division.DivisionName;
+
+                            DList.Add(dl);
+                        }
+
+                        dgDepartmentList.ItemsSource = DList.OrderByDescending(m => m.DepartmentID);
                     }
-               
-                    dgDepartmentList.ItemsSource = DList.OrderByDescending(m => m.DepartmentID);
                 }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+               
             }
             catch (Exception ex)
             {
@@ -95,23 +111,31 @@ namespace ImusCityGovernmentSystem.General.Department
         {
             try
             {
-                using (var db = new ImusCityHallEntities())
+                if(SystemClass.CheckConnection())
                 {
-                    if (dgDepartmentList.SelectedItem != null)
+                    using (var db = new ImusCityHallEntities())
                     {
-                        var selectedItem = ((DepartmentList)dgDepartmentList.SelectedItem);
-                        EditDepartmentWindow ud = new EditDepartmentWindow();
-                        ud.DepartmentID = selectedItem.DepartmentID;
-                        ud.ShowDialog();
-                        TextClear();
-                        GetList();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No department Selected", "System Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                        if (dgDepartmentList.SelectedItem != null)
+                        {
+                            var selectedItem = ((DepartmentList)dgDepartmentList.SelectedItem);
+                            EditDepartmentWindow ud = new EditDepartmentWindow();
+                            ud.DepartmentID = selectedItem.DepartmentID;
+                            ud.ShowDialog();
+                            TextClear();
+                            GetList();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No department Selected", "System Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
 
+                    }
                 }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+             
             }
             catch (Exception ex)
             {
@@ -132,28 +156,36 @@ namespace ImusCityGovernmentSystem.General.Department
         {
             try
             {
-                DList = new List<DepartmentList>();
-                using (var db = new ImusCityHallEntities())
+                if(SystemClass.CheckConnection())
                 {
-                    var get = db.Departments.OrderByDescending(m => m.DepartmentID).ToList();
-
-                    foreach (var item in get)
+                    DList = new List<DepartmentList>();
+                    using (var db = new ImusCityHallEntities())
                     {
-                        DepartmentList dl = new DepartmentList();
-                        dl.DepartmentID = item.DepartmentID;
-                        dl.DepartmentCode = item.DepartmentCode;
-                        dl.DepartmentName = item.DepartmentName;
-                        dl.DivisionID = item.DivisionID;
-                        dl.DivisionName = item.Division.DivisionName;
+                        var get = db.Departments.OrderByDescending(m => m.DepartmentID).ToList();
 
-                        DList.Add(dl);
+                        foreach (var item in get)
+                        {
+                            DepartmentList dl = new DepartmentList();
+                            dl.DepartmentID = item.DepartmentID;
+                            dl.DepartmentCode = item.DepartmentCode;
+                            dl.DepartmentName = item.DepartmentName;
+                            dl.DivisionID = item.DivisionID;
+                            dl.DivisionName = item.Division.DivisionName;
+
+                            DList.Add(dl);
+                        }
+                        if (!String.IsNullOrEmpty(txtSearch.Text))
+                            DList = DList.Where(m => m.DepartmentCode.ToUpper().Contains(txtSearch.Text) || m.DepartmentName.ToUpper().Contains(txtSearch.Text)).ToList();
+
+
+                        dgDepartmentList.ItemsSource = DList;
                     }
-                    if (!String.IsNullOrEmpty(txtSearch.Text))
-                        DList = DList.Where(m => m.DepartmentCode.ToUpper().Contains(txtSearch.Text) || m.DepartmentName.ToUpper().Contains(txtSearch.Text)).ToList();
-
-                
-                    dgDepartmentList.ItemsSource = DList;
                 }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+              
             }
             catch (Exception ex)
             {
