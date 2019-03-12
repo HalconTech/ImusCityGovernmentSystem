@@ -73,7 +73,7 @@ namespace ImusCityGovernmentSystem
                             else
                             {
                                 MessageBox.Show("Log-in failed!");
-                                Mouse.OverrideCursorss = null;
+                                Mouse.OverrideCursor = null;
                                 return;
                             }
 
