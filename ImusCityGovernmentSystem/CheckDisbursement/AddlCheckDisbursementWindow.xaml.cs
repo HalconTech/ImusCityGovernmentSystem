@@ -56,9 +56,10 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
 
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+
+            if (SystemClass.CheckConnection())
             {
-                if (SystemClass.CheckConnection())
+                try
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();
                     if (payeecb.SelectedValue == null)
@@ -100,7 +101,6 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                         disbursement.DocCompleted = documentcb.IsChecked;
                         db.Disbursements.Add(disbursement);
                         db.SaveChanges();
-
                         var audit = new AuditTrailModel
                         {
                             Activity = "Created disbursement document",
@@ -111,22 +111,16 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                         SystemClass.InsertLog(audit);
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
-
+                    MessageBox.Show(ex.ToString());
                 }
-
             }
-
-
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.ToString());
-            }
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
 
-
-
+            }          
         }
 
         private void payeecb_SelectionChanged(object sender, SelectionChangedEventArgs e)
