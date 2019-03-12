@@ -36,10 +36,7 @@ namespace ImusCityGovernmentSystem.General.Position
                         ep.EmployeePositionName = txtName.Text;
                         ep.Description = txtDesc.Text;
                         ep.EmployeeRankID = Convert.ToInt32(cbRank.SelectedValue);
-                        if (chkActive.IsChecked == true)
-                            ep.Active = true;
-                        else
-                            ep.Active = false;
+                        ep.Active = true;
                         db.EmployeePositions.Add(ep);
                         db.SaveChanges();
 
@@ -77,7 +74,7 @@ namespace ImusCityGovernmentSystem.General.Position
             txtName.Clear();
             txtName.Focus();
             cbRank.Text = "";
-            chkActive.IsChecked = true;
+           
         }
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {

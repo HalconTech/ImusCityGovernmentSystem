@@ -116,7 +116,7 @@ namespace ImusCityGovernmentSystem.General.Payee
                     };
 
                     SystemClass.InsertLog(audit);
-                    MessageBox.Show("Payee added succefully!");
+                    MessageBox.Show("Payee added successfully!");
                     SystemClass.ClearTextBoxes(this);
                     LoadPayeeRepresentative();
 

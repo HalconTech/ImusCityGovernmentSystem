@@ -2,7 +2,7 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="Add Position" Height="283.5" Width="389" TitleCaps="False" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" >
+        Title="Add Position" Height="204.167" Width="389" TitleCaps="False" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" >
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".7*"/>
@@ -14,25 +14,20 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="35"/>
+         
+        
+       
         </Grid.RowDefinitions>
+        <Label Grid.Column="0"  HorizontalContentAlignment="Right" Content="Position Name:*" FontWeight="Bold"/>
+        <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" Content="Description:*" FontWeight="Bold"/>
+        <Label Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Right" Content="Rank:*" FontWeight="Bold"/>
 
-        <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right" Content="Position ID:" FontWeight="Bold"/>
-        <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" Content="Position Name:*" FontWeight="Bold"/>
-        <Label Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Right" Content="Description:*" FontWeight="Bold"/>
-        <Label Grid.Column="0" Grid.Row="4" HorizontalContentAlignment="Right" Content="Rank:*" FontWeight="Bold"/>
-        <Label Grid.Column="0" Grid.Row="5" HorizontalContentAlignment="Right" Content="Is Active:*" FontWeight="Bold"/>
+       
+        <TextBox Grid.Column="1"  Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Position Name" Name="txtName"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Description" Name="txtDesc" Grid.RowSpan="2" TextWrapping="Wrap"/>
 
-        <Label Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Left" Content="" FontWeight="Bold" Name="lblPosID"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="5,2" Controls:TextBoxHelper.Watermark="Position Name" Name="txtName"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Margin="5,2" Controls:TextBoxHelper.Watermark="Description" Name="txtDesc" Grid.RowSpan="2" TextWrapping="Wrap"/>
+        <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Rank" Name="cbRank"/>
 
-        <ComboBox Grid.Column="1" Grid.Row="4" Margin="5,2" Controls:TextBoxHelper.Watermark="Rank" Name="cbRank"/>
-
-        <CheckBox Grid.Column="1" Grid.Row="5" Margin="5,2"  Name="chkActive" Content="Active" />
-
-        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Save" x:Name="btnAdd" IsDefault="True" HorizontalAlignment="Right" Width="100" Click="btnAdd_Click"/>
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Save" x:Name="btnAdd" IsDefault="True" HorizontalAlignment="Right" Width="100" Click="btnAdd_Click"/>
     </Grid>
     </Controls:MetroWindow>

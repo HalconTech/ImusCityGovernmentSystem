@@ -84,7 +84,6 @@ namespace ImusCityGovernmentSystem.General.Department
                         cbDivision.DisplayMemberPath = "DivisionCode";
                         cbDivision.SelectedValuePath = "DivisionID";
                         var find = db.Departments.Find(DepartmentID);
-                        lblDeptID.Content = find.DepartmentID.ToString();
                         txtCode.Text = find.DepartmentCode;
                         txtName.Text = find.DepartmentName;
                         cbDivision.SelectedValue = find.DivisionID;

@@ -38,7 +38,7 @@
         <TextBlock Grid.Row="4" Text="Company Address"></TextBlock>
         <TextBox Grid.Row="5" Name="companyaddresstb" VerticalContentAlignment="Center"></TextBox>
         <TextBlock Grid.Row="6" Text="TIN No."></TextBlock>
-        <TextBox Grid.Row="7" VerticalContentAlignment="Center" Name="tinnotb"></TextBox>
+        <TextBox Grid.Row="7" VerticalContentAlignment="Center" MaxLength="12" Name="tinnotb"></TextBox>
         <TextBlock Text="Contact No." Grid.Row="8"></TextBlock>
         <TextBox Grid.Row="9" VerticalContentAlignment="Center" Name="contactnotb"></TextBox>
         <Button x:Name="savebtn" Grid.Row="10" Content="Save" Margin="0,5,0,0" HorizontalAlignment="Right" Width="100" Click="savebtn_Click"></Button>

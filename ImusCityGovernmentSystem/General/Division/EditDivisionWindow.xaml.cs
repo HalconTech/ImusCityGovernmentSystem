@@ -68,7 +68,7 @@ namespace ImusCityGovernmentSystem.General.Division
                 using (var db = new ImusCityHallEntities())
                 {
                     var find = db.Divisions.Find(DivisionID);
-                    lblDivID.Content = find.DivisionID.ToString();
+                    
                     txtCode.Text = find.DivisionCode;
                     txtName.Text = find.DivisionName;
                 }

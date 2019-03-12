@@ -59,7 +59,7 @@ namespace ImusCityGovernmentSystem.General.Payee
                 };
 
                 SystemClass.InsertLog(audit);
-                MessageBox.Show("Representative addedd succefully!");
+                MessageBox.Show("Representative addedd successfully!");
                 SystemClass.ClearTextBoxes(this);
             }
             Mouse.OverrideCursor = null;
