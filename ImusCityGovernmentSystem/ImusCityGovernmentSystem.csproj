@@ -596,6 +596,7 @@
     <Resource Include="Images\imusseal.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".circleci\" />
     <Folder Include="Validation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
