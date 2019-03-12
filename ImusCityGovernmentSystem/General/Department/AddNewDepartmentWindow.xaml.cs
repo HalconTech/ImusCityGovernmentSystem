@@ -42,36 +42,44 @@ namespace ImusCityGovernmentSystem.General.Department
         {
             try
             {
-                using (var db = new ImusCityHallEntities())
+                if(SystemClass.CheckConnection())
                 {
-                    if (!String.IsNullOrEmpty(txtCode.Text) && !String.IsNullOrEmpty(txtName.Text) && !String.IsNullOrEmpty(cbDivision.Text))
+                    using (var db = new ImusCityHallEntities())
                     {
-                        Model.Department d = new Model.Department();
-                        d.DepartmentCode = txtCode.Text;
-                        d.DepartmentName = txtName.Text;
-                        d.DivisionID = Convert.ToInt32(cbDivision.SelectedValue);
-                        db.Departments.Add(d);
-                        db.SaveChanges();
-
-                        var audit = new AuditTrailModel
+                        if (!String.IsNullOrEmpty(txtCode.Text) && !String.IsNullOrEmpty(txtName.Text) && !String.IsNullOrEmpty(cbDivision.Text))
                         {
-                            Activity = "Added new department in the database. DEPT CODE: " + txtCode.Text,
-                            ModuleName = this.GetType().Name,
-                            EmployeeID = App.EmployeeID
-                        };
+                            Model.Department d = new Model.Department();
+                            d.DepartmentCode = txtCode.Text;
+                            d.DepartmentName = txtName.Text;
+                            d.DivisionID = Convert.ToInt32(cbDivision.SelectedValue);
+                            db.Departments.Add(d);
+                            db.SaveChanges();
 
-                        SystemClass.InsertLog(audit);
-                        MessageBox.Show("Department added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                        TextClear();
+                            var audit = new AuditTrailModel
+                            {
+                                Activity = "Added new department in the database. DEPT CODE: " + txtCode.Text,
+                                ModuleName = this.GetType().Name,
+                                EmployeeID = App.EmployeeID
+                            };
+
+                            SystemClass.InsertLog(audit);
+                            MessageBox.Show("Department added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                            TextClear();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fill up necessary fields.", "System Information!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+
 
                     }
-                    else
-                    {
-                        MessageBox.Show("Fill up necessary fields.", "System Information!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-
-
                 }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+              
             }
             catch (Exception ex)
             {
@@ -84,13 +92,21 @@ namespace ImusCityGovernmentSystem.General.Department
         {
             try
             {
-                using (var db = new ImusCityHallEntities())
+                if(SystemClass.CheckConnection())
                 {
-                    cbDivision.ItemsSource = db.Divisions.OrderBy(m => m.DivisionName).ToList();
-                    cbDivision.DisplayMemberPath = "DivisionCode";
-                    cbDivision.SelectedValuePath = "DivisionID";
-                    txtCode.Focus();
+                    using (var db = new ImusCityHallEntities())
+                    {
+                        cbDivision.ItemsSource = db.Divisions.OrderBy(m => m.DivisionName).ToList();
+                        cbDivision.DisplayMemberPath = "DivisionCode";
+                        cbDivision.SelectedValuePath = "DivisionID";
+                        txtCode.Focus();
+                    }
                 }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+                
             }
             catch (Exception ex)
             {
