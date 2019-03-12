@@ -5,7 +5,7 @@
         BorderThickness="0"
         Title="Check Disbursement"
     
-        WindowTransitionsEnabled="False"  Height="410.849" Width="533.071"   ResizeMode="NoResize"
+        WindowTransitionsEnabled="False"  Height="410.849" Width="621.571"   ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"   TitleCaps="False"  >
     <Grid>
    
@@ -36,6 +36,13 @@
                 <Rectangle Fill="White" Height="50" Width="50">
                     <Rectangle.OpacityMask>
                         <VisualBrush Visual="{StaticResource appbar_money}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="checkbtn"    Background="#CC0050EF"    Title="Checks Master List" TitleFontSize="12" Click="checkbtn_Click"  >
+                <Rectangle Fill="White" Height="50" Width="50">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_book_list}" Stretch="Fill" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>

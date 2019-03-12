@@ -48,5 +48,13 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             General.Fund.FundListWindow fund = new General.Fund.FundListWindow();
             fund.ShowDialog();
         }
+
+        private void checkbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            CheckDisbursement.CheckListWindow check = new CheckDisbursement.CheckListWindow();
+            Mouse.OverrideCursor = null;
+            check.ShowDialog();
+        }
     }
 }

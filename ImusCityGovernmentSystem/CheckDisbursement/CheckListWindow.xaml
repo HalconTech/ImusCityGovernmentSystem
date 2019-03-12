@@ -1,0 +1,41 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.CheckDisbursement.CheckListWindow"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Check Master List" Height="319.211" Width="521.822"  TitleCaps="False" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox VerticalContentAlignment="Center" Name="searchkeytb" Margin="0,0,5,0" Controls:TextBoxHelper.Watermark="Search" ></TextBox>
+        <Button x:Name="searchbtn" Grid.Column="1" Content="Search"></Button>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Text="Search By:"></TextBlock>
+            <RadioButton Name="payeerb" Grid.Column="1" Content="Payee"></RadioButton>
+            <RadioButton Name="descrb" Grid.Column="2" Content="Description"></RadioButton>
+            <RadioButton Name="checknorb" Content="Check No." Grid.Column="3"></RadioButton>
+        </Grid>
+        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" Name="checklistdg" Grid.Row="2" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Check No." Binding="{Binding CheckNo}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Voucher" Binding="{Binding Disbursement.Voucher}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Payee" Binding="{Binding Disbursement.Payee.CompanyName }"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding CheckDescription}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Amout" Binding="{Binding Amount}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+    </Controls:MetroWindow>
