@@ -84,5 +84,13 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
         {
             LoadItems();
         }
+
+        private void searchkeytb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                GetSearched(searchkeytb.Text);
+            }
+        }
     }
 }

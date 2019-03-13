@@ -161,5 +161,23 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             
             Mouse.OverrideCursor = null;
         }
+
+        private void checkbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            if(voucherlistlb.SelectedValue == null)
+            {
+                Mouse.OverrideCursor = null;
+                MessageBox.Show("Please select an item");
+            }
+            else
+            {
+                CheckDisbursement.AddNewCheckEntryWindow addcheck = new CheckDisbursement.AddNewCheckEntryWindow();
+                Mouse.OverrideCursor = null;
+                addcheck.DisbursementID = (int)voucherlistlb.SelectedValue;
+                addcheck.ShowDialog();
+            }
+            Mouse.OverrideCursor = null;
+        }
     }
 }

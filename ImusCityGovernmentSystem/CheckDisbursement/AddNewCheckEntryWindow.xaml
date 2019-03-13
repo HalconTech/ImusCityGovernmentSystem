@@ -1,0 +1,20 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.CheckDisbursement.AddNewCheckEntryWindow"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Add New Check Entry" Height="207.556" Width="394.639"  TitleCaps="False" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Voucher"></TextBlock>
+        <TextBox Grid.Column="1" VerticalContentAlignment="Center" IsReadOnly="True" Name="vouchernotb"></TextBox>
+    </Grid>
+</Controls:MetroWindow>

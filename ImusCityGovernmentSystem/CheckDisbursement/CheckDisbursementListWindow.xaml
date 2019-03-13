@@ -67,7 +67,15 @@
             <CheckBox x:Name="documentcb" Grid.Row="8" Content="Supporting documents completed" Grid.ColumnSpan="4"></CheckBox>
             <TextBlock Text="Amount:" FontWeight="Bold" FontSize="16" Grid.Row="9"></TextBlock>
             <TextBlock x:Name="amounttb" Grid.Column="1" FontSize="16" Grid.ColumnSpan="3" Grid.Row="9" Foreground="#FFB40000" FontWeight="Bold"/>
-            <Button x:Name="btnPrint" Grid.Column="3" Grid.Row="10" Content="Print" Margin="5" Click="btnPrint_Click"/>
+            <Grid Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnPrint"  Content="Print Dis. Voucher"  Click="btnPrint_Click" FontSize="12" Margin="0,0,5,0"/>
+                <Button Name="checkbtn" Grid.Column="1" Content="Generate Check" Click="checkbtn_Click"></Button>
+            </Grid>
+            
         </Grid>
         <TextBlock Text="Voucher List" Grid.Row="1" FontWeight="Bold"></TextBlock>
         <ListBox Name="voucherlistlb"  BorderBrush="Black" BorderThickness="1" Grid.Row="2" SelectionChanged="voucherlistlb_SelectionChanged" Margin="0" ></ListBox>

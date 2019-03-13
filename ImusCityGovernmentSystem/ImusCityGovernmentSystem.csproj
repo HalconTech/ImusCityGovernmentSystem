@@ -117,6 +117,9 @@
     <Compile Include="CheckDisbursement\AddlCheckDisbursementWindow.xaml.cs">
       <DependentUpon>AddlCheckDisbursementWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CheckDisbursement\AddNewCheckEntryWindow.xaml.cs">
+      <DependentUpon>AddNewCheckEntryWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CheckDisbursement\CheckDisbursementListWindow.xaml.cs">
       <DependentUpon>CheckDisbursementListWindow.xaml</DependentUpon>
     </Compile>
@@ -250,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CheckDisbursement\AddlCheckDisbursementWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckDisbursement\AddNewCheckEntryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
