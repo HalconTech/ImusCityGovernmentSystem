@@ -33,42 +33,50 @@ namespace ImusCityGovernmentSystem.General.Division
         }
         public void DivisionAdd()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    if (!String.IsNullOrEmpty(txtCode.Text) && !String.IsNullOrEmpty(txtName.Text))
+                    using (var db = new ImusCityHallEntities())
                     {
-                        Model.Division d = new Model.Division();
-                        d.DivisionCode = txtCode.Text;
-                        d.DivisionName = txtName.Text;
-                        db.Divisions.Add(d);
-                        db.SaveChanges();
-
-                        var audit = new AuditTrailModel
+                        if (!String.IsNullOrEmpty(txtCode.Text) && !String.IsNullOrEmpty(txtName.Text))
                         {
-                            Activity = "Added new division in the database. DEPT CODE: " + txtCode.Text,
-                            ModuleName = this.GetType().Name,
-                            EmployeeID = App.EmployeeID
-                        };
+                            Model.Division d = new Model.Division();
+                            d.DivisionCode = txtCode.Text;
+                            d.DivisionName = txtName.Text;
+                            db.Divisions.Add(d);
+                            db.SaveChanges();
 
-                        SystemClass.InsertLog(audit);
-                        MessageBox.Show("Division added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                        TextClear();
+                            var audit = new AuditTrailModel
+                            {
+                                Activity = "Added new division in the database. DEPT CODE: " + txtCode.Text,
+                                ModuleName = this.GetType().Name,
+                                EmployeeID = App.EmployeeID
+                            };
+
+                            SystemClass.InsertLog(audit);
+                            MessageBox.Show("Division added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                            TextClear();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fill up necessary fields.", "System Information!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+
 
                     }
-                    else
-                    {
-                        MessageBox.Show("Fill up necessary fields.", "System Information!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-
-
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+           
 
         }
         public void TextClear()

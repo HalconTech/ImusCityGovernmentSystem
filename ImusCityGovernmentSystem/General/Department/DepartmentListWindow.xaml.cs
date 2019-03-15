@@ -27,7 +27,7 @@ namespace ImusCityGovernmentSystem.General.Department
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 if (String.IsNullOrEmpty(txtSearch.Text))
                 {
@@ -52,7 +52,7 @@ namespace ImusCityGovernmentSystem.General.Department
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-          
+
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -66,9 +66,10 @@ namespace ImusCityGovernmentSystem.General.Department
 
         public void GetSearchedList(string searchkey)
         {
-            try
+
+            if (SystemClass.CheckConnection())
             {
-                if(SystemClass.CheckConnection())
+                try
                 {
                     DList = new List<DepartmentList>();
                     using (var db = new ImusCityHallEntities())
@@ -90,16 +91,17 @@ namespace ImusCityGovernmentSystem.General.Department
                         dgDepartmentList.ItemsSource = DList.OrderByDescending(m => m.DepartmentID);
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-               
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
+
         }
         private void refreshbtn_Click(object sender, RoutedEventArgs e)
         {
@@ -109,9 +111,10 @@ namespace ImusCityGovernmentSystem.General.Department
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+
+            if (SystemClass.CheckConnection())
             {
-                if(SystemClass.CheckConnection())
+                try
                 {
                     using (var db = new ImusCityHallEntities())
                     {
@@ -131,16 +134,17 @@ namespace ImusCityGovernmentSystem.General.Department
 
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-             
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
+
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -154,9 +158,10 @@ namespace ImusCityGovernmentSystem.General.Department
         List<DepartmentList> DList = new List<DepartmentList>();
         public void GetList()
         {
-            try
+
+            if (SystemClass.CheckConnection())
             {
-                if(SystemClass.CheckConnection())
+                try
                 {
                     DList = new List<DepartmentList>();
                     using (var db = new ImusCityHallEntities())
@@ -181,16 +186,17 @@ namespace ImusCityGovernmentSystem.General.Department
                         dgDepartmentList.ItemsSource = DList;
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-              
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
+
         }
         public class DepartmentList
         {
@@ -207,6 +213,14 @@ namespace ImusCityGovernmentSystem.General.Department
             if (e.Key == Key.Enter)
             {
                 GetSearchedList(txtSearch.Text);
+                var audit = new AuditTrailModel
+                {
+                    Activity = "Searched item in the department list. SEARCH KEY: " + txtSearch.Text,
+                    ModuleName = this.GetType().Name,
+                    EmployeeID = App.EmployeeID
+                };
+
+                SystemClass.InsertLog(audit);
             }
         }
 

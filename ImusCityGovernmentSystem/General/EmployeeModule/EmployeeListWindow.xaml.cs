@@ -22,78 +22,129 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
     /// </summary>
     public partial class EmployeeListWindow : MetroWindow
     {
-        ImusCityHallEntities db = new ImusCityHallEntities();
+
         public EmployeeListWindow()
         {
             InitializeComponent();
 
-            var employeelist = from p in db.Employees
-                               orderby p.FirstName
-                               select new
-                               {
-                                   p.EmployeeID,
-                                   Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
-                               };
-            employeelistlb.ItemsSource = employeelist.ToList();
-            employeelistlb.DisplayMemberPath = "Name";
-            employeelistlb.SelectedValuePath = "EmployeeID";
-            employeelistlb.SelectedIndex = 0;
-            searchtb.Focus();
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                var employeelist = from p in db.Employees
+                                   orderby p.FirstName
+                                   select new
+                                   {
+                                       p.EmployeeID,
+                                       Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
+                                   };
+                employeelistlb.ItemsSource = employeelist.ToList();
+                employeelistlb.DisplayMemberPath = "Name";
+                employeelistlb.SelectedValuePath = "EmployeeID";
+                employeelistlb.SelectedIndex = 0;
+                searchtb.Focus();
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+
 
         }
 
         private void employeelistlb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Wait;
-            db = new ImusCityHallEntities();
-            if (employeelistlb.SelectedValue == null)
+            if (SystemClass.CheckConnection())
             {
-                return;
-            }
-            else
-            {
-                int EmployeeID = (int)employeelistlb.SelectedValue;
-                Employee employee = db.Employees.Find(EmployeeID);
-                employeenotb.Text = employee.EmployeeNo;
-                nametb.Text = employee.FirstName + " " + employee.MiddleName + " " + employee.LastName;
-                divisiontb.Text = employee.Department.Division.DivisionName;
-                positiontb.Text = employee.EmployeePosition.EmployeePositionName;
-                departmenttb.Text = employee.Department.DepartmentName;
-                emailtb.Text = employee.PrimaryEmail;
-                contactnotb.Text = employee.MobileNo;
-                if (employee.Photo == null)
+                Mouse.OverrideCursor = Cursors.Wait;
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                if (employeelistlb.SelectedValue == null)
                 {
-
-                    this.empimage.Source = null;
+                    return;
                 }
                 else
                 {
-                    Stream StreamObj = new MemoryStream(employee.Photo);
-                    BitmapImage BitObj = new BitmapImage();
-                    BitObj.BeginInit();
-                    BitObj.StreamSource = StreamObj;
-                    BitObj.EndInit();
-                    this.empimage.Source = BitObj;
+                    int EmployeeID = (int)employeelistlb.SelectedValue;
+                    Employee employee = db.Employees.Find(EmployeeID);
+                    employeenotb.Text = employee.EmployeeNo;
+                    nametb.Text = employee.FirstName + " " + employee.MiddleName + " " + employee.LastName;
+                    divisiontb.Text = employee.Department.Division.DivisionName;
+                    positiontb.Text = employee.EmployeePosition.EmployeePositionName;
+                    departmenttb.Text = employee.Department.DepartmentName;
+                    emailtb.Text = employee.PrimaryEmail;
+                    contactnotb.Text = employee.MobileNo;
+                    if (employee.Photo == null)
+                    {
+
+                        this.empimage.Source = null;
+                    }
+                    else
+                    {
+                        Stream StreamObj = new MemoryStream(employee.Photo);
+                        BitmapImage BitObj = new BitmapImage();
+                        BitObj.BeginInit();
+                        BitObj.StreamSource = StreamObj;
+                        BitObj.EndInit();
+                        this.empimage.Source = BitObj;
+
+                    }
+                    Mouse.OverrideCursor = null;
 
                 }
                 Mouse.OverrideCursor = null;
-
             }
-            Mouse.OverrideCursor = null;
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+
         }
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            if (employeelistlb.SelectedValue == null)
+            if (SystemClass.CheckConnection())
             {
-                MessageBox.Show("Please select an employee to edit!");
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                if (employeelistlb.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select an employee to edit!");
+                }
+                else
+                {
+                    EditEmployeeWindow editemp = new EditEmployeeWindow();
+                    editemp.EmployeeID = (int)employeelistlb.SelectedValue;
+                    editemp.ShowDialog();
+
+                    db = new ImusCityHallEntities();
+                    var employeelist = from p in db.Employees
+                                       orderby p.FirstName
+                                       select new
+                                       {
+                                           p.EmployeeID,
+                                           Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
+                                       };
+                    employeelistlb.ItemsSource = employeelist.ToList();
+                    employeelistlb.DisplayMemberPath = "Name";
+                    employeelistlb.SelectedValuePath = "EmployeeID";
+                    employeelistlb.SelectedIndex = 0;
+
+
+                }
+
             }
             else
             {
-                EditEmployeeWindow editemp = new EditEmployeeWindow();
-                editemp.EmployeeID = (int)employeelistlb.SelectedValue;
-                editemp.ShowDialog();
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
 
+        }
+
+        private void addempbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                AddNewEmployeeWindow add = new AddNewEmployeeWindow();
+                add.ShowDialog();
                 db = new ImusCityHallEntities();
                 var employeelist = from p in db.Employees
                                    orderby p.FirstName
@@ -106,87 +157,61 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                 employeelistlb.DisplayMemberPath = "Name";
                 employeelistlb.SelectedValuePath = "EmployeeID";
                 employeelistlb.SelectedIndex = 0;
-
-
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
 
-        }
-
-        private void addempbtn_Click(object sender, RoutedEventArgs e)
-        {
-            AddNewEmployeeWindow add = new AddNewEmployeeWindow();
-            add.ShowDialog();
-            db = new ImusCityHallEntities();
-            var employeelist = from p in db.Employees
-                               orderby p.FirstName
-                               select new
-                               {
-                                   p.EmployeeID,
-                                   Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
-                               };
-            employeelistlb.ItemsSource = employeelist.ToList();
-            employeelistlb.DisplayMemberPath = "Name";
-            employeelistlb.SelectedValuePath = "EmployeeID";
-            employeelistlb.SelectedIndex = 0;
 
         }
 
         private void resetpasswordbtn_Click(object sender, RoutedEventArgs e)
         {
-            if (employeelistlb.SelectedValue == null)
+            if (SystemClass.CheckConnection())
             {
-                MessageBox.Show("Please select an employee");
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                if (employeelistlb.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select an employee");
+                }
+                else
+                {
+                    var employee = db.Employees.Find((int)employeelistlb.SelectedValue);
+                    AspNetUser aspuser = db.AspNetUsers.FirstOrDefault(m => m.UserName == employee.EmployeeNo);
+                    var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
+                    aspuser.PasswordHash = passwordHasher.HashPassword("imuscitygov");
+                    db.SaveChanges();
+                    MessageBox.Show("Employee account has been reset");
+                }
             }
             else
             {
-                var employee = db.Employees.Find((int)employeelistlb.SelectedValue);
-                AspNetUser aspuser = db.AspNetUsers.FirstOrDefault(m => m.UserName == employee.EmployeeNo);
-                var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
-                aspuser.PasswordHash = passwordHasher.HashPassword("imuscitygov");
-                db.SaveChanges();
-                MessageBox.Show("Employee account has been reset");
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
 
         }
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Wait;
-            var employeelist = from p in db.Employees
-                               where p.FirstName.Contains(searchtb.Text) || p.MiddleName.Contains(searchtb.Text) || p.LastName.Contains(searchtb.Text)
-                               orderby p.FirstName
-                               select new
-                               {
-                                   p.EmployeeID,
-                                   Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
-                               };
-            employeelistlb.ItemsSource = employeelist.ToList();
-            employeelistlb.DisplayMemberPath = "Name";
-            employeelistlb.SelectedValuePath = "EmployeeID";
-            employeelistlb.SelectedIndex = 0;
-
-            if (String.IsNullOrEmpty(searchtb.Text))
+            if(SystemClass.CheckConnection())
             {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                Mouse.OverrideCursor = Cursors.Wait;
+                var employeelist = from p in db.Employees
+                                   where p.FirstName.Contains(searchtb.Text) || p.MiddleName.Contains(searchtb.Text) || p.LastName.Contains(searchtb.Text)
+                                   orderby p.FirstName
+                                   select new
+                                   {
+                                       p.EmployeeID,
+                                       Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
+                                   };
+                employeelistlb.ItemsSource = employeelist.ToList();
+                employeelistlb.DisplayMemberPath = "Name";
+                employeelistlb.SelectedValuePath = "EmployeeID";
+                employeelistlb.SelectedIndex = 0;
 
-            }
-            else
-            {
-                var audit = new AuditTrailModel
-                {
-                    Activity = "Searched item in the employee list. SEARCH KEY: " + searchtb.Text,
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
-                SystemClass.InsertLog(audit);
-            }
-
-            Mouse.OverrideCursor = null;
-        }
-
-        private void searchtb_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
                 if (String.IsNullOrEmpty(searchtb.Text))
                 {
 
@@ -201,7 +226,30 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                     };
                     SystemClass.InsertLog(audit);
                 }
-                searchbtn_Click(sender, e);
+
+                Mouse.OverrideCursor = null;
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+           
+        }
+
+        private void searchtb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (String.IsNullOrEmpty(searchtb.Text))
+                {
+                    MessageBox.Show("Please enter search key");
+                }
+                else
+                {
+                    searchbtn_Click(sender, e);
+                 
+                }
+           
             }
         }
     }

@@ -27,22 +27,30 @@ namespace ImusCityGovernmentSystem.General.Division
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtSearch.Text))
+            if (SystemClass.CheckConnection())
             {
+                if (String.IsNullOrEmpty(txtSearch.Text))
+                {
 
+                }
+                else
+                {
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Searched item in the division list. SEARCH KEY: " + txtSearch.Text,
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+                    SystemClass.InsertLog(audit);
+                }
             }
             else
             {
-                var audit = new AuditTrailModel
-                {
-                    Activity = "Searched item in the division list. SEARCH KEY: " + txtSearch.Text,
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
-                SystemClass.InsertLog(audit);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
 
-           
+
+
             GetSearchedList(txtSearch.Text);
         }
         public class DivisionList
@@ -58,31 +66,39 @@ namespace ImusCityGovernmentSystem.General.Division
         List<DivisionList> DList = new List<DivisionList>();
         public void GetList()
         {
-            try
+            if (SystemClass.CheckConnection())
             {
-                DList = new List<DivisionList>();
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    var get = db.Divisions.OrderBy(m => m.DivisionName).ToList();
-
-                    foreach (var item in get)
+                    DList = new List<DivisionList>();
+                    using (var db = new ImusCityHallEntities())
                     {
-                        DivisionList dl = new DivisionList();
-                        dl.DivisionID = item.DivisionID;
-                        dl.DivisionCode = item.DivisionCode;
-                        dl.DivisionName = item.DivisionName;
+                        var get = db.Divisions.OrderBy(m => m.DivisionName).ToList();
 
-                        DList.Add(dl);
+                        foreach (var item in get)
+                        {
+                            DivisionList dl = new DivisionList();
+                            dl.DivisionID = item.DivisionID;
+                            dl.DivisionCode = item.DivisionCode;
+                            dl.DivisionName = item.DivisionName;
+
+                            DList.Add(dl);
+                        }
+                        if (!String.IsNullOrEmpty(txtSearch.Text))
+                            DList = DList.OrderByDescending(m => m.DivisionID).Where(m => m.DivisionCode.ToUpper().Contains(txtSearch.Text) || m.DivisionName.ToUpper().Contains(txtSearch.Text)).ToList();
+                        dgDivisionList.ItemsSource = DList;
                     }
-                    if (!String.IsNullOrEmpty(txtSearch.Text))
-                        DList = DList.OrderByDescending(m => m.DivisionID).Where(m => m.DivisionCode.ToUpper().Contains(txtSearch.Text) || m.DivisionName.ToUpper().Contains(txtSearch.Text)).ToList();
-                    dgDivisionList.ItemsSource = DList;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
         }
 
         private void refreshbtn_Click(object sender, RoutedEventArgs e)
@@ -98,30 +114,38 @@ namespace ImusCityGovernmentSystem.General.Division
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    if (dgDivisionList.SelectedItem != null)
+                    using (var db = new ImusCityHallEntities())
                     {
-                        var selectedItem = ((DivisionList)dgDivisionList.SelectedItem);
-                        EditDivisionWindow ud = new EditDivisionWindow();
-                        ud.DivisionID = selectedItem.DivisionID;
-                        ud.ShowDialog();
-                        TextClear();
-                        GetList();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No division Selected", "System Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                        if (dgDivisionList.SelectedItem != null)
+                        {
+                            var selectedItem = ((DivisionList)dgDivisionList.SelectedItem);
+                            EditDivisionWindow ud = new EditDivisionWindow();
+                            ud.DivisionID = selectedItem.DivisionID;
+                            ud.ShowDialog();
+                            TextClear();
+                            GetList();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No division Selected", "System Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
 
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -133,29 +157,37 @@ namespace ImusCityGovernmentSystem.General.Division
         }
         public void GetSearchedList(string searchkey)
         {
-            try
+            if (SystemClass.CheckConnection())
             {
-                DList = new List<DivisionList>();
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    var get = db.Divisions.Where(m => m.DivisionName.Contains(searchkey) || m.DivisionCode.Contains(searchkey)).OrderBy(m => m.DivisionName).ToList();
-
-                    foreach (var item in get)
+                    DList = new List<DivisionList>();
+                    using (var db = new ImusCityHallEntities())
                     {
-                        DivisionList dl = new DivisionList();
-                        dl.DivisionID = item.DivisionID;
-                        dl.DivisionCode = item.DivisionCode;
-                        dl.DivisionName = item.DivisionName;
+                        var get = db.Divisions.Where(m => m.DivisionName.Contains(searchkey) || m.DivisionCode.Contains(searchkey)).OrderBy(m => m.DivisionName).ToList();
 
-                        DList.Add(dl);
+                        foreach (var item in get)
+                        {
+                            DivisionList dl = new DivisionList();
+                            dl.DivisionID = item.DivisionID;
+                            dl.DivisionCode = item.DivisionCode;
+                            dl.DivisionName = item.DivisionName;
+
+                            DList.Add(dl);
+                        }
+                        dgDivisionList.ItemsSource = DList.OrderByDescending(m => m.DivisionID);
                     }
-                    dgDivisionList.ItemsSource = DList.OrderByDescending(m => m.DivisionID);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
         }
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
@@ -163,6 +195,13 @@ namespace ImusCityGovernmentSystem.General.Division
             if (e.Key == Key.Enter)
             {
                 GetSearchedList(txtSearch.Text);
+                var audit = new AuditTrailModel
+                {
+                    Activity = "Searched item in the division list. SEARCH KEY: " + txtSearch.Text,
+                    ModuleName = this.GetType().Name,
+                    EmployeeID = App.EmployeeID
+                };
+                SystemClass.InsertLog(audit);
             }
         }
     }

@@ -40,9 +40,9 @@ namespace ImusCityGovernmentSystem.General.Department
         }
         public void DepartmentAdd()
         {
-            try
+            if (SystemClass.CheckConnection())
             {
-                if(SystemClass.CheckConnection())
+                try
                 {
                     using (var db = new ImusCityHallEntities())
                     {
@@ -75,24 +75,23 @@ namespace ImusCityGovernmentSystem.General.Department
 
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-              
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            try
+
+            if (SystemClass.CheckConnection())
             {
-                if(SystemClass.CheckConnection())
+                try
                 {
                     using (var db = new ImusCityHallEntities())
                     {
@@ -101,17 +100,18 @@ namespace ImusCityGovernmentSystem.General.Department
                         cbDivision.SelectedValuePath = "DivisionID";
                         txtCode.Focus();
                     }
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
         }
     }
 }
