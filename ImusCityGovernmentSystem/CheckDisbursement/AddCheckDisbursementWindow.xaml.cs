@@ -13,15 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
-namespace ImusCityGovernmentSystem.Check_Disbursement
+namespace ImusCityGovernmentSystem.CheckDisbursement
 {
     /// <summary>
-    /// Interaction logic for AddlCheckDisbursementWindow.xaml
+    /// Interaction logic for AddCheckDisbursementWindow.xaml
     /// </summary>
-    public partial class AddlCheckDisbursementWindow : MetroWindow
+    public partial class AddCheckDisbursementWindow : MetroWindow
     {
-
-        public AddlCheckDisbursementWindow()
+        public AddCheckDisbursementWindow()
         {
             InitializeComponent();
         }
@@ -120,7 +119,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
 
-            }          
+            }
         }
 
         private void payeecb_SelectionChanged(object sender, SelectionChangedEventArgs e)

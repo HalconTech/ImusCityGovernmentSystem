@@ -33,7 +33,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
 
         private void adddisbursementbtn_Click(object sender, RoutedEventArgs e)
         {
-            AddlCheckDisbursementWindow add = new AddlCheckDisbursementWindow();
+            ImusCityGovernmentSystem.CheckDisbursement.AddCheckDisbursementWindow add = new CheckDisbursement.AddCheckDisbursementWindow();
             add.ShowDialog();
         }
 

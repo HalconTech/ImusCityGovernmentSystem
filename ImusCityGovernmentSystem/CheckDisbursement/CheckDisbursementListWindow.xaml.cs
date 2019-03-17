@@ -100,7 +100,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
-            AddlCheckDisbursementWindow add = new AddlCheckDisbursementWindow();
+            ImusCityGovernmentSystem.CheckDisbursement.AddCheckDisbursementWindow add = new CheckDisbursement.AddCheckDisbursementWindow();      
             add.Show();
         }
         private void btnPrint_Click(object sender, RoutedEventArgs e)
