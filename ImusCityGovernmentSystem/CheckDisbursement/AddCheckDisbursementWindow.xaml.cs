@@ -13,15 +13,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
-namespace ImusCityGovernmentSystem.Check_Disbursement
+namespace ImusCityGovernmentSystem.CheckDisbursement
 {
     /// <summary>
-    /// Interaction logic for AddlCheckDisbursementWindow.xaml
+    /// Interaction logic for AddCheckDisbursementWindow.xaml
     /// </summary>
-    public partial class AddlCheckDisbursementWindow : MetroWindow
+    public partial class AddCheckDisbursementWindow : MetroWindow
     {
-
-        public AddlCheckDisbursementWindow()
+        public List<DisbursementVoucherModel> DVList = new List<DisbursementVoucherModel>();
+        public AddCheckDisbursementWindow()
         {
             InitializeComponent();
         }
@@ -99,7 +99,8 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                         disbursement.Amount = Convert.ToDecimal(amounttb.Text);
                         disbursement.Obligated = obligatedcb.IsChecked;
                         disbursement.DocCompleted = documentcb.IsChecked;
-                        db.Disbursements.Add(disbursement);
+                        disbursement.PayeeRepID = (int)payeerepcb.SelectedValue;
+                        var x = db.Disbursements.Add(disbursement);
                         db.SaveChanges();
                         var audit = new AuditTrailModel
                         {
@@ -107,8 +108,10 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                             ModuleName = this.GetType().Name,
                             EmployeeID = App.EmployeeID
                         };
-
+                        
                         SystemClass.InsertLog(audit);
+                        MessageBox.Show("Check Disbursement Created!");
+                        PrintCheck(x.DisbursementID);
                     }
                 }
                 catch (Exception ex)
@@ -120,9 +123,71 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
 
-            }          
+            }
         }
 
+
+        public void PrintCheck(int DisbursementID)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                db = new ImusCityHallEntities();
+                if (DisbursementID == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    
+                    DVList = new List<DisbursementVoucherModel>();
+                    var disburse = db.GetDisbursementVoucher(DisbursementID).ToList();
+                    foreach (var x in disburse)
+                    {
+                        DisbursementVoucherModel dvl = new DisbursementVoucherModel();
+                        dvl.Amount = x.Amount.HasValue ? x.Amount.Value : 0;
+                        dvl.Certification = x.Certification;
+                        dvl.CompanyAddress = x.CompanyAddress;
+                        dvl.CompanyName = x.CompanyName;
+                        dvl.DateCreated = x.DateCreated.Value;
+                        dvl.DepartmentCode = x.DepartmentCode;
+                        dvl.Description = x.Description;
+                        dvl.DocumentCompleted = x.DocumentCompleted;
+                        dvl.Name = x.Name;
+                        dvl.Obligated = x.Obligated;
+                        dvl.ObligationRequestNo = x.ObligationRequestNo;
+                        dvl.TIN_EmpNo = x.TIN_EmpNo;
+                        dvl.Unit_Project = x.Unit_Project;
+                        dvl.VoucherNo = x.VoucherNo;
+                        dvl.PaymentName = x.PaymentName;
+                        dvl.Signatory = x.Signatory;
+                        dvl.Signatory2 = x.Signatory2;
+                        dvl.Signatory3 = x.Signatory3;
+                        DVList.Add(dvl);
+                    }
+
+                    if (DVList.Count != 0)
+                    {
+                        ReportWindow rw = new ReportWindow();
+                        rw.DVList = DVList;
+                        App.ReportID = 1;
+                        rw.Show();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Report data source is empty.");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+
+            Mouse.OverrideCursor = null;
+        }
         private void payeecb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (SystemClass.CheckConnection())

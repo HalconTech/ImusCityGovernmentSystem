@@ -28,5 +28,8 @@ namespace ImusCityGovernmentSystem.Model
         public string Certification { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public string PaymentName { get; set; }
+        public string Signatory { get; set; }
+        public string Signatory2 { get; set; }
+        public string Signatory3 { get; set; }
     }
 }

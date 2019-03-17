@@ -114,8 +114,8 @@
     <Compile Include="ChangePasswordWindow.xaml.cs">
       <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CheckDisbursement\AddlCheckDisbursementWindow.xaml.cs">
-      <DependentUpon>AddlCheckDisbursementWindow.xaml</DependentUpon>
+    <Compile Include="CheckDisbursement\AddCheckDisbursementWindow.xaml.cs">
+      <DependentUpon>AddCheckDisbursementWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CheckDisbursement\AddNewCheckEntryWindow.xaml.cs">
       <DependentUpon>AddNewCheckEntryWindow.xaml</DependentUpon>
@@ -252,7 +252,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CheckDisbursement\AddlCheckDisbursementWindow.xaml">
+    <Page Include="CheckDisbursement\AddCheckDisbursementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,6 +18,9 @@ namespace ImusCityGovernmentSystem.Model
         {
             this.Checks = new HashSet<Check>();
             this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
+            this.Disbursements = new HashSet<Disbursement>();
+            this.Disbursements1 = new HashSet<Disbursement>();
+            this.Disbursements2 = new HashSet<Disbursement>();
         }
     
         public int EmployeeID { get; set; }
@@ -81,5 +84,8 @@ namespace ImusCityGovernmentSystem.Model
         public virtual EmployeeStatu EmployeeStatu { get; set; }
         public virtual ICollection<Check> Checks { get; set; }
         public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
+        public virtual ICollection<Disbursement> Disbursements { get; set; }
+        public virtual ICollection<Disbursement> Disbursements1 { get; set; }
+        public virtual ICollection<Disbursement> Disbursements2 { get; set; }
     }
 }

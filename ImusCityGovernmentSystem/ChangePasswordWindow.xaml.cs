@@ -40,7 +40,7 @@ namespace ImusCityGovernmentSystem
                 var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
                 asp.PasswordHash = passwordHasher.HashPassword(confirmpasswordpb.Password);
                 db.SaveChanges();
-                MessageBox.Show("Password updated succesfully!");
+                MessageBox.Show("Password updated successfully!");
                 this.Close();
             }
          

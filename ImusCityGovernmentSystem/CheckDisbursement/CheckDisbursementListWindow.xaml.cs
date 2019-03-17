@@ -100,7 +100,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
-            AddlCheckDisbursementWindow add = new AddlCheckDisbursementWindow();
+            ImusCityGovernmentSystem.CheckDisbursement.AddCheckDisbursementWindow add = new CheckDisbursement.AddCheckDisbursementWindow();      
             add.Show();
         }
         private void btnPrint_Click(object sender, RoutedEventArgs e)
@@ -117,7 +117,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 else
                 {
                     int DisbursementID = (int)voucherlistlb.SelectedValue;
-
+                    DVList = new List<DisbursementVoucherModel>();
                     var disburse = db.GetDisbursementVoucher(DisbursementID).ToList();
                     foreach (var x in disburse)
                     {
@@ -137,6 +137,9 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                         dvl.Unit_Project = x.Unit_Project;
                         dvl.VoucherNo = x.VoucherNo;
                         dvl.PaymentName = x.PaymentName;
+                        dvl.Signatory = x.Signatory;
+                        dvl.Signatory2 = x.Signatory2;
+                        dvl.Signatory3 = x.Signatory3;
                         DVList.Add(dvl);
                     }
 

@@ -33,50 +33,64 @@ namespace ImusCityGovernmentSystem.General.Division
 
         public void DivisionUpdate()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    var find = db.Divisions.Find(DivisionID);
-                    find.DivisionCode = txtCode.Text;
-                    find.DivisionName = txtName.Text;
-                    db.SaveChanges();
-
-                    var audit = new AuditTrailModel
+                    using (var db = new ImusCityHallEntities())
                     {
-                        Activity = "Updated an item in division list. DIV ID: " + DivisionID.ToString(),
-                        ModuleName = this.GetType().Name,
-                        EmployeeID = App.EmployeeID
-                    };
+                        var find = db.Divisions.Find(DivisionID);
+                        find.DivisionCode = txtCode.Text;
+                        find.DivisionName = txtName.Text;
+                        db.SaveChanges();
 
-                    SystemClass.InsertLog(audit);
+                        var audit = new AuditTrailModel
+                        {
+                            Activity = "Updated an item in division list. DIV ID: " + DivisionID.ToString(),
+                            ModuleName = this.GetType().Name,
+                            EmployeeID = App.EmployeeID
+                        };
 
-                    SystemClass.InsertLog(audit);
-                    MessageBox.Show("Division updated successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
+                        SystemClass.InsertLog(audit);
+                        MessageBox.Show("Division updated successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+            
         }
         public void LoadDivision()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    var find = db.Divisions.Find(DivisionID);
-                    
-                    txtCode.Text = find.DivisionCode;
-                    txtName.Text = find.DivisionName;
+                    using (var db = new ImusCityHallEntities())
+                    {
+                        var find = db.Divisions.Find(DivisionID);
+
+                        txtCode.Text = find.DivisionCode;
+                        txtName.Text = find.DivisionName;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+          
         }
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
