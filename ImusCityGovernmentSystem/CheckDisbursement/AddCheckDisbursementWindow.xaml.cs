@@ -20,6 +20,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
     /// </summary>
     public partial class AddCheckDisbursementWindow : MetroWindow
     {
+        public List<DisbursementVoucherModel> DVList = new List<DisbursementVoucherModel>();
         public AddCheckDisbursementWindow()
         {
             InitializeComponent();
