@@ -20,7 +20,7 @@ namespace ImusCityGovernmentSystem.General.Payee
     /// </summary>
     public partial class AddNewPayeeRepresentativeWindow : MetroWindow
     {
-        ImusCityHallEntities db = new ImusCityHallEntities();
+       
         public AddNewPayeeRepresentativeWindow()
         {
             InitializeComponent();
@@ -33,35 +33,44 @@ namespace ImusCityGovernmentSystem.General.Payee
 
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Wait;
-            if (String.IsNullOrEmpty(fnametb.Text) || String.IsNullOrEmpty(lnametb.Text))
+            if(SystemClass.CheckConnection())
             {
-                Mouse.OverrideCursor = null;
-                MessageBox.Show("Please input first name and last name field!");
+                Mouse.OverrideCursor = Cursors.Wait;
+                if (String.IsNullOrEmpty(fnametb.Text) || String.IsNullOrEmpty(lnametb.Text))
+                {
+                    Mouse.OverrideCursor = null;
+                    MessageBox.Show("Please input first name and last name field!");
+                }
+                else
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    PayeeRepresentative pr = new PayeeRepresentative();
+                    pr.FirstName = fnametb.Text;
+                    pr.MiddleName = mnametb.Text;
+                    pr.LastName = lnametb.Text;
+                    pr.MobileNo = mobilenotb.Text;
+                    pr.Landline = landlinetb.Text;
+                    db.PayeeRepresentatives.Add(pr);
+                    db.SaveChanges();
+                    Mouse.OverrideCursor = null;
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Added new payee representative in the database. NAME: " + fnametb.Text + " " + lnametb.Text,
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+                    MessageBox.Show("Representative addedd successfully!");
+                    SystemClass.ClearTextBoxes(this);
+                }
             }
             else
             {
-                PayeeRepresentative pr = new PayeeRepresentative();
-                pr.FirstName = fnametb.Text;
-                pr.MiddleName = mnametb.Text;
-                pr.LastName = lnametb.Text;
-                pr.MobileNo = mobilenotb.Text;
-                pr.Landline = landlinetb.Text;
-                db.PayeeRepresentatives.Add(pr);
-                db.SaveChanges();
                 Mouse.OverrideCursor = null;
-
-                var audit = new AuditTrailModel
-                {
-                    Activity = "Added new payee representative in the database. NAME: " + fnametb.Text + " " + lnametb.Text,
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
-
-                SystemClass.InsertLog(audit);
-                MessageBox.Show("Representative addedd successfully!");
-                SystemClass.ClearTextBoxes(this);
-            }
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }   
             Mouse.OverrideCursor = null;
         }
 

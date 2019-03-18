@@ -21,7 +21,7 @@ namespace ImusCityGovernmentSystem.General.Payee
     public partial class EditPayeeWindow : MetroWindow
     {
         public int PayeeID;
-        ImusCityHallEntities db = new ImusCityHallEntities();
+
         public EditPayeeWindow()
         {
             InitializeComponent();
@@ -30,100 +30,118 @@ namespace ImusCityGovernmentSystem.General.Payee
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            if (gd.Where(m => m.IsSelected == true).Count() == 0)
+            if (SystemClass.CheckConnection())
             {
-                Mouse.OverrideCursor = null;
-                MessageBox.Show("Please select at least representative for the payee!");
-            }
-            else if (String.IsNullOrEmpty(payeenotb.Text) || String.IsNullOrEmpty(companynametb.Text) || String.IsNullOrEmpty(companyaddresstb.Text))
-            {
-                Mouse.OverrideCursor = null;
-                MessageBox.Show("Please input company name, company address and payee number");
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                if (gd.Where(m => m.IsSelected == true).Count() == 0)
+                {
+                    Mouse.OverrideCursor = null;
+                    MessageBox.Show("Please select at least representative for the payee!");
+                }
+                else if (String.IsNullOrEmpty(payeenotb.Text) || String.IsNullOrEmpty(companynametb.Text) || String.IsNullOrEmpty(companyaddresstb.Text))
+                {
+                    Mouse.OverrideCursor = null;
+                    MessageBox.Show("Please input company name, company address and payee number");
+                }
+                else
+                {
+                    ImusCityGovernmentSystem.Model.Payee payee = db.Payees.Find(PayeeID);
+                    payee.PayeeNo = payeenotb.Text;
+                    payee.CompanyName = companynametb.Text;
+                    payee.CompanyAddress = companyaddresstb.Text;
+                    payee.TIN = tinnotb.Text;
+                    payee.LandlineNo = contactnotb.Text;
+                    db.SaveChanges();
+
+                    foreach (var list in gd)
+                    {
+                        if (list.IsSelected == true)
+                        {
+                            PayeeRepresentative pr = db.PayeeRepresentatives.Find(list.Id);
+                            pr.PayeeID = payee.PayeeID;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            PayeeRepresentative pr = db.PayeeRepresentatives.Find(list.Id);
+                            pr.PayeeID = null;
+                            db.SaveChanges();
+                        }
+
+                    }
+                    Mouse.OverrideCursor = null;
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Updated an item in payee list. PAYEE ID: " + PayeeID.ToString(),
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+
+                    MessageBox.Show("Payee updated successfully!");
+                }
             }
             else
             {
-                ImusCityGovernmentSystem.Model.Payee payee = db.Payees.Find(PayeeID);
-                payee.PayeeNo = payeenotb.Text;
-                payee.CompanyName = companynametb.Text;
-                payee.CompanyAddress = companyaddresstb.Text;
-                payee.TIN = tinnotb.Text;
-                payee.LandlineNo = contactnotb.Text;
-                db.SaveChanges();
-
-                foreach (var list in gd)
-                {
-                    if(list.IsSelected == true)
-                    {
-                        PayeeRepresentative pr = db.PayeeRepresentatives.Find(list.Id);
-                        pr.PayeeID = payee.PayeeID;
-                        db.SaveChanges();
-                    }
-                    else
-                    {
-                        PayeeRepresentative pr = db.PayeeRepresentatives.Find(list.Id);
-                        pr.PayeeID = null;
-                        db.SaveChanges();
-                    }
-                  
-                }
                 Mouse.OverrideCursor = null;
-
-                var audit = new AuditTrailModel
-                {
-                    Activity = "Updated an item in payee list. PAYEE ID: " + PayeeID.ToString(),
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
-
-                SystemClass.InsertLog(audit);
-
-                MessageBox.Show("Payee updated successfully!");
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
             Mouse.OverrideCursor = null;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            ImusCityGovernmentSystem.Model.Payee payee = db.Payees.Find(PayeeID);
-            payeenotb.Text = payee.PayeeNo;
-            companynametb.Text = payee.CompanyName;
-            companyaddresstb.Text = payee.CompanyAddress;
-            tinnotb.Text = payee.TIN;
-            contactnotb.Text = payee.LandlineNo;
-
-            gd.Clear();
-            db = new ImusCityHallEntities();
-            if(db.PayeeRepresentatives.Where(m => m.PayeeID == PayeeID).Count() == 0)
+            if (SystemClass.CheckConnection())
             {
-                var representative = db.PayeeRepresentativeViews.OrderBy(m => m.PayeeRepresentativeName).ToList();
-                foreach (var dr in representative)
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                ImusCityGovernmentSystem.Model.Payee payee = db.Payees.Find(PayeeID);
+                payeenotb.Text = payee.PayeeNo;
+                companynametb.Text = payee.CompanyName;
+                companyaddresstb.Text = payee.CompanyAddress;
+                tinnotb.Text = payee.TIN;
+                contactnotb.Text = payee.LandlineNo;
+
+                gd.Clear();
+                db = new ImusCityHallEntities();
+                if (db.PayeeRepresentatives.Where(m => m.PayeeID == PayeeID).Count() == 0)
                 {
-                    PayeeRepresentativeClass i = new PayeeRepresentativeClass()
+                    var representative = db.PayeeRepresentativeViews.OrderBy(m => m.PayeeRepresentativeName).ToList();
+                    foreach (var dr in representative)
                     {
-                        Name = dr.PayeeRepresentativeName.ToString(),
-                        Id = dr.PayeeRepID
-                    };
-                    gd.Add(i);
+                        PayeeRepresentativeClass i = new PayeeRepresentativeClass()
+                        {
+                            Name = dr.PayeeRepresentativeName.ToString(),
+                            Id = dr.PayeeRepID
+                        };
+                        gd.Add(i);
+                    }
                 }
+                else
+                {
+                    var representative = db.PayeeRepresentativeViews.OrderBy(m => m.PayeeRepresentativeName).ToList();
+                    foreach (var dr in representative)
+                    {
+                        PayeeRepresentativeClass i = new PayeeRepresentativeClass()
+                        {
+                            Name = dr.PayeeRepresentativeName.ToString(),
+                            Id = dr.PayeeRepID,
+                            IsSelected = dr.PayeeID == null || dr.PayeeID != PayeeID ? false : true
+                        };
+                        gd.Add(i);
+                    }
+                }
+
+
+                represetativelb.ItemsSource = gd;
+                represetativelb.Items.Refresh();
             }
             else
             {
-                var representative = db.PayeeRepresentativeViews.OrderBy(m => m.PayeeRepresentativeName).ToList();
-                foreach (var dr in representative)
-                {
-                    PayeeRepresentativeClass i = new PayeeRepresentativeClass()
-                    {
-                        Name = dr.PayeeRepresentativeName.ToString(),
-                        Id = dr.PayeeRepID,
-                        IsSelected = dr.PayeeID == null || dr.PayeeID != PayeeID ? false : true
-                    };
-                    gd.Add(i);
-                }
+                Mouse.OverrideCursor = null;
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-           
-
-            represetativelb.ItemsSource = gd;
-            represetativelb.Items.Refresh();
         }
 
         class PayeeRepresentativeClass

@@ -92,9 +92,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 Mouse.OverrideCursor = null;
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-         
-
-            
+        
             Mouse.OverrideCursor = null;
         }
 
@@ -106,62 +104,10 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            if(SystemClass.CheckConnection())
-            {
-                ImusCityHallEntities db = new ImusCityHallEntities();
-                db = new ImusCityHallEntities();
-                if (voucherlistlb.SelectedValue == null)
-                {
-                    return;
-                }
-                else
-                {
-                    int DisbursementID = (int)voucherlistlb.SelectedValue;
-                    DVList = new List<DisbursementVoucherModel>();
-                    var disburse = db.GetDisbursementVoucher(DisbursementID).ToList();
-                    foreach (var x in disburse)
-                    {
-                        DisbursementVoucherModel dvl = new DisbursementVoucherModel();
-                        dvl.Amount = x.Amount.HasValue ? x.Amount.Value : 0;
-                        dvl.Certification = x.Certification;
-                        dvl.CompanyAddress = x.CompanyAddress;
-                        dvl.CompanyName = x.CompanyName;
-                        dvl.DateCreated = x.DateCreated.Value;
-                        dvl.DepartmentCode = x.DepartmentCode;
-                        dvl.Description = x.Description;
-                        dvl.DocumentCompleted = x.DocumentCompleted;
-                        dvl.Name = x.Name;
-                        dvl.Obligated = x.Obligated;
-                        dvl.ObligationRequestNo = x.ObligationRequestNo;
-                        dvl.TIN_EmpNo = x.TIN_EmpNo;
-                        dvl.Unit_Project = x.Unit_Project;
-                        dvl.VoucherNo = x.VoucherNo;
-                        dvl.PaymentName = x.PaymentName;
-                        dvl.Signatory = x.Signatory;
-                        dvl.Signatory2 = x.Signatory2;
-                        dvl.Signatory3 = x.Signatory3;
-                        DVList.Add(dvl);
-                    }
-
-                    if (DVList.Count != 0)
-                    {
-                        ReportWindow rw = new ReportWindow();
-                        rw.DVList = DVList;
-                        App.ReportID = 1;
-                        rw.Show();
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("Report data source is empty.");
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
-            }
-            
+            ReportWindow report = new ReportWindow();
+            report.id = (int)voucherlistlb.SelectedValue;
+            App.ReportID = 1;
+            report.Show();
             Mouse.OverrideCursor = null;
         }
 
