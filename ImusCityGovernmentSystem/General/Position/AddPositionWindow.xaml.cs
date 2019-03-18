@@ -26,46 +26,54 @@ namespace ImusCityGovernmentSystem.General.Position
         }
         public void PositionAdd()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    if (!String.IsNullOrEmpty(txtName.Text) && !String.IsNullOrEmpty(txtDesc.Text) && !String.IsNullOrEmpty(cbRank.Text))
+                    using (var db = new ImusCityHallEntities())
                     {
-                        Model.EmployeePosition ep = new EmployeePosition();
-                        ep.EmployeePositionName = txtName.Text;
-                        ep.Description = txtDesc.Text;
-                        ep.EmployeeRankID = Convert.ToInt32(cbRank.SelectedValue);
-                        ep.Active = true;
-                        db.EmployeePositions.Add(ep);
-                        db.SaveChanges();
-
-                        var audit = new AuditTrailModel
+                        if (!String.IsNullOrEmpty(txtName.Text) && !String.IsNullOrEmpty(txtDesc.Text) && !String.IsNullOrEmpty(cbRank.Text))
                         {
-                            Activity = "Added new position in the database. DEPT CODE: " + txtName.Text,
-                            ModuleName = this.GetType().Name,
-                            EmployeeID = App.EmployeeID
-                        };
+                            Model.EmployeePosition ep = new EmployeePosition();
+                            ep.EmployeePositionName = txtName.Text;
+                            ep.Description = txtDesc.Text;
+                            ep.EmployeeRankID = Convert.ToInt32(cbRank.SelectedValue);
+                            ep.Active = true;
+                            db.EmployeePositions.Add(ep);
+                            db.SaveChanges();
 
-                        SystemClass.InsertLog(audit);
+                            var audit = new AuditTrailModel
+                            {
+                                Activity = "Added new position in the database. DEPT CODE: " + txtName.Text,
+                                ModuleName = this.GetType().Name,
+                                EmployeeID = App.EmployeeID
+                            };
 
-                        MessageBox.Show("Position added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                        TextClear();
+                            SystemClass.InsertLog(audit);
+
+                            MessageBox.Show("Position added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                            TextClear();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fill up necessary fields.", "System Information!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+
 
                     }
-                    else
-                    {
-                        MessageBox.Show("Fill up necessary fields.", "System Information!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-
-
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
 
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+           
         }
 
         public void TextClear()
@@ -78,19 +86,26 @@ namespace ImusCityGovernmentSystem.General.Position
         }
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    cbRank.ItemsSource = db.EmployeeRanks.OrderBy(m => m.EmployeeRankName).ToList();
-                    cbRank.DisplayMemberPath = "EmployeeRankName";
-                    cbRank.SelectedValuePath = "EmployeeRankID";
-                    txtName.Focus();
+                    using (var db = new ImusCityHallEntities())
+                    {
+                        cbRank.ItemsSource = db.EmployeeRanks.OrderBy(m => m.EmployeeRankName).ToList();
+                        cbRank.DisplayMemberPath = "EmployeeRankName";
+                        cbRank.SelectedValuePath = "EmployeeRankID";
+                        txtName.Focus();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
         }
 

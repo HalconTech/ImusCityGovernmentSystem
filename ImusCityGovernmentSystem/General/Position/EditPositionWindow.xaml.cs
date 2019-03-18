@@ -37,62 +37,78 @@ namespace ImusCityGovernmentSystem.General.Position
         }
         public void LoadPosition()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    cbRank.ItemsSource = db.EmployeeRanks.OrderBy(m => m.EmployeeRankName).ToList();
-                    cbRank.DisplayMemberPath = "EmployeeRankName";
-                    cbRank.SelectedValuePath = "EmployeeRankID";
+                    using (var db = new ImusCityHallEntities())
+                    {
+                        cbRank.ItemsSource = db.EmployeeRanks.OrderBy(m => m.EmployeeRankName).ToList();
+                        cbRank.DisplayMemberPath = "EmployeeRankName";
+                        cbRank.SelectedValuePath = "EmployeeRankID";
 
-                    var find = db.EmployeePositions.Find(PositionID);
-                    txtName.Text = find.EmployeePositionName;
-                    txtDesc.Text = find.Description;
-                    cbRank.SelectedValue = find.EmployeeRankID;
-                    if (find.Active == true)
-                        chkActive.IsChecked = true;
-                    else
-                        chkActive.IsChecked = false;
+                        var find = db.EmployeePositions.Find(PositionID);
+                        txtName.Text = find.EmployeePositionName;
+                        txtDesc.Text = find.Description;
+                        cbRank.SelectedValue = find.EmployeeRankID;
+                        if (find.Active == true)
+                            chkActive.IsChecked = true;
+                        else
+                            chkActive.IsChecked = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+          
         }
 
         public void PositionUpdate()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    var find = db.EmployeePositions.Find(PositionID);
-                    find.EmployeePositionName = txtName.Text;
-                    find.Description = txtDesc.Text;
-                    find.EmployeeRankID = Convert.ToInt32(cbRank.SelectedValue);
-                    if (chkActive.IsChecked == true)
-                        find.Active = true;
-                    else
-                        find.Active = false;
-                    db.SaveChanges();
-
-                    var audit = new AuditTrailModel
+                    using (var db = new ImusCityHallEntities())
                     {
-                        Activity = "Updated an item in employee position list. POS ID: " + PositionID.ToString(),
-                        ModuleName = this.GetType().Name,
-                        EmployeeID = App.EmployeeID
-                    };
+                        var find = db.EmployeePositions.Find(PositionID);
+                        find.EmployeePositionName = txtName.Text;
+                        find.Description = txtDesc.Text;
+                        find.EmployeeRankID = Convert.ToInt32(cbRank.SelectedValue);
+                        if (chkActive.IsChecked == true)
+                            find.Active = true;
+                        else
+                            find.Active = false;
+                        db.SaveChanges();
 
-                    SystemClass.InsertLog(audit);
-                    MessageBox.Show("Position updated successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
+                        var audit = new AuditTrailModel
+                        {
+                            Activity = "Updated an item in employee position list. POS ID: " + PositionID.ToString(),
+                            ModuleName = this.GetType().Name,
+                            EmployeeID = App.EmployeeID
+                        };
+
+                        SystemClass.InsertLog(audit);
+                        MessageBox.Show("Position updated successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+            
         }
     }
 }

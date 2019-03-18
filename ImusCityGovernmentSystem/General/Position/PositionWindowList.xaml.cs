@@ -56,41 +56,49 @@ namespace ImusCityGovernmentSystem.General.Position
         }
         public void GetList()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                PList = new List<PositionList>();
-                using (var db = new Model.ImusCityHallEntities())
+                try
                 {
-                    var get = db.EmployeePositions.OrderBy(m => m.EmployeePositionName).ToList();
-
-                    foreach (var item in get)
+                    PList = new List<PositionList>();
+                    using (var db = new Model.ImusCityHallEntities())
                     {
-                        PositionList pl = new PositionList();
-                        pl.PositionID = item.EmployeePositionID;
-                        pl.PositionName = item.EmployeePositionName;
-                        pl.Description = item.Description;
-                        pl.RankID = item.EmployeeRankID;
-                        if(item.EmployeeRank == null)
-                        {
+                        var get = db.EmployeePositions.OrderBy(m => m.EmployeePositionName).ToList();
 
-                        }
-                        else
+                        foreach (var item in get)
                         {
-                            pl.Rank = item.EmployeeRank.EmployeeRankName;
+                            PositionList pl = new PositionList();
+                            pl.PositionID = item.EmployeePositionID;
+                            pl.PositionName = item.EmployeePositionName;
+                            pl.Description = item.Description;
+                            pl.RankID = item.EmployeeRankID;
+                            if (item.EmployeeRank == null)
+                            {
+
+                            }
+                            else
+                            {
+                                pl.Rank = item.EmployeeRank.EmployeeRankName;
+                            }
+
+                            pl.IsActive = item.Active;
+                            PList.Add(pl);
                         }
-                   
-                        pl.IsActive = item.Active;
-                        PList.Add(pl);
+                        if (!String.IsNullOrEmpty(txtSearch.Text))
+                            PList = PList.Where(m => m.PositionName.ToUpper().Contains(txtSearch.Text) || m.Description.ToUpper().Contains(txtSearch.Text)).ToList();
+                        dgPositionList.ItemsSource = PList.OrderByDescending(m => m.PositionID);
                     }
-                    if (!String.IsNullOrEmpty(txtSearch.Text))
-                        PList = PList.Where(m => m.PositionName.ToUpper().Contains(txtSearch.Text) || m.Description.ToUpper().Contains(txtSearch.Text)).ToList();
-                    dgPositionList.ItemsSource = PList.OrderByDescending(m => m.PositionID);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+           
         }
         public void TextClear()
         {
@@ -110,30 +118,38 @@ namespace ImusCityGovernmentSystem.General.Position
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    if (dgPositionList.SelectedItem != null)
+                    using (var db = new ImusCityHallEntities())
                     {
-                        var selectedItem = ((PositionList)dgPositionList.SelectedItem);
-                        EditPositionWindow up = new EditPositionWindow();
-                        up.PositionID = selectedItem.PositionID;
-                        up.ShowDialog();
-                        TextClear();
-                        GetList();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No department Selected", "System Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                        if (dgPositionList.SelectedItem != null)
+                        {
+                            var selectedItem = ((PositionList)dgPositionList.SelectedItem);
+                            EditPositionWindow up = new EditPositionWindow();
+                            up.PositionID = selectedItem.PositionID;
+                            up.ShowDialog();
+                            TextClear();
+                            GetList();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No department Selected", "System Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
 
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+         
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -145,39 +161,47 @@ namespace ImusCityGovernmentSystem.General.Position
         }
         public void GetSearchedList(string searchkey)
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                PList = new List<PositionList>();
-                using (var db = new Model.ImusCityHallEntities())
+                try
                 {
-                    var get = db.EmployeePositions.Where(m => m.EmployeePositionName.Contains(searchkey)).OrderBy(m => m.EmployeePositionName).ToList();
-
-                    foreach (var item in get)
+                    PList = new List<PositionList>();
+                    using (var db = new Model.ImusCityHallEntities())
                     {
-                        PositionList pl = new PositionList();
-                        pl.PositionID = item.EmployeePositionID;
-                        pl.PositionName = item.EmployeePositionName;
-                        pl.Description = item.Description;
-                        pl.RankID = item.EmployeeRankID;
-                        if (item.EmployeeRank == null)
-                        {
+                        var get = db.EmployeePositions.Where(m => m.EmployeePositionName.Contains(searchkey)).OrderBy(m => m.EmployeePositionName).ToList();
 
-                        }
-                        else
+                        foreach (var item in get)
                         {
-                            pl.Rank = item.EmployeeRank.EmployeeRankName;
-                        }
+                            PositionList pl = new PositionList();
+                            pl.PositionID = item.EmployeePositionID;
+                            pl.PositionName = item.EmployeePositionName;
+                            pl.Description = item.Description;
+                            pl.RankID = item.EmployeeRankID;
+                            if (item.EmployeeRank == null)
+                            {
 
-                        pl.IsActive = item.Active;
-                        PList.Add(pl);
-                    }             
-                    dgPositionList.ItemsSource = PList.OrderByDescending(m => m.PositionID);
+                            }
+                            else
+                            {
+                                pl.Rank = item.EmployeeRank.EmployeeRankName;
+                            }
+
+                            pl.IsActive = item.Active;
+                            PList.Add(pl);
+                        }
+                        dgPositionList.ItemsSource = PList.OrderByDescending(m => m.PositionID);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+            
         }
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
