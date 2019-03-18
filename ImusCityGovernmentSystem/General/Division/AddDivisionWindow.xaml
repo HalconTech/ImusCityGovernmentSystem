@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right" Content="Division Code:" FontWeight="Bold"/>
-        <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" Content="Department Name:" FontWeight="Bold" Margin="0,5,0,0"/>
+        <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" Content="Division Name:" FontWeight="Bold" Margin="0,5,0,0"/>
 
         <TextBox Grid.Column="1" VerticalContentAlignment="Center" Grid.Row="0" Name="txtCode"/>
         <TextBox Grid.Column="1" VerticalContentAlignment="Center" Grid.Row="1" Name="txtName" Margin="0,5,0,0"/>

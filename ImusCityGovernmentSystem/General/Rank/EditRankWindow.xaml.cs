@@ -42,7 +42,6 @@ namespace ImusCityGovernmentSystem.General.Rank
                 using (var db = new ImusCityHallEntities())
                 {
                     var find = db.EmployeeRanks.Find(RankID);
-                    lblRankID.Content = find.EmployeeRankID.ToString();
                     txtName.Text = find.EmployeeRankName;
                 }
             }

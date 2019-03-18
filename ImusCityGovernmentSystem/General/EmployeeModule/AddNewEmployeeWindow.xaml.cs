@@ -295,7 +295,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                 departmentcb.SelectedValuePath = "DepartmentID";
                 departmentcb.SelectedIndex = 0;
 
-                positioncb.ItemsSource = db.EmployeePositions.Where(m => m.Active == false).OrderBy(m => m.EmployeePositionName).ToList();
+                positioncb.ItemsSource = db.EmployeePositions.Where(m => m.Active == true).OrderBy(m => m.EmployeePositionName).ToList();
                 positioncb.DisplayMemberPath = "EmployeePositionName";
                 positioncb.SelectedValuePath = "EmployeePositionID";
                 positioncb.SelectedIndex = 0;

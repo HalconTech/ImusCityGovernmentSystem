@@ -161,7 +161,7 @@ namespace ImusCityGovernmentSystem
 
                 if (license == null)
                 {
-                    MessageBox.Show("This software have not been licensed to this machine. Please input valid license key!");
+                    MessageBox.Show("This machine is not yet licensed. Please contact your administrator");
                     LicenseCodeWindow lc = new LicenseCodeWindow();
                     lc.Show();
                     this.Close();

@@ -36,8 +36,7 @@ namespace ImusCityGovernmentSystem.General.Rank.Status
             {
                 using (var db = new ImusCityHallEntities())
                 {
-                    var find = db.EmployeeStatus.Find(StatusID);
-                    lblStatusID.Content = find.EmployeeStatusID.ToString();
+                    var find = db.EmployeeStatus.Find(StatusID);      
                     txtName.Text = find.EmployeeStatusName;
                     txtCode.Text = find.EmployeeStatusCode;
                 }

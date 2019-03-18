@@ -18,14 +18,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-
-        <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right" Content="Position ID:" FontWeight="Bold"/>
         <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" Content="Position Name:*" FontWeight="Bold"/>
         <Label Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Right" Content="Description:*" FontWeight="Bold"/>
         <Label Grid.Column="0" Grid.Row="4" HorizontalContentAlignment="Right" Content="Rank:*" FontWeight="Bold"/>
         <Label Grid.Column="0" Grid.Row="5" HorizontalContentAlignment="Right" Content="Is Active:*" FontWeight="Bold"/>
-
-        <Label Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Left" Content="" FontWeight="Bold" Name="lblPosID"/>
         <TextBox Grid.Column="1" Grid.Row="1" Margin="5,2" Controls:TextBoxHelper.Watermark="Position Name" Name="txtName"/>
         <TextBox Grid.Column="1" Grid.Row="2" Margin="5,2" Controls:TextBoxHelper.Watermark="Description" Name="txtDesc" Grid.RowSpan="2" TextWrapping="Wrap"/>
 
