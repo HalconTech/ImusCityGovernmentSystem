@@ -27,35 +27,43 @@ namespace ImusCityGovernmentSystem
 
         private void acceptbtn_Click(object sender, RoutedEventArgs e)
         {
-            ImusCityHallEntities db = new ImusCityHallEntities();
-            LicensingCode license = db.LicensingCodes.FirstOrDefault(m => m.LicenseKey == licensekey.Text);
+            if(SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                LicensingCode license = db.LicensingCodes.FirstOrDefault(m => m.LicenseKey == licensekey.Text);
 
-            if(license != null && license.ExpirationDate > DateTime.Now.Date)
-            {
-                license.MachineName = Environment.MachineName;
-                db.SaveChanges();
-                LogInWindow login = new LogInWindow();
-                login.Show();
-                App.LicenseKey = licensekey.Text;
-                this.Close();
+                if (license != null && license.ExpirationDate > DateTime.Now.Date)
+                {
+                    license.MachineName = Environment.MachineName;
+                    db.SaveChanges();
+                    LogInWindow login = new LogInWindow();
+                    login.Show();
+                    App.LicenseKey = licensekey.Text;
+                    this.Close();
+                }
+                else if (String.IsNullOrEmpty(licensekey.Text))
+                {
+                    MessageBox.Show("Please enter a valid license key.");
+                }
+                else if (license == null)
+                {
+                    MessageBox.Show("Please enter a valid license key.");
+                }
+                else if (license.ExpirationDate < DateTime.Now)
+                {
+                    MessageBox.Show("The license that youve entering is expired!");
+                }
+                else if (!String.IsNullOrEmpty(license.MachineName))
+                {
+                    MessageBox.Show("The license have been already used");
+                }
+
             }
-            else if (String.IsNullOrEmpty(licensekey.Text))
+            else
             {
-                MessageBox.Show("Please enter a valid license key.");
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-            else if(license == null)
-            {
-                MessageBox.Show("Please enter a valid license key.");
-            }
-            else if(license.ExpirationDate < DateTime.Now)
-            {
-                MessageBox.Show("The license that youve entering is expired!");
-            }
-            else if(!String.IsNullOrEmpty(license.MachineName))
-            {
-                MessageBox.Show("The license have been already used");
-            }
-           
+            
         }
     }
 }

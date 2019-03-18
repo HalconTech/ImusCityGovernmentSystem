@@ -33,43 +33,51 @@ namespace ImusCityGovernmentSystem.General.Rank
         }
         public void RankAdd()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    if (!String.IsNullOrEmpty(txtName.Text))
+                    using (var db = new ImusCityHallEntities())
                     {
-                        Model.EmployeeRank er = new Model.EmployeeRank();
-                        er.EmployeeRankName = txtName.Text;
-                        db.EmployeeRanks.Add(er);
-                        db.SaveChanges();
-
-                        var audit = new AuditTrailModel
+                        if (!String.IsNullOrEmpty(txtName.Text))
                         {
-                            Activity = "Added new employee rank in the database. RANK NAME: " + txtName.Text,
-                            ModuleName = this.GetType().Name,
-                            EmployeeID = App.EmployeeID
-                        };
+                            Model.EmployeeRank er = new Model.EmployeeRank();
+                            er.EmployeeRankName = txtName.Text;
+                            db.EmployeeRanks.Add(er);
+                            db.SaveChanges();
 
-                        SystemClass.InsertLog(audit);
+                            var audit = new AuditTrailModel
+                            {
+                                Activity = "Added new employee rank in the database. RANK NAME: " + txtName.Text,
+                                ModuleName = this.GetType().Name,
+                                EmployeeID = App.EmployeeID
+                            };
 
-                        MessageBox.Show("Rank added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                        TextClear();
+                            SystemClass.InsertLog(audit);
+
+                            MessageBox.Show("Rank added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                            TextClear();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fill up necessary fields.", "System Information!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+
 
                     }
-                    else
-                    {
-                        MessageBox.Show("Fill up necessary fields.", "System Information!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-
-
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
 
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+            
         }
 
         public void TextClear()

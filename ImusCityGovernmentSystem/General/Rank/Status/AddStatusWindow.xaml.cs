@@ -38,42 +38,51 @@ namespace ImusCityGovernmentSystem.General.Rank.Status
         }
         public void StatusAdd()
         {
-            try
+            if (SystemClass.CheckConnection())
             {
-                using (var db = new Model.ImusCityHallEntities())
+
+                try
                 {
-                    if (!String.IsNullOrEmpty(txtName.Text) && !String.IsNullOrEmpty(txtCode.Text))
+                    using (var db = new Model.ImusCityHallEntities())
                     {
-                        Model.EmployeeStatu es = new Model.EmployeeStatu();
-                        es.EmployeeStatusName = txtName.Text;
-                        es.EmployeeStatusCode = txtCode.Text;
-                        db.EmployeeStatus.Add(es);
-                        db.SaveChanges();
-
-                        var audit = new AuditTrailModel
+                        if (!String.IsNullOrEmpty(txtName.Text) && !String.IsNullOrEmpty(txtCode.Text))
                         {
-                            Activity = "Added new employee status in the database. STAT CODE: " + txtCode.Text,
-                            ModuleName = this.GetType().Name,
-                            EmployeeID = App.EmployeeID
-                        };
+                            Model.EmployeeStatu es = new Model.EmployeeStatu();
+                            es.EmployeeStatusName = txtName.Text;
+                            es.EmployeeStatusCode = txtCode.Text;
+                            db.EmployeeStatus.Add(es);
+                            db.SaveChanges();
 
-                        SystemClass.InsertLog(audit);
+                            var audit = new AuditTrailModel
+                            {
+                                Activity = "Added new employee status in the database. STAT CODE: " + txtCode.Text,
+                                ModuleName = this.GetType().Name,
+                                EmployeeID = App.EmployeeID
+                            };
 
-                        MessageBox.Show("Status added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                        TextClear();
+                            SystemClass.InsertLog(audit);
+
+                            MessageBox.Show("Status added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                            TextClear();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fill up necessary fields.", "System Information!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+
 
                     }
-                    else
-                    {
-                        MessageBox.Show("Fill up necessary fields.", "System Information!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-
-
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
 
         }

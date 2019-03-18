@@ -53,30 +53,38 @@ namespace ImusCityGovernmentSystem.General.Rank
 
         public void RankUpdate()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    var find = db.EmployeeRanks.Find(RankID);
-                    find.EmployeeRankName = txtName.Text;
-                    db.SaveChanges();
-
-                    var audit = new AuditTrailModel
+                    using (var db = new ImusCityHallEntities())
                     {
-                        Activity = "Updated an item in employee rank list. RANK ID: " + RankID.ToString(),
-                        ModuleName = this.GetType().Name,
-                        EmployeeID = App.EmployeeID
-                    };
+                        var find = db.EmployeeRanks.Find(RankID);
+                        find.EmployeeRankName = txtName.Text;
+                        db.SaveChanges();
 
-                    SystemClass.InsertLog(audit);
-                    MessageBox.Show("Rank updated successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
+                        var audit = new AuditTrailModel
+                        {
+                            Activity = "Updated an item in employee rank list. RANK ID: " + RankID.ToString(),
+                            ModuleName = this.GetType().Name,
+                            EmployeeID = App.EmployeeID
+                        };
+
+                        SystemClass.InsertLog(audit);
+                        MessageBox.Show("Rank updated successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
         }
     }
 }

@@ -29,21 +29,28 @@ namespace ImusCityGovernmentSystem
 
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
-            if(newpasswordpb.Password != confirmpasswordpb.Password)
+            if(SystemClass.CheckConnection())
             {
-                MessageBox.Show("Password mismatch!");
+                if (newpasswordpb.Password != confirmpasswordpb.Password)
+                {
+                    MessageBox.Show("Password mismatch!");
+                }
+                else
+                {
+                    Employee employee = db.Employees.Find(App.EmployeeID);
+                    AspNetUser asp = db.AspNetUsers.FirstOrDefault(m => m.UserName == employee.EmployeeNo);
+                    var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
+                    asp.PasswordHash = passwordHasher.HashPassword(confirmpasswordpb.Password);
+                    db.SaveChanges();
+                    MessageBox.Show("Password updated successfully!");
+                    this.Close();
+                }
+
             }
             else
             {
-                Employee employee = db.Employees.Find(App.EmployeeID);
-                AspNetUser asp = db.AspNetUsers.FirstOrDefault(m => m.UserName == employee.EmployeeNo);
-                var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
-                asp.PasswordHash = passwordHasher.HashPassword(confirmpasswordpb.Password);
-                db.SaveChanges();
-                MessageBox.Show("Password updated successfully!");
-                this.Close();
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-         
             
         }
 

@@ -52,30 +52,37 @@ namespace ImusCityGovernmentSystem.General.Rank.Status
         }
         public void GetList()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                SList = new List<StatusList>();
-                using (var db = new Model.ImusCityHallEntities())
+                try
                 {
-                    var get = db.EmployeeStatus.OrderBy(m => m.EmployeeStatusName).ToList();
-
-                    foreach (var item in get)
+                    SList = new List<StatusList>();
+                    using (var db = new Model.ImusCityHallEntities())
                     {
-                        StatusList sl = new StatusList();
-                        sl.StatusID = item.EmployeeStatusID;
-                        sl.StatusName = item.EmployeeStatusName;
-                        sl.StatusCode = item.EmployeeStatusCode;
-                        SList.Add(sl);
+                        var get = db.EmployeeStatus.OrderBy(m => m.EmployeeStatusName).ToList();
 
+                        foreach (var item in get)
+                        {
+                            StatusList sl = new StatusList();
+                            sl.StatusID = item.EmployeeStatusID;
+                            sl.StatusName = item.EmployeeStatusName;
+                            sl.StatusCode = item.EmployeeStatusCode;
+                            SList.Add(sl);
+
+                        }
+                        if (!String.IsNullOrEmpty(txtSearch.Text))
+                            SList = SList.Where(m => m.StatusName.ToUpper().Contains(txtSearch.Text) || m.StatusCode.ToUpper().Contains(txtSearch.Text)).ToList();
+                        dgStatusList.ItemsSource = SList.OrderByDescending(m => m.StatusID);
                     }
-                    if (!String.IsNullOrEmpty(txtSearch.Text))
-                        SList = SList.Where(m => m.StatusName.ToUpper().Contains(txtSearch.Text) || m.StatusCode.ToUpper().Contains(txtSearch.Text)).ToList();
-                    dgStatusList.ItemsSource = SList.OrderByDescending(m => m.StatusID);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
         }
         public void TextClear()
@@ -103,57 +110,73 @@ namespace ImusCityGovernmentSystem.General.Rank.Status
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    if (dgStatusList.SelectedItem != null)
+                    using (var db = new ImusCityHallEntities())
                     {
-                        var selectedItem = ((StatusList)dgStatusList.SelectedItem);
-                        EditStatusWindow us = new EditStatusWindow();
-                        us.StatusID = selectedItem.StatusID;
-                        us.ShowDialog();
-                        TextClear();
-                        GetList();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No division Selected", "System Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                        if (dgStatusList.SelectedItem != null)
+                        {
+                            var selectedItem = ((StatusList)dgStatusList.SelectedItem);
+                            EditStatusWindow us = new EditStatusWindow();
+                            us.StatusID = selectedItem.StatusID;
+                            us.ShowDialog();
+                            TextClear();
+                            GetList();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No division Selected", "System Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
 
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+            
         }
         public void GetSearchedList(string searchkey)
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                SList = new List<StatusList>();
-                using (var db = new Model.ImusCityHallEntities())
+                try
                 {
-                    var get = db.EmployeeStatus.Where(m => m.EmployeeStatusName.Contains(searchkey)).OrderBy(m => m.EmployeeStatusName).ToList();
-
-                    foreach (var item in get)
+                    SList = new List<StatusList>();
+                    using (var db = new Model.ImusCityHallEntities())
                     {
-                        StatusList sl = new StatusList();
-                        sl.StatusID = item.EmployeeStatusID;
-                        sl.StatusName = item.EmployeeStatusName;
-                        sl.StatusCode = item.EmployeeStatusCode;
-                        SList.Add(sl);
+                        var get = db.EmployeeStatus.Where(m => m.EmployeeStatusName.Contains(searchkey)).OrderBy(m => m.EmployeeStatusName).ToList();
 
+                        foreach (var item in get)
+                        {
+                            StatusList sl = new StatusList();
+                            sl.StatusID = item.EmployeeStatusID;
+                            sl.StatusName = item.EmployeeStatusName;
+                            sl.StatusCode = item.EmployeeStatusCode;
+                            SList.Add(sl);
+
+                        }
+
+                        dgStatusList.ItemsSource = SList.OrderByDescending(m => m.StatusID);
                     }
-
-                    dgStatusList.ItemsSource = SList.OrderByDescending(m => m.StatusID);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
         }
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {

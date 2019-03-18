@@ -33,76 +33,92 @@ namespace ImusCityGovernmentSystem
 
         public void LoadInitialQuestion()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    var getques = db.SecurityQuestionUsers.Where(m => m.EmployeeID == App.EmployeeID).OrderBy(m => Guid.NewGuid()).FirstOrDefault();
-                    if (getques != null)
+                    using (var db = new ImusCityHallEntities())
                     {
-                        txtSecQues.Text = getques.SecurityQuestionBank.Question;
-                        QuestionID = getques.SecurityQuestionID;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Question not available.");
-                        return;
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using (var db = new ImusCityHallEntities())
-                {
-                    if (!String.IsNullOrEmpty(txtAnswer.Text))
-                    {
-                        var getanswer = db.SecurityQuestionUsers.Where(m => m.EmployeeID == App.EmployeeID && m.SecurityQuestionID == QuestionID).FirstOrDefault();
-
-                        if (getanswer != null)
+                        var getques = db.SecurityQuestionUsers.Where(m => m.EmployeeID == App.EmployeeID).OrderBy(m => Guid.NewGuid()).FirstOrDefault();
+                        if (getques != null)
                         {
-                            string inputAnswer = txtAnswer.Text;
-                            if (inputAnswer.TrimStart().Trim().TrimEnd().ToLower() == getanswer.Answer.TrimStart().Trim().TrimEnd().ToLower())
-                            {
-                                ChangePasswordWindow cp = new ChangePasswordWindow();
-                                cp.Show();
-                                this.Close();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Incorrect answer.");
-                                return;
-                            }
-
+                            txtSecQues.Text = getques.SecurityQuestionBank.Question;
+                            QuestionID = getques.SecurityQuestionID;
                         }
                         else
                         {
                             MessageBox.Show("Question not available.");
                             return;
                         }
+
                     }
-                    else
-                    {
-                        MessageBox.Show("Please input answer.");
-                        return;
-                    }
-
-
-
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+           
+        }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            if(SystemClass.CheckConnection())
+            {
+                try
+                {
+                    using (var db = new ImusCityHallEntities())
+                    {
+                        if (!String.IsNullOrEmpty(txtAnswer.Text))
+                        {
+                            var getanswer = db.SecurityQuestionUsers.Where(m => m.EmployeeID == App.EmployeeID && m.SecurityQuestionID == QuestionID).FirstOrDefault();
+
+                            if (getanswer != null)
+                            {
+                                string inputAnswer = txtAnswer.Text;
+                                if (inputAnswer.TrimStart().Trim().TrimEnd().ToLower() == getanswer.Answer.TrimStart().Trim().TrimEnd().ToLower())
+                                {
+                                    ChangePasswordWindow cp = new ChangePasswordWindow();
+                                    cp.Show();
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Incorrect answer.");
+                                    return;
+                                }
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Question not available.");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please input answer.");
+                            return;
+                        }
+
+
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+            
         }
     }
 }

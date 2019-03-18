@@ -33,7 +33,6 @@ namespace ImusCityGovernmentSystem.General.Rank
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
-
             if (String.IsNullOrEmpty(txtSearch.Text))
             {
 
@@ -52,29 +51,36 @@ namespace ImusCityGovernmentSystem.General.Rank
         }
         public void GetList()
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                RList = new List<RankList>();
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    var get = db.EmployeeRanks.OrderBy(m => m.EmployeeRankName).ToList();
-
-                    foreach (var item in get)
+                    RList = new List<RankList>();
+                    using (var db = new ImusCityHallEntities())
                     {
-                        RankList rl = new RankList();
-                        rl.RankID = item.EmployeeRankID;
-                        rl.RankName = item.EmployeeRankName;
-                        RList.Add(rl);
+                        var get = db.EmployeeRanks.OrderBy(m => m.EmployeeRankName).ToList();
 
+                        foreach (var item in get)
+                        {
+                            RankList rl = new RankList();
+                            rl.RankID = item.EmployeeRankID;
+                            rl.RankName = item.EmployeeRankName;
+                            RList.Add(rl);
+
+                        }
+                        if (!String.IsNullOrEmpty(txtSearch.Text))
+                            RList = RList.Where(m => m.RankName.ToUpper().Contains(txtSearch.Text)).ToList();
+                        dgRankList.ItemsSource = RList.OrderByDescending(m => m.RankID);
                     }
-                    if (!String.IsNullOrEmpty(txtSearch.Text))
-                        RList = RList.Where(m => m.RankName.ToUpper().Contains(txtSearch.Text)).ToList();
-                    dgRankList.ItemsSource = RList.OrderByDescending(m => m.RankID);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
         }
         public void TextClear()
@@ -103,56 +109,72 @@ namespace ImusCityGovernmentSystem.General.Rank
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    if (dgRankList.SelectedItem != null)
+                    using (var db = new ImusCityHallEntities())
                     {
-                        var selectedItem = ((RankList)dgRankList.SelectedItem);
-                        EditRankWindow ud = new EditRankWindow();
-                        ud.RankID = selectedItem.RankID;
-                        ud.ShowDialog();
-                        TextClear();
-                        GetList();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No rank Selected", "System Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                        if (dgRankList.SelectedItem != null)
+                        {
+                            var selectedItem = ((RankList)dgRankList.SelectedItem);
+                            EditRankWindow ud = new EditRankWindow();
+                            ud.RankID = selectedItem.RankID;
+                            ud.ShowDialog();
+                            TextClear();
+                            GetList();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No rank Selected", "System Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
 
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+            
         }
 
         public void GetSearchedList(string searchkey)
         {
-            try
+            if(SystemClass.CheckConnection())
             {
-                RList = new List<RankList>();
-                using (var db = new ImusCityHallEntities())
+                try
                 {
-                    var get = db.EmployeeRanks.Where(m => m.EmployeeRankName.Contains(searchkey)).OrderBy(m => m.EmployeeRankName).ToList();
-
-                    foreach (var item in get)
+                    RList = new List<RankList>();
+                    using (var db = new ImusCityHallEntities())
                     {
-                        RankList rl = new RankList();
-                        rl.RankID = item.EmployeeRankID;
-                        rl.RankName = item.EmployeeRankName;
-                        RList.Add(rl);
+                        var get = db.EmployeeRanks.Where(m => m.EmployeeRankName.Contains(searchkey)).OrderBy(m => m.EmployeeRankName).ToList();
 
+                        foreach (var item in get)
+                        {
+                            RankList rl = new RankList();
+                            rl.RankID = item.EmployeeRankID;
+                            rl.RankName = item.EmployeeRankName;
+                            RList.Add(rl);
+
+                        }
+                        dgRankList.ItemsSource = RList.OrderByDescending(m => m.RankID);
                     }
-                    dgRankList.ItemsSource = RList.OrderByDescending(m => m.RankID);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+            
         }
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
