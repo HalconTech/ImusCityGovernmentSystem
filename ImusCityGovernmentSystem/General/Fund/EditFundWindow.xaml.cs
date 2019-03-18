@@ -20,7 +20,7 @@ namespace ImusCityGovernmentSystem.General.Fund
     /// </summary>
     public partial class EditFundWindow : MetroWindow
     {
-        ImusCityHallEntities db = new ImusCityHallEntities();
+     
         public int FundID;
         public EditFundWindow()
         {
@@ -30,35 +30,54 @@ namespace ImusCityGovernmentSystem.General.Fund
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            if (String.IsNullOrEmpty(fundcodetb.Text) || String.IsNullOrEmpty(fundnametb.Text))
+            if (SystemClass.CheckConnection())
             {
-                MessageBox.Show("Please input fund code and fund name!");
+                if (String.IsNullOrEmpty(fundcodetb.Text) || String.IsNullOrEmpty(fundnametb.Text))
+                {
+                    MessageBox.Show("Please input fund code and fund name!");
+                }
+                else
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    ImusCityGovernmentSystem.Model.Fund fund = db.Funds.Find(FundID);
+                    fund.FundCode = fundcodetb.Text;
+                    fund.FundName = fundnametb.Text;
+                    db.SaveChanges();
+                    Mouse.OverrideCursor = null;
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Updated an item in fund list. FUND ID: " + FundID.ToString(),
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+                    MessageBox.Show("Fund updated successfully!");
+                }
             }
             else
             {
-                ImusCityGovernmentSystem.Model.Fund fund = db.Funds.Find(FundID);
-                fund.FundCode = fundcodetb.Text;
-                fund.FundName = fundnametb.Text;
-                db.SaveChanges();
                 Mouse.OverrideCursor = null;
-                var audit = new AuditTrailModel
-                {
-                    Activity = "Updated an item in fund list. FUND ID: " + FundID.ToString(),
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
-
-                SystemClass.InsertLog(audit);
-                MessageBox.Show("Fund updated successfully!");
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
             Mouse.OverrideCursor = null;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            ImusCityGovernmentSystem.Model.Fund fund = db.Funds.Find(FundID);
-            fundcodetb.Text = fund.FundCode;
-            fundnametb.Text = fund.FundName;
+            if(SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                ImusCityGovernmentSystem.Model.Fund fund = db.Funds.Find(FundID);
+                fundcodetb.Text = fund.FundCode;
+                fundnametb.Text = fund.FundName;
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+           
         }
     }
 }

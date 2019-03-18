@@ -20,7 +20,7 @@ namespace ImusCityGovernmentSystem.General.Fund
     /// </summary>
     public partial class AddNewFundWindow : MetroWindow
     {
-        ImusCityHallEntities db = new ImusCityHallEntities();
+     
         public AddNewFundWindow()
         {
             InitializeComponent();
@@ -30,32 +30,42 @@ namespace ImusCityGovernmentSystem.General.Fund
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            if(String.IsNullOrEmpty(fundcodetb.Text) || String.IsNullOrEmpty(fundnametb.Text))
+            if(SystemClass.CheckConnection())
             {
-                MessageBox.Show("Please input fund code and fund name!");
+                if (String.IsNullOrEmpty(fundcodetb.Text) || String.IsNullOrEmpty(fundnametb.Text))
+                {
+                    MessageBox.Show("Please input fund code and fund name!");
+                }
+                else
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    ImusCityGovernmentSystem.Model.Fund fund = new Model.Fund();
+                    fund.FundCode = fundcodetb.Text;
+                    fund.FundName = fundnametb.Text;
+                    db.Funds.Add(fund);
+                    db.SaveChanges();
+                    Mouse.OverrideCursor = null;
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Added new fund in the database. DEPT CODE: " + fundcodetb.Text,
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+
+                    MessageBox.Show("New item added successfully.");
+
+                    SystemClass.ClearTextBoxes(this);
+                }
             }
             else
             {
-                ImusCityGovernmentSystem.Model.Fund fund = new Model.Fund();
-                fund.FundCode = fundcodetb.Text;
-                fund.FundName = fundnametb.Text;
-                db.Funds.Add(fund);
-                db.SaveChanges();
                 Mouse.OverrideCursor = null;
-
-                var audit = new AuditTrailModel
-                {
-                    Activity = "Added new fund in the database. DEPT CODE: " + fundcodetb.Text,
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
-
-                SystemClass.InsertLog(audit);
-
-                MessageBox.Show("New item added successfully.");
-
-                SystemClass.ClearTextBoxes(this);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+          
             Mouse.OverrideCursor = null;
         }
 

@@ -20,7 +20,7 @@ namespace ImusCityGovernmentSystem.General.Fund
     /// </summary>
     public partial class FundListWindow : MetroWindow
     {
-        ImusCityHallEntities db = new ImusCityHallEntities();
+
         public FundListWindow()
         {
             InitializeComponent();
@@ -53,67 +53,104 @@ namespace ImusCityGovernmentSystem.General.Fund
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).ToList();
-            fundlb.DisplayMemberPath = "FundName";
-            fundlb.SelectedValuePath = "FundID";
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).ToList();
+                fundlb.DisplayMemberPath = "FundName";
+                fundlb.SelectedValuePath = "FundID";
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+
         }
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
-
-            if (String.IsNullOrEmpty(searchtb.Text))
+            if (SystemClass.CheckConnection())
             {
+                if (String.IsNullOrEmpty(searchtb.Text))
+                {
 
+                }
+                else
+                {
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Searched item in fund list. SEARCH KEY: " + searchtb.Text,
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+                }
+
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).Where(m => m.FundName.Contains(searchtb.Text)).ToList();
+                fundlb.DisplayMemberPath = "FundName";
+                fundlb.SelectedValuePath = "FundID";
             }
             else
             {
-                var audit = new AuditTrailModel
-                {
-                    Activity = "Searched item in fund list. SEARCH KEY: " + searchtb.Text,
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
-
-                SystemClass.InsertLog(audit);
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-
-            fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).Where(m => m.FundName.Contains(searchtb.Text)).ToList();
-            fundlb.DisplayMemberPath = "FundName";
-            fundlb.SelectedValuePath = "FundID";
         }
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            if (fundlb.SelectedValue == null)
+            if (SystemClass.CheckConnection())
             {
-                Mouse.OverrideCursor = null;
-                MessageBox.Show("Please select an item!");
+                if (fundlb.SelectedValue == null)
+                {
+                    Mouse.OverrideCursor = null;
+                    MessageBox.Show("Please select an item!");
+                }
+                else
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    EditFundWindow edit = new EditFundWindow();
+                    edit.FundID = (int)fundlb.SelectedValue;
+                    Mouse.OverrideCursor = null;
+                    edit.ShowDialog();
+                    db = new ImusCityHallEntities();
+                    fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).OrderBy(m => m.FundName).ToList();
+                    fundlb.DisplayMemberPath = "FundName";
+                    fundlb.SelectedValuePath = "FundID";
+                }
             }
             else
             {
-                EditFundWindow edit = new EditFundWindow();
-                edit.FundID = (int)fundlb.SelectedValue;
                 Mouse.OverrideCursor = null;
-                edit.ShowDialog();
-                db = new ImusCityHallEntities();
-                fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).OrderBy(m => m.FundName).ToList();
-                fundlb.DisplayMemberPath = "FundName";
-                fundlb.SelectedValuePath = "FundID";
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+
+
             Mouse.OverrideCursor = null;
         }
 
         private void addnewfunbtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            AddNewFundWindow add = new AddNewFundWindow();
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                AddNewFundWindow add = new AddNewFundWindow();
+                Mouse.OverrideCursor = null;
+                add.ShowDialog();
+                db = new ImusCityHallEntities();
+                fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).OrderBy(m => m.FundName).ToList();
+                fundlb.DisplayMemberPath = "FundName";
+                fundlb.SelectedValuePath = "FundID";
+            }
+            else
+            {
+                Mouse.OverrideCursor = null;
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
             Mouse.OverrideCursor = null;
-            add.ShowDialog();
-            db = new ImusCityHallEntities();
-            fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).OrderBy(m => m.FundName).ToList();
-            fundlb.DisplayMemberPath = "FundName";
-            fundlb.SelectedValuePath = "FundID";
         }
     }
 }
