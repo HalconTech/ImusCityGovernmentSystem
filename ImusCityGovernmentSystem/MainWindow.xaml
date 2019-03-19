@@ -94,9 +94,7 @@
                     <RowDefinition></RowDefinition>
 
                 </Grid.RowDefinitions>
-                <Label  Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontFamily="Impact" FontSize="40" Foreground="White" Padding="0,5,5,0" HorizontalAlignment="Left" Content="Imus City Government " Background="Transparent" >
-                   
-                </Label>
+                <Label  Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="35" Foreground="White" Padding="0,5,5,0" HorizontalAlignment="Left" Content="Imus City Government " Background="Transparent" FontWeight="Bold" />
                 <Label Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1"  FontSize="14" Foreground="White" Padding="0,0,5,5" HorizontalAlignment="Left" Content="Government Integrated System of Imus">
 
                 </Label>

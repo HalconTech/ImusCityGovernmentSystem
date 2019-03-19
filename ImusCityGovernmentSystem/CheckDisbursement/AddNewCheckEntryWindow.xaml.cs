@@ -94,6 +94,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
 
                     SystemClass.InsertLog(audit);
                     MessageBox.Show("Check created successfully!");
+
+                    checknotb.Clear();
+                    checkdesctb.Clear();
+                    checkamounttb.Clear();
                 }
 
 
@@ -102,6 +106,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+        }
+
+        private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            checkdesctb.Text = descriptiontb.Text;
         }
     }
 }

@@ -68,12 +68,18 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                     {
                         case "Check":
                             checkcb.IsChecked = true;
+                            cashcb.IsEnabled = false;
+                            otherscb.IsEnabled = false;
                             break;
                         case "Cash":
                             cashcb.IsChecked = true;
+                            checkcb.IsEnabled = false;
+                            otherscb.IsEnabled = false;
                             break;
                         case "Others":
                             otherscb.IsChecked = true;
+                            cashcb.IsEnabled = false;
+                            checkcb.IsEnabled = false;
                             break;
                     }
                     payeetb.Text = dis.Payee.CompanyName;

@@ -46,6 +46,7 @@
                     <RowDefinition Height="35"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -58,10 +59,13 @@
                 <TextBlock Text="Fund" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                 <ComboBox Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Name="fundcb" VerticalContentAlignment="Center" Margin="0,5,0,0"></ComboBox>
                 <TextBlock Grid.Row="2" Text="Check Description" Grid.ColumnSpan="2" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
-                <TextBox Grid.Row="3" TextWrapping="Wrap" Name="checkdesctb"  Grid.ColumnSpan="3" Margin="0,0,0,5"></TextBox>
-                <TextBlock Text="Amount" Grid.Row="4" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
-                <TextBox Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" Name="checkamounttb"></TextBox>
-                <Button x:Name="savebtn" Grid.Row="4" Grid.Column="2" Content="Save" Margin="5,0,0,0" Click="savebtn_Click"></Button>
+                <TextBlock Grid.Row="4" Grid.ColumnSpan="3"  VerticalAlignment="Center" FontSize="10" PreviewMouseDown="TextBlock_PreviewMouseDown">
+                    <Hyperlink >Copy Description from the voucher</Hyperlink>
+                </TextBlock>
+                <TextBox Grid.Row="3" TextWrapping="Wrap" Name="checkdesctb"  Grid.ColumnSpan="3" Margin="0"></TextBox>
+                <TextBlock Text="Amount" Grid.Row="5" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+                <TextBox Grid.Row="5" Grid.Column="1" VerticalContentAlignment="Center" Name="checkamounttb"></TextBox>
+                <Button x:Name="savebtn" Grid.Row="5" Grid.Column="2" Content="Save" Margin="5,0,0,0" Click="savebtn_Click"></Button>
             </Grid>
         </GroupBox>
         

@@ -33,8 +33,8 @@
                 <DataGridTextColumn Header="Check No." Binding="{Binding CheckNo}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Voucher" Binding="{Binding Disbursement.VoucherNo}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Payee" Binding="{Binding Disbursement.Payee.CompanyName }"></DataGridTextColumn>
-                <DataGridTextColumn Header="Description" Binding="{Binding CheckDescription}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Amout" Binding="{Binding Amount}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Width="200" Binding="{Binding CheckDescription}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
