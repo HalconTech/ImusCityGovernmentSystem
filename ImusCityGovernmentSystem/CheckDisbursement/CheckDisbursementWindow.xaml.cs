@@ -56,5 +56,13 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             Mouse.OverrideCursor = null;
             check.ShowDialog();
         }
+
+        private void checkregisterbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            CheckDisbursement.CheckRegisterReport checkregister = new CheckDisbursement.CheckRegisterReport();
+            checkregister.Show();
+            Mouse.OverrideCursor = null;
+        }
     }
 }

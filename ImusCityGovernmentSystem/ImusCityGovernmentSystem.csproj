@@ -129,6 +129,9 @@
     <Compile Include="CheckDisbursement\CheckListWindow.xaml.cs">
       <DependentUpon>CheckListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CheckDisbursement\CheckRegisterReport.xaml.cs">
+      <DependentUpon>CheckRegisterReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CheckDisbursement\Data\CheckDisbursementDataTable.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -162,6 +165,7 @@
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\AuditTrailModel.cs" />
+    <Compile Include="Model\CheckRegisterModel.cs" />
     <Compile Include="Model\Disbursement.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
@@ -269,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CheckDisbursement\CheckListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckDisbursement\CheckRegisterReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

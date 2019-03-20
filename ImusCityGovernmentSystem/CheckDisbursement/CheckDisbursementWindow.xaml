@@ -5,12 +5,18 @@
         BorderThickness="0"
         Title="Check Disbursement"
     
-        WindowTransitionsEnabled="False"  Height="410.849" Width="621.571"   ResizeMode="NoResize"
+        WindowTransitionsEnabled="False"  Height="492.349" Width="834.571"   ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"   TitleCaps="False"  >
-    <Grid>
-   
-     
-        <WrapPanel Margin="45" HorizontalAlignment="Center">
+    <Grid Margin="45">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Modules" FontSize="18"></TextBlock>
+        <WrapPanel Grid.Row="1" >
             <Controls:Tile x:Name="disbursementlistbtn" Background="#CC0050EF"    Title="Disbursement List" TitleFontSize="12" Click="disbursementlistbtn_Click" >
                 <Rectangle Fill="White" Height="50" Width="50">
                     <Rectangle.OpacityMask>
@@ -46,7 +52,18 @@
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>
+
+        </WrapPanel>
+        <TextBlock Grid.Row="2" Text="Reports"  FontSize="18"/>
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Left">
+            <Controls:Tile x:Name="checkregisterbtn"  Background="#CC0050EF"    Title="Check Register" TitleFontSize="12" Click="checkregisterbtn_Click" >
+                <Rectangle Fill="White" Height="50" Width="50">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_paper}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
         </WrapPanel>
     </Grid>
-   
+
 </Controls:MetroWindow>
