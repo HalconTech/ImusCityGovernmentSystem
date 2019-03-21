@@ -15,5 +15,6 @@ namespace ImusCityGovernmentSystem.Model
         public string CheckNo { get; set; }
         public string CompanyName { get; set; }
         public decimal Amount { get; set; }
+        public string AmountInWords { get; set; }
     }
 }

@@ -60,8 +60,8 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
         private void checkregisterbtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            CheckDisbursement.CheckRegisterReport checkregister = new CheckDisbursement.CheckRegisterReport();
-            checkregister.Show();
+            CheckDisbursement.AccountantsLocalCheckDisbursementReportWindow accountant = new CheckDisbursement.AccountantsLocalCheckDisbursementReportWindow();
+            accountant.Show();
             Mouse.OverrideCursor = null;
         }
     }
