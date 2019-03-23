@@ -16,8 +16,8 @@ namespace ImusCityGovernmentSystem.Model
     {
         public Department()
         {
-            this.Employees = new HashSet<Employee>();
             this.Disbursements = new HashSet<Disbursement>();
+            this.Employees = new HashSet<Employee>();
         }
     
         public int DepartmentID { get; set; }
@@ -27,7 +27,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<bool> IsActive { get; set; }
     
         public virtual Division Division { get; set; }
-        public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

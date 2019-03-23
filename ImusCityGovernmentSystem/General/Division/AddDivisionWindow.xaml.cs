@@ -44,6 +44,7 @@ namespace ImusCityGovernmentSystem.General.Division
                             Model.Division d = new Model.Division();
                             d.DivisionCode = txtCode.Text;
                             d.DivisionName = txtName.Text;
+                            d.IsActive = true;
                             db.Divisions.Add(d);
                             db.SaveChanges();
 

@@ -73,7 +73,7 @@ namespace ImusCityGovernmentSystem.General.Division
                     DList = new List<DivisionList>();
                     using (var db = new ImusCityHallEntities())
                     {
-                        var get = db.Divisions.OrderBy(m => m.DivisionName).ToList();
+                        var get = db.Divisions.Where(m => m.IsActive == true).OrderBy(m => m.DivisionName).ToList();
 
                         foreach (var item in get)
                         {
@@ -87,6 +87,7 @@ namespace ImusCityGovernmentSystem.General.Division
                         if (!String.IsNullOrEmpty(txtSearch.Text))
                             DList = DList.OrderByDescending(m => m.DivisionID).Where(m => m.DivisionCode.ToUpper().Contains(txtSearch.Text) || m.DivisionName.ToUpper().Contains(txtSearch.Text)).ToList();
                         dgDivisionList.ItemsSource = DList;
+                        dgDivisionList.SelectedValuePath = "DivisionID";
                     }
                 }
                 catch (Exception ex)
@@ -164,7 +165,7 @@ namespace ImusCityGovernmentSystem.General.Division
                     DList = new List<DivisionList>();
                     using (var db = new ImusCityHallEntities())
                     {
-                        var get = db.Divisions.Where(m => m.DivisionName.Contains(searchkey) || m.DivisionCode.Contains(searchkey)).OrderBy(m => m.DivisionName).ToList();
+                        var get = db.Divisions.Where(m => m.IsActive == true && m.DivisionName.Contains(searchkey) || m.DivisionCode.Contains(searchkey)).OrderBy(m => m.DivisionName).ToList();
 
                         foreach (var item in get)
                         {
@@ -176,6 +177,7 @@ namespace ImusCityGovernmentSystem.General.Division
                             DList.Add(dl);
                         }
                         dgDivisionList.ItemsSource = DList.OrderByDescending(m => m.DivisionID);
+                        dgDivisionList.SelectedValuePath = "DivisionID";
                     }
                 }
                 catch (Exception ex)
@@ -202,6 +204,38 @@ namespace ImusCityGovernmentSystem.General.Division
                     EmployeeID = App.EmployeeID
                 };
                 SystemClass.InsertLog(audit);
+            }
+        }
+
+        private void deletebtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                if (dgDivisionList.SelectedValue != null)
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    int id = (int)dgDivisionList.SelectedValue;
+                    ImusCityGovernmentSystem.Model.Division division = db.Divisions.Find(id);
+                    division.IsActive = false;
+                    db.SaveChanges();
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Deleted an item in the division list. DIV ID: " + id.ToString(),
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+                    GetList();
+                }
+                else
+                {
+                    MessageBox.Show("Please select an item");
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
         }
     }

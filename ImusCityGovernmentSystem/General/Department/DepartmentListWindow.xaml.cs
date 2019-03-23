@@ -74,7 +74,7 @@ namespace ImusCityGovernmentSystem.General.Department
                     DList = new List<DepartmentList>();
                     using (var db = new ImusCityHallEntities())
                     {
-                        var get = db.Departments.Where(m => m.DepartmentName.Contains(searchkey) || m.DepartmentCode.Contains(searchkey)).OrderBy(m => m.DepartmentName).ToList();
+                        var get = db.Departments.Where(m => m.DepartmentName.Contains(searchkey) || m.DepartmentCode.Contains(searchkey) && m.IsActive == true).OrderBy(m => m.DepartmentName).ToList();
 
                         foreach (var item in get)
                         {
@@ -89,6 +89,7 @@ namespace ImusCityGovernmentSystem.General.Department
                         }
 
                         dgDepartmentList.ItemsSource = DList.OrderByDescending(m => m.DepartmentID);
+                        dgDepartmentList.SelectedValuePath = "DepartmentID";
                     }
                 }
                 catch (Exception ex)
@@ -166,7 +167,7 @@ namespace ImusCityGovernmentSystem.General.Department
                     DList = new List<DepartmentList>();
                     using (var db = new ImusCityHallEntities())
                     {
-                        var get = db.Departments.OrderByDescending(m => m.DepartmentID).ToList();
+                        var get = db.Departments.Where(m => m.IsActive == true).OrderByDescending(m => m.DepartmentID).ToList();
 
                         foreach (var item in get)
                         {
@@ -184,6 +185,7 @@ namespace ImusCityGovernmentSystem.General.Department
 
 
                         dgDepartmentList.ItemsSource = DList;
+                        dgDepartmentList.SelectedValuePath = "DepartmentID";
                     }
                 }
                 catch (Exception ex)
@@ -224,5 +226,36 @@ namespace ImusCityGovernmentSystem.General.Department
             }
         }
 
+        private void deletebtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                if (dgDepartmentList.SelectedValue != null)
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    int id = (int)dgDepartmentList.SelectedValue;
+                    ImusCityGovernmentSystem.Model.Department department = db.Departments.Find(id);
+                    department.IsActive = false;
+                    db.SaveChanges();
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Deleted an item in the department list. DEPT ID: " + id.ToString(),
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+                    GetList();
+                }
+                else
+                {
+                    MessageBox.Show("Please select an item");
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+        }
     }
 }

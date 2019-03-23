@@ -42,6 +42,10 @@ namespace ImusCityGovernmentSystem
                     this.Title = "Check Disbursement Voucher";
                     CheckDisbursementVoucher(id);
                     break;
+                case 2:
+                    this.Title = "Check Report";
+                    CheckReport(id);
+                    break;
             }
         }
         public void CheckDisbursementVoucher(int id)
@@ -86,7 +90,27 @@ namespace ImusCityGovernmentSystem
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-            
+
+        }
+        public void CheckReport(int id)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                CheckModel check = new CheckModel();
+                ImusCityGovernmentSystem.Model.Check checklist = db.Checks.Find(id);
+                check.CheckNo = checklist.CheckNo;
+
+                ReportDocument report;
+                report = new CheckReport();
+                report.SetDataSource(new[] { check });
+                reportviewer.ViewerCore.ReportSource = report;
+
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
         }
     }
 }

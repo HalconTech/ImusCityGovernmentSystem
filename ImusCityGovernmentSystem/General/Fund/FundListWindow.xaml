@@ -33,6 +33,7 @@
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="editbtn" Header="Edit Fund" Click="editbtn_Click"/>
+                    <MenuItem  Name="deletebtn" Header="Delete Fund" Click="deletebtn_Click" />
 
                 </ContextMenu>
             </ListBox.ContextMenu>

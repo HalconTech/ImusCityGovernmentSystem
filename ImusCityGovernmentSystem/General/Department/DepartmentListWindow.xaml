@@ -49,6 +49,11 @@
                         <DataGridTextColumn Header="Department Name"  Binding="{Binding DepartmentName}"/>
                         <DataGridTextColumn Header="Division Name" Binding="{Binding DivisionName}"/>
                     </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="deletebtn" Header="Delete" Click="deletebtn_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
                 </DataGrid>
             </Grid>
         </Grid>

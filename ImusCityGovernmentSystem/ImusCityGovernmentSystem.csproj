@@ -152,6 +152,12 @@
       <DependentUpon>CheckRegisterReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CheckDisbursement\Report\CheckReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CheckReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CheckDisbursement\Report\DisbursementVoucherReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -169,6 +175,7 @@
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\AuditTrailModel.cs" />
+    <Compile Include="Model\CheckModel.cs" />
     <Compile Include="Model\CheckRegisterModel.cs" />
     <Compile Include="Model\Disbursement.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
@@ -563,6 +570,10 @@
     <EmbeddedResource Include="CheckDisbursement\Report\CheckRegisterReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CheckRegisterReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckDisbursement\Report\CheckReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CheckReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CheckDisbursement\Report\DisbursementVoucherReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
