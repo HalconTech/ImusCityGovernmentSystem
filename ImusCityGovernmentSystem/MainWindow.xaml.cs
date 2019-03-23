@@ -28,9 +28,22 @@ namespace ImusCityGovernmentSystem
             InitializeComponent();
             Employee employee = db.Employees.Find(App.EmployeeID);
             empname.Content = "Welcome! " + employee.FirstName + " " + employee.LastName;
+            var notif = db.GetCheckExpiryNotice().ToList();
+
+            if(notif.Count != 0)
+            {
+                bdgNotif.Badge = notif.Count;
+                btnNotif.Visibility = Visibility.Visible;
+                lvNotif.ItemsSource = notif;
+
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvNotif.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupName");
+                view.GroupDescriptions.Add(groupDescription);
+            }
 
             
-            bdgNotif.Badge = 3;
+           
+
         }
 
         private void empmgntbtn_Click(object sender, RoutedEventArgs e)

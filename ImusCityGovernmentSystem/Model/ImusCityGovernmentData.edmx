@@ -84,6 +84,8 @@
           <Property Name="DateStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
           <Property Name="Amount" Type="money" />
           <Property Name="EmployeeID" Type="int" />
+          <Property Name="Signatory1" Type="int" />
+          <Property Name="Signatory2" Type="int" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -93,6 +95,7 @@
           <Property Name="DepartmentName" Type="nvarchar" MaxLength="150" />
           <Property Name="DepartmentCode" Type="nvarchar" MaxLength="50" />
           <Property Name="DivisionID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Disbursement">
           <Key>
@@ -124,6 +127,7 @@
           <Property Name="DivisionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DivisionName" Type="nvarchar" MaxLength="50" />
           <Property Name="DivisionCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -219,6 +223,7 @@
           <Property Name="FundCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Branch" Type="nvarchar" MaxLength="50" />
           <Property Name="AccountNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="LicensingCode">
           <Key>
@@ -240,6 +245,7 @@
           <Property Name="CompanyAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="TIN" Type="nvarchar" MaxLength="20" />
           <Property Name="LandlineNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="PayeeRepresentative">
           <Key>
@@ -344,6 +350,30 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Principal>
             <Dependent Role="Check">
               <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Check_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Check" Type="Self.Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="Signatory1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Check_Employee2">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Check" Type="Self.Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="Signatory2" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -607,6 +637,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetCheckExpiryNotice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetCheckRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Date" Type="date" Mode="In" />
           <Parameter Name="FundID" Type="int" Mode="In" />
@@ -652,6 +683,14 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="Check" EntitySet="Check" />
           </AssociationSet>
           <AssociationSet Name="FK_Check_Employee" Association="Self.FK_Check_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Check" EntitySet="Check" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Check_Employee1" Association="Self.FK_Check_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Check" EntitySet="Check" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Check_Employee2" Association="Self.FK_Check_Employee2">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Check" EntitySet="Check" />
           </AssociationSet>
@@ -870,6 +909,15 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="SubModule" EntitySet="SubModules" />
             <End Role="SubModuleUser" EntitySet="SubModuleUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_Check_Employee1" Association="ImusCityHallModel.FK_Check_Employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Check" EntitySet="Checks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Check_Employee2" Association="ImusCityHallModel.FK_Check_Employee2">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Check" EntitySet="Checks" />
+          </AssociationSet>
+          <FunctionImport Name="GetCheckExpiryNotice" ReturnType="Collection(ImusCityHallModel.GetCheckExpiryNotice_Result)" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -946,6 +994,10 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <NavigationProperty Name="Disbursement" Relationship="ImusCityHallModel.FK_Check_Disbursement" FromRole="Check" ToRole="Disbursement" />
           <Property Name="EmployeeID" Type="Int32" />
           <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_Check_Employee" FromRole="Check" ToRole="Employee" />
+          <Property Name="Signatory1" Type="Int32" />
+          <Property Name="Signatory2" Type="Int32" />
+          <NavigationProperty Name="Employee1" Relationship="ImusCityHallModel.FK_Check_Employee1" FromRole="Check" ToRole="Employee" />
+          <NavigationProperty Name="Employee2" Relationship="ImusCityHallModel.FK_Check_Employee2" FromRole="Check" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -958,6 +1010,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <NavigationProperty Name="Division" Relationship="ImusCityHallModel.FK_Department_Division" FromRole="Department" ToRole="Division" />
           <NavigationProperty Name="Employees" Relationship="ImusCityHallModel.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
           <NavigationProperty Name="Disbursements" Relationship="ImusCityHallModel.FK_Disbursement_Department" FromRole="Department" ToRole="Disbursement" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="Division">
           <Key>
@@ -967,6 +1020,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="DivisionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DivisionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Departments" Relationship="ImusCityHallModel.FK_Department_Division" FromRole="Division" ToRole="Department" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="EmployeePosition">
           <Key>
@@ -1006,6 +1060,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="FundCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="Payee">
           <Key>
@@ -1019,6 +1074,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="LandlineNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PayeeRepresentatives" Relationship="ImusCityHallModel.FK_PayeeRepresentative_Payee" FromRole="Payee" ToRole="PayeeRepresentative" />
           <NavigationProperty Name="Disbursements" Relationship="ImusCityHallModel.FK_Disbursement_Disbursement" FromRole="Payee" ToRole="Disbursement" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="PayeeRepresentative">
           <Key>
@@ -1232,6 +1288,8 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <NavigationProperty Name="Disbursements1" Relationship="ImusCityHallModel.FK_Disbursement_Signatory2" FromRole="Employee" ToRole="Disbursement" />
           <NavigationProperty Name="Disbursements2" Relationship="ImusCityHallModel.FK_Disbursement_Signatory3" FromRole="Employee" ToRole="Disbursement" />
           <NavigationProperty Name="SubModuleUsers" Relationship="ImusCityHallModel.FK_SubModuleUser_Employee" FromRole="Employee" ToRole="SubModuleUser" />
+          <NavigationProperty Name="Checks1" Relationship="ImusCityHallModel.FK_Check_Employee1" FromRole="Employee" ToRole="Check" />
+          <NavigationProperty Name="Checks2" Relationship="ImusCityHallModel.FK_Check_Employee2" FromRole="Employee" ToRole="Check" />
         </EntityType>
         <Association Name="FK_Employee_Department">
           <End Type="ImusCityHallModel.Department" Role="Department" Multiplicity="0..1" />
@@ -1546,6 +1604,38 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Check_Employee1">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Check" Role="Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="Signatory1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Check_Employee2">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Check" Role="Check" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Check">
+              <PropertyRef Name="Signatory2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetCheckExpiryNotice_Result">
+          <Property Type="String" Name="GroupName" Nullable="false" MaxLength="32" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CheckNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CheckDescription" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="ProjectName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1609,6 +1699,8 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySetMapping Name="Checks">
             <EntityTypeMapping TypeName="ImusCityHallModel.Check">
               <MappingFragment StoreEntitySet="Check">
+                <ScalarProperty Name="Signatory2" ColumnName="Signatory2" />
+                <ScalarProperty Name="Signatory1" ColumnName="Signatory1" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
@@ -1624,6 +1716,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySetMapping Name="Departments">
             <EntityTypeMapping TypeName="ImusCityHallModel.Department">
               <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
                 <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
                 <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
@@ -1634,6 +1727,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySetMapping Name="Divisions">
             <EntityTypeMapping TypeName="ImusCityHallModel.Division">
               <MappingFragment StoreEntitySet="Division">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="DivisionCode" ColumnName="DivisionCode" />
                 <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
                 <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
@@ -1671,6 +1765,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySetMapping Name="Funds">
             <EntityTypeMapping TypeName="ImusCityHallModel.Fund">
               <MappingFragment StoreEntitySet="Fund">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
                 <ScalarProperty Name="Branch" ColumnName="Branch" />
                 <ScalarProperty Name="FundCode" ColumnName="FundCode" />
@@ -1682,6 +1777,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySetMapping Name="Payees">
             <EntityTypeMapping TypeName="ImusCityHallModel.Payee">
               <MappingFragment StoreEntitySet="Payee">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="LandlineNo" ColumnName="LandlineNo" />
                 <ScalarProperty Name="TIN" ColumnName="TIN" />
                 <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
@@ -1928,6 +2024,18 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCheckExpiryNotice" FunctionName="ImusCityHallModel.Store.GetCheckExpiryNotice">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ImusCityHallModel.GetCheckExpiryNotice_Result">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="CheckDescription" ColumnName="CheckDescription" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="FundName" ColumnName="FundName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

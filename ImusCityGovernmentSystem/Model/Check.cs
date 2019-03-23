@@ -23,8 +23,12 @@ namespace ImusCityGovernmentSystem.Model
         public byte[] DateStamp { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public Nullable<int> EmployeeID { get; set; }
+        public Nullable<int> Signatory1 { get; set; }
+        public Nullable<int> Signatory2 { get; set; }
     
         public virtual Disbursement Disbursement { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual Employee Employee1 { get; set; }
+        public virtual Employee Employee2 { get; set; }
     }
 }

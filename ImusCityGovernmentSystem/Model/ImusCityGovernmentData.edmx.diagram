@@ -54,6 +54,8 @@
         <EntityTypeShape EntityType="ImusCityHallModel.SubModuleUser" Width="1.5" PointX="15.25" PointY="12.25" />
         <AssociationConnector Association="ImusCityHallModel.FK_SubModuleUser_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_SubModuleUser_SubModule" />
+        <AssociationConnector Association="ImusCityHallModel.FK_Check_Employee1" />
+        <AssociationConnector Association="ImusCityHallModel.FK_Check_Employee2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

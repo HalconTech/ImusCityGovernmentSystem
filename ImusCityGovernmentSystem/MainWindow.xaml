@@ -6,9 +6,10 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Name="empname" />
+            <Button x:Name="btnlogout" Content="Sign-out" Click="btnlogout_Click"/>
             <Controls:Badged Badge="{Binding Path=BadgeValue}" BadgeBackground="Red" Name="bdgNotif" BadgePlacementMode="Bottom" Grid.Column="3" Margin="5">
                 <!-- Control to wrap goes here -->
-                <Button Name="btnNotif" Click="btnNotif_Click" Visibility="Hidden">
+                <Button Name="btnNotif" Click="btnNotif_Click" Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="20"
                    Height="20"
@@ -22,9 +23,7 @@
                     </StackPanel>
                 </Button>
             </Controls:Badged>
-            <Button x:Name="btnlogout" Content="Sign-out" Click="btnlogout_Click"/>
 
-            
 
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
@@ -212,7 +211,7 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
-                    
+
                     <MenuItem x:Name="payeebtn" Visibility="Collapsed"   VerticalContentAlignment="Center"  Header="Payee Management" Click="payeebtn_Click"    >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="16" Height="14">
@@ -242,9 +241,31 @@
 
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout Name="flyoutNotif" Header="Notifications" Position="Right" Width="400" IsOpen="True">
-                <ListView Background="White" Margin="10">
-                    
+            <Controls:Flyout Name="flyoutNotif" Header="Notifications" Position="Right" Width="400">
+                <ListView Name="lvNotif">
+                    <ListView.ItemTemplate> 
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <TextBlock Text="{Binding ProjectName}" FontWeight="Bold" />
+                                <TextBlock>
+                                    <Run Text="{Binding FundName}"/>
+                                    <Run Text=" - "/>
+                                    <Run Text="{Binding CheckNo}"/>
+                                </TextBlock>
+                                <TextBlock  Text="{Binding DateCreated,StringFormat=d}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                    <ListView.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </ListView.GroupStyle>
                 </ListView>
             </Controls:Flyout>
         </Controls:FlyoutsControl>

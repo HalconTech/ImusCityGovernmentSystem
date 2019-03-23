@@ -75,5 +75,10 @@ namespace ImusCityGovernmentSystem.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDisbursementVoucher_Result>("GetDisbursementVoucher", disbursementIDParameter);
         }
+    
+        public virtual ObjectResult<GetCheckExpiryNotice_Result> GetCheckExpiryNotice()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckExpiryNotice_Result>("GetCheckExpiryNotice");
+        }
     }
 }

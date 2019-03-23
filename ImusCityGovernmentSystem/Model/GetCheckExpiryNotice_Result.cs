@@ -10,15 +10,14 @@
 namespace ImusCityGovernmentSystem.Model
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Fund
+    public partial class GetCheckExpiryNotice_Result
     {
-        public int FundID { get; set; }
+        public string GroupName { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
+        public string CheckNo { get; set; }
+        public string CheckDescription { get; set; }
+        public string ProjectName { get; set; }
         public string FundName { get; set; }
-        public string FundCode { get; set; }
-        public string Branch { get; set; }
-        public string AccountNumber { get; set; }
-        public Nullable<bool> IsActive { get; set; }
     }
 }
