@@ -8,246 +8,92 @@ namespace ImusCityGovernmentSystem
 {
     public class CurrencyToWords
     {
-        public String changeNumericToWords(double numb)
+        public string NumberToWords(double doubleNumber)
         {
-            String num = numb.ToString();
-            return changeToWords(num, false);
-        }
+            var beforeFloatingPoint = (int)Math.Floor(doubleNumber);
+            var beforeFloatingPointWord = $"{NumberToWords(beforeFloatingPoint)} pesos";
+            var afterFloatingPointWord =
+                $"{SmallNumberToWord((int)((doubleNumber - beforeFloatingPoint) * 100), "")} cents";
 
-        public String changeCurrencyToWords(String numb)
-        {
-            return changeToWords(numb, true);
-        }
-
-        public String changeNumericToWords(String numb)
-        {
-            return changeToWords(numb, false);
-        }
-
-        public String changeCurrencyToWords(double numb)
-        {
-            return changeToWords(numb.ToString(), true);
-        }
-
-        private String changeToWords(String numb, bool isCurrency)
-        {
-            String val = "", wholeNo = numb, points = "", andStr = "", pointStr = "";
-            String endStr = (isCurrency) ? ("Only") : ("");
-            try
+            if(doubleNumber % 1 != 0)
             {
-                int decimalPlace = numb.IndexOf(".");
-                if (decimalPlace > 0)
-                {
-                    wholeNo = numb.Substring(0, decimalPlace);
-                    points = numb.Substring(decimalPlace + 1);
-                    if (Convert.ToInt32(points) > 0)
-                    {
-                        andStr = (isCurrency) ? ("and") : ("point");// just to separate whole numbers from points/Rupees
-                        endStr = (isCurrency) ? ("Pesos " + endStr) : ("");
-                        pointStr = translateRupees(points);
-                    }
-                }
-                val = String.Format("{0} {1}{2} {3}", translateWholeNumber(wholeNo).Trim(), andStr, pointStr, endStr);
+                return UppercaseFirst($"{beforeFloatingPointWord} and {afterFloatingPointWord}");
             }
-            catch
+            else
             {
-                ;
+                return UppercaseFirst($"{beforeFloatingPointWord}");
             }
-            return val;
+           
         }
 
-        private String translateWholeNumber(String number)
+        private static string UppercaseFirst(string s)
         {
-            string word = "";
-            try
+            // Check for empty string.
+            if (string.IsNullOrEmpty(s))
             {
-                bool beginsZero = false;//tests for 0XX
-                bool isDone = false;//test if already translated
-                double dblAmt = (Convert.ToDouble(number));
-                //if ((dblAmt > 0) && number.StartsWith("0"))
-
-                if (dblAmt > 0)
-                {//test for zero or digit zero in a nuemric
-                    beginsZero = number.StartsWith("0");
-                    int numDigits = number.Length;
-                    int pos = 0;//store digit grouping
-                    String place = "";//digit grouping name:hundres,thousand,etc...
-                    switch (numDigits)
-                    {
-                        case 1://ones' range
-                            word = ones(number);
-                            isDone = true;
-                            break;
-                        case 2://tens' range
-                            word = tens(number);
-                            isDone = true;
-                            break;
-                        case 3://hundreds' range
-                            pos = (numDigits % 3) + 1;
-                            place = " Hundred ";
-                            break;
-                        case 4://thousands' range
-                        case 5:
-                        case 6:
-                            pos = (numDigits % 4) + 1;
-                            place = " Thousand ";
-                            break;
-                        case 7://millions' range
-                        case 8:
-                        case 9:
-                            pos = (numDigits % 7) + 1;
-                            place = " Million ";
-                            break;
-                        case 10://Billions's range
-                            pos = (numDigits % 10) + 1;
-                            place = " Billion ";
-                            break;
-                        //add extra case options for anything above Billion...
-                        default:
-                            isDone = true;
-                            break;
-                    }
-                    if (!isDone)
-                    {//if transalation is not done, continue...(Recursion comes in now!!)
-                        word = translateWholeNumber(number.Substring(0, pos)) + place + translateWholeNumber(number.Substring(pos));
-                        //check for trailing zeros
-                        if (beginsZero) word = " and " + word.Trim();
-                    }
-                    //ignore digit grouping names
-                    if (word.Trim().Equals(place.Trim())) word = "";
-                }
+                return string.Empty;
             }
-            catch
-            {
-                ;
-            }
-            return word.Trim();
+            // Return char and concat substring.
+            return char.ToUpper(s[0]) + s.Substring(1);
         }
 
-        private String tens(String digit)
+        private static string NumberToWords(int number)
         {
-            int digt = Convert.ToInt32(digit);
-            String name = null;
-            switch (digt)
+            if (number == 0)
+                return "zero";
+
+            if (number < 0)
+                return "minus " + NumberToWords(Math.Abs(number));
+
+            var words = "";
+
+            if (number / 1000000000 > 0)
             {
-                case 10:
-                    name = "Ten";
-                    break;
-                case 11:
-                    name = "Eleven";
-                    break;
-                case 12:
-                    name = "Twelve";
-                    break;
-                case 13:
-                    name = "Thirteen";
-                    break;
-                case 14:
-                    name = "Fourteen";
-                    break;
-                case 15:
-                    name = "Fifteen";
-                    break;
-                case 16:
-                    name = "Sixteen";
-                    break;
-                case 17:
-                    name = "Seventeen";
-                    break;
-                case 18:
-                    name = "Eighteen";
-                    break;
-                case 19:
-                    name = "Nineteen";
-                    break;
-                case 20:
-                    name = "Twenty";
-                    break;
-                case 30:
-                    name = "Thirty";
-                    break;
-                case 40:
-                    name = "Fourty";
-                    break;
-                case 50:
-                    name = "Fifty";
-                    break;
-                case 60:
-                    name = "Sixty";
-                    break;
-                case 70:
-                    name = "Seventy";
-                    break;
-                case 80:
-                    name = "Eighty";
-                    break;
-                case 90:
-                    name = "Ninety";
-                    break;
-                default:
-                    if (digt > 0)
-                    {
-                        name = tens(digit.Substring(0, 1) + "0") + " " + ones(digit.Substring(1));
-                    }
-                    break;
+                words += NumberToWords(number / 1000000000) + " billion ";
+                number %= 1000000000;
             }
-            return name;
+
+            if (number / 1000000 > 0)
+            {
+                words += NumberToWords(number / 1000000) + " million ";
+                number %= 1000000;
+            }
+
+            if (number / 1000 > 0)
+            {
+                words += NumberToWords(number / 1000) + " thousand ";
+                number %= 1000;
+            }
+
+            if (number / 100 > 0)
+            {
+                words += NumberToWords(number / 100) + " hundred ";
+                number %= 100;
+            }
+
+            words = SmallNumberToWord(number, words);
+
+            return words;
         }
 
-        private String ones(String digit)
+        private static string SmallNumberToWord(int number, string words)
         {
-            int digt = Convert.ToInt32(digit);
-            String name = "";
-            switch (digt)
-            {
-                case 1:
-                    name = "One";
-                    break;
-                case 2:
-                    name = "Two";
-                    break;
-                case 3:
-                    name = "Three";
-                    break;
-                case 4:
-                    name = "Four";
-                    break;
-                case 5:
-                    name = "Five";
-                    break;
-                case 6:
-                    name = "Six";
-                    break;
-                case 7:
-                    name = "Seven";
-                    break;
-                case 8:
-                    name = "Eight";
-                    break;
-                case 9:
-                    name = "Nine";
-                    break;
-            }
-            return name;
-        }
+            if (number <= 0) return words;
+            if (words != "")
+                words += " ";
 
-        private String translateRupees(String Rupees)
-        {
-            String cts = "", digit = "", engOne = "";
-            for (int i = 0; i < Rupees.Length; i++)
+            var unitsMap = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+            var tensMap = new[] { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+
+            if (number < 20)
+                words += unitsMap[number];
+            else
             {
-                digit = Rupees[i].ToString();
-                if (digit.Equals("0"))
-                {
-                    engOne = "Zero";
-                }
-                else
-                {
-                    engOne = ones(digit);
-                }
-                cts += " " + engOne;
+                words += tensMap[number / 10];
+                if ((number % 10) > 0)
+                    words += "-" + unitsMap[number % 10];
             }
-            return cts;
+            return words;
         }
     }
 }

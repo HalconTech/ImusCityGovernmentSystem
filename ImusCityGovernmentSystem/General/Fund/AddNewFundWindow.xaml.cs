@@ -36,12 +36,22 @@ namespace ImusCityGovernmentSystem.General.Fund
                 {
                     MessageBox.Show("Please input fund code and fund name!");
                 }
+                else if(String.IsNullOrEmpty(accountnotb.Text))
+                {
+                    MessageBox.Show("Please enter account number");
+                }
+                else if(String.IsNullOrEmpty(branchtb.Text))
+                {
+                    MessageBox.Show("Please enter branch");
+                }
                 else
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();
                     ImusCityGovernmentSystem.Model.Fund fund = new Model.Fund();
                     fund.FundCode = fundcodetb.Text;
                     fund.FundName = fundnametb.Text;
+                    fund.AccountNumber = accountnotb.Text;
+                    fund.Branch = branchtb.Text;
                     db.Funds.Add(fund);
                     db.SaveChanges();
                     Mouse.OverrideCursor = null;

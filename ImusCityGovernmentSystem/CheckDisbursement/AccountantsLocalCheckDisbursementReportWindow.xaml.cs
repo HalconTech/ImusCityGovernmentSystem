@@ -24,6 +24,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
         public AccountantsLocalCheckDisbursementReportWindow()
         {
             InitializeComponent();
+            this.Title = "Accountant's Advice of Local Check Disbursement";
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -41,12 +42,43 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 fundcb.DisplayMemberPath = "FundName";
                 fundcb.SelectedValuePath = "FundID";
 
+                LoadSignatories();
+
 
             }
             else
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+        }
+
+         void LoadSignatories()
+        {
+            if(SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                var signatories = from p in db.Employees
+                                  orderby p.FirstName
+                                  select new
+                                  {
+                                      Name = p.FirstName + " " + p.MiddleName + " " + p.LastName,
+                                      id = p.EmployeeID 
+                                  };
+
+                signatory1cb.ItemsSource = signatories.ToList();
+                signatory1cb.DisplayMemberPath = "Name";
+                signatory1cb.SelectedValuePath = "Name";
+                signatory1cb.SelectedIndex = 0;
+                signatory2cb.ItemsSource = signatories.ToList();
+                signatory2cb.DisplayMemberPath = "Name";
+                signatory2cb.SelectedValuePath = "Name";
+                signatory2cb.SelectedIndex = 0;
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+  
         }
 
         private void generatebtn_Click(object sender, RoutedEventArgs e)
@@ -61,16 +93,22 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     MessageBox.Show("Please select date");
                 }
+                else if(String.IsNullOrEmpty(advicenotb.Text))
+                {
+                    MessageBox.Show("Please enter advice number");
+                }
                 else
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();
                     List<CheckRegisterModel> list = new List<CheckRegisterModel>();
                     var result = db.GetCheckRegister(createddatedp.SelectedDate, (int)fundcb.SelectedValue);
-                    //CurrencyToWords convert = new CurrencyToWords();
-                    decimal totalAmount = db.GetCheckRegister(createddatedp.SelectedDate, (int)fundcb.SelectedValue).Sum(m => m.Amount).Value;
-                    string sqlQuery = "SELECT dbo.fnCurrencyToWords({0})";
-                    Object[] parameters = { totalAmount };
-                    string amountInWords = db.Database.SqlQuery<string>(sqlQuery, parameters).FirstOrDefault();
+                    CurrencyToWords convert = new CurrencyToWords();
+                    //decimal totalAmount = db.GetCheckRegister(createddatedp.SelectedDate, (int)fundcb.SelectedValue).Sum(m => m.Amount).Value;
+                    //string sqlQuery = "SELECT dbo.fnCurrencyToWords({0})";
+                    //Object[] parameters = { totalAmount };
+                    //string amountInWords = db.Database.SqlQuery<string>(sqlQuery, parameters).FirstOrDefault();
+                    double totalAmount = Convert.ToDouble(db.GetCheckRegister(createddatedp.SelectedDate, (int)fundcb.SelectedValue).Sum(m => m.Amount).Value);
+                    string amountInWords = convert.NumberToWords(totalAmount).ToUpper();              
                     foreach (var checkregister in result)
                     {
                         var check = new CheckRegisterModel
@@ -87,8 +125,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         list.Add(check);
                     }
                     ReportDocument report;
-                    report = new CheckDisbursement.Report.AccountantCheckDisbursementReport();
+                    report = new CheckDisbursement.Report.AccountantCheckDisbursementReport();           
                     report.SetDataSource(list);
+                    report.SetParameterValue("Signatory1", signatory1cb.SelectedValue.ToString());
+                    report.SetParameterValue("Signatory2", signatory2cb.SelectedValue.ToString());
+                    report.SetParameterValue("AdviceNo", advicenotb.Text);
                     reportviewer.ViewerCore.ReportSource = report;
                 }
             }
@@ -97,5 +138,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
         }
+   
     }
 }

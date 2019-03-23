@@ -36,12 +36,22 @@ namespace ImusCityGovernmentSystem.General.Fund
                 {
                     MessageBox.Show("Please input fund code and fund name!");
                 }
+                else if (String.IsNullOrEmpty(accountnotb.Text))
+                {
+                    MessageBox.Show("Please enter account number");
+                }
+                else if (String.IsNullOrEmpty(branchtb.Text))
+                {
+                    MessageBox.Show("Please enter branch");
+                }
                 else
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();
                     ImusCityGovernmentSystem.Model.Fund fund = db.Funds.Find(FundID);
                     fund.FundCode = fundcodetb.Text;
                     fund.FundName = fundnametb.Text;
+                    fund.AccountNumber = accountnotb.Text;
+                    fund.Branch = branchtb.Text;
                     db.SaveChanges();
                     Mouse.OverrideCursor = null;
                     var audit = new AuditTrailModel
@@ -72,6 +82,8 @@ namespace ImusCityGovernmentSystem.General.Fund
                 ImusCityGovernmentSystem.Model.Fund fund = db.Funds.Find(FundID);
                 fundcodetb.Text = fund.FundCode;
                 fundnametb.Text = fund.FundName;
+                accountnotb.Text = fund.AccountNumber;
+                branchtb.Text = fund.Branch;
             }
             else
             {

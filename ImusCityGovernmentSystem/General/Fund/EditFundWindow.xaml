@@ -7,7 +7,7 @@
                       TitleCaps="False"
                       BorderThickness="1"
                       WindowStartupLocation="CenterScreen"
-                      Height="192.034"
+                      Height="286.701"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
@@ -19,14 +19,26 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="17"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="17"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Fund Code"></TextBlock>
         <TextBox BorderBrush="Black" Grid.Row="1" VerticalContentAlignment="Center" Name="fundcodetb"></TextBox>
         <TextBlock Grid.Row="2" Text="Fund Name"></TextBlock>
         <TextBox Grid.Row="3" VerticalContentAlignment="Center" Name="fundnametb" BorderBrush="Black"></TextBox>
-        <Button x:Name="savebtn" Content="Save" Grid.Row="4" Click="savebtn_Click" Margin="0,5,0,0"></Button>
-
+        <TextBlock Grid.Row="4" Text="Account Number"></TextBlock>
+        <TextBox Grid.Row="5" VerticalContentAlignment="Center" Name="accountnotb" BorderBrush="Black"></TextBox>
+        <TextBlock Grid.Row="6" Text="Branch"></TextBlock>
+        <TextBox Grid.Row="7" VerticalContentAlignment="Center" Name="branchtb" BorderBrush="Black"></TextBox>
+        <Grid Grid.Row="8" Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="savebtn" Content="Save" Margin="0,0,2.5,0" Click="savebtn_Click"></Button>
+        </Grid>
     </Grid>
-    </Controls:MetroWindow>
+</Controls:MetroWindow>
 

@@ -17,13 +17,25 @@
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="35"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Text="Fund" FontWeight="Bold"></TextBlock>
             <ComboBox Grid.Row="1" Name="fundcb"></ComboBox>
             <TextBlock Grid.Row="2" Text="Date" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
             <DatePicker VerticalContentAlignment="Center" Grid.Row="3" Name="createddatedp"></DatePicker>
-            <Button x:Name="generatebtn" Grid.Row="4" Content="Generate Report" Margin="0,5,0,0" Click="generatebtn_Click"></Button>
+            <TextBlock Grid.Row="4" Text="City Accountant" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+            <ComboBox Grid.Row="5" VerticalContentAlignment="Center" Name="signatory1cb"></ComboBox>
+            <TextBlock Grid.Row="6" Text="Accountant's Representative" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+            <ComboBox Grid.Row="7" VerticalContentAlignment="Center" Name="signatory2cb"></ComboBox>
+            <TextBlock Grid.Row="8" Text="Advice No" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+            <TextBox Grid.Row="9" Name="advicenotb" VerticalContentAlignment="Center"></TextBox>
+            <Button x:Name="generatebtn" Grid.Row="10" Content="Generate Report" Margin="0,5,0,0" Click="generatebtn_Click"></Button>
         </Grid>
 
         <my:CrystalReportsViewer x:Name="reportviewer" Background="White" Grid.Column="1" >
