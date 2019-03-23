@@ -14,6 +14,7 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class EmployeeStatu
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EmployeeStatu()
         {
             this.Employees = new HashSet<Employee>();
@@ -23,6 +24,7 @@ namespace ImusCityGovernmentSystem.Model
         public string EmployeeStatusName { get; set; }
         public string EmployeeStatusCode { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
     }
 }

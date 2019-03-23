@@ -14,6 +14,7 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
             this.Checks = new HashSet<Check>();
@@ -24,8 +25,6 @@ namespace ImusCityGovernmentSystem.Model
             this.Disbursements2 = new HashSet<Disbursement>();
             this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
             this.SubModuleUsers = new HashSet<SubModuleUser>();
-            this.Checks1 = new HashSet<Check>();
-            this.Checks2 = new HashSet<Check>();
         }
     
         public int EmployeeID { get; set; }
@@ -84,18 +83,24 @@ namespace ImusCityGovernmentSystem.Model
         public string NameSuffix { get; set; }
         public string BankAccountNo { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Check> Checks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Check> Checks1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Check> Checks2 { get; set; }
         public virtual Department Department { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements2 { get; set; }
         public virtual EmployeePosition EmployeePosition { get; set; }
         public virtual EmployeeStatu EmployeeStatu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
-        public virtual ICollection<Check> Checks1 { get; set; }
-        public virtual ICollection<Check> Checks2 { get; set; }
     }
 }

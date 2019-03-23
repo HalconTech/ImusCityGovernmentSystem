@@ -17,7 +17,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<System.DateTime> DateCreated { get; set; }
         public string CheckNo { get; set; }
         public string CheckDescription { get; set; }
-        public string ProjectName { get; set; }
+        public string CompanyName { get; set; }
         public string FundName { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class Disbursement
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Disbursement()
         {
             this.Checks = new HashSet<Check>();
@@ -38,6 +39,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> Signatory2 { get; set; }
         public Nullable<int> Signatory3 { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Check> Checks { get; set; }
         public virtual Department Department { get; set; }
         public virtual Payee Payee { get; set; }

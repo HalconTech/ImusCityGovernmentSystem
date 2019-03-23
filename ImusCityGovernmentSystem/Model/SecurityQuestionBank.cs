@@ -14,6 +14,7 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class SecurityQuestionBank
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SecurityQuestionBank()
         {
             this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
@@ -22,6 +23,7 @@ namespace ImusCityGovernmentSystem.Model
         public int SecurityQuestionID { get; set; }
         public string Question { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
     }
 }

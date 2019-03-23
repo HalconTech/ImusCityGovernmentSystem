@@ -14,6 +14,7 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class SubModule
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SubModule()
         {
             this.SubModuleUsers = new HashSet<SubModuleUser>();
@@ -24,6 +25,7 @@ namespace ImusCityGovernmentSystem.Model
         public string Acronym { get; set; }
         public Nullable<int> ModuleID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
     }
 }

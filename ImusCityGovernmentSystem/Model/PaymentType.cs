@@ -14,6 +14,7 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class PaymentType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PaymentType()
         {
             this.Disbursements = new HashSet<Disbursement>();
@@ -23,6 +24,7 @@ namespace ImusCityGovernmentSystem.Model
         public string Name { get; set; }
         public string PaymentCode { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
     }
 }

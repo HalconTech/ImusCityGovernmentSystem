@@ -54,6 +54,11 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<PayeeRepresentativeView> PayeeRepresentativeViews { get; set; }
     
+        public virtual ObjectResult<GetCheckExpiryNotice_Result> GetCheckExpiryNotice()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckExpiryNotice_Result>("GetCheckExpiryNotice");
+        }
+    
         public virtual ObjectResult<GetCheckRegister_Result> GetCheckRegister(Nullable<System.DateTime> date, Nullable<int> fundID)
         {
             var dateParameter = date.HasValue ?
@@ -74,11 +79,6 @@ namespace ImusCityGovernmentSystem.Model
                 new ObjectParameter("DisbursementID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDisbursementVoucher_Result>("GetDisbursementVoucher", disbursementIDParameter);
-        }
-    
-        public virtual ObjectResult<GetCheckExpiryNotice_Result> GetCheckExpiryNotice()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckExpiryNotice_Result>("GetCheckExpiryNotice");
         }
     }
 }

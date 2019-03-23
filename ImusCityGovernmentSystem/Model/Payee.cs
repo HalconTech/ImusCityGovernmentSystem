@@ -14,6 +14,7 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class Payee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Payee()
         {
             this.Disbursements = new HashSet<Disbursement>();
@@ -28,7 +29,9 @@ namespace ImusCityGovernmentSystem.Model
         public string LandlineNo { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PayeeRepresentative> PayeeRepresentatives { get; set; }
     }
 }

@@ -171,15 +171,30 @@
     <Compile Include="General\EmployeeModule\EmployeeModuleWindow.xaml.cs">
       <DependentUpon>EmployeeModuleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AspNetRole.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AspNetUser.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AspNetUserClaim.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AspNetUserLogin.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AspNetUserRole.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\AuditTrail.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\AuditTrailModel.cs" />
-    <Compile Include="Model\CheckModel.cs" />
-    <Compile Include="Model\CheckRegisterModel.cs" />
-    <Compile Include="Model\Disbursement.cs">
+    <Compile Include="Model\Check.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CheckModel.cs" />
+    <Compile Include="Model\CheckRegisterModel.cs" />
     <Compile Include="General\Department\AddNewDepartmentWindow.xaml.cs">
       <DependentUpon>AddNewDepartmentWindow.xaml</DependentUpon>
     </Compile>
@@ -231,8 +246,29 @@
     <Compile Include="LicenseCodeWindow.xaml.cs">
       <DependentUpon>LicenseCodeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Department.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Disbursement.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\DisbursementVoucherModel.cs" />
+    <Compile Include="Model\Division.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Employee.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeePosition.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\EmployeeRank.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeStatu.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Fund.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetCheckExpiryNotice_Result.cs">
@@ -244,7 +280,34 @@
     <Compile Include="Model\GetDisbursementVoucher_Result.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ImusCityGovernmentData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImusCityGovernmentData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ImusCityGovernmentData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ImusCityGovernmentData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImusCityGovernmentData.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Model\LicensingCode.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Payee.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PayeeRepresentative.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PayeeRepresentativeView.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PaymentType.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ReportParameter.cs">
@@ -487,69 +550,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\AspNetRole.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\AspNetUser.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\AspNetUserClaim.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\AspNetUserLogin.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\AspNetUserRole.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Check.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Department.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Division.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Employee.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\EmployeePosition.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\EmployeeStatu.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Fund.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ImusCityGovernmentData.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ImusCityGovernmentData.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ImusCityGovernmentData.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ImusCityGovernmentData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ImusCityGovernmentData.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Payee.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PayeeRepresentative.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PayeeRepresentativeView.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PaymentType.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -583,10 +583,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\ImusCityGovernmentData.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ImusCityGovernmentData.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="CheckDisbursement\Data\CheckDisbursementDataTable.xsc">
       <DependentUpon>CheckDisbursementDataTable.xsd</DependentUpon>
     </None>
@@ -598,18 +594,12 @@
     <None Include="CheckDisbursement\Data\CheckDisbursementDataTable.xss">
       <DependentUpon>CheckDisbursementDataTable.xsd</DependentUpon>
     </None>
-    <None Include="Model\ImusCityGovernmentData.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ImusCityGovernmentData.edmx</DependentUpon>
-      <LastGenOutput>ImusCityGovernmentData.Context.cs</LastGenOutput>
-    </None>
+    <EntityDeploy Include="Model\ImusCityGovernmentData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ImusCityGovernmentData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="Model\ImusCityGovernmentData.edmx.diagram">
       <DependentUpon>ImusCityGovernmentData.edmx</DependentUpon>
-    </None>
-    <None Include="Model\ImusCityGovernmentData.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ImusCityGovernmentData.edmx</DependentUpon>
-      <LastGenOutput>ImusCityGovernmentData.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -654,6 +644,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Validation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\ImusCityGovernmentData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ImusCityGovernmentData.edmx</DependentUpon>
+      <LastGenOutput>ImusCityGovernmentData.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\ImusCityGovernmentData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ImusCityGovernmentData.edmx</DependentUpon>
+      <LastGenOutput>ImusCityGovernmentData.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
