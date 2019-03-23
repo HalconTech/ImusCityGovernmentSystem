@@ -100,7 +100,16 @@ namespace ImusCityGovernmentSystem
                 CheckModel check = new CheckModel();
                 ImusCityGovernmentSystem.Model.Check checklist = db.Checks.Find(id);
                 check.CheckNo = checklist.CheckNo;
-
+                check.CheckDate = checklist.DateCreated.Value;
+                check.CompanyName = checklist.Disbursement.Payee.CompanyName;
+                CurrencyToWords convert = new CurrencyToWords();
+                double amount = Convert.ToDouble(checklist.Amount.Value);
+                check.AmountInWords = convert.NumberToWords(amount).ToUpper();
+                check.CheckDescription = checklist.CheckDescription;
+                check.Signatory1 = GetSignatory(checklist.Signatory1);
+                check.Signatory2 = GetSignatory(checklist.Signatory2);
+                check.VoucherNo = checklist.Disbursement.VoucherNo;
+                check.Amount = checklist.Amount.Value;
                 ReportDocument report;
                 report = new CheckReport();
                 report.SetDataSource(new[] { check });
@@ -111,6 +120,15 @@ namespace ImusCityGovernmentSystem
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+        }
+
+        public string GetSignatory(int? id)
+        {
+            string result = "";
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            ImusCityGovernmentSystem.Model.Employee employee = db.Employees.Find(id);
+            result = employee.FirstName + " " + employee.MiddleName + " " + employee.LastName;
+            return result;
         }
     }
 }
