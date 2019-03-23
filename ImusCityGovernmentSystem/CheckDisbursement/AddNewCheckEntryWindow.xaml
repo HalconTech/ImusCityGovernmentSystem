@@ -23,6 +23,7 @@
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
                  
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -35,8 +36,10 @@
                 <TextBox Grid.Column="1" Grid.Row="1" Name="payeetb" VerticalContentAlignment="Center" IsReadOnly="True" Margin="0,5,0,0"></TextBox>
                 <TextBlock Grid.Row="2" Text="Description" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
                 <TextBox Grid.Row="3" Grid.ColumnSpan="2" TextWrapping="Wrap" Name="descriptiontb" Margin="0,0,0,5"></TextBox>
-                <TextBlock Text="Payment Type" Grid.Row="4" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
-                <TextBox Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" Name="paymenttypetb" IsReadOnly="True"></TextBox>
+                <TextBlock Text="Amount" Grid.Row="4" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+                <TextBox Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" Name="voucheramounttb"  IsReadOnly="True"></TextBox>
+                <TextBlock Text="Payment Type" Grid.Row="5" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+                <TextBox Grid.Row="5" Grid.Column="1" VerticalContentAlignment="Center" Name="paymenttypetb" IsReadOnly="True" Margin="0,5,0,0"></TextBox>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Check Information" Margin="5,0,0,0">

@@ -36,6 +36,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 payeetb.Text = disbursement.Payee.CompanyName;
                 descriptiontb.Text = disbursement.Description;
                 paymenttypetb.Text = disbursement.PaymentType.Name;
+                voucheramounttb.Text = String.Format("{0:0.##}", disbursement.Amount);
                 fundcb.ItemsSource = db.Funds.OrderBy(m => m.FundName).ToList();
                 fundcb.DisplayMemberPath = "FundCode";
                 fundcb.SelectedValuePath = "FundID";
