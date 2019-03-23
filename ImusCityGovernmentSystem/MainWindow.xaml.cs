@@ -28,7 +28,9 @@ namespace ImusCityGovernmentSystem
             InitializeComponent();
             Employee employee = db.Employees.Find(App.EmployeeID);
             empname.Content = "Welcome! " + employee.FirstName + " " + employee.LastName;
+
             
+            bdgNotif.Badge = 3;
         }
 
         private void empmgntbtn_Click(object sender, RoutedEventArgs e)
@@ -167,6 +169,11 @@ namespace ImusCityGovernmentSystem
             UserAccess access = new UserAccess();
             Mouse.OverrideCursor = null;
             access.ShowDialog();
+        }
+
+        private void btnNotif_Click(object sender, RoutedEventArgs e)
+        {
+            flyoutNotif.IsOpen = true;
         }
     }
 }
