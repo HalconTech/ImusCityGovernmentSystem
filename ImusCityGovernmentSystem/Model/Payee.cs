@@ -16,8 +16,8 @@ namespace ImusCityGovernmentSystem.Model
     {
         public Payee()
         {
-            this.PayeeRepresentatives = new HashSet<PayeeRepresentative>();
             this.Disbursements = new HashSet<Disbursement>();
+            this.PayeeRepresentatives = new HashSet<PayeeRepresentative>();
         }
     
         public int PayeeID { get; set; }
@@ -26,8 +26,9 @@ namespace ImusCityGovernmentSystem.Model
         public string CompanyAddress { get; set; }
         public string TIN { get; set; }
         public string LandlineNo { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
-        public virtual ICollection<PayeeRepresentative> PayeeRepresentatives { get; set; }
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        public virtual ICollection<PayeeRepresentative> PayeeRepresentatives { get; set; }
     }
 }

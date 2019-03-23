@@ -95,6 +95,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
 
                     SystemClass.InsertLog(audit);
                     MessageBox.Show("Check created successfully!");
+                    PrintReport(check.CheckID);
 
                     checknotb.Clear();
                     checkdesctb.Clear();
@@ -109,6 +110,15 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             }
         }
 
+        void PrintReport(int id)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            ReportWindow report = new ReportWindow();
+            report.id = id;
+            App.ReportID = 2;
+            report.Show();
+            Mouse.OverrideCursor = null;
+        }
         private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             checkdesctb.Text = descriptiontb.Text;

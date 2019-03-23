@@ -56,7 +56,7 @@ namespace ImusCityGovernmentSystem.General.Fund
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).ToList();
+                fundlb.ItemsSource = db.Funds.Where(m => m.IsActive == true).OrderByDescending(m => m.FundID).ToList();
                 fundlb.DisplayMemberPath = "FundName";
                 fundlb.SelectedValuePath = "FundID";
             }
@@ -88,7 +88,7 @@ namespace ImusCityGovernmentSystem.General.Fund
                 }
 
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).Where(m => m.FundName.Contains(searchtb.Text)).ToList();
+                fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).Where(m => m.FundName.Contains(searchtb.Text) && m.IsActive == true).ToList();
                 fundlb.DisplayMemberPath = "FundName";
                 fundlb.SelectedValuePath = "FundID";
             }
@@ -116,7 +116,7 @@ namespace ImusCityGovernmentSystem.General.Fund
                     Mouse.OverrideCursor = null;
                     edit.ShowDialog();
                     db = new ImusCityHallEntities();
-                    fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).OrderBy(m => m.FundName).ToList();
+                    fundlb.ItemsSource = db.Funds.Where(m => m.IsActive == true).OrderByDescending(m => m.FundID).ToList();
                     fundlb.DisplayMemberPath = "FundName";
                     fundlb.SelectedValuePath = "FundID";
                 }
@@ -141,7 +141,7 @@ namespace ImusCityGovernmentSystem.General.Fund
                 Mouse.OverrideCursor = null;
                 add.ShowDialog();
                 db = new ImusCityHallEntities();
-                fundlb.ItemsSource = db.Funds.OrderByDescending(m => m.FundID).OrderBy(m => m.FundName).ToList();
+                fundlb.ItemsSource = db.Funds.Where(m => m.IsActive == true).OrderByDescending(m => m.FundID).ToList();
                 fundlb.DisplayMemberPath = "FundName";
                 fundlb.SelectedValuePath = "FundID";
             }
@@ -151,6 +151,41 @@ namespace ImusCityGovernmentSystem.General.Fund
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
             Mouse.OverrideCursor = null;
+        }
+
+        private void deletebtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                if(fundlb.SelectedValue != null)
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    int id = (int)fundlb.SelectedValue;
+                    ImusCityGovernmentSystem.Model.Fund fund = db.Funds.Find(id);
+                    fund.IsActive = false;
+                    db.SaveChanges();
+                    db = new ImusCityHallEntities();
+                    fundlb.ItemsSource = db.Funds.Where(m => m.IsActive == true).OrderByDescending(m => m.FundID).ToList();
+                    fundlb.DisplayMemberPath = "FundName";
+                    fundlb.SelectedValuePath = "FundID";
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Deleted item in the fund list. FUND ID: " + id.ToString(),
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+                    SystemClass.InsertLog(audit);
+                }
+                else
+                {
+                    MessageBox.Show("Please select an item");
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
         }
     }
 }

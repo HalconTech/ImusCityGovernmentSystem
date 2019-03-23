@@ -22,6 +22,7 @@ namespace ImusCityGovernmentSystem.Model
         public int DivisionID { get; set; }
         public string DivisionName { get; set; }
         public string DivisionCode { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         public virtual ICollection<Department> Departments { get; set; }
     }

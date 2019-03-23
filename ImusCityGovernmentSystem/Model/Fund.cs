@@ -19,5 +19,6 @@ namespace ImusCityGovernmentSystem.Model
         public string FundCode { get; set; }
         public string Branch { get; set; }
         public string AccountNumber { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

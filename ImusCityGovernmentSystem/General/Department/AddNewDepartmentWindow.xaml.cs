@@ -52,6 +52,7 @@ namespace ImusCityGovernmentSystem.General.Department
                             d.DepartmentCode = txtCode.Text;
                             d.DepartmentName = txtName.Text;
                             d.DivisionID = Convert.ToInt32(cbDivision.SelectedValue);
+                            d.IsActive = true;
                             db.Departments.Add(d);
                             db.SaveChanges();
 

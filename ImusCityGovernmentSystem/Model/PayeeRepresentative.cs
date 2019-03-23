@@ -28,7 +28,7 @@ namespace ImusCityGovernmentSystem.Model
         public string Landline { get; set; }
         public string EmployeeNo { get; set; }
     
-        public virtual Payee Payee { get; set; }
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        public virtual Payee Payee { get; set; }
     }
 }

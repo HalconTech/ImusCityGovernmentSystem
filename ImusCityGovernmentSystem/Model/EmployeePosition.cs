@@ -25,7 +25,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<bool> Active { get; set; }
         public string EmployeePositionName { get; set; }
     
-        public virtual EmployeeRank EmployeeRank { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
+        public virtual EmployeeRank EmployeeRank { get; set; }
     }
 }

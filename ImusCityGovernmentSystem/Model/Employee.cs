@@ -17,10 +17,12 @@ namespace ImusCityGovernmentSystem.Model
         public Employee()
         {
             this.Checks = new HashSet<Check>();
-            this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
+            this.Checks1 = new HashSet<Check>();
+            this.Checks2 = new HashSet<Check>();
             this.Disbursements = new HashSet<Disbursement>();
             this.Disbursements1 = new HashSet<Disbursement>();
             this.Disbursements2 = new HashSet<Disbursement>();
+            this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
             this.SubModuleUsers = new HashSet<SubModuleUser>();
         }
     
@@ -80,14 +82,16 @@ namespace ImusCityGovernmentSystem.Model
         public string NameSuffix { get; set; }
         public string BankAccountNo { get; set; }
     
-        public virtual Department Department { get; set; }
-        public virtual EmployeePosition EmployeePosition { get; set; }
-        public virtual EmployeeStatu EmployeeStatu { get; set; }
         public virtual ICollection<Check> Checks { get; set; }
-        public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
+        public virtual ICollection<Check> Checks1 { get; set; }
+        public virtual ICollection<Check> Checks2 { get; set; }
+        public virtual Department Department { get; set; }
         public virtual ICollection<Disbursement> Disbursements { get; set; }
         public virtual ICollection<Disbursement> Disbursements1 { get; set; }
         public virtual ICollection<Disbursement> Disbursements2 { get; set; }
+        public virtual EmployeePosition EmployeePosition { get; set; }
+        public virtual EmployeeStatu EmployeeStatu { get; set; }
+        public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
         public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
     }
 }

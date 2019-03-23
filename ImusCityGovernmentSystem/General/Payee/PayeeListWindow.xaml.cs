@@ -31,7 +31,7 @@ namespace ImusCityGovernmentSystem.General.Payee
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                payeelb.ItemsSource = db.Payees.OrderByDescending(m => m.PayeeID).ToList();
+                payeelb.ItemsSource = db.Payees.Where(m => m.IsActive == true).OrderByDescending(m => m.PayeeID).ToList();
                 payeelb.DisplayMemberPath = "CompanyName";
                 payeelb.SelectedValuePath = "PayeeID";
             }
@@ -62,7 +62,7 @@ namespace ImusCityGovernmentSystem.General.Payee
                     SystemClass.InsertLog(audit);
                 }
 
-                payeelb.ItemsSource = db.Payees.Where(m => m.CompanyName.Contains(searchtb.Text)).OrderByDescending(m => m.PayeeID).ToList();
+                payeelb.ItemsSource = db.Payees.Where(m => m.CompanyName.Contains(searchtb.Text) && m.IsActive == true).OrderByDescending(m => m.PayeeID).ToList();
                 payeelb.DisplayMemberPath = "CompanyName";
                 payeelb.SelectedValuePath = "PayeeID";
             }
@@ -106,7 +106,7 @@ namespace ImusCityGovernmentSystem.General.Payee
                 Mouse.OverrideCursor = null;
                 add.ShowDialog();
                 db = new ImusCityHallEntities();
-                payeelb.ItemsSource = db.Payees.OrderByDescending(m => m.PayeeID).ToList();
+                payeelb.ItemsSource = db.Payees.Where(m => m.IsActive == true).OrderByDescending(m => m.PayeeID).ToList();
                 payeelb.DisplayMemberPath = "CompanyName";
                 payeelb.SelectedValuePath = "PayeeID";
             }
@@ -136,7 +136,7 @@ namespace ImusCityGovernmentSystem.General.Payee
                     Mouse.OverrideCursor = null;
                     edit.ShowDialog();
                     db = new ImusCityHallEntities();
-                    payeelb.ItemsSource = db.Payees.OrderByDescending(m => m.PayeeID).ToList();
+                    payeelb.ItemsSource = db.Payees.Where(m => m.IsActive == true).OrderByDescending(m => m.PayeeID).ToList();
                     payeelb.DisplayMemberPath = "CompanyName";
                     payeelb.SelectedValuePath = "PayeeID";
                 }
@@ -147,6 +147,42 @@ namespace ImusCityGovernmentSystem.General.Payee
                 Mouse.OverrideCursor = null;
             }
             Mouse.OverrideCursor = null;
+        }
+
+        private void deletebtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(SystemClass.CheckConnection())
+            {
+                if (payeelb.SelectedValue != null)
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    int id = (int)payeelb.SelectedValue;
+                    ImusCityGovernmentSystem.Model.Payee payee = db.Payees.Find(id);
+                    payee.IsActive = false;
+                    db.SaveChanges();
+                    db = new ImusCityHallEntities();
+                    payeelb.ItemsSource = db.Payees.Where(m => m.IsActive == true).OrderByDescending(m => m.PayeeID).ToList();
+                    payeelb.DisplayMemberPath = "CompanyName";
+                    payeelb.SelectedValuePath = "PayeeID";
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Deleted item in the payee list. PAYEE ID: " + id.ToString(),
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+                    SystemClass.InsertLog(audit);
+
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
         }
     }
 }

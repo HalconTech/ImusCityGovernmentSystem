@@ -32,27 +32,27 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<AuditTrail> AuditTrails { get; set; }
         public virtual DbSet<Check> Checks { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Disbursement> Disbursements { get; set; }
         public virtual DbSet<Division> Divisions { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeePosition> EmployeePositions { get; set; }
         public virtual DbSet<EmployeeRank> EmployeeRanks { get; set; }
         public virtual DbSet<EmployeeStatu> EmployeeStatus { get; set; }
         public virtual DbSet<Fund> Funds { get; set; }
+        public virtual DbSet<LicensingCode> LicensingCodes { get; set; }
         public virtual DbSet<Payee> Payees { get; set; }
         public virtual DbSet<PayeeRepresentative> PayeeRepresentatives { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<PayeeRepresentativeView> PayeeRepresentativeViews { get; set; }
-        public virtual DbSet<LicensingCode> LicensingCodes { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Disbursement> Disbursements { get; set; }
-        public virtual DbSet<AuditTrail> AuditTrails { get; set; }
         public virtual DbSet<ReportParameter> ReportParameters { get; set; }
         public virtual DbSet<SecurityQuestionBank> SecurityQuestionBanks { get; set; }
         public virtual DbSet<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
         public virtual DbSet<SubModule> SubModules { get; set; }
         public virtual DbSet<SubModuleUser> SubModuleUsers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<PayeeRepresentativeView> PayeeRepresentativeViews { get; set; }
     
         public virtual ObjectResult<GetCheckRegister_Result> GetCheckRegister(Nullable<System.DateTime> date, Nullable<int> fundID)
         {
