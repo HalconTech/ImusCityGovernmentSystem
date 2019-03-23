@@ -84,6 +84,14 @@ namespace ImusCityGovernmentSystem
                                 {
                                     ChangePasswordWindow cp = new ChangePasswordWindow();
                                     cp.Show();
+                                    var audit = new AuditTrailModel
+                                    {
+                                        Activity = "User answer a security question for Forgot Password.",
+                                        ModuleName = this.GetType().Name,
+                                        EmployeeID = App.EmployeeID
+                                    };
+
+                                    SystemClass.InsertLog(audit);
                                     this.Close();
                                 }
                                 else

@@ -231,7 +231,8 @@ namespace ImusCityGovernmentSystem
             if (Rememberme.IsChecked == false)
             {
                 IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
-                isolatedStorage.DeleteFile("login");
+                if(isolatedStorage.FileExists("login"))
+                    isolatedStorage.DeleteFile("login");
             }
         }
         private void Label_PreviewMouseDown(object sender, MouseButtonEventArgs e)

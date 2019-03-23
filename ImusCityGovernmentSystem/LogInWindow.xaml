@@ -49,7 +49,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>                  
                 </Grid.ColumnDefinitions>
-                <Button  x:Name="loginbtn" Grid.Column="1" Content="Sign-In" Click="loginbtn_Click"></Button>
+                <Button  x:Name="loginbtn" Grid.Column="1" Content="Sign-In" Click="loginbtn_Click" HorizontalAlignment="Left" Width="131"></Button>
             </Grid>       
         </Grid>
     </Grid>
