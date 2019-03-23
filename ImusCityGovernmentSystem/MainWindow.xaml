@@ -246,7 +246,7 @@
                     <ListView.ItemTemplate> 
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" Margin="5">
-                                <TextBlock Text="{Binding ProjectName}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding CompanyName}" FontWeight="Bold" />
                                 <TextBlock>
                                     <Run Text="{Binding FundName}"/>
                                     <Run Text=" - "/>
