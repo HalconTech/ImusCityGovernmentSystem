@@ -52,6 +52,7 @@ namespace ImusCityGovernmentSystem.General.Fund
                     fund.FundName = fundnametb.Text;
                     fund.AccountNumber = accountnotb.Text;
                     fund.Branch = branchtb.Text;
+                    fund.IsActive = true;
                     db.Funds.Add(fund);
                     db.SaveChanges();
                     Mouse.OverrideCursor = null;

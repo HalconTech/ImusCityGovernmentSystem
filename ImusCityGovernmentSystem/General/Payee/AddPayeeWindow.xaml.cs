@@ -109,6 +109,7 @@ namespace ImusCityGovernmentSystem.General.Payee
                         payee.CompanyAddress = companyaddresstb.Text;
                         payee.TIN = tinnotb.Text;
                         payee.LandlineNo = contactnotb.Text;
+                        payee.IsActive = true;
                         db.Payees.Add(payee);
                         db.SaveChanges();
 

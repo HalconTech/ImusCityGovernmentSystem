@@ -48,6 +48,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         checklistdg.ItemsSource = db.Checks.Where(m => m.CheckNo.Contains(searchkey)).OrderByDescending(m => m.CheckID).ToList();
                         checklistdg.SelectedValuePath = "CheckID";
                     }
+                    else if(allrb.IsChecked == true)
+                    {
+                        LoadItems();
+                    }
                 }
                 else
                 {
@@ -91,6 +95,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             {
                 GetSearched(searchkeytb.Text);
             }
+        }
+
+        private void allrb_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadItems();
         }
     }
 }

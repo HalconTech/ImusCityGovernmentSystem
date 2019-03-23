@@ -16,9 +16,10 @@
         </Grid.ColumnDefinitions>
         <TextBox VerticalContentAlignment="Center" Name="searchkeytb" Margin="0,0,5,0" Controls:TextBoxHelper.Watermark="Search" KeyDown="searchkeytb_KeyDown" ></TextBox>
         <Button x:Name="searchbtn" Grid.Column="1" Content="Search" Click="searchbtn_Click"></Button>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -27,8 +28,9 @@
             <RadioButton Name="payeerb" Grid.Column="1" Content="Payee"></RadioButton>
             <RadioButton Name="descrb" Grid.Column="2" Content="Description"></RadioButton>
             <RadioButton Name="checknorb" Content="Check No." Grid.Column="3"></RadioButton>
+            <RadioButton Name="allrb" Content="All" Grid.Column="4" Checked="allrb_Checked"></RadioButton>
         </Grid>
-        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" Name="checklistdg" Grid.Row="2" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" GridLinesVisibility="All">
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" Name="checklistdg" Grid.Row="2" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" GridLinesVisibility="All">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Check No." Binding="{Binding CheckNo}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Voucher" Binding="{Binding Disbursement.VoucherNo}"></DataGridTextColumn>

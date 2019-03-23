@@ -16,6 +16,8 @@ using ImusCityGovernmentSystem.Model;
 using System.Data.Entity.Validation;
 using Microsoft.Win32;
 using System.IO;
+using System.Text.RegularExpressions;
+
 namespace ImusCityGovernmentSystem.General.EmployeeModule
 {
     /// <summary>
@@ -32,6 +34,11 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
 
         }
 
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
         //Insertion of new employee information
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
@@ -214,7 +221,6 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                                 aspuser.PasswordHash = passwordHasher.HashPassword("imuscitygov");
                                 var adduser = db.AspNetUsers.Add(aspuser);
                                 asproleuser.UserId = adduser.Id;
-                                asproleuser.RoleId = roleid;
                                 db.AspNetUserRoles.Add(asproleuser);
                             }
                         }
@@ -290,7 +296,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             if(SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentCode).ToList();
+                departmentcb.ItemsSource = db.Departments.Where(m => m.IsActive == true).OrderBy(m => m.DepartmentCode).ToList();
                 departmentcb.DisplayMemberPath = "DepartmentCode";
                 departmentcb.SelectedValuePath = "DepartmentID";
                 departmentcb.SelectedIndex = 0;

@@ -31,7 +31,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                payeecb.ItemsSource = db.Payees.OrderBy(m => m.CompanyName).ToList();
+                payeecb.ItemsSource = db.Payees.Where(m => m.IsActive == true).OrderBy(m => m.CompanyName).ToList();
                 payeecb.DisplayMemberPath = "CompanyName";
                 payeecb.SelectedValuePath = "PayeeID";
 

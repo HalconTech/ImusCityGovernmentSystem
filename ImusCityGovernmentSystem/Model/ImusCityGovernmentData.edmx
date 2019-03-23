@@ -319,6 +319,14 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="UserAccountID" />
+          </Key>
+          <Property Name="UserAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nchar" MaxLength="10" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PayeeRepresentativeView">
@@ -671,6 +679,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="SubModule" EntityType="Self.SubModule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubModuleUser" EntityType="Self.SubModuleUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PayeeRepresentativeView" EntityType="Self.PayeeRepresentativeView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PayeeRepresentativeView].[PayeeRepID] AS [PayeeRepID], 
@@ -1596,8 +1605,9 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <Parameter Name="FundID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetDisbursementVoucher" ReturnType="Collection(ImusCityHallModel.GetDisbursementVoucher_Result)">
-            <Parameter Name="DisbursementID" Mode="In" Type="Int32" />
+          <Parameter Name="DisbursementID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="UserAccounts" EntityType="ImusCityHallModel.UserAccount" />
         </EntityContainer>
         <ComplexType Name="GetCheckExpiryNotice_Result">
           <Property Type="String" Name="GroupName" Nullable="false" MaxLength="32" />
@@ -1637,6 +1647,14 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="Signatory2" Nullable="true" MaxLength="101" />
           <Property Type="String" Name="Signatory3" Nullable="true" MaxLength="101" />
         </ComplexType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="UserAccountID" />
+          </Key>
+          <Property Name="UserAccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2038,6 +2056,15 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UserAccounts">
+            <EntityTypeMapping TypeName="ImusCityHallModel.UserAccount">
+              <MappingFragment StoreEntitySet="UserAccount">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserAccountID" ColumnName="UserAccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -172,15 +172,15 @@
                             <ComboBoxItem>Divorced</ComboBoxItem>
                         </ComboBox>
                         <TextBlock Text="Religion" FontWeight="Bold" Grid.Column="3" Grid.Row="4" Margin="5,0,0,0"></TextBlock>
-                        <TextBox Name="religiontb" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="3" Margin="5,0,0,0"></TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" Name="religiontb" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="3" Margin="5,0,0,0"></TextBox>
                         <TextBlock Grid.Row="6" Text="TIN No."  FontWeight="Bold"></TextBlock>
-                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="7" Name="tinnotb"></TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="12" Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="7" Name="tinnotb"></TextBox>
                         <TextBlock Grid.Row="8" Text="PAG-IBIG No."  FontWeight="Bold"></TextBlock>
-                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="9" Name="pagibignotb"></TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="12" Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="9" Name="pagibignotb"></TextBox>
                         <TextBlock Grid.Row="10" Text="SSS No."  FontWeight="Bold"></TextBlock>
-                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="11" Name="sssnotb"></TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="10" Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="11" Name="sssnotb"></TextBox>
                         <TextBlock Grid.Row="12" Text="PhilHealth No."  FontWeight="Bold"></TextBlock>
-                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="13" Name="philhealthnotb"></TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="12"  Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="13" Name="philhealthnotb"></TextBox>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Contact Information">

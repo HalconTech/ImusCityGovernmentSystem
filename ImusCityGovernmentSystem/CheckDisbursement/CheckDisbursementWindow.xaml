@@ -15,7 +15,7 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Modules" FontSize="18"></TextBlock>
+        <TextBlock Text="Menu" FontSize="18"></TextBlock>
         <WrapPanel Grid.Row="1" >
             <Controls:Tile x:Name="disbursementlistbtn" Background="#CC0050EF"    Title="Disbursement List" TitleFontSize="12" Click="disbursementlistbtn_Click" >
                 <Rectangle Fill="White" Height="50" Width="50">

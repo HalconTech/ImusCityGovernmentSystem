@@ -56,6 +56,7 @@
         <AssociationConnector Association="ImusCityHallModel.FK_PayeeRepresentative_Payee" ManuallyRouted="false" />
         <AssociationConnector Association="ImusCityHallModel.FK_SecurityQuestionUser_SecurityQuestionBank" ManuallyRouted="false" />
         <AssociationConnector Association="ImusCityHallModel.FK_SubModuleUser_SubModule" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ImusCityHallModel.UserAccount" Width="1.5" PointX="13.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

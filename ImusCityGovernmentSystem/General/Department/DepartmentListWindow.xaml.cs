@@ -74,7 +74,7 @@ namespace ImusCityGovernmentSystem.General.Department
                     DList = new List<DepartmentList>();
                     using (var db = new ImusCityHallEntities())
                     {
-                        var get = db.Departments.Where(m => m.DepartmentName.Contains(searchkey) || m.DepartmentCode.Contains(searchkey) && m.IsActive == true).OrderBy(m => m.DepartmentName).ToList();
+                        var get = db.Departments.Where(m => (m.DepartmentName.Contains(searchkey) || m.DepartmentCode.Contains(searchkey)) && m.IsActive == true).OrderBy(m => m.DepartmentName).ToList();
 
                         foreach (var item in get)
                         {

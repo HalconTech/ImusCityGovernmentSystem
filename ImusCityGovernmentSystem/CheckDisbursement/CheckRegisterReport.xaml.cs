@@ -34,6 +34,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 var fund = from p in db.Funds
+                           where p.IsActive == true
                            select new
                            {
                                FundID = p.FundID,

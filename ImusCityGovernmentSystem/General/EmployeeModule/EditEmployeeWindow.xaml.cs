@@ -32,11 +32,11 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             if(SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentCode).ToList();
+                departmentcb.ItemsSource = db.Departments.Where(m => m.IsActive == true).OrderBy(m => m.DepartmentCode).ToList();
                 departmentcb.DisplayMemberPath = "DepartmentCode";
                 departmentcb.SelectedValuePath = "DepartmentID";
 
-                positioncb.ItemsSource = db.EmployeePositions.Where(m => m.Active == false).OrderBy(m => m.EmployeePositionName).ToList();
+                positioncb.ItemsSource = db.EmployeePositions.Where(m => m.Active == true).OrderBy(m => m.EmployeePositionName).ToList();
                 positioncb.DisplayMemberPath = "EmployeePositionName";
                 positioncb.SelectedValuePath = "EmployeePositionID";
 

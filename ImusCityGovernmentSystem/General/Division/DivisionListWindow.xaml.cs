@@ -165,7 +165,7 @@ namespace ImusCityGovernmentSystem.General.Division
                     DList = new List<DivisionList>();
                     using (var db = new ImusCityHallEntities())
                     {
-                        var get = db.Divisions.Where(m => m.IsActive == true && m.DivisionName.Contains(searchkey) || m.DivisionCode.Contains(searchkey)).OrderBy(m => m.DivisionName).ToList();
+                        var get = db.Divisions.Where(m => m.IsActive == true && (m.DivisionName.Contains(searchkey) || m.DivisionCode.Contains(searchkey))).OrderBy(m => m.DivisionName).ToList();
 
                         foreach (var item in get)
                         {

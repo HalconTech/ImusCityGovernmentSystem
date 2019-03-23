@@ -26,11 +26,16 @@ namespace ImusCityGovernmentSystem
         public MainWindow()
         {
             InitializeComponent();
-            Employee employee = db.Employees.Find(App.EmployeeID);
-            empname.Content = "Welcome! " + employee.FirstName + " " + employee.LastName;
+
+            if (App.ByPass != true)
+            {
+                Employee employee = db.Employees.Find(App.EmployeeID);
+                empname.Content = "Welcome! " + employee.FirstName + " " + employee.LastName;
+            }
+
             var notif = db.GetCheckExpiryNotice().ToList();
 
-            if(notif.Count != 0)
+            if (notif.Count != 0)
             {
                 bdgNotif.Badge = notif.Count;
                 btnNotif.Visibility = Visibility.Visible;
@@ -41,8 +46,8 @@ namespace ImusCityGovernmentSystem
                 view.GroupDescriptions.Add(groupDescription);
             }
 
-            
-           
+
+
 
         }
 
@@ -59,7 +64,7 @@ namespace ImusCityGovernmentSystem
             LogInWindow lw = new LogInWindow();
             lw.Show();
             this.Close();
-           
+
         }
 
         private void payeebtn_Click(object sender, RoutedEventArgs e)
@@ -68,7 +73,7 @@ namespace ImusCityGovernmentSystem
             General.Payee.PayeeListWindow payee = new General.Payee.PayeeListWindow();
             Mouse.OverrideCursor = null;
             payee.ShowDialog();
-          
+
         }
 
         private void fundbtn_Click(object sender, RoutedEventArgs e)
@@ -84,7 +89,7 @@ namespace ImusCityGovernmentSystem
             Mouse.OverrideCursor = Cursors.Wait;
             ImusCityGovernmentSystem.Check_Disbursement.CheckDisbursementWindow check = new Check_Disbursement.CheckDisbursementWindow();
             Mouse.OverrideCursor = null;
-            check.ShowDialog();         
+            check.ShowDialog();
         }
 
         private void departmentbtn_Click(object sender, RoutedEventArgs e)
@@ -129,22 +134,22 @@ namespace ImusCityGovernmentSystem
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-           if(db.LicensingCodes.Find(App.LicenseKey).IsDemo == true)
-           {
-               demotb.Visibility = Visibility.Visible;
-           }
+            if (db.LicensingCodes.Find(App.LicenseKey).IsDemo == true)
+            {
+                demotb.Visibility = Visibility.Visible;
+            }
             CheckUserAccess();
         }
 
         public void CheckUserAccess()
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                IEnumerable<SubModuleUser> submodule = db.SubModuleUsers.Where(m => m.EmployeeID == App.EmployeeID);                
-                if(submodule.Count() >= 1)
+                IEnumerable<SubModuleUser> submodule = db.SubModuleUsers.Where(m => m.EmployeeID == App.EmployeeID);
+                if (submodule.Count() >= 1)
                 {
-                    foreach(var module in submodule)
+                    foreach (var module in submodule)
                     {
                         CDS.IsEnabled = module.SubModule.Acronym == CDS.Name ? true : false;
                     }

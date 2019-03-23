@@ -328,6 +328,9 @@
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\UserAccount.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>

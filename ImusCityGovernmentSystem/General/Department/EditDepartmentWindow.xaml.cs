@@ -83,7 +83,7 @@ namespace ImusCityGovernmentSystem.General.Department
                 {
                     using (var db = new ImusCityHallEntities())
                     {
-                        cbDivision.ItemsSource = db.Divisions.OrderBy(m => m.DivisionName).ToList();
+                        cbDivision.ItemsSource = db.Divisions.Where(m => m.IsActive == true).OrderBy(m => m.DivisionName).ToList();
                         cbDivision.DisplayMemberPath = "DivisionCode";
                         cbDivision.SelectedValuePath = "DivisionID";
                         var find = db.Departments.Find(DepartmentID);
