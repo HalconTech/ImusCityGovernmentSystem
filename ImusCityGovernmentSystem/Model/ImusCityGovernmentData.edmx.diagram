@@ -50,6 +50,10 @@
         <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_Signatory" />
         <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_Signatory2" />
         <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_Signatory3" />
+        <EntityTypeShape EntityType="ImusCityHallModel.SubModule" Width="1.5" PointX="13" PointY="15.25" />
+        <EntityTypeShape EntityType="ImusCityHallModel.SubModuleUser" Width="1.5" PointX="15.25" PointY="12.25" />
+        <AssociationConnector Association="ImusCityHallModel.FK_SubModuleUser_Employee" />
+        <AssociationConnector Association="ImusCityHallModel.FK_SubModuleUser_SubModule" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

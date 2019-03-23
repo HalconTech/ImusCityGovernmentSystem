@@ -246,6 +246,12 @@
     <Compile Include="Model\SecurityQuestionUser.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SubModule.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SubModuleUser.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
@@ -256,6 +262,9 @@
       <DependentUpon>SecurityQuestion.xaml</DependentUpon>
     </Compile>
     <Compile Include="SystemClass.cs" />
+    <Compile Include="UserAccess.xaml.cs">
+      <DependentUpon>UserAccess.xaml</DependentUpon>
+    </Compile>
     <Page Include="ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -459,6 +468,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SecurityQuestion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserAccess.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

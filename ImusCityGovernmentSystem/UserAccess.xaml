@@ -1,0 +1,55 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.UserAccess"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="User Access"            
+                      TitleCaps="False"
+                      BorderThickness="1"
+                      WindowStartupLocation="CenterScreen"
+                      Height="380.72"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      Width="641.99" Loaded="MetroWindow_Loaded" >
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Select Employee:"></TextBlock>
+        <ComboBox Grid.Row="1" Name="employeecb" SelectionChanged="employeecb_SelectionChanged"></ComboBox>
+        <TextBlock Text="List of Modules" Grid.Row="2" VerticalAlignment="Bottom"></TextBlock>
+        <ListBox Grid.Row="3" BorderBrush="Black" BorderThickness="1" Name="moduleslb" Margin="0,0,5,0"></ListBox>
+        <Grid Grid.Column="1" Grid.Row="4" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Name="removebtn" Margin="0,0,0,5" Click="removebtn_Click">
+                <StackPanel Orientation="Horizontal">
+
+                    <iconPacks:PackIconModern Width="17" Height="17" Kind="ArrowLeft" />
+                    
+                </StackPanel>
+            </Button>
+            <Button Name="addbtn" Margin="0,0,0,5" Grid.Row="1" Click="addbtn_Click">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconModern Width="17" Height="17" Kind="ArrowRight" />
+                    <TextBlock Margin="5 0 0 0" VerticalAlignment="Center"  />
+                </StackPanel>
+            </Button>
+        </Grid>
+        <TextBlock Text="List of Assigned Modules" Grid.Row="2" Grid.Column="2"></TextBlock>
+        <ListBox Grid.Column="2" BorderThickness="1" BorderBrush="Black"  Grid.Row="4" Margin="5,0,0,0" Name="assignedmodulelb"></ListBox>
+    </Grid>
+      
+    </Controls:MetroWindow>
