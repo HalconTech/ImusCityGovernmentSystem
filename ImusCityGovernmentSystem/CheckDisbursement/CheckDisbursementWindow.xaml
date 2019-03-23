@@ -63,7 +63,7 @@
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>
-            <Controls:Tile  Background="#CC0050EF"    Title="Accountant's Advice of Local Check Disbursement" TitleFontSize="10" Click="checkregisterbtn_Click" >
+            <Controls:Tile x:Name="accountantreportbtn"  Background="#CC0050EF"    Title="Accountant's Advice of Local Check Disbursement" TitleFontSize="10" Click="accountantreportbtn_Click" >
                 <Rectangle Fill="White" Height="50" Width="50">
                     <Rectangle.OpacityMask>
                         <VisualBrush Visual="{StaticResource appbar_list_two}" Stretch="Fill" />

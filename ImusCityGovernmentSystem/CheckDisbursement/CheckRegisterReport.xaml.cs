@@ -25,6 +25,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
         public CheckRegisterReport()
         {
             InitializeComponent();
+            this.Title = "Check Register Report";
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)

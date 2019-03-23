@@ -4,18 +4,7 @@
      xmlns:my="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         WindowTitleBrush="#FF001834" TitleCaps="False" WindowState="Maximized"  BorderThickness="0" 
-                      GlowBrush="Black" WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded"  >
-    <Controls:MetroWindow.IconTemplate>
-        <DataTemplate>
-            <Grid>
-                <Rectangle Width="15" Height="15" Fill="White">
-                    <Rectangle.OpacityMask>
-                        <VisualBrush Visual="{StaticResource appbar_journal}" />
-                    </Rectangle.OpacityMask>
-                </Rectangle>
-            </Grid>
-        </DataTemplate>
-    </Controls:MetroWindow.IconTemplate>
+                      GlowBrush="Black" WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded" Background="#FFECECEC"  >
 
     <Grid >
         <Grid.ColumnDefinitions>
@@ -37,9 +26,9 @@
             <Button x:Name="generatebtn" Grid.Row="4" Content="Generate Report" Margin="0,5,0,0" Click="generatebtn_Click"></Button>
         </Grid>
 
-        <my:CrystalReportsViewer x:Name="reportviewer"  Background="White" Grid.Column="1" >
+        <my:CrystalReportsViewer x:Name="reportviewer" Background="White" Grid.Column="1" >
 
         </my:CrystalReportsViewer>
     </Grid>
-    </Controls:MetroWindow>
+</Controls:MetroWindow>
 
