@@ -64,22 +64,25 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                     Disbursement dis = db.Disbursements.Find(DisbursementID);
                     vouchernotb.Text = dis.VoucherNo;
                     datetb.Text = dis.DateCreated.HasValue ? dis.DateCreated.Value.ToShortDateString() : null;
+                    checkcb.IsEnabled = false;
+                    cashcb.IsEnabled = false;
+                    otherscb.IsEnabled = false;
                     switch (dis.PaymentType.Name)
                     {
                         case "Check":
                             checkcb.IsChecked = true;
-                            cashcb.IsEnabled = false;
-                            otherscb.IsEnabled = false;
+                            cashcb.IsChecked = false;
+                            otherscb.IsChecked = false;
                             break;
                         case "Cash":
                             cashcb.IsChecked = true;
-                            checkcb.IsEnabled = false;
-                            otherscb.IsEnabled = false;
+                            checkcb.IsChecked = false;
+                            otherscb.IsChecked = false;
                             break;
                         case "Others":
                             otherscb.IsChecked = true;
-                            cashcb.IsEnabled = false;
-                            checkcb.IsEnabled = false;
+                            cashcb.IsChecked = false;
+                            checkcb.IsChecked = false;
                             break;
                     }
                     payeetb.Text = dis.Payee.CompanyName;
