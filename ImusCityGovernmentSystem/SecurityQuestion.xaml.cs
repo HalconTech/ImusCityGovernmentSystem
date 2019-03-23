@@ -119,7 +119,15 @@ namespace ImusCityGovernmentSystem
                         db.SaveChanges();
                     }
 
-                    MessageBox.Show("Security Question set-up succesfully!");
+                    MessageBox.Show("Security Questions set-up succesfully!");
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "User set-up security questions.",
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
                     this.Close();
                 }
             }

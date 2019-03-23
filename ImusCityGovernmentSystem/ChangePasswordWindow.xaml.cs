@@ -43,6 +43,15 @@ namespace ImusCityGovernmentSystem
                     asp.PasswordHash = passwordHasher.HashPassword(confirmpasswordpb.Password);
                     db.SaveChanges();
                     MessageBox.Show("Password updated successfully!");
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "User changes his/her password.",
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
                     this.Close();
                 }
 
