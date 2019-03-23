@@ -40,6 +40,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 fundcb.ItemsSource = db.Funds.OrderBy(m => m.FundName).ToList();
                 fundcb.DisplayMemberPath = "FundCode";
                 fundcb.SelectedValuePath = "FundID";
+                LoadSignatories();
             }
             else
             {
@@ -72,6 +73,14 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     MessageBox.Show("Check number is already been used");
                 }
+                else if(mayorcb.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select mayor");
+                }
+                else if(treasurercb.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select treasurer");
+                }
                 else
                 {
                    
@@ -83,6 +92,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     check.Amount = Convert.ToDecimal(checkamounttb.Text);
                     check.EmployeeID = App.EmployeeID;
                     check.DateCreated = DateTime.Now;
+                    check.Signatory1 = (int)mayorcb.SelectedValue;
+                    check.Signatory2 = (int)treasurercb.SelectedValue;
                     db.Checks.Add(check);
                     db.SaveChanges();
 
@@ -123,5 +134,33 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
         {
             checkdesctb.Text = descriptiontb.Text;
         }
+
+        public void LoadSignatories()
+        {
+            if(SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                var employee = from p in db.Employees orderby p.FirstName
+                               select new
+                               {
+                                   id = p.EmployeeID,
+                                   Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
+                               };
+                mayorcb.ItemsSource = employee.ToList();
+                mayorcb.DisplayMemberPath = "Name";
+                mayorcb.SelectedValuePath = "id";
+                mayorcb.SelectedIndex = 0;
+
+                treasurercb.ItemsSource = employee.ToList();
+                treasurercb.DisplayMemberPath = "Name";
+                treasurercb.SelectedValuePath = "id";
+                treasurercb.SelectedIndex = 0;
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+        }
+            
     }
 }

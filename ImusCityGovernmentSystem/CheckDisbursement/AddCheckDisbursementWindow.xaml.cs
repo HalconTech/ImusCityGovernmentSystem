@@ -112,6 +112,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         SystemClass.InsertLog(audit);
                         MessageBox.Show("Check Disbursement Created!");
                         PrintCheck(x.DisbursementID);
+                        this.Close();
                     }
                 }
                 catch (Exception ex)
