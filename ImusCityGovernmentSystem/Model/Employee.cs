@@ -21,6 +21,7 @@ namespace ImusCityGovernmentSystem.Model
             this.Disbursements = new HashSet<Disbursement>();
             this.Disbursements1 = new HashSet<Disbursement>();
             this.Disbursements2 = new HashSet<Disbursement>();
+            this.SubModuleUsers = new HashSet<SubModuleUser>();
         }
     
         public int EmployeeID { get; set; }
@@ -87,5 +88,6 @@ namespace ImusCityGovernmentSystem.Model
         public virtual ICollection<Disbursement> Disbursements { get; set; }
         public virtual ICollection<Disbursement> Disbursements1 { get; set; }
         public virtual ICollection<Disbursement> Disbursements2 { get; set; }
+        public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
     }
 }

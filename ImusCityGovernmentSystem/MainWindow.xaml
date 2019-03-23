@@ -110,7 +110,7 @@
                 <Label Name="lbldate" Grid.Row="1" VerticalContentAlignment="Bottom" Margin="0" HorizontalAlignment="Right" Grid.Column="3" Foreground="White"  FontSize="18" FontWeight="Bold" Padding="5,0,5,5"></Label>
             </Grid>
             <Menu Grid.Row="1" Grid.ColumnSpan="4" Height="30" Background="White"  >
-                <MenuItem Height="30" VerticalContentAlignment="Center"  Background="{x:Null}" >
+                <MenuItem Height="30" VerticalContentAlignment="Center" Name="modules"  Background="{x:Null}" >
                     <MenuItem.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -132,7 +132,7 @@
                                 </Rectangle.OpacityMask>
                             </Rectangle>
                         </MenuItem.Icon>
-                        <MenuItem x:Name="checkdisbursementbtn"   VerticalContentAlignment="Center"  Header="Check Disbursement" Click="checkdisbursementbtn_Click"   >
+                        <MenuItem x:Name="CDS"   VerticalContentAlignment="Center"  Header="Check Disbursement" Click="checkdisbursementbtn_Click"   >
                             <MenuItem.Icon>
                                 <Rectangle Fill="#FF002753" Width="14" Height="14">
                                     <Rectangle.OpacityMask>
@@ -184,6 +184,16 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Name="accessbtn"    VerticalContentAlignment="Center"  Header="User Access" Click="accessbtn_Click"  >
+                        <MenuItem.Icon>
+                            <Rectangle Fill="#FF002753" Width="13" Height="16">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_lock}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    
                     <MenuItem x:Name="payeebtn" Visibility="Collapsed"   VerticalContentAlignment="Center"  Header="Payee Management" Click="payeebtn_Click"    >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="16" Height="14">

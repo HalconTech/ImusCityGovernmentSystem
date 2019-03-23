@@ -286,6 +286,23 @@
           <Property Name="EmployeeID" Type="int" />
           <Property Name="Answer" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="SubModule">
+          <Key>
+            <PropertyRef Name="SubModuleID" />
+          </Key>
+          <Property Name="SubModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Acronym" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModuleID" Type="int" />
+        </EntityType>
+        <EntityType Name="SubModuleUser">
+          <Key>
+            <PropertyRef Name="SubModuleUserID" />
+          </Key>
+          <Property Name="SubModuleUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubModuleID" Type="int" />
+          <Property Name="EmployeeID" Type="int" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -566,6 +583,30 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SubModuleUser_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="SubModuleUser" Type="Self.SubModuleUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="SubModuleUser">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubModuleUser_SubModule">
+          <End Role="SubModule" Type="Self.SubModule" Multiplicity="0..1" />
+          <End Role="SubModuleUser" Type="Self.SubModuleUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubModule">
+              <PropertyRef Name="SubModuleID" />
+            </Principal>
+            <Dependent Role="SubModuleUser">
+              <PropertyRef Name="SubModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="GetCheckRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Date" Type="date" Mode="In" />
           <Parameter Name="FundID" Type="int" Mode="In" />
@@ -596,6 +637,8 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="ReportParameter" EntityType="Self.ReportParameter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SecurityQuestionBank" EntityType="Self.SecurityQuestionBank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SecurityQuestionUser" EntityType="Self.SecurityQuestionUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubModule" EntityType="Self.SubModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubModuleUser" EntityType="Self.SubModuleUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PayeeRepresentativeView" EntityType="Self.PayeeRepresentativeView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -687,6 +730,14 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <AssociationSet Name="FK_SecurityQuestionUser_SecurityQuestionBank" Association="Self.FK_SecurityQuestionUser_SecurityQuestionBank">
             <End Role="SecurityQuestionBank" EntitySet="SecurityQuestionBank" />
             <End Role="SecurityQuestionUser" EntitySet="SecurityQuestionUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubModuleUser_Employee" Association="Self.FK_SubModuleUser_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SubModuleUser" EntitySet="SubModuleUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubModuleUser_SubModule" Association="Self.FK_SubModuleUser_SubModule">
+            <End Role="SubModule" EntitySet="SubModule" />
+            <End Role="SubModuleUser" EntitySet="SubModuleUser" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -809,6 +860,16 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <FunctionImport Name="GetDisbursementVoucher" ReturnType="Collection(ImusCityHallModel.GetDisbursementVoucher_Result)">
           <Parameter Name="DisbursementID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="SubModules" EntityType="ImusCityHallModel.SubModule" />
+          <EntitySet Name="SubModuleUsers" EntityType="ImusCityHallModel.SubModuleUser" />
+          <AssociationSet Name="FK_SubModuleUser_Employee" Association="ImusCityHallModel.FK_SubModuleUser_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="SubModuleUser" EntitySet="SubModuleUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubModuleUser_SubModule" Association="ImusCityHallModel.FK_SubModuleUser_SubModule">
+            <End Role="SubModule" EntitySet="SubModules" />
+            <End Role="SubModuleUser" EntitySet="SubModuleUsers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1170,6 +1231,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <NavigationProperty Name="Disbursements" Relationship="ImusCityHallModel.FK_Disbursement_Signatory" FromRole="Employee" ToRole="Disbursement" />
           <NavigationProperty Name="Disbursements1" Relationship="ImusCityHallModel.FK_Disbursement_Signatory2" FromRole="Employee" ToRole="Disbursement" />
           <NavigationProperty Name="Disbursements2" Relationship="ImusCityHallModel.FK_Disbursement_Signatory3" FromRole="Employee" ToRole="Disbursement" />
+          <NavigationProperty Name="SubModuleUsers" Relationship="ImusCityHallModel.FK_SubModuleUser_Employee" FromRole="Employee" ToRole="SubModuleUser" />
         </EntityType>
         <Association Name="FK_Employee_Department">
           <End Type="ImusCityHallModel.Department" Role="Department" Multiplicity="0..1" />
@@ -1440,6 +1502,50 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="Signatory2" Nullable="true" MaxLength="101" />
           <Property Type="String" Name="Signatory3" Nullable="true" MaxLength="101" />
         </ComplexType>
+        <EntityType Name="SubModule">
+          <Key>
+            <PropertyRef Name="SubModuleID" />
+          </Key>
+          <Property Name="SubModuleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Acronym" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModuleID" Type="Int32" />
+          <NavigationProperty Name="SubModuleUsers" Relationship="ImusCityHallModel.FK_SubModuleUser_SubModule" FromRole="SubModule" ToRole="SubModuleUser" />
+        </EntityType>
+        <EntityType Name="SubModuleUser">
+          <Key>
+            <PropertyRef Name="SubModuleUserID" />
+          </Key>
+          <Property Name="SubModuleUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubModuleID" Type="Int32" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_SubModuleUser_Employee" FromRole="SubModuleUser" ToRole="Employee" />
+          <NavigationProperty Name="SubModule" Relationship="ImusCityHallModel.FK_SubModuleUser_SubModule" FromRole="SubModuleUser" ToRole="SubModule" />
+        </EntityType>
+        <Association Name="FK_SubModuleUser_Employee">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.SubModuleUser" Role="SubModuleUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="SubModuleUser">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubModuleUser_SubModule">
+          <End Type="ImusCityHallModel.SubModule" Role="SubModule" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.SubModuleUser" Role="SubModuleUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubModule">
+              <PropertyRef Name="SubModuleID" />
+            </Principal>
+            <Dependent Role="SubModuleUser">
+              <PropertyRef Name="SubModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1803,6 +1909,25 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="SubModules">
+            <EntityTypeMapping TypeName="ImusCityHallModel.SubModule">
+              <MappingFragment StoreEntitySet="SubModule">
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="Acronym" ColumnName="Acronym" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SubModuleID" ColumnName="SubModuleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubModuleUsers">
+            <EntityTypeMapping TypeName="ImusCityHallModel.SubModuleUser">
+              <MappingFragment StoreEntitySet="SubModuleUser">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="SubModuleID" ColumnName="SubModuleID" />
+                <ScalarProperty Name="SubModuleUserID" ColumnName="SubModuleUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

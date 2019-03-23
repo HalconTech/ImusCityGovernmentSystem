@@ -51,6 +51,8 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<ReportParameter> ReportParameters { get; set; }
         public virtual DbSet<SecurityQuestionBank> SecurityQuestionBanks { get; set; }
         public virtual DbSet<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
+        public virtual DbSet<SubModule> SubModules { get; set; }
+        public virtual DbSet<SubModuleUser> SubModuleUsers { get; set; }
     
         public virtual ObjectResult<GetCheckRegister_Result> GetCheckRegister(Nullable<System.DateTime> date, Nullable<int> fundID)
         {

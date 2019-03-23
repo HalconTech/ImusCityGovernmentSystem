@@ -118,6 +118,31 @@ namespace ImusCityGovernmentSystem
            {
                demotb.Visibility = Visibility.Visible;
            }
+            CheckUserAccess();
+        }
+
+        public void CheckUserAccess()
+        {
+            if(SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                IEnumerable<SubModuleUser> submodule = db.SubModuleUsers.Where(m => m.EmployeeID == App.EmployeeID);                
+                if(submodule.Count() >= 1)
+                {
+                    foreach(var module in submodule)
+                    {
+                        CDS.IsEnabled = module.SubModule.Acronym == CDS.Name ? true : false;
+                    }
+                }
+                else
+                {
+                    modules.IsEnabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
         }
 
         private void addempbtn_Click(object sender, RoutedEventArgs e)
@@ -134,6 +159,14 @@ namespace ImusCityGovernmentSystem
             General.EmployeeModule.EmployeeModuleWindow employee = new General.EmployeeModule.EmployeeModuleWindow();
             Mouse.OverrideCursor = null;
             employee.ShowDialog();
+        }
+
+        private void accessbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            UserAccess access = new UserAccess();
+            Mouse.OverrideCursor = null;
+            access.ShowDialog();
         }
     }
 }
