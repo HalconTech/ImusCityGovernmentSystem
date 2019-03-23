@@ -6,7 +6,26 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Name="empname" />
+            <Controls:Badged Badge="{Binding Path=BadgeValue}" BadgeBackground="Red" Name="bdgNotif" BadgePlacementMode="Bottom" Grid.Column="3" Margin="5">
+                <!-- Control to wrap goes here -->
+                <Button Name="btnNotif" Click="btnNotif_Click" Visibility="Hidden">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="20"
+                   Height="20"
+                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush  Stretch="Fill" Visual="{StaticResource appbar_notification_star}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <Label Margin="4 0 0 0"
+                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Controls:Badged>
             <Button x:Name="btnlogout" Content="Sign-out" Click="btnlogout_Click"/>
+
+            
+
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Window.Resources>
@@ -142,7 +161,7 @@
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
-                  
+
                 </MenuItem>
                 <MenuItem>
                     <MenuItem.HeaderTemplate>
@@ -204,11 +223,22 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
-         
+
         </Grid>
-     
         <TextBlock Visibility="Hidden" Name="demotb" Foreground="Black" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.5">DEMO MODE</TextBlock>
 
 
     </DockPanel>
+
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout Name="flyoutNotif" Header="Notifications" Position="Right" Width="400" IsOpen="True">
+                <ListView Background="White" Margin="10">
+                    
+                </ListView>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+
+
 </Controls:MetroWindow>
