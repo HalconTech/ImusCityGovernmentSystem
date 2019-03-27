@@ -221,6 +221,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                                 aspuser.PasswordHash = passwordHasher.HashPassword("imuscitygov");
                                 var adduser = db.AspNetUsers.Add(aspuser);
                                 asproleuser.UserId = adduser.Id;
+                                asproleuser.RoleId = roleid;
                                 db.AspNetUserRoles.Add(asproleuser);
                             }
                         }
