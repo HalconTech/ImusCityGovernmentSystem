@@ -11,7 +11,7 @@
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
-                      Width="884" >
+                      Width="884" Loaded="MetroWindow_Loaded" >
     <Grid Margin="10" Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"></ColumnDefinition>
@@ -81,7 +81,7 @@
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem x:Name="editbtn" Header="Edit Employee" Click="editbtn_Click"/>
-                        <!--<MenuItem x:Name="resetpasswordbtn" Visibility="Hidden" Header="Reset Password" Click="resetpasswordbtn_Click" />-->
+                        <MenuItem x:Name="resetpasswordbtn" Header="Reset Password" Click="resetpasswordbtn_Click" />
                     </ContextMenu>
                 </ListBox.ContextMenu>
             </ListBox>

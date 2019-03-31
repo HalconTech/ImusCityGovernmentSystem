@@ -67,9 +67,9 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                     Employee employee = db.Employees.Find(EmployeeID);
                     employeenotb.Text = employee.EmployeeNo;
                     nametb.Text = employee.FirstName + " " + employee.MiddleName + " " + employee.LastName;
-                    divisiontb.Text = employee.Department.Division.DivisionName;
-                    positiontb.Text = employee.EmployeePosition.EmployeePositionName;
-                    departmenttb.Text = employee.Department.DepartmentName;
+                    divisiontb.Text = employee.Department == null ? null : employee.Department.Division.DivisionName;
+                    positiontb.Text = employee.EmployeePosition == null ? null : employee.EmployeePosition.EmployeePositionName;
+                    departmenttb.Text = employee.Department == null ? null : employee.Department.DepartmentName;
                     emailtb.Text = employee.PrimaryEmail;
                     contactnotb.Text = employee.MobileNo;
                     if (employee.Photo == null)
@@ -195,7 +195,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 Mouse.OverrideCursor = Cursors.Wait;
@@ -233,7 +233,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-           
+
         }
 
         private void searchtb_KeyDown(object sender, KeyEventArgs e)
@@ -247,9 +247,27 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                 else
                 {
                     searchbtn_Click(sender, e);
-                 
+
                 }
-           
+
+            }
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                ImusCityGovernmentSystem.Model.Employee employee = db.Employees.Find(App.EmployeeID);
+                resetpasswordbtn.IsEnabled = false;
+                if (employee.EmployeePosition == null || employee.EmployeePosition.IsAdmin == true)
+                {
+                    resetpasswordbtn.IsEnabled = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
         }
     }

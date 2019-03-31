@@ -62,9 +62,13 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 try
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();
-                    if (payeecb.SelectedValue == null)
+                    if (payeecb.SelectedValue == null && optionpayeecb.IsChecked == false)
                     {
-                        MessageBox.Show("Please select payee");
+                        MessageBox.Show("Please select payee from the dropdown list");
+                    }
+                    else if (optionpayeecb.IsChecked == true)
+                    {
+                        MessageBox.Show("Please enter payee name");
                     }
                     else if (paymenttypecb.SelectedValue == null)
                     {
@@ -73,10 +77,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     else if (String.IsNullOrEmpty(vouchernotb.Text))
                     {
                         MessageBox.Show("Please enter voucher number");
-                    }
-                    else if (departmentcb.SelectedValue == null)
-                    {
-                        MessageBox.Show("Please select department");
                     }
                     else if (String.IsNullOrEmpty(descriptiontb.Text))
                     {
@@ -89,7 +89,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     else
                     {
                         Disbursement disbursement = new Disbursement();
-                        disbursement.PayeeID = (int)payeecb.SelectedValue;
+                        disbursement.PayeeID = optionpayeecb.IsChecked == true ? null : (int?)payeecb.SelectedValue;
                         disbursement.PaymentTypeID = (int)paymenttypecb.SelectedValue;
                         disbursement.VoucherNo = vouchernotb.Text;
                         disbursement.DateCreated = DateTime.Now;
@@ -100,6 +100,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         disbursement.Obligated = obligatedcb.IsChecked;
                         disbursement.DocCompleted = documentcb.IsChecked;
                         disbursement.PayeeRepID = (int)payeerepcb.SelectedValue;
+                        disbursement.PayeeName = optionalpayee.Text;
                         var x = db.Disbursements.Add(disbursement);
                         db.SaveChanges();
                         var audit = new AuditTrailModel
@@ -108,7 +109,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                             ModuleName = this.GetType().Name,
                             EmployeeID = App.EmployeeID
                         };
-                        
+
                         SystemClass.InsertLog(audit);
                         MessageBox.Show("Check Disbursement Created!");
                         PrintCheck(x.DisbursementID);

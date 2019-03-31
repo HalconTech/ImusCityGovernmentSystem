@@ -139,6 +139,8 @@ namespace ImusCityGovernmentSystem
                 demotb.Visibility = Visibility.Visible;
             }
             CheckUserAccess();
+
+
         }
 
         public void CheckUserAccess()

@@ -39,6 +39,7 @@ namespace ImusCityGovernmentSystem.General.Position
                             ep.Description = txtDesc.Text;
                             ep.EmployeeRankID = Convert.ToInt32(cbRank.SelectedValue);
                             ep.Active = true;
+                            ep.IsAdmin = admincb.IsChecked == true ? true : false;                      
                             db.EmployeePositions.Add(ep);
                             db.SaveChanges();
 

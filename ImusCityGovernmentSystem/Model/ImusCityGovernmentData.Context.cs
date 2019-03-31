@@ -35,10 +35,8 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<AuditTrail> AuditTrails { get; set; }
         public virtual DbSet<Check> Checks { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<Disbursement> Disbursements { get; set; }
         public virtual DbSet<Division> Divisions { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<EmployeePosition> EmployeePositions { get; set; }
         public virtual DbSet<EmployeeRank> EmployeeRanks { get; set; }
         public virtual DbSet<EmployeeStatu> EmployeeStatus { get; set; }
         public virtual DbSet<Fund> Funds { get; set; }
@@ -51,9 +49,10 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
         public virtual DbSet<SubModule> SubModules { get; set; }
         public virtual DbSet<SubModuleUser> SubModuleUsers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<PayeeRepresentativeView> PayeeRepresentativeViews { get; set; }
         public virtual DbSet<UserAccount> UserAccounts { get; set; }
+        public virtual DbSet<EmployeePosition> EmployeePositions { get; set; }
+        public virtual DbSet<Disbursement> Disbursements { get; set; }
     
         public virtual ObjectResult<GetCheckExpiryNotice_Result> GetCheckExpiryNotice()
         {

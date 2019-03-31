@@ -38,6 +38,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> Signatory { get; set; }
         public Nullable<int> Signatory2 { get; set; }
         public Nullable<int> Signatory3 { get; set; }
+        public string PayeeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Check> Checks { get; set; }

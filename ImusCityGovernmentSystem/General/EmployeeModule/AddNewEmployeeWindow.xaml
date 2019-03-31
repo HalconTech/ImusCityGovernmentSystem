@@ -172,7 +172,7 @@
                             <ComboBoxItem>Divorced</ComboBoxItem>
                         </ComboBox>
                         <TextBlock Text="Religion" FontWeight="Bold" Grid.Column="3" Grid.Row="4" Margin="5,0,0,0"></TextBlock>
-                        <TextBox PreviewTextInput="NumberValidationTextBox" Name="religiontb" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="3" Margin="5,0,0,0"></TextBox>
+                        <TextBox Name="religiontb" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="3" Margin="5,0,0,0"></TextBox>
                         <TextBlock Grid.Row="6" Text="TIN No."  FontWeight="Bold"></TextBlock>
                         <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="12" Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="7" Name="tinnotb"></TextBox>
                         <TextBlock Grid.Row="8" Text="PAG-IBIG No."  FontWeight="Bold"></TextBlock>

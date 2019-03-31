@@ -17,8 +17,8 @@ namespace ImusCityGovernmentSystem.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
-            this.Disbursements = new HashSet<Disbursement>();
             this.Employees = new HashSet<Employee>();
+            this.Disbursements = new HashSet<Disbursement>();
         }
     
         public int DepartmentID { get; set; }
@@ -29,8 +29,8 @@ namespace ImusCityGovernmentSystem.Model
     
         public virtual Division Division { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Disbursement> Disbursements { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Disbursement> Disbursements { get; set; }
     }
 }
