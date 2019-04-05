@@ -13,56 +13,50 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
-namespace ImusCityGovernmentSystem.General.Fund
+namespace ImusCityGovernmentSystem.General.Bank
 {
     /// <summary>
-    /// Interaction logic for AddNewFundWindow.xaml
+    /// Interaction logic for AddNewBankWindow.xaml
     /// </summary>
-    public partial class AddNewFundWindow : MetroWindow
+    public partial class AddNewBankWindow : MetroWindow
     {
-     
-        public AddNewFundWindow()
+        public AddNewBankWindow()
         {
             InitializeComponent();
-            fundcodetb.Focus();
         }
 
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                if (String.IsNullOrEmpty(fundcodetb.Text) || String.IsNullOrEmpty(fundnametb.Text))
+                if (String.IsNullOrEmpty(bankcodetb.Text) || String.IsNullOrEmpty(banknametb.Text))
                 {
-                    MessageBox.Show("Please input fund code and fund name");
+                    MessageBox.Show("Please input bank code and bank name");
                 }
-                else if(String.IsNullOrEmpty(voucherprefixtb.Text))
+                else if (String.IsNullOrEmpty(branchtb.Text))
                 {
-                    MessageBox.Show("Please enter voucher prefix");
+                    MessageBox.Show("Please enter branch name");
                 }
-                else if(db.Funds.Any(m => m.FundCode == fundcodetb.Text))
+                else if (db.Banks.Any(m => m.BankCode == bankcodetb.Text))
                 {
-                    MessageBox.Show("The fund code is already used");
-                }
-                else if(db.Funds.Any(m => m.FundName == fundnametb.Text))
-                {
-                    MessageBox.Show("The fund name is already used");
+                    MessageBox.Show("The bank code is already used");
                 }
                 else
                 {
-                    ImusCityGovernmentSystem.Model.Fund fund = new Model.Fund();
-                    fund.FundCode = fundcodetb.Text;
-                    fund.FundName = fundnametb.Text;
-                    fund.FundPrefix = voucherprefixtb.Text;
-                    fund.IsActive = true;
-                    db.Funds.Add(fund);
+                    ImusCityGovernmentSystem.Model.Bank bank = new Model.Bank();
+                    bank.BankCode = bankcodetb.Text;
+                    bank.BankName = banknametb.Text;
+                    bank.Branch = branchtb.Text;
+                    bank.IsActive = true;
+                    db.Banks.Add(bank);
                     db.SaveChanges();
                     Mouse.OverrideCursor = null;
 
                     var audit = new AuditTrailModel
                     {
-                        Activity = "Added new fund in the database. FUND CODE: " + fundcodetb.Text,
+                        Activity = "Added new fund in the database. BANK CODE: " + bankcodetb.Text,
                         ModuleName = this.GetType().Name,
                         EmployeeID = App.EmployeeID
                     };
@@ -79,7 +73,7 @@ namespace ImusCityGovernmentSystem.General.Fund
                 Mouse.OverrideCursor = null;
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-          
+
             Mouse.OverrideCursor = null;
         }
 

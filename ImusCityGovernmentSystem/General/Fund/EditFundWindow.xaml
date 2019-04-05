@@ -7,7 +7,7 @@
                       TitleCaps="False"
                       BorderThickness="1"
                       WindowStartupLocation="CenterScreen"
-                      Height="286.701"
+                      Height="239.368"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
@@ -21,18 +21,14 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="17"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="17"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Fund Code"></TextBlock>
-        <TextBox BorderBrush="Black" Grid.Row="1" VerticalContentAlignment="Center" Name="fundcodetb"></TextBox>
-        <TextBlock Grid.Row="2" Text="Fund Name"></TextBlock>
-        <TextBox Grid.Row="3" VerticalContentAlignment="Center" Name="fundnametb" BorderBrush="Black"></TextBox>
-        <TextBlock Grid.Row="4" Text="Account Number"></TextBlock>
-        <TextBox Grid.Row="5" VerticalContentAlignment="Center" Name="accountnotb" BorderBrush="Black"></TextBox>
-        <TextBlock Grid.Row="6" Text="Branch"></TextBlock>
-        <TextBox Grid.Row="7" VerticalContentAlignment="Center" Name="branchtb" BorderBrush="Black"></TextBox>
+        <TextBlock Text="Fund Code*"></TextBlock>
+        <TextBox Grid.Row="1" VerticalContentAlignment="Center" Name="fundcodetb"/>
+        <TextBlock Grid.Row="2" Text="Fund Name*"></TextBlock>
+        <TextBox Grid.Row="3" VerticalContentAlignment="Center" Name="fundnametb" ></TextBox>
+        <TextBlock Grid.Row="4" Text="Voucher Prefix*"></TextBlock>
+        <TextBox Grid.Row="5" VerticalContentAlignment="Center" x:Name="voucherprefixtb" ></TextBox>
         <Grid Grid.Row="8" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>

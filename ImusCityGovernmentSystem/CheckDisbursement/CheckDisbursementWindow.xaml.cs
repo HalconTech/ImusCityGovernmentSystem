@@ -72,5 +72,13 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             accountant.Show();
             Mouse.OverrideCursor = null;
         }
+
+        private void bankbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            General.Bank.BankListWindow bank = new General.Bank.BankListWindow();
+            bank.Show();
+            Mouse.OverrideCursor = null;
+        }
     }
 }

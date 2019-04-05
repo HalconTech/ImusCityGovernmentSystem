@@ -1,9 +1,9 @@
-﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.Fund.AddNewFundWindow"
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.Bank.AddNewBankWindow"
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-                      Title="Add New Fund"            
+                      Title="Add New Bank"            
                       TitleCaps="False"
                       BorderThickness="1"
                       WindowStartupLocation="CenterScreen"
@@ -23,12 +23,12 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Fund Code*"></TextBlock>
-        <TextBox Grid.Row="1" VerticalContentAlignment="Center" Name="fundcodetb"/>
-        <TextBlock Grid.Row="2" Text="Fund Name*"></TextBlock>
-        <TextBox Grid.Row="3" VerticalContentAlignment="Center" Name="fundnametb" ></TextBox>
-        <TextBlock Grid.Row="4" Text="Voucher Prefix*"></TextBlock>
-        <TextBox Grid.Row="5" VerticalContentAlignment="Center" x:Name="voucherprefixtb" ></TextBox>
+        <TextBlock Text="Bank Code*"></TextBlock>
+        <TextBox Grid.Row="1" VerticalContentAlignment="Center" x:Name="bankcodetb"/>
+        <TextBlock Grid.Row="2" Text="Bank Name*"></TextBlock>
+        <TextBox Grid.Row="3" VerticalContentAlignment="Center" x:Name="banknametb" ></TextBox>
+        <TextBlock Grid.Row="4" Text="Branch*"></TextBlock>
+        <TextBox Grid.Row="5" VerticalContentAlignment="Center" x:Name="branchtb" ></TextBox>
         <Grid Grid.Row="8" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -39,5 +39,6 @@
         </Grid>
     </Grid>
 </Controls:MetroWindow>
+
 
 

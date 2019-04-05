@@ -14,6 +14,12 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class Check
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Check()
+        {
+            this.CheckReleases = new HashSet<CheckRelease>();
+        }
+    
         public int CheckID { get; set; }
         public Nullable<int> DisbursementID { get; set; }
         public string CheckNo { get; set; }
@@ -25,10 +31,13 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> EmployeeID { get; set; }
         public Nullable<int> Signatory1 { get; set; }
         public Nullable<int> Signatory2 { get; set; }
+        public string Status { get; set; }
     
+        public virtual Disbursement Disbursement { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Employee Employee1 { get; set; }
         public virtual Employee Employee2 { get; set; }
-        public virtual Disbursement Disbursement { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CheckRelease> CheckReleases { get; set; }
     }
 }

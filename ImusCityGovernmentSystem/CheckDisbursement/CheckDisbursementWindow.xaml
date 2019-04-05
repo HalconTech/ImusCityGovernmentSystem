@@ -5,13 +5,13 @@
         BorderThickness="0"
         Title="Check Disbursement"
     
-        WindowTransitionsEnabled="False"  Height="492.349" Width="834.571"   ResizeMode="NoResize"
+        WindowTransitionsEnabled="False"  Height="639" Width="681.571"   ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"   TitleCaps="False"  >
     <Grid Margin="45">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="295"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -42,6 +42,20 @@
                 <Rectangle Fill="White" Height="50" Width="50">
                     <Rectangle.OpacityMask>
                         <VisualBrush Visual="{StaticResource appbar_money}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="bankbtn"   Background="#CC0050EF"    Title="Bank Management" TitleFontSize="12" Click="bankbtn_Click"  >
+                <Rectangle Fill="White" Height="50" Width="40">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_tardis}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="accountsbtn"   Background="#CC0050EF"    Title="Accounts Management" TitleFontSize="12" Click="bankbtn_Click"  >
+                <Rectangle Fill="White" Height="35" Width="50">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_return}" Stretch="Fill" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>

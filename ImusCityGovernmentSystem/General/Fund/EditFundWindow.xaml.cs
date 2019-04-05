@@ -36,13 +36,9 @@ namespace ImusCityGovernmentSystem.General.Fund
                 {
                     MessageBox.Show("Please input fund code and fund name!");
                 }
-                else if (String.IsNullOrEmpty(accountnotb.Text))
+                else if (String.IsNullOrEmpty(voucherprefixtb.Text))
                 {
-                    MessageBox.Show("Please enter account number");
-                }
-                else if (String.IsNullOrEmpty(branchtb.Text))
-                {
-                    MessageBox.Show("Please enter branch");
+                    MessageBox.Show("Please enter voucher prefix");
                 }
                 else
                 {
@@ -50,8 +46,7 @@ namespace ImusCityGovernmentSystem.General.Fund
                     ImusCityGovernmentSystem.Model.Fund fund = db.Funds.Find(FundID);
                     fund.FundCode = fundcodetb.Text;
                     fund.FundName = fundnametb.Text;
-                    fund.AccountNumber = accountnotb.Text;
-                    fund.Branch = branchtb.Text;
+                    fund.FundPrefix = voucherprefixtb.Text;
                     db.SaveChanges();
                     Mouse.OverrideCursor = null;
                     var audit = new AuditTrailModel
@@ -82,8 +77,7 @@ namespace ImusCityGovernmentSystem.General.Fund
                 ImusCityGovernmentSystem.Model.Fund fund = db.Funds.Find(FundID);
                 fundcodetb.Text = fund.FundCode;
                 fundnametb.Text = fund.FundName;
-                accountnotb.Text = fund.AccountNumber;
-                branchtb.Text = fund.Branch;
+                voucherprefixtb.Text = fund.FundPrefix;
             }
             else
             {

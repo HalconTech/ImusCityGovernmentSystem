@@ -33,16 +33,16 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             if(SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                var fund = from p in db.Funds
+                var fund = from p in db.FundBanks
                            where p.IsActive == true
                            select new
                            {
-                               FundID = p.FundID,
-                               FundName = p.FundCode + " (" + p.Branch + ")" 
+                               ID = p.FundBankID,
+                               Name = p.Bank.BankName + " - " + p.Fund.FundName
                            };
                 fundcb.ItemsSource = fund.ToList();
-                fundcb.DisplayMemberPath = "FundName";
-                fundcb.SelectedValuePath = "FundID";
+                fundcb.DisplayMemberPath = "Name";
+                fundcb.SelectedValuePath = "ID";
       
                 
             }

@@ -14,11 +14,19 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class Fund
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Fund()
+        {
+            this.FundBanks = new HashSet<FundBank>();
+        }
+    
         public int FundID { get; set; }
         public string FundName { get; set; }
         public string FundCode { get; set; }
-        public string Branch { get; set; }
-        public string AccountNumber { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public string FundPrefix { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FundBank> FundBanks { get; set; }
     }
 }

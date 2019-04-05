@@ -196,6 +196,15 @@
     <Compile Include="ForgotPassword.xaml.cs">
       <DependentUpon>ForgotPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="General\Bank\AddNewBankWindow.xaml.cs">
+      <DependentUpon>AddNewBankWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="General\Bank\BankListWindow.xaml.cs">
+      <DependentUpon>BankListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="General\Bank\EditBankWindow.xaml.cs">
+      <DependentUpon>EditBankWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="General\EmployeeModule\EmployeeModuleWindow.xaml.cs">
       <DependentUpon>EmployeeModuleWindow.xaml</DependentUpon>
     </Compile>
@@ -218,6 +227,12 @@
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\AuditTrailModel.cs" />
+    <Compile Include="Model\Bank.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BankTrail.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Check.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
@@ -274,6 +289,9 @@
     <Compile Include="LicenseCodeWindow.xaml.cs">
       <DependentUpon>LicenseCodeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CheckRelease.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Department.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
@@ -297,6 +315,9 @@
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Fund.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FundBank.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetCheckExpiryNotice_Result.cs">
@@ -399,6 +420,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ForgotPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\Bank\AddNewBankWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\Bank\BankListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\Bank\EditBankWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -12,25 +12,25 @@ namespace ImusCityGovernmentSystem.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class PayeeRepresentative
+    public partial class FundBank
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PayeeRepresentative()
+        public FundBank()
         {
-            this.Disbursements = new HashSet<Disbursement>();
+            this.BankTrails = new HashSet<BankTrail>();
         }
     
-        public int PayeeRepID { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public Nullable<int> PayeeID { get; set; }
-        public string MobileNo { get; set; }
-        public string Landline { get; set; }
-        public string EmployeeNo { get; set; }
+        public int FundBankID { get; set; }
+        public Nullable<int> FundID { get; set; }
+        public Nullable<int> BankID { get; set; }
+        public string AccountNumber { get; set; }
+        public Nullable<decimal> CurrentBalance { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public Nullable<System.DateTime> DateAdded { get; set; }
     
+        public virtual Bank Bank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Disbursement> Disbursements { get; set; }
-        public virtual Payee Payee { get; set; }
+        public virtual ICollection<BankTrail> BankTrails { get; set; }
+        public virtual Fund Fund { get; set; }
     }
 }
