@@ -99,7 +99,6 @@
           <Property Name="CheckID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisbursementID" Type="int" />
           <Property Name="CheckNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="FundID" Type="int" />
           <Property Name="CheckDescription" Type="text" />
           <Property Name="DateCreated" Type="datetime" />
           <Property Name="DateStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
@@ -1088,7 +1087,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="CheckID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisbursementID" Type="Int32" />
           <Property Name="CheckNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FundID" Type="Int32" />
           <Property Name="CheckDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="DateStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
@@ -1847,7 +1845,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="CheckDescription" ColumnName="CheckDescription" />
-                <ScalarProperty Name="FundID" ColumnName="FundID" />
                 <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
                 <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
                 <ScalarProperty Name="CheckID" ColumnName="CheckID" />

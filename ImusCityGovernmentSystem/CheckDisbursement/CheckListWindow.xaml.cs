@@ -133,7 +133,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 EditCheckWindow edit = new EditCheckWindow();
                 edit.CheckID = id;
                 edit.ShowDialog();
-
+                LoadItems();
             }
             else
             {

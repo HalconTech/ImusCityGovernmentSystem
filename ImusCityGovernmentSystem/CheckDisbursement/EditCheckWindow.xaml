@@ -29,11 +29,8 @@
         <DatePicker Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" Name="checkdatecreateddp" Margin="0,5,0,0"></DatePicker>
         <TextBlock Text="Check Status" Grid.Row="2" VerticalAlignment="Center"></TextBlock>
         <ComboBox Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" Name="checkstatuscb" Margin="0,5,0,0">
-            <ComboBoxItem>Created</ComboBoxItem>
-            <ComboBoxItem>Cancelled</ComboBoxItem>
-            <ComboBoxItem>Released</ComboBoxItem>
         </ComboBox>
-        <Button Grid.Row="3" Grid.Column="1" Content="Save" Name="savebtn" Margin="0,5,0,0" HorizontalAlignment="Right"></Button>
+        <Button Grid.Row="3" Grid.Column="1" Content="Save" Name="savebtn" Margin="0,5,0,0" HorizontalAlignment="Right" Click="savebtn_Click"></Button>
     </Grid>
 </Controls:MetroWindow>
 

@@ -37,9 +37,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 descriptiontb.Text = disbursement.Description;
                 paymenttypetb.Text = disbursement.PaymentType.Name;
                 voucheramounttb.Text = String.Format("{0:0.##}", disbursement.Amount);
-                fundcb.ItemsSource = db.Funds.Where(m => m.IsActive == true).OrderBy(m => m.FundName).ToList();
-                fundcb.DisplayMemberPath = "FundCode";
-                fundcb.SelectedValuePath = "FundID";
                 LoadSignatories();
             }
             else
@@ -56,10 +53,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 if (String.IsNullOrEmpty(checknotb.Text))
                 {
                     MessageBox.Show("Please provide the check number");
-                }
-                else if (fundcb.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select fund");
                 }
                 else if (String.IsNullOrEmpty(checkdesctb.Text))
                 {
@@ -86,7 +79,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                    
                     Check check = new Check();
                     check.DisbursementID = DisbursementID;
-                    check.FundID = (int)fundcb.SelectedValue;
                     check.CheckNo = checknotb.Text;
                     check.CheckDescription = checkdesctb.Text;
                     check.Amount = Convert.ToDecimal(checkamounttb.Text);
@@ -94,6 +86,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     check.DateCreated = DateTime.Now;
                     check.Status = (int)CheckStatus.Created;
                     db.Checks.Add(check);
+
+
                     db.SaveChanges();
 
                     var audit = new AuditTrailModel

@@ -28,8 +28,13 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
+                foreach (var item in Enum.GetValues(typeof(CheckStatus)))
+                {
+                    checkstatuscb.Items.Add(item);
+                }
+
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 ImusCityGovernmentSystem.Model.Check check = db.Checks.Find(CheckID);
                 checknumbertb.Text = check.CheckNo;
@@ -42,9 +47,21 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             }
         }
 
-        private void ComboBox_GotStylusCapture(object sender, StylusEventArgs e)
+        private void savebtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                ImusCityGovernmentSystem.Model.Check check = db.Checks.Find(CheckID);
+                check.DateCreated = checkdatecreateddp.SelectedDate;
+                check.Status = checkstatuscb.SelectedIndex;
+                db.SaveChanges();
+                MessageBox.Show("Check entry updated successfully");
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
         }
     }
 }

@@ -46,7 +46,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
@@ -60,13 +60,11 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Check No." VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="2" Name="checknotb" VerticalContentAlignment="Center"></TextBox>
-                <TextBlock Text="Fund" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
-                <ComboBox Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Name="fundcb" VerticalContentAlignment="Center" Margin="0,5,0,0"></ComboBox>
-                <TextBlock Grid.Row="2" Text="Check Description" Grid.ColumnSpan="2" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="1" Text="Check Description" Grid.ColumnSpan="2" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Row="4" Grid.ColumnSpan="3"  VerticalAlignment="Center" FontSize="10" PreviewMouseDown="TextBlock_PreviewMouseDown">
                     <Hyperlink >Copy Description from the voucher</Hyperlink>
                 </TextBlock>
-                <TextBox Grid.Row="3" TextWrapping="Wrap" Name="checkdesctb"  Grid.ColumnSpan="3" Margin="0"></TextBox>
+                <TextBox Grid.Row="2" Grid.RowSpan="2" TextWrapping="Wrap" Name="checkdesctb"  Grid.ColumnSpan="3" Margin="0"></TextBox>
                 <Grid Grid.Row="5" Grid.ColumnSpan="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"></RowDefinition>

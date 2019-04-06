@@ -24,7 +24,6 @@ namespace ImusCityGovernmentSystem.Model
         public int CheckID { get; set; }
         public Nullable<int> DisbursementID { get; set; }
         public string CheckNo { get; set; }
-        public Nullable<int> FundID { get; set; }
         public string CheckDescription { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public byte[] DateStamp { get; set; }
