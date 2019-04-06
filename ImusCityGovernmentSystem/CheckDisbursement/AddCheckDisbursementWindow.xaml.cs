@@ -93,33 +93,52 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     }
                     else
                     {
-                        Disbursement disbursement = new Disbursement();
-                        disbursement.PayeeID = optionpayeecb.IsChecked == true ? null : (int?)payeecb.SelectedValue;
-                        disbursement.PaymentTypeID = (int)paymenttypecb.SelectedValue;
-                        disbursement.VoucherNo = vouchernotb.Text;
-                        disbursement.DateCreated = DateTime.Now;
-                        disbursement.DepartmentID = (int)departmentcb.SelectedValue;
-                        disbursement.ProjectName = projectnametb.Text;
-                        disbursement.Description = descriptiontb.Text;
-                        disbursement.Amount = Convert.ToDecimal(amounttb.Text);
-                        disbursement.Obligated = obligatedcb.IsChecked;
-                        disbursement.DocCompleted = documentcb.IsChecked;
-                        disbursement.PayeeRepID = (int)payeerepcb.SelectedValue;
-                        disbursement.PayeeName = optionalpayee.Text;
-                        disbursement.FundBankID = (int)fundtypecb.SelectedValue;
-                        var x = db.Disbursements.Add(disbursement);
-                        db.SaveChanges();
-                        var audit = new AuditTrailModel
+                        if(!String.IsNullOrEmpty(fundtypecb.Text))
                         {
-                            Activity = "Created disbursement document",
-                            ModuleName = this.GetType().Name,
-                            EmployeeID = App.EmployeeID
-                        };
 
-                        SystemClass.InsertLog(audit);
-                        MessageBox.Show("Check Disbursement Created!");
-                        PrintCheck(x.DisbursementID);
-                        this.Close();
+                            int fundbankID = (int)fundtypecb.SelectedValue;
+
+                            var fundbank = db.FundBanks.Find(fundbankID);
+
+                            if(fundbank.CurrentBalance < Convert.ToDecimal(amounttb.Text))
+                            {
+                                MessageBox.Show("Selected fund have insufficient balance.");
+                                return;
+                            }
+
+                            Disbursement disbursement = new Disbursement();
+                            disbursement.PayeeID = optionpayeecb.IsChecked == true ? null : (int?)payeecb.SelectedValue;
+                            disbursement.PaymentTypeID = (int)paymenttypecb.SelectedValue;
+                            disbursement.VoucherNo = vouchernotb.Text;
+                            disbursement.DateCreated = DateTime.Now;
+                            disbursement.DepartmentID = (int)departmentcb.SelectedValue;
+                            disbursement.ProjectName = projectnametb.Text;
+                            disbursement.Description = descriptiontb.Text;
+                            disbursement.Amount = Convert.ToDecimal(amounttb.Text);
+                            disbursement.Obligated = obligatedcb.IsChecked;
+                            disbursement.DocCompleted = documentcb.IsChecked;
+                            disbursement.PayeeRepID = (int)payeerepcb.SelectedValue;
+                            disbursement.PayeeName = optionalpayee.Text;
+                            disbursement.FundBankID = (int)fundtypecb.SelectedValue;
+                            var x = db.Disbursements.Add(disbursement);
+                            db.SaveChanges();
+                            var audit = new AuditTrailModel
+                            {
+                                Activity = "Created disbursement document",
+                                ModuleName = this.GetType().Name,
+                                EmployeeID = App.EmployeeID
+                            };
+
+                            SystemClass.InsertLog(audit);
+                            MessageBox.Show("Check Disbursement Created!");
+                            PrintCheck(x.DisbursementID);
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please select fund type");
+                            return;
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -215,6 +234,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     string prefix = fundbank.Fund.FundPrefix + "-";
                     vouchernotb.Text = prefix;
+                    MessageBox.Show(String.Format("{0:C}", fundbank.CurrentBalance), "Fund Current Balance", MessageBoxButton.OK, MessageBoxImage.Information);
                     vouchernotb.Focus();
                 }
             }
@@ -224,24 +244,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             }
         }
 
-        private void checkbalbtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (SystemClass.CheckConnection())
-            {
-                ImusCityHallEntities db = new ImusCityHallEntities();
-                var fundbankID = Convert.ToInt32(fundtypecb.SelectedValue);
-
-                var fundbank = db.FundBanks.Find(fundbankID);
-
-                if (fundbank != null)
-                {
-                    MessageBox.Show(String.Format("{0:C}", fundbank.CurrentBalance), "Fund Current Balance", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            else
-            {
-                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
-            }
-        }
+       
     }
 }

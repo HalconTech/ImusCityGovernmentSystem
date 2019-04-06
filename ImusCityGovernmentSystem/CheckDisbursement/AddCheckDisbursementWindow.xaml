@@ -34,7 +34,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="130"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Voucher No." FontWeight="Bold" FontSize="16" VerticalAlignment="Center"></TextBlock>
             <TextBox x:Name="vouchernotb" Grid.Column="1" FontSize="16" Foreground="#FFB40000" FontWeight="Bold" Grid.ColumnSpan="3"/>
@@ -53,12 +52,6 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button x:Name="checkbalbtn" Grid.Row="1" Grid.Column="2" Click="checkbalbtn_Click"  Margin="5,5,0,0">
-                <StackPanel Orientation="Horizontal">
-
-                    <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Text="Check Balance" />
-                </StackPanel>
-            </Button>
 
             <TextBlock Text="Payment Type:" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
             <ComboBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="paymenttypecb" Margin="0,5,0,0"></ComboBox>
