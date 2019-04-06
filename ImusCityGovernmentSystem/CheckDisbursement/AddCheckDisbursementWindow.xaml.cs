@@ -35,24 +35,19 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 payeecb.DisplayMemberPath = "CompanyName";
                 payeecb.SelectedValuePath = "PayeeID";
 
-                
-                foreach(var item in Enum.GetValues(typeof(PaymentType)))
+
+                foreach (var item in Enum.GetValues(typeof(PaymentType)))
                 {
                     paymenttypecb.Items.Add(item);
                 }
                 paymenttypecb.SelectedIndex = 0;
-
-                //paymenttypecb.ItemsSource = db.PaymentTypes.ToList();
-                //paymenttypecb.DisplayMemberPath = "Name";
-                //paymenttypecb.SelectedValuePath = "PaymentTypeID";
-                //paymenttypecb.SelectedIndex = 0;
 
                 departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentName).ToList();
                 departmentcb.DisplayMemberPath = "DepartmentName";
                 departmentcb.SelectedValuePath = "DepartmentID";
                 departmentcb.SelectedIndex = 0;
 
-                fundtypecb.ItemsSource = db.FundBanks.OrderBy(m=>m.Fund.FundName).ToList();
+                fundtypecb.ItemsSource = db.FundBanks.OrderBy(m => m.Fund.FundName).ToList();
                 fundtypecb.SelectedValuePath = "FundBankID";
 
                 IncrementAdviceNo();
@@ -111,7 +106,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         disbursement.DocCompleted = documentcb.IsChecked;
                         disbursement.PayeeRepID = (int)payeerepcb.SelectedValue;
                         disbursement.PayeeName = optionalpayee.Text;
-                        
+                        disbursement.FundBankID = (int)fundtypecb.SelectedValue;
                         var x = db.Disbursements.Add(disbursement);
                         db.SaveChanges();
                         var audit = new AuditTrailModel
@@ -181,7 +176,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 ImusCityHallEntities db = new ImusCityHallEntities();
 
                 var accountlist = db.FundBanks.ToList();
-                foreach(var x in accountlist.Where(m=>m.IsActive == true &&  m.IsProcessed == false))
+                foreach (var x in accountlist.Where(m => m.IsActive == true && m.IsProcessed == false))
                 {
                     x.IsProcessed = true;
                     x.AdviceNo = (x.AdviceNo + 1);
@@ -189,7 +184,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     db.SaveChanges();
                 }
 
-                if(isForAudit == true)
+                if (isForAudit == true)
                 {
                     var audit = new AuditTrailModel
                     {
@@ -221,6 +216,26 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     string prefix = fundbank.Fund.FundPrefix + "-";
                     vouchernotb.Text = prefix;
                     vouchernotb.Focus();
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+        }
+
+        private void checkbalbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                var fundbankID = Convert.ToInt32(fundtypecb.SelectedValue);
+
+                var fundbank = db.FundBanks.Find(fundbankID);
+
+                if (fundbank != null)
+                {
+                    MessageBox.Show(String.Format("{0:C}", fundbank.CurrentBalance), "Fund Current Balance", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else

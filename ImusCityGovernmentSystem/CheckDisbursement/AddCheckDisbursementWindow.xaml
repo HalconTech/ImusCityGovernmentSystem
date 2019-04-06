@@ -11,7 +11,7 @@
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
-                      Width="560"  Loaded="MetroWindow_Loaded">
+                      Width="560"  Loaded="MetroWindow_Loaded" GlowBrush="Black">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="430"></RowDefinition>
@@ -34,14 +34,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="130"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Voucher No." FontWeight="Bold" FontSize="16" VerticalAlignment="Center"></TextBlock>
             <TextBox x:Name="vouchernotb" Grid.Column="1" FontSize="16" Foreground="#FFB40000" FontWeight="Bold" Grid.ColumnSpan="3"/>
 
             <TextBlock Text="Fund:" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
-            <ComboBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="fundtypecb" Margin="0,5,0,0" SelectionChanged="fundtypecb_SelectionChanged">
+            <ComboBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Name="fundtypecb" Margin="0,5,0,0" SelectionChanged="fundtypecb_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -54,6 +53,12 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <Button x:Name="checkbalbtn" Grid.Row="1" Grid.Column="2" Click="checkbalbtn_Click"  Margin="5,5,0,0">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Text="Check Balance" />
+                </StackPanel>
+            </Button>
 
             <TextBlock Text="Payment Type:" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
             <ComboBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="paymenttypecb" Margin="0,5,0,0"></ComboBox>
