@@ -235,7 +235,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
 
                 if (fundbank != null)
                 {
-                    MessageBox.Show(String.Format("{0:C}", fundbank.CurrentBalance), "Fund Current Balance", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(String.Format("{0:n}", fundbank.CurrentBalance), "Fund Current Balance", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else

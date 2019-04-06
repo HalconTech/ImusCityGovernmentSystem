@@ -63,9 +63,9 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     banktrail.DebitCredit = "C";
                     banktrail.FundBankID = disbursement.FundBankID;
                     banktrail.Amount = Convert.ToDecimal(check.Amount);
-                    banktrail.EntryName = nameof(BankTrailEntry.CheckCreated);
+                    banktrail.EntryName = nameof(BankTrailEntry.CheckCancelled);
                     banktrail.CheckID = check.CheckID;
-                    banktrail.EntryNameID = (int)BankTrailEntry.CheckCreated;
+                    banktrail.EntryNameID = (int)BankTrailEntry.CheckCancelled;
                     banktrail.EmployeeID = App.EmployeeID;
                     db.BankTrails.Add(banktrail);
 
