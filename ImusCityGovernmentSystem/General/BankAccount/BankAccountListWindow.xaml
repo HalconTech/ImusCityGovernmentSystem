@@ -7,12 +7,12 @@
                       TitleCaps="False"
                       BorderThickness="0"
                       WindowStartupLocation="CenterScreen"
-                      Height="346.667"
+                      Height="438.217"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
                       GlowBrush="Black"
-                      Width="550" Loaded="MetroWindow_Loaded">
+                      Width="586" Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -30,7 +30,9 @@
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Text="Fund"></TextBlock>
             <ComboBox IsEnabled="False" VerticalContentAlignment="Center" Grid.Row="1" Name="fundcb"></ComboBox>
@@ -42,13 +44,17 @@
             <TextBox Grid.Row="7" IsEnabled="False" VerticalContentAlignment="Center" Name="startingbalancetb"></TextBox>
             <TextBlock Grid.Row="8" Text="Current Balance"></TextBlock>
             <TextBox IsEnabled="False" VerticalContentAlignment="Center" Grid.Row="9" Name="currentbalancetb"></TextBox>
-            <Grid Grid.Row="10" Margin="0,5,0,0">
+            <TextBlock Grid.Row="10" Text="Current Advice Number"></TextBlock>
+            <TextBox IsEnabled="False" Grid.Row="11" VerticalAlignment="Center" Name="advicenumbertb"></TextBox>
+            <Grid Grid.Row="12" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Content="Edit" Name="editbtn" Margin="0,0,2.5,0" Click="editbtn_Click"/>
-                <Button IsEnabled="False" Content="Save" Grid.Column="1" Name="savebtn" Margin="2.5,0,0,0" Click="savebtn_Click"></Button>
+                <Button Content="Edit" Name="editbtn" Margin="0,0,2.5,0" Click="editbtn_Click" VerticalAlignment="Bottom"/>
+                <Button IsEnabled="False" Content="Save" Grid.Column="1" Name="savebtn" Margin="2.5,0" Click="savebtn_Click" VerticalAlignment="Bottom"></Button>
+                <Button x:Name="addbtn" Content="Add" Grid.Column="2"  Margin="2.5,0,0,0" Click="addbtn_Click" VerticalAlignment="Bottom"></Button>
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Margin="2.5,0,0,0">
@@ -57,7 +63,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Text="Accounts Listing" FontWeight="Bold"></TextBlock>
-            <ListBox BorderBrush="Black"  BorderThickness="1" Grid.Row="1" Name="accountslistlb" Margin="0,0,0,5" SelectionChanged="accountslistlb_SelectionChanged"></ListBox>
+            <ListBox BorderBrush="Black"  BorderThickness="1" Grid.Row="1" Name="accountslistlb" Margin="0" SelectionChanged="accountslistlb_SelectionChanged"></ListBox>
         </Grid>
     </Grid>
 </Controls:MetroWindow>
