@@ -37,7 +37,6 @@ namespace ImusCityGovernmentSystem.General.Department
         }
         public void DepartmentUpdate()
         {
-
             if (SystemClass.CheckConnection())
             {
                 try
@@ -47,7 +46,6 @@ namespace ImusCityGovernmentSystem.General.Department
                         var find = db.Departments.Find(DepartmentID);
                         find.DepartmentCode = txtCode.Text;
                         find.DepartmentName = txtName.Text;
-                        find.DivisionID = Convert.ToInt32(cbDivision.SelectedValue);
                         db.SaveChanges();
 
                         var audit = new AuditTrailModel
@@ -71,27 +69,18 @@ namespace ImusCityGovernmentSystem.General.Department
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-
-
         }
         public void LoadDepartment()
         {
-
             if (SystemClass.CheckConnection())
             {
                 try
                 {
                     using (var db = new ImusCityHallEntities())
                     {
-                        cbDivision.ItemsSource = db.Divisions.Where(m => m.IsActive == true).OrderBy(m => m.DivisionName).ToList();
-                        cbDivision.DisplayMemberPath = "DivisionCode";
-                        cbDivision.SelectedValuePath = "DivisionID";
                         var find = db.Departments.Find(DepartmentID);
                         txtCode.Text = find.DepartmentCode;
                         txtName.Text = find.DepartmentName;
-                        cbDivision.SelectedValue = find.DivisionID;
-
-
                     }
                 }
                 catch (Exception ex)
@@ -103,8 +92,6 @@ namespace ImusCityGovernmentSystem.General.Department
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-
-
         }
     }
 }

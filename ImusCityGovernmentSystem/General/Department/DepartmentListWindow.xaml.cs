@@ -82,9 +82,6 @@ namespace ImusCityGovernmentSystem.General.Department
                             dl.DepartmentID = item.DepartmentID;
                             dl.DepartmentCode = item.DepartmentCode;
                             dl.DepartmentName = item.DepartmentName;
-                            dl.DivisionID = item.DivisionID;
-                            dl.DivisionName = item.Division.DivisionName;
-
                             DList.Add(dl);
                         }
 
@@ -175,9 +172,6 @@ namespace ImusCityGovernmentSystem.General.Department
                             dl.DepartmentID = item.DepartmentID;
                             dl.DepartmentCode = item.DepartmentCode;
                             dl.DepartmentName = item.DepartmentName;
-                            dl.DivisionID = item.DivisionID;
-                            dl.DivisionName = item.Division.DivisionName;
-
                             DList.Add(dl);
                         }
                         if (!String.IsNullOrEmpty(txtSearch.Text))
@@ -205,9 +199,6 @@ namespace ImusCityGovernmentSystem.General.Department
             public int DepartmentID { get; set; }
             public string DepartmentName { get; set; }
             public string DepartmentCode { get; set; }
-            public int? DivisionID { get; set; }
-            public string DivisionName { get; set; }
-
         }
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)

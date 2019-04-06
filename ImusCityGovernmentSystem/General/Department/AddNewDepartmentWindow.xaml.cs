@@ -36,7 +36,6 @@ namespace ImusCityGovernmentSystem.General.Department
             txtCode.Clear();
             txtName.Clear();
             txtCode.Focus();
-            cbDivision.Text = "";
         }
         public void DepartmentAdd()
         {
@@ -46,12 +45,11 @@ namespace ImusCityGovernmentSystem.General.Department
                 {
                     using (var db = new ImusCityHallEntities())
                     {
-                        if (!String.IsNullOrEmpty(txtCode.Text) && !String.IsNullOrEmpty(txtName.Text) && !String.IsNullOrEmpty(cbDivision.Text))
+                        if (!String.IsNullOrEmpty(txtCode.Text) && !String.IsNullOrEmpty(txtName.Text))
                         {
                             Model.Department d = new Model.Department();
                             d.DepartmentCode = txtCode.Text;
                             d.DepartmentName = txtName.Text;
-                            d.DivisionID = Convert.ToInt32(cbDivision.SelectedValue);
                             d.IsActive = true;
                             db.Departments.Add(d);
                             db.SaveChanges();
@@ -87,32 +85,5 @@ namespace ImusCityGovernmentSystem.General.Department
             }
         }
 
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            if (SystemClass.CheckConnection())
-            {
-                try
-                {
-                    using (var db = new ImusCityHallEntities())
-                    {
-                        cbDivision.ItemsSource = db.Divisions.Where(m => m.IsActive == true).OrderBy(m => m.DivisionName).ToList();
-                        cbDivision.DisplayMemberPath = "DivisionCode";
-                        cbDivision.SelectedValuePath = "DivisionID";
-                        txtCode.Focus();
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Something went wrong." + Environment.NewLine + ex.Message, "System Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-            else
-            {
-                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
-            }
-
-        }
     }
 }

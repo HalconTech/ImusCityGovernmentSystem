@@ -32,9 +32,9 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             if(SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                departmentcb.ItemsSource = db.Departments.Where(m => m.IsActive == true).OrderBy(m => m.DepartmentCode).ToList();
-                departmentcb.DisplayMemberPath = "DepartmentCode";
-                departmentcb.SelectedValuePath = "DepartmentID";
+                divisioncb.ItemsSource = db.Divisions.Where(m => m.IsActive == true).OrderBy(m => m.DivisionCode).ToList();
+                divisioncb.DisplayMemberPath = "DivisionCode";
+                divisioncb.SelectedValuePath = "DivisionID";
 
                 positioncb.ItemsSource = db.EmployeePositions.Where(m => m.Active == true).OrderBy(m => m.EmployeePositionName).ToList();
                 positioncb.DisplayMemberPath = "EmployeePositionName";
@@ -91,9 +91,9 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                         MessageBox.Show("Please enter date hired");
                         Mouse.OverrideCursor = null;
                     }
-                    else if (departmentcb.SelectedValue == null)
+                    else if (divisioncb.SelectedValue == null)
                     {
-                        MessageBox.Show("Please select employee department");
+                        MessageBox.Show("Please select employee division");
                         Mouse.OverrideCursor = null;
                     }
                     else if (positioncb.SelectedValue == null)
@@ -121,24 +121,14 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                         MessageBox.Show("Please select gender");
                         Mouse.OverrideCursor = null;
                     }
-                    else if (String.IsNullOrEmpty(citizenshiptb.Text))
-                    {
-                        MessageBox.Show("Please enter citizenship");
-                        Mouse.OverrideCursor = null;
-                    }
                     else if (civilstatuscb.SelectedValue == null)
                     {
                         MessageBox.Show("Please select civil status");
                         Mouse.OverrideCursor = null;
                     }
-                    else if (String.IsNullOrEmpty(religiontb.Text))
+                    else if (String.IsNullOrEmpty(mobilenotb.Text) || String.IsNullOrEmpty(landlinenotb.Text))
                     {
-                        MessageBox.Show("Please enter religion");
-                        Mouse.OverrideCursor = null;
-                    }
-                    else if (String.IsNullOrEmpty(mobilenotb.Text))
-                    {
-                        MessageBox.Show("Please enter mobile number");
+                        MessageBox.Show("Please enter mobile number or landline number");
                         Mouse.OverrideCursor = null;
                     }
                     else
@@ -148,7 +138,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                         int DeptID, PosID, StatID;
 
                         //Employee Information
-                        employee.EmployeeDepartmentID = Int32.TryParse(departmentcb.SelectedValue.ToString(), out DeptID) ? DeptID : (int?)null;
+                        employee.EmployeeDivisionID = Int32.TryParse(divisioncb.SelectedValue.ToString(), out DeptID) ? DeptID : (int?)null;
                         employee.EmployeePositionID = Int32.TryParse(positioncb.SelectedValue.ToString(), out PosID) ? PosID : (int?)null;
                         employee.EmployeeStatusID = Int32.TryParse(positioncb.SelectedValue.ToString(), out StatID) ? StatID : (int?)null;
                         employee.DateHired = String.IsNullOrEmpty(datehiredp.Text) ? null : datehiredp.SelectedDate;
@@ -239,7 +229,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
 
 
                     //Employee Information
-                    departmentcb.SelectedValue = employee.EmployeeDepartmentID;
+                    divisioncb.SelectedValue = employee.EmployeeDivisionID;
                     positioncb.SelectedValue = employee.EmployeePositionID;
                     statuscb.SelectedValue = employee.EmployeeStatusID;
                     datehiredp.SelectedDate = employee.DateHired;

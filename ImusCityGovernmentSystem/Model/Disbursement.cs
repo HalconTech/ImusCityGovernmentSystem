@@ -43,7 +43,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual ICollection<Check> Checks { get; set; }
         public virtual Department Department { get; set; }
         public virtual Payee Payee { get; set; }
-        public virtual PayeeRepresentative PayeeRepresentative { get; set; }
         public virtual FundBank FundBank { get; set; }
+        public virtual PayeeRepresentative PayeeRepresentative { get; set; }
     }
 }

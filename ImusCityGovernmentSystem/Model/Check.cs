@@ -17,8 +17,8 @@ namespace ImusCityGovernmentSystem.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Check()
         {
-            this.CheckReleases = new HashSet<CheckRelease>();
             this.BankTrails = new HashSet<BankTrail>();
+            this.CheckReleases = new HashSet<CheckRelease>();
         }
     
         public int CheckID { get; set; }
@@ -32,11 +32,11 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> Status { get; set; }
         public Nullable<int> AdviceNo { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BankTrail> BankTrails { get; set; }
+        public virtual Disbursement Disbursement { get; set; }
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckRelease> CheckReleases { get; set; }
-        public virtual Disbursement Disbursement { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BankTrail> BankTrails { get; set; }
     }
 }

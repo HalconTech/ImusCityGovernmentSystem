@@ -47,7 +47,6 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Department Code"  Binding="{Binding DepartmentCode}"/>
                         <DataGridTextColumn Header="Department Name"  Binding="{Binding DepartmentName}"/>
-                        <DataGridTextColumn Header="Division Name" Binding="{Binding DivisionName}"/>
                     </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                         <ContextMenu>

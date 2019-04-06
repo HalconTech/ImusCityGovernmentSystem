@@ -17,8 +17,8 @@ namespace ImusCityGovernmentSystem.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Payee()
         {
-            this.PayeeRepresentatives = new HashSet<PayeeRepresentative>();
             this.Disbursements = new HashSet<Disbursement>();
+            this.PayeeRepresentatives = new HashSet<PayeeRepresentative>();
         }
     
         public int PayeeID { get; set; }
@@ -30,8 +30,8 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<bool> IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PayeeRepresentative> PayeeRepresentatives { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PayeeRepresentative> PayeeRepresentatives { get; set; }
     }
 }

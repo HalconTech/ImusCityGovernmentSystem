@@ -17,15 +17,17 @@ namespace ImusCityGovernmentSystem.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Division()
         {
-            this.Departments = new HashSet<Department>();
+            this.Employees = new HashSet<Employee>();
         }
     
         public int DivisionID { get; set; }
         public string DivisionName { get; set; }
         public string DivisionCode { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> DepartmentID { get; set; }
     
+        public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Department> Departments { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }
