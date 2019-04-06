@@ -30,7 +30,7 @@ namespace ImusCityGovernmentSystem.General.BankAccount
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                accountslistlb.ItemsSource = db.FundBanks.OrderByDescending(m => m.FundBankID).ToList();
+                accountslistlb.ItemsSource = db.FundBanks.Where(m => m.IsActive == true).OrderByDescending(m => m.FundBankID).ToList();
                 accountslistlb.DisplayMemberPath = "AccountNumber";
                 accountslistlb.SelectedValuePath = "FundBankID";
 
@@ -67,6 +67,12 @@ namespace ImusCityGovernmentSystem.General.BankAccount
                 fundcb.DisplayMemberPath = "FundName";
                 fundcb.SelectedValuePath = "FundID";
                 fundcb.SelectedValue = account.FundID;
+
+                accountnumbertb.Text = account.AccountNumber;
+                startingbalancetb.Text = String.Format("{0:n}", account.StartingBalance);
+                currentbalancetb.Text = String.Format("{0:n}", account.CurrentBalance);
+                advicenumbertb.Text = account.AdviceNo.HasValue ? account.AdviceNo.ToString() : "";
+
             }
             else
             {
@@ -76,6 +82,10 @@ namespace ImusCityGovernmentSystem.General.BankAccount
 
         private void accountslistlb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (accountslistlb.SelectedValue == null)
+            {
+                return;
+            }
             int id = (int)accountslistlb.SelectedValue;
             LoadSelected(id);
         }
@@ -107,20 +117,54 @@ namespace ImusCityGovernmentSystem.General.BankAccount
 
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
-                int id = (int)accountslistlb.SelectedValue;
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                FundBank account = db.FundBanks.Find(id);
-                account.FundID = (int)fundcb.SelectedValue;
-                account.BankID = (int)bankcb.SelectedValue;
-                account.AccountNumber = accountnumbertb.Text;
+                if (db.FundBanks.Any(m => m.AccountNumber == accountnumbertb.Text))
+                {
+                    MessageBox.Show("Account number is already used");                  
+                }
+                else
+                {
+                    int id = (int)accountslistlb.SelectedValue;
+                    FundBank account = db.FundBanks.Find(id);
+                    account.FundID = (int)fundcb.SelectedValue;
+                    account.BankID = (int)bankcb.SelectedValue;
+                    account.AccountNumber = accountnumbertb.Text;
+                    db.SaveChanges();
+                    MessageBox.Show("Account updated succesfully");
 
+                    fundcb.IsEnabled = false;
+                    bankcb.IsEnabled = false;
+                    accountnumbertb.IsEnabled = false;
+                    savebtn.IsEnabled = false;
+                    editbtn.IsEnabled = true;
+
+
+                    db = new ImusCityHallEntities();
+                    accountslistlb.ItemsSource = db.FundBanks.Where(m => m.IsActive == true).OrderByDescending(m => m.FundBankID).ToList();
+                    accountslistlb.DisplayMemberPath = "AccountNumber";
+                    accountslistlb.SelectedValuePath = "FundBankID";
+                    accountslistlb.SelectedValue = id;
+                }
             }
             else
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+        }
+
+        private void addbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            General.BankAccount.AddBankAccountWindow add = new AddBankAccountWindow();
+            Mouse.OverrideCursor = null;
+            add.ShowDialog();
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            db = new ImusCityHallEntities();
+            accountslistlb.ItemsSource = db.FundBanks.Where(m => m.IsActive == true).OrderByDescending(m => m.FundBankID).ToList();
+            accountslistlb.DisplayMemberPath = "AccountNumber";
+            accountslistlb.SelectedValuePath = "FundBankID";
         }
     }
 }

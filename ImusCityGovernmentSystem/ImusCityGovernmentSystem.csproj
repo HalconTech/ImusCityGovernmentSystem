@@ -196,6 +196,9 @@
     <Compile Include="ForgotPassword.xaml.cs">
       <DependentUpon>ForgotPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="General\BankAccount\AddBankAccountWindow.xaml.cs">
+      <DependentUpon>AddBankAccountWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="General\BankAccount\BankAccountListWindow.xaml.cs">
       <DependentUpon>BankAccountListWindow.xaml</DependentUpon>
     </Compile>
@@ -423,6 +426,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ForgotPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\BankAccount\AddBankAccountWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
