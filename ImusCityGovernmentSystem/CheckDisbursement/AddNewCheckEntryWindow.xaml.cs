@@ -94,6 +94,20 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     db.Checks.Add(check);
 
 
+                    ImusCityGovernmentSystem.Model.BankTrail banktrail = new BankTrail();
+                    ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(DisbursementID);
+                    banktrail.DebitCredit = "D";
+                    banktrail.FundBankID = disbursement.FundBankID;
+                    banktrail.Amount = Convert.ToDecimal(checkamounttb.Text);
+                    banktrail.EntryName = nameof(BankTrailEntry.CheckCreated);
+                    banktrail.CheckID = check.CheckID;
+                    banktrail.EntryNameID = (int)BankTrailEntry.CheckCreated;
+                    banktrail.EmployeeID = App.EmployeeID;
+                    db.BankTrails.Add(banktrail);
+
+                    ImusCityGovernmentSystem.Model.FundBank account = db.FundBanks.Find(disbursement.FundBankID);
+                    account.CurrentBalance -= Convert.ToDecimal(checkamounttb.Text);
+
                     db.SaveChanges();
 
                     var audit = new AuditTrailModel

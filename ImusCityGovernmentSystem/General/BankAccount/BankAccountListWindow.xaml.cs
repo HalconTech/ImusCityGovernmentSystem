@@ -72,6 +72,7 @@ namespace ImusCityGovernmentSystem.General.BankAccount
                 startingbalancetb.Text = String.Format("{0:n}", account.StartingBalance);
                 currentbalancetb.Text = String.Format("{0:n}", account.CurrentBalance);
                 advicenumbertb.Text = account.AdviceNo.HasValue ? account.AdviceNo.ToString() : "";
+                flooramounttb.Text = String.Format("{0:n}", account.AmountLimit);
 
             }
             else
@@ -100,6 +101,7 @@ namespace ImusCityGovernmentSystem.General.BankAccount
                     fundcb.IsEnabled = true;
                     bankcb.IsEnabled = true;
                     accountnumbertb.IsEnabled = true;
+                    flooramounttb.IsEnabled = true;
                     savebtn.IsEnabled = true;
                     editbtn.IsEnabled = false;
                 }
@@ -120,33 +122,37 @@ namespace ImusCityGovernmentSystem.General.BankAccount
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                if (db.FundBanks.Any(m => m.AccountNumber == accountnumbertb.Text))
+                int id = (int)accountslistlb.SelectedValue;
+                FundBank account = db.FundBanks.Find(id);
+                account.FundID = (int)fundcb.SelectedValue;
+                account.BankID = (int)bankcb.SelectedValue;
+                account.AccountNumber = accountnumbertb.Text;
+                account.AmountLimit = Convert.ToDecimal(flooramounttb.Text);
+                db.SaveChanges();
+
+                var audit = new AuditTrailModel
                 {
-                    MessageBox.Show("Account number is already used");                  
-                }
-                else
-                {
-                    int id = (int)accountslistlb.SelectedValue;
-                    FundBank account = db.FundBanks.Find(id);
-                    account.FundID = (int)fundcb.SelectedValue;
-                    account.BankID = (int)bankcb.SelectedValue;
-                    account.AccountNumber = accountnumbertb.Text;
-                    db.SaveChanges();
-                    MessageBox.Show("Account updated succesfully");
+                    Activity = "Updated bank account in the database. FUND BANK ID: " + id.ToString(),
+                    ModuleName = this.GetType().Name,
+                    EmployeeID = App.EmployeeID
+                };
 
-                    fundcb.IsEnabled = false;
-                    bankcb.IsEnabled = false;
-                    accountnumbertb.IsEnabled = false;
-                    savebtn.IsEnabled = false;
-                    editbtn.IsEnabled = true;
+                SystemClass.InsertLog(audit);
+                MessageBox.Show("Account updated succesfully");
+
+                fundcb.IsEnabled = false;
+                bankcb.IsEnabled = false;
+                accountnumbertb.IsEnabled = false;
+                flooramounttb.IsEnabled = false;
+                savebtn.IsEnabled = false;
+                editbtn.IsEnabled = true;
 
 
-                    db = new ImusCityHallEntities();
-                    accountslistlb.ItemsSource = db.FundBanks.Where(m => m.IsActive == true).OrderByDescending(m => m.FundBankID).ToList();
-                    accountslistlb.DisplayMemberPath = "AccountNumber";
-                    accountslistlb.SelectedValuePath = "FundBankID";
-                    accountslistlb.SelectedValue = id;
-                }
+                db = new ImusCityHallEntities();
+                accountslistlb.ItemsSource = db.FundBanks.Where(m => m.IsActive == true).OrderByDescending(m => m.FundBankID).ToList();
+                accountslistlb.DisplayMemberPath = "AccountNumber";
+                accountslistlb.SelectedValuePath = "FundBankID";
+                accountslistlb.SelectedValue = id;
             }
             else
             {

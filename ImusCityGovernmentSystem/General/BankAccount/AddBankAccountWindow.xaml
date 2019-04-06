@@ -7,7 +7,7 @@
                       TitleCaps="False"
                       BorderThickness="0"
                       WindowStartupLocation="CenterScreen"
-                      Height="400"
+                      Height="443.856"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
@@ -16,6 +16,8 @@
     <Grid Margin="10">
         <Grid Margin="0,0,2.5,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="20"></RowDefinition>
@@ -42,7 +44,9 @@
             <TextBox PreviewTextInput="NumberValidationTextBox" VerticalContentAlignment="Center" Grid.Row="9" Name="currentbalancetb"></TextBox>
             <TextBlock Grid.Row="10" Text="Current Advice Number*"></TextBlock>
             <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="11" VerticalAlignment="Center" Name="advicenumbertb"></TextBox>
-            <Grid Grid.Row="12" Margin="0,5,0,0">
+            <TextBlock Grid.Row="12" Text="Floor Amount*"></TextBlock>
+            <TextBox Grid.Row="13" VerticalContentAlignment="Center" Name="flooramounttb"></TextBox>
+            <Grid Grid.Row="14" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>

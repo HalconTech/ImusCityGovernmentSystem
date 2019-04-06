@@ -20,8 +20,11 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<decimal> Amount { get; set; }
         public string EntryName { get; set; }
         public Nullable<int> CheckID { get; set; }
+        public Nullable<int> EntryNameID { get; set; }
+        public Nullable<int> EmployeeID { get; set; }
     
         public virtual Check Check { get; set; }
+        public virtual Employee Employee { get; set; }
         public virtual FundBank FundBank { get; set; }
     }
 }

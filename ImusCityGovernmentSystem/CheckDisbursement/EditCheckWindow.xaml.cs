@@ -55,7 +55,35 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 ImusCityGovernmentSystem.Model.Check check = db.Checks.Find(CheckID);
                 check.DateCreated = checkdatecreateddp.SelectedDate;
                 check.Status = checkstatuscb.SelectedIndex;
+           
+                if(checkstatuscb.SelectedIndex == (int)CheckStatus.Cancelled)
+                {
+                    ImusCityGovernmentSystem.Model.BankTrail banktrail = new BankTrail();
+                    ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(check.DisbursementID);
+                    banktrail.DebitCredit = "C";
+                    banktrail.FundBankID = disbursement.FundBankID;
+                    banktrail.Amount = Convert.ToDecimal(check.Amount);
+                    banktrail.EntryName = nameof(BankTrailEntry.CheckCreated);
+                    banktrail.CheckID = check.CheckID;
+                    banktrail.EntryNameID = (int)BankTrailEntry.CheckCreated;
+                    banktrail.EmployeeID = App.EmployeeID;
+                    db.BankTrails.Add(banktrail);
+
+                    ImusCityGovernmentSystem.Model.FundBank account = db.FundBanks.Find(disbursement.FundBankID);
+                    account.CurrentBalance += Convert.ToDecimal(check.Amount);
+
+                }
                 db.SaveChanges();
+
+                var audit = new AuditTrailModel
+                {
+                    Activity = "Updated check in the database. CHECK NUMBER: " + check.CheckNo,
+                    ModuleName = this.GetType().Name,
+                    EmployeeID = App.EmployeeID
+                };
+
+                SystemClass.InsertLog(audit);
+
                 MessageBox.Show("Check entry updated successfully");
             }
             else
