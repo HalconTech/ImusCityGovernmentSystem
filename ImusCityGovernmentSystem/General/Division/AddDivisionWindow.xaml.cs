@@ -39,11 +39,12 @@ namespace ImusCityGovernmentSystem.General.Division
                 {
                     using (var db = new ImusCityHallEntities())
                     {
-                        if (!String.IsNullOrEmpty(txtCode.Text) && !String.IsNullOrEmpty(txtName.Text))
+                        if (!String.IsNullOrEmpty(txtCode.Text) && !String.IsNullOrEmpty(txtName.Text) && departmentcb.SelectedValue != null)
                         {
                             Model.Division d = new Model.Division();
                             d.DivisionCode = txtCode.Text;
                             d.DivisionName = txtName.Text;
+                            d.DepartmentID = (int)departmentcb.SelectedValue;
                             d.IsActive = true;
                             db.Divisions.Add(d);
                             db.SaveChanges();
@@ -89,6 +90,17 @@ namespace ImusCityGovernmentSystem.General.Division
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            if(SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentName).ToList();
+                departmentcb.DisplayMemberPath = "DepartmentName";
+                departmentcb.SelectedValuePath = "DepartmentID";
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
             txtCode.Focus();
         }
     }

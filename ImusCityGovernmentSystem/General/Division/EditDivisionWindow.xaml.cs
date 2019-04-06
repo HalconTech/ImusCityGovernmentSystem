@@ -42,6 +42,7 @@ namespace ImusCityGovernmentSystem.General.Division
                         var find = db.Divisions.Find(DivisionID);
                         find.DivisionCode = txtCode.Text;
                         find.DivisionName = txtName.Text;
+                        find.DepartmentID = (int)departmentcb.SelectedValue;
                         db.SaveChanges();
 
                         var audit = new AuditTrailModel
@@ -79,6 +80,7 @@ namespace ImusCityGovernmentSystem.General.Division
 
                         txtCode.Text = find.DivisionCode;
                         txtName.Text = find.DivisionName;
+                        departmentcb.SelectedValue = find.DepartmentID;
                     }
                 }
                 catch (Exception ex)
@@ -94,6 +96,17 @@ namespace ImusCityGovernmentSystem.General.Division
         }
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            if(SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentName).ToList();
+                departmentcb.DisplayMemberPath = "DepartmentName";
+                departmentcb.SelectedValuePath = "DepartmentID";
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
             LoadDivision();
         }
     }

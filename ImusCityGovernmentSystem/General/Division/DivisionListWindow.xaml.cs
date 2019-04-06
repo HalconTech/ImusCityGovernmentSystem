@@ -58,6 +58,7 @@ namespace ImusCityGovernmentSystem.General.Division
             public int DivisionID { get; set; }
             public string DivisionCode { get; set; }
             public string DivisionName { get; set; }
+            public string DepartmentName { get; set; }
         }
         public void TextClear()
         {
@@ -81,7 +82,7 @@ namespace ImusCityGovernmentSystem.General.Division
                             dl.DivisionID = item.DivisionID;
                             dl.DivisionCode = item.DivisionCode;
                             dl.DivisionName = item.DivisionName;
-
+                            dl.DepartmentName = item.Department.DepartmentName;
                             DList.Add(dl);
                         }
                         if (!String.IsNullOrEmpty(txtSearch.Text))
@@ -173,7 +174,7 @@ namespace ImusCityGovernmentSystem.General.Division
                             dl.DivisionID = item.DivisionID;
                             dl.DivisionCode = item.DivisionCode;
                             dl.DivisionName = item.DivisionName;
-
+                            dl.DepartmentName = item.Department.DepartmentName;
                             DList.Add(dl);
                         }
                         dgDivisionList.ItemsSource = DList.OrderByDescending(m => m.DivisionID);
