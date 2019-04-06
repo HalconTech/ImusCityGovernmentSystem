@@ -46,6 +46,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 departmentcb.DisplayMemberPath = "DepartmentName";
                 departmentcb.SelectedValuePath = "DepartmentID";
                 departmentcb.SelectedIndex = 0;
+
+                IncrementAdviceNo();
             }
             else
             {
@@ -159,6 +161,41 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
 
+        }
+
+        public void IncrementAdviceNo()
+        {
+            if (SystemClass.CheckConnection())
+            {
+                bool isForAudit = false;
+
+                ImusCityHallEntities db = new ImusCityHallEntities();
+
+                var accountlist = db.FundBanks.ToList();
+                foreach(var x in accountlist.Where(m=>m.IsActive == true &&  m.IsProcessed == false))
+                {
+                    x.IsProcessed = true;
+                    x.AdviceNo = (x.AdviceNo + 1);
+                    isForAudit = true;
+                    db.SaveChanges();
+                }
+
+                if(isForAudit == true)
+                {
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Advice No Incremented successful.",
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
         }
     }
 }
