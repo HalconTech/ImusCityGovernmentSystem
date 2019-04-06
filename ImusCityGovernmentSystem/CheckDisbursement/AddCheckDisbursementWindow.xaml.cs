@@ -244,6 +244,24 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             }
         }
 
-       
+        private void checkbalbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                var fundbankID = Convert.ToInt32(fundtypecb.SelectedValue);
+
+                var fundbank = db.FundBanks.Find(fundbankID);
+
+                if (fundbank != null)
+                {
+                    MessageBox.Show(String.Format("{0:n}", fundbank.CurrentBalance), "Fund Current Balance", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+        }
     }
 }
