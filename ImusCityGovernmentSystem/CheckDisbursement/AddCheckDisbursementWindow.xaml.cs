@@ -234,7 +234,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     string prefix = fundbank.Fund.FundPrefix + "-";
                     vouchernotb.Text = prefix;
-                    MessageBox.Show(String.Format("{0:C}", fundbank.CurrentBalance), "Fund Current Balance", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(String.Format(new System.Globalization.CultureInfo("en-PH"), "{0:C}", fundbank.CurrentBalance), "Fund Current Balance", MessageBoxButton.OK, MessageBoxImage.Information);
                     vouchernotb.Focus();
                 }
             }
