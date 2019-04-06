@@ -22,6 +22,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> CheckID { get; set; }
         public Nullable<int> EntryNameID { get; set; }
         public Nullable<int> EmployeeID { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
     
         public virtual Check Check { get; set; }
         public virtual Employee Employee { get; set; }

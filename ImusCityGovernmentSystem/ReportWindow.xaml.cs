@@ -57,6 +57,7 @@ namespace ImusCityGovernmentSystem
                 db = new ImusCityHallEntities();
                 DVList = new List<DisbursementVoucherModel>();
                 var disburse = db.GetDisbursementVoucher(id).ToList();
+                CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
                 foreach (var x in disburse)
                 {
                     DisbursementVoucherModel dvl = new DisbursementVoucherModel();
@@ -75,9 +76,9 @@ namespace ImusCityGovernmentSystem
                     dvl.Unit_Project = x.Unit_Project;
                     dvl.VoucherNo = x.VoucherNo;
                     dvl.PaymentName = x.PaymentName;
-                    dvl.Signatory = x.Signatory;
-                    dvl.Signatory2 = x.Signatory2;
-                    dvl.Signatory3 = x.Signatory3;
+                    dvl.Signatory = GetSignatory(signatories.CItyAccountant);
+                    dvl.Signatory2 = GetSignatory(signatories.CityTreasurer);
+                    dvl.Signatory3 = GetSignatory(signatories.CityAdministrator);
                     DVList.Add(dvl);
 
                     ReportDocument report;
@@ -97,6 +98,7 @@ namespace ImusCityGovernmentSystem
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
+                CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
                 CheckModel check = new CheckModel();
                 ImusCityGovernmentSystem.Model.Check checklist = db.Checks.Find(id);
                 check.CheckNo = checklist.CheckNo;
@@ -108,6 +110,8 @@ namespace ImusCityGovernmentSystem
                 check.CheckDescription = checklist.CheckDescription;
                 check.VoucherNo = checklist.Disbursement.VoucherNo;
                 check.Amount = checklist.Amount.Value;
+                check.Signatory1 = GetSignatory(signatories.CityMayor);
+                check.Signatory2 = GetSignatory(signatories.CityTreasurer);
                 ReportDocument report;
                 report = new CheckReport();
                 report.SetDataSource(new[] { check });

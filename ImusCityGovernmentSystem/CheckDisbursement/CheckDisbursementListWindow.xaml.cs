@@ -71,12 +71,12 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                     otherscb.IsEnabled = false;
                     switch (dis.PaymentTypeID)
                     {
-                        case (int)PaymentType.Cash:
+                        case (int)PaymentType.Check:
                             checkcb.IsChecked = true;
                             cashcb.IsChecked = false;
                             otherscb.IsChecked = false;
                             break;
-                        case (int)PaymentType.Check:
+                        case (int)PaymentType.Cash:
                             cashcb.IsChecked = true;
                             checkcb.IsChecked = false;
                             otherscb.IsChecked = false;

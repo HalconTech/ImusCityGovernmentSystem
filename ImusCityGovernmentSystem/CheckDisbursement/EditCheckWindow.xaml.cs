@@ -67,6 +67,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     banktrail.CheckID = check.CheckID;
                     banktrail.EntryNameID = (int)BankTrailEntry.CheckCancelled;
                     banktrail.EmployeeID = App.EmployeeID;
+                    banktrail.DateCreated = DateTime.Now;
                     db.BankTrails.Add(banktrail);
 
                     ImusCityGovernmentSystem.Model.FundBank account = db.FundBanks.Find(disbursement.FundBankID);

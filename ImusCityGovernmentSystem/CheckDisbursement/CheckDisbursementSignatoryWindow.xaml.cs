@@ -92,6 +92,20 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 administratorcb.ItemsSource = result.OrderBy(m => m.Name).ToList();
                 administratorcb.DisplayMemberPath = "Name";
                 administratorcb.SelectedValuePath = "ID";
+
+                if(db.CDSSignatories.Any())
+                {
+                    ImusCityGovernmentSystem.Model.CDSSignatory signatory = db.CDSSignatories.FirstOrDefault();
+                    mayorcb.SelectedValue = signatory.CityMayor;
+                    treasurercb.SelectedValue = signatory.CityTreasurer;
+                    accountantcb.SelectedValue = signatory.CItyAccountant;
+                    accountantrepcb.SelectedValue = signatory.AccountantRepresentative;
+                    administratorcb.SelectedValue = signatory.CityAdministrator;
+                }
+                else
+                {
+                   
+                }
             }
             else
             {

@@ -56,6 +56,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
+                ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(DisbursementID);
                 if (String.IsNullOrEmpty(checknotb.Text))
                 {
                     MessageBox.Show("Please provide the check number");
@@ -80,6 +81,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     MessageBox.Show("Please select treasurer");
                 }
+                else if(db.FundBanks.Find(disbursement.FundBankID).CurrentBalance < Convert.ToDecimal(checkamounttb.Text))
+                {
+                    MessageBox.Show("Check cannot be created, you have insufficients funds");
+                }
                 else
                 {
 
@@ -95,7 +100,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
 
 
                     ImusCityGovernmentSystem.Model.BankTrail banktrail = new BankTrail();
-                    ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(DisbursementID);
                     banktrail.DebitCredit = "D";
                     banktrail.FundBankID = disbursement.FundBankID;
                     banktrail.Amount = Convert.ToDecimal(checkamounttb.Text);
@@ -103,6 +107,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     banktrail.CheckID = check.CheckID;
                     banktrail.EntryNameID = (int)BankTrailEntry.CheckCreated;
                     banktrail.EmployeeID = App.EmployeeID;
+                    banktrail.DateCreated = DateTime.Now;
                     db.BankTrails.Add(banktrail);
 
                     ImusCityGovernmentSystem.Model.FundBank account = db.FundBanks.Find(disbursement.FundBankID);

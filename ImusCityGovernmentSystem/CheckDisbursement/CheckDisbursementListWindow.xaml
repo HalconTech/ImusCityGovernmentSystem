@@ -5,6 +5,7 @@
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                       Title="Check Disbursement List"
                       TitleCaps="False"
+                      GlowBrush="Black"
                       BorderThickness="0"
                       WindowStartupLocation="CenterScreen"
                       Height="603"
