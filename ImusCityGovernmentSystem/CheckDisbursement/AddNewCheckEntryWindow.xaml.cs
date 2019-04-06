@@ -30,12 +30,18 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
         {
             if (SystemClass.CheckConnection())
             {
+
+                foreach (var item in Enum.GetValues(typeof(PaymentType)))
+                {
+                    paymenttypecb.Items.Add(item);
+                }
+
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 Disbursement disbursement = db.Disbursements.Find(DisbursementID);
                 vouchernotb.Text = disbursement.VoucherNo;
                 payeetb.Text = disbursement.Payee.CompanyName;
                 descriptiontb.Text = disbursement.Description;
-                //paymenttypetb.Text = disbursement.PaymentTypeID;
+                paymenttypecb.SelectedIndex = disbursement.PaymentTypeID.HasValue ? disbursement.PaymentTypeID.Value : 0;
                 voucheramounttb.Text = String.Format("{0:0.##}", disbursement.Amount);
                 LoadSignatories();
             }
@@ -62,21 +68,21 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     MessageBox.Show("Please enter check amount");
                 }
-                else if(db.Checks.Any(m => m.CheckNo == checknotb.Text))
+                else if (db.Checks.Any(m => m.CheckNo == checknotb.Text))
                 {
                     MessageBox.Show("Check number is already been used");
                 }
-                else if(mayorcb.SelectedValue == null)
+                else if (mayorcb.SelectedValue == null)
                 {
                     MessageBox.Show("Please select mayor");
                 }
-                else if(treasurercb.SelectedValue == null)
+                else if (treasurercb.SelectedValue == null)
                 {
                     MessageBox.Show("Please select treasurer");
                 }
                 else
                 {
-                   
+
                     Check check = new Check();
                     check.DisbursementID = DisbursementID;
                     check.CheckNo = checknotb.Text;
@@ -130,10 +136,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
 
         public void LoadSignatories()
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                var employee = from p in db.Employees orderby p.FirstName
+                var employee = from p in db.Employees
+                               orderby p.FirstName
                                select new
                                {
                                    id = p.EmployeeID,
@@ -154,6 +161,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
         }
-            
+
     }
 }

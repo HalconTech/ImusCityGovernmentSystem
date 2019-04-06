@@ -40,6 +40,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     paymenttypecb.Items.Add(item);
                 }
+                paymenttypecb.SelectedIndex = 0;
 
                 //paymenttypecb.ItemsSource = db.PaymentTypes.ToList();
                 //paymenttypecb.DisplayMemberPath = "Name";
@@ -50,6 +51,9 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 departmentcb.DisplayMemberPath = "DepartmentName";
                 departmentcb.SelectedValuePath = "DepartmentID";
                 departmentcb.SelectedIndex = 0;
+
+                fundtypecb.ItemsSource = db.FundBanks.OrderBy(m=>m.Fund.FundName).ToList();
+                fundtypecb.SelectedValuePath = "FundBankID";
 
                 IncrementAdviceNo();
             }
@@ -107,6 +111,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         disbursement.DocCompleted = documentcb.IsChecked;
                         disbursement.PayeeRepID = (int)payeerepcb.SelectedValue;
                         disbursement.PayeeName = optionalpayee.Text;
+                        
                         var x = db.Disbursements.Add(disbursement);
                         db.SaveChanges();
                         var audit = new AuditTrailModel
@@ -194,6 +199,28 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     };
 
                     SystemClass.InsertLog(audit);
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+        }
+
+        private void fundtypecb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                var fundbankID = Convert.ToInt32(fundtypecb.SelectedValue);
+
+                var fundbank = db.FundBanks.Find(fundbankID);
+
+                if (fundbank != null)
+                {
+                    string prefix = fundbank.Fund.FundPrefix + "-";
+                    vouchernotb.Text = prefix;
+                    vouchernotb.Focus();
                 }
             }
             else
