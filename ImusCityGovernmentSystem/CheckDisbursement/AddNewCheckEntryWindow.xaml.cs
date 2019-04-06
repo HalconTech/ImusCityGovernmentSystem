@@ -92,8 +92,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     check.Amount = Convert.ToDecimal(checkamounttb.Text);
                     check.EmployeeID = App.EmployeeID;
                     check.DateCreated = DateTime.Now;
-                    check.Signatory1 = (int)mayorcb.SelectedValue;
-                    check.Signatory2 = (int)treasurercb.SelectedValue;
+                    check.Status = (int)CheckStatus.Created;
                     db.Checks.Add(check);
                     db.SaveChanges();
 

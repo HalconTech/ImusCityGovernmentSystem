@@ -18,7 +18,10 @@ namespace ImusCityGovernmentSystem.Model
         public string DebitCredit { get; set; }
         public Nullable<int> FundBankID { get; set; }
         public Nullable<decimal> Amount { get; set; }
+        public string EntryName { get; set; }
+        public Nullable<int> CheckID { get; set; }
     
+        public virtual Check Check { get; set; }
         public virtual FundBank FundBank { get; set; }
     }
 }

@@ -151,6 +151,7 @@
     <Compile Include="CheckDisbursement\AddNewCheckEntryWindow.xaml.cs">
       <DependentUpon>AddNewCheckEntryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CheckDisbursement\BankTrailEntry.cs" />
     <Compile Include="CheckDisbursement\CheckDisbursementListWindow.xaml.cs">
       <DependentUpon>CheckDisbursementListWindow.xaml</DependentUpon>
     </Compile>
@@ -163,11 +164,16 @@
     <Compile Include="CheckDisbursement\CheckRegisterReport.xaml.cs">
       <DependentUpon>CheckRegisterReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CheckDisbursement\CheckStatus.cs" />
     <Compile Include="CheckDisbursement\Data\CheckDisbursementDataTable.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckDisbursementDataTable.xsd</DependentUpon>
     </Compile>
+    <Compile Include="CheckDisbursement\EditCheckWindow.xaml.cs">
+      <DependentUpon>EditCheckWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CheckDisbursement\PaymentType.cs" />
     <Compile Include="CheckDisbursement\Report\AccountantCheckDisbursementReport.cs">
       <DependentUpon>AccountantCheckDisbursementReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -362,9 +368,6 @@
     <Compile Include="Model\PayeeRepresentativeView.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\PaymentType.cs">
-      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\ReportParameter.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
@@ -422,6 +425,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CheckDisbursement\CheckRegisterReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckDisbursement\EditCheckWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

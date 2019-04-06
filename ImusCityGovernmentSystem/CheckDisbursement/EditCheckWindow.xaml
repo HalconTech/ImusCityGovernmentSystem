@@ -1,0 +1,39 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.CheckDisbursement.EditCheckWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="Edit Check"            
+                      TitleCaps="False"
+                      BorderThickness="1"
+                      WindowStartupLocation="CenterScreen"
+                      Height="203.368"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      Width="315.99"  Loaded="MetroWindow_Loaded" >
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Check Number" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Name="checknumbertb" Grid.Column="1"></TextBlock>
+        <TextBlock Text="Data Created" Grid.Row="1" VerticalAlignment="Center"></TextBlock>
+        <DatePicker Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" Name="checkdatecreateddp" Margin="0,5,0,0"></DatePicker>
+        <TextBlock Text="Check Status" Grid.Row="2" VerticalAlignment="Center"></TextBlock>
+        <ComboBox Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" Name="checkstatuscb" Margin="0,5,0,0">
+            <ComboBoxItem>Created</ComboBoxItem>
+            <ComboBoxItem>Cancelled</ComboBoxItem>
+            <ComboBoxItem>Released</ComboBoxItem>
+        </ComboBox>
+        <Button Grid.Row="3" Grid.Column="1" Content="Save" Name="savebtn" Margin="0,5,0,0" HorizontalAlignment="Right"></Button>
+    </Grid>
+</Controls:MetroWindow>
+

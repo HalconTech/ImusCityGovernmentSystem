@@ -106,8 +106,6 @@ namespace ImusCityGovernmentSystem
                 double amount = Convert.ToDouble(checklist.Amount.Value);
                 check.AmountInWords = convert.NumberToWords(amount).ToUpper();
                 check.CheckDescription = checklist.CheckDescription;
-                check.Signatory1 = GetSignatory(checklist.Signatory1);
-                check.Signatory2 = GetSignatory(checklist.Signatory2);
                 check.VoucherNo = checklist.Disbursement.VoucherNo;
                 check.Amount = checklist.Amount.Value;
                 ReportDocument report;
