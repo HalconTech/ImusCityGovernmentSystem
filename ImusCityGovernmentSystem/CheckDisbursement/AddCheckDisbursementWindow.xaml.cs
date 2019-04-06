@@ -35,12 +35,16 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 payeecb.DisplayMemberPath = "CompanyName";
                 payeecb.SelectedValuePath = "PayeeID";
 
+                
+                foreach(var item in Enum.GetValues(typeof(PaymentType)))
+                {
+                    paymenttypecb.Items.Add(item);
+                }
 
-
-                paymenttypecb.ItemsSource = db.PaymentTypes.ToList();
-                paymenttypecb.DisplayMemberPath = "Name";
-                paymenttypecb.SelectedValuePath = "PaymentTypeID";
-                paymenttypecb.SelectedIndex = 0;
+                //paymenttypecb.ItemsSource = db.PaymentTypes.ToList();
+                //paymenttypecb.DisplayMemberPath = "Name";
+                //paymenttypecb.SelectedValuePath = "PaymentTypeID";
+                //paymenttypecb.SelectedIndex = 0;
 
                 departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentName).ToList();
                 departmentcb.DisplayMemberPath = "DepartmentName";

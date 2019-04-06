@@ -35,7 +35,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 vouchernotb.Text = disbursement.VoucherNo;
                 payeetb.Text = disbursement.Payee.CompanyName;
                 descriptiontb.Text = disbursement.Description;
-                paymenttypetb.Text = disbursement.PaymentType.Name;
+                //paymenttypetb.Text = disbursement.PaymentTypeID;
                 voucheramounttb.Text = String.Format("{0:0.##}", disbursement.Amount);
                 LoadSignatories();
             }

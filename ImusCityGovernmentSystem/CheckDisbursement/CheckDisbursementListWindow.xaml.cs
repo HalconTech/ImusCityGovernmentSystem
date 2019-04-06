@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
 using ImusCityGovernmentSystem;
+using ImusCityGovernmentSystem.CheckDisbursement;
+
 namespace ImusCityGovernmentSystem.Check_Disbursement
 {
     /// <summary>
@@ -67,19 +69,19 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                     checkcb.IsEnabled = false;
                     cashcb.IsEnabled = false;
                     otherscb.IsEnabled = false;
-                    switch (dis.PaymentType.Name)
+                    switch (dis.PaymentTypeID)
                     {
-                        case "Check":
+                        case (int)PaymentType.Cash:
                             checkcb.IsChecked = true;
                             cashcb.IsChecked = false;
                             otherscb.IsChecked = false;
                             break;
-                        case "Cash":
+                        case (int)PaymentType.Check:
                             cashcb.IsChecked = true;
                             checkcb.IsChecked = false;
                             otherscb.IsChecked = false;
                             break;
-                        case "Others":
+                        case (int)PaymentType.Others:
                             otherscb.IsChecked = true;
                             cashcb.IsChecked = false;
                             checkcb.IsChecked = false;
