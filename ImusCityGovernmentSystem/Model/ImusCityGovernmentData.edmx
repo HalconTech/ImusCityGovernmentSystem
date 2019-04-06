@@ -272,6 +272,9 @@
           <Property Name="CurrentBalance" Type="money" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="DateAdded" Type="datetime" />
+          <Property Name="AdviceNo" Type="int" />
+          <Property Name="StartingBalance" Type="money" />
+          <Property Name="IsProcessed" Type="bit" />
         </EntityType>
         <EntityType Name="LicensingCode">
           <Key>
@@ -1833,6 +1836,9 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="CurrentBalance" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="AdviceNo" Type="Int32" />
+          <Property Name="StartingBalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsProcessed" Type="Boolean" />
           <NavigationProperty Name="Bank" Relationship="ImusCityHallModel.FK_FundBank_Bank" FromRole="FundBank" ToRole="Bank" />
           <NavigationProperty Name="BankTrails" Relationship="ImusCityHallModel.FK_BankTrail_FundBank" FromRole="FundBank" ToRole="BankTrail" />
           <NavigationProperty Name="Fund" Relationship="ImusCityHallModel.FK_FundBank_FundBank" FromRole="FundBank" ToRole="Fund" />
@@ -2314,6 +2320,9 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySetMapping Name="FundBanks">
             <EntityTypeMapping TypeName="ImusCityHallModel.FundBank">
               <MappingFragment StoreEntitySet="FundBank">
+                <ScalarProperty Name="IsProcessed" ColumnName="IsProcessed" />
+                <ScalarProperty Name="StartingBalance" ColumnName="StartingBalance" />
+                <ScalarProperty Name="AdviceNo" ColumnName="AdviceNo" />
                 <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />

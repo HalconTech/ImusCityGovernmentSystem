@@ -27,6 +27,9 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<decimal> CurrentBalance { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> DateAdded { get; set; }
+        public Nullable<int> AdviceNo { get; set; }
+        public Nullable<decimal> StartingBalance { get; set; }
+        public Nullable<bool> IsProcessed { get; set; }
     
         public virtual Bank Bank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

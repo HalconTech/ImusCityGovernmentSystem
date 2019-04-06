@@ -60,7 +60,7 @@
         <AssociationConnector Association="ImusCityHallModel.FK_PayeeRepresentative_Payee" />
         <AssociationConnector Association="ImusCityHallModel.FK_SecurityQuestionUser_SecurityQuestionBank" />
         <AssociationConnector Association="ImusCityHallModel.FK_SubModuleUser_SubModule" />
-        <EntityTypeShape EntityType="ImusCityHallModel.FundBank" Width="1.5" PointX="12" PointY="1.375" />
+        <EntityTypeShape EntityType="ImusCityHallModel.FundBank" Width="1.5" PointX="12" PointY="1.125" />
         <AssociationConnector Association="ImusCityHallModel.FK_FundBank_Bank" />
         <AssociationConnector Association="ImusCityHallModel.FK_BankTrail_FundBank" />
         <AssociationConnector Association="ImusCityHallModel.FK_FundBank_FundBank" />
