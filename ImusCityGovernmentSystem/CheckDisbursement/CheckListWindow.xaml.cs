@@ -130,10 +130,26 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             if (checklistdg.SelectedValue != null)
             {
                 int id = (int)checklistdg.SelectedValue;
-                EditCheckWindow edit = new EditCheckWindow();
-                edit.CheckID = id;
-                edit.ShowDialog();
-                LoadItems();
+                if(SystemClass.CheckConnection())
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    if(db.Checks.Find(id).Status == (int)CheckStatus.Cancelled)
+                    {
+                        MessageBox.Show("Checked is already cancelled and it cannot be edited");
+                    }
+                    else
+                    {
+                        EditCheckWindow edit = new EditCheckWindow();
+                        edit.CheckID = id;
+                        edit.ShowDialog();
+                        LoadItems();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+
             }
             else
             {

@@ -20,6 +20,7 @@ namespace ImusCityGovernmentSystem.Model
             this.Checks = new HashSet<Check>();
             this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
             this.SubModuleUsers = new HashSet<SubModuleUser>();
+            this.BankTrails = new HashSet<BankTrail>();
         }
     
         public int EmployeeID { get; set; }
@@ -87,5 +88,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BankTrail> BankTrails { get; set; }
     }
 }

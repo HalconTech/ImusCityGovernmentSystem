@@ -32,6 +32,8 @@
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Text="Fund"></TextBlock>
@@ -46,7 +48,9 @@
             <TextBox IsEnabled="False" VerticalContentAlignment="Center" Grid.Row="9" Name="currentbalancetb"></TextBox>
             <TextBlock Grid.Row="10" Text="Current Advice Number"></TextBlock>
             <TextBox IsEnabled="False" Grid.Row="11" VerticalAlignment="Center" Name="advicenumbertb"></TextBox>
-            <Grid Grid.Row="12" Margin="0,5,0,0">
+            <TextBlock Grid.Row="12" Text="Floor Amount"></TextBlock>
+            <TextBox Grid.Row="13" Name="flooramounttb" VerticalContentAlignment="Center" IsEnabled="False"></TextBox>
+            <Grid Grid.Row="14" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>

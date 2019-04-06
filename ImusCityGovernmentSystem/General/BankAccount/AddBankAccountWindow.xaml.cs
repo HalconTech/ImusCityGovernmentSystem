@@ -60,6 +60,10 @@ namespace ImusCityGovernmentSystem.General.BankAccount
                 {
                     MessageBox.Show("Please input advice number");
                 }
+                else if(String.IsNullOrEmpty(flooramounttb.Text))
+                {
+                    MessageBox.Show("Please input floor amount");
+                }
                 else
                 {
                     ImusCityGovernmentSystem.Model.FundBank account = new FundBank();
@@ -72,8 +76,19 @@ namespace ImusCityGovernmentSystem.General.BankAccount
                     account.DateAdded = DateTime.Now;
                     account.AdviceNo = Convert.ToInt32(advicenumbertb.Text);
                     account.IsProcessed = true;
+                    account.AmountLimit = Convert.ToDecimal(flooramounttb.Text);
                     db.FundBanks.Add(account);
                     db.SaveChanges();
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Added new bank account in the database. FUNDBANK ID: " + account.FundBankID.ToString(),
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+
                     MessageBox.Show("Account added successfully");
                     SystemClass.ClearTextBoxes(this);
                     

@@ -56,7 +56,7 @@ namespace ImusCityGovernmentSystem.General.Bank
 
                     var audit = new AuditTrailModel
                     {
-                        Activity = "Added new fund in the database. BANK CODE: " + bankcodetb.Text,
+                        Activity = "Added new bank in the database. BANK CODE: " + bankcodetb.Text,
                         ModuleName = this.GetType().Name,
                         EmployeeID = App.EmployeeID
                     };

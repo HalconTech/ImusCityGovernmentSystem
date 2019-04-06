@@ -37,11 +37,13 @@ namespace ImusCityGovernmentSystem.Model
         public string ObligationRequestNo { get; set; }
         public string PayeeName { get; set; }
         public Nullable<int> AdviceNo { get; set; }
+        public Nullable<int> FundBankID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Check> Checks { get; set; }
         public virtual Department Department { get; set; }
         public virtual Payee Payee { get; set; }
         public virtual PayeeRepresentative PayeeRepresentative { get; set; }
+        public virtual FundBank FundBank { get; set; }
     }
 }
