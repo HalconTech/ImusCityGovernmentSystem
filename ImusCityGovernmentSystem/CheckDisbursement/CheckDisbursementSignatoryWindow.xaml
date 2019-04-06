@@ -1,0 +1,42 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.CheckDisbursement.CheckDisbursementSignatoryWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="CDS Signatories"            
+                      TitleCaps="False"
+                      BorderThickness="0"
+                      GlowBrush="Black"
+                      WindowStartupLocation="CenterScreen"
+                      Height="341.938"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      Width="315.99" Loaded="MetroWindow_Loaded" >
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="City Mayor"></TextBlock>
+        <ComboBox IsEditable="True" Grid.Row="1" VerticalContentAlignment="Center" Name="mayorcb"></ComboBox>
+        <TextBlock Grid.Row="2" Text="City Treasurer"></TextBlock>
+        <ComboBox IsEditable="True" Grid.Row="3" Name="treasurercb" VerticalContentAlignment="Center"></ComboBox>
+        <TextBlock Grid.Row="4" Text="City Accountant"></TextBlock>
+        <ComboBox IsEditable="True" Grid.Row="5" VerticalContentAlignment="Center" Name="accountantcb" ></ComboBox>
+        <TextBlock Grid.Row="6" Text="Accountant's Representative"></TextBlock>
+        <ComboBox IsEditable="True" Grid.Row="7" VerticalContentAlignment="Center" Name="accountantrepcb"></ComboBox>
+        <TextBlock Grid.Row="8" Text="City Administrator"></TextBlock>
+        <ComboBox IsEditable="True" Grid.Row="9" VerticalContentAlignment="Center" Name="administratorcb"></ComboBox>
+        <Button Grid.Row="10" Content="Save" Name="savebtn" Margin="0,5,0,0" Click="savebtn_Click"></Button>
+    </Grid>
+</Controls:MetroWindow>

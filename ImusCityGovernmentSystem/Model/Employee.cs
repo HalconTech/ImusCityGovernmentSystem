@@ -21,6 +21,11 @@ namespace ImusCityGovernmentSystem.Model
             this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
             this.SubModuleUsers = new HashSet<SubModuleUser>();
             this.BankTrails = new HashSet<BankTrail>();
+            this.CDSSignatories = new HashSet<CDSSignatory>();
+            this.CDSSignatories1 = new HashSet<CDSSignatory>();
+            this.CDSSignatories2 = new HashSet<CDSSignatory>();
+            this.CDSSignatories3 = new HashSet<CDSSignatory>();
+            this.CDSSignatories4 = new HashSet<CDSSignatory>();
         }
     
         public int EmployeeID { get; set; }
@@ -90,5 +95,15 @@ namespace ImusCityGovernmentSystem.Model
         public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BankTrail> BankTrails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CDSSignatory> CDSSignatories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CDSSignatory> CDSSignatories1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CDSSignatory> CDSSignatories2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CDSSignatory> CDSSignatories3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CDSSignatory> CDSSignatories4 { get; set; }
     }
 }

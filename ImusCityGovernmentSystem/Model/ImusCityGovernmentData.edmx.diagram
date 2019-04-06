@@ -24,7 +24,6 @@
         <EntityTypeShape EntityType="ImusCityHallModel.LicensingCode" Width="1.5" PointX="2.75" PointY="1.75" />
         <EntityTypeShape EntityType="ImusCityHallModel.Payee" Width="1.5" PointX="6" PointY="20.25" />
         <EntityTypeShape EntityType="ImusCityHallModel.PayeeRepresentative" Width="1.5" PointX="6" PointY="2.5" />
-        <EntityTypeShape EntityType="ImusCityHallModel.ReportParameter" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="ImusCityHallModel.SecurityQuestionBank" Width="1.5" PointX="8.25" PointY="17" />
         <EntityTypeShape EntityType="ImusCityHallModel.SecurityQuestionUser" Width="1.5" PointX="10.5" PointY="15.625" />
         <EntityTypeShape EntityType="ImusCityHallModel.SubModule" Width="1.5" PointX="8.25" PointY="0.75" />
@@ -60,6 +59,12 @@
         <AssociationConnector Association="ImusCityHallModel.FK_BankTrail_FundBank" />
         <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_FundBank" />
         <AssociationConnector Association="ImusCityHallModel.FK_FundBank_FundBank" />
+        <EntityTypeShape EntityType="ImusCityHallModel.CDSSignatory" Width="1.5" PointX="7.5" PointY="11.75" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee1" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee2" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee3" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

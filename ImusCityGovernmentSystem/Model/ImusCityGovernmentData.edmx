@@ -94,6 +94,17 @@
           <Property Name="EntryNameID" Type="int" />
           <Property Name="EmployeeID" Type="int" />
         </EntityType>
+        <EntityType Name="CDSSignatory">
+          <Key>
+            <PropertyRef Name="CDSSignatoryID" />
+          </Key>
+          <Property Name="CDSSignatoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityMayor" Type="int" />
+          <Property Name="CityTreasurer" Type="int" />
+          <Property Name="CItyAccountant" Type="int" />
+          <Property Name="AccountantRepresentative" Type="int" />
+          <Property Name="CityAdministrator" Type="int" />
+        </EntityType>
         <EntityType Name="Check">
           <Key>
             <PropertyRef Name="CheckID" />
@@ -313,14 +324,6 @@
           <Property Name="Landline" Type="nvarchar" MaxLength="50" />
           <Property Name="EmployeeNo" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="ReportParameter">
-          <Key>
-            <PropertyRef Name="ReportParameterID" />
-          </Key>
-          <Property Name="ReportParameterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CityAccountant" Type="nvarchar" MaxLength="50" />
-          <Property Name="CItyTreasurer" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="SecurityQuestionBank">
           <Key>
             <PropertyRef Name="SecurityQuestionID" />
@@ -405,6 +408,66 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Principal>
             <Dependent Role="BankTrail">
               <PropertyRef Name="FundBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDSSignatory_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="CDSSignatory" Type="Self.CDSSignatory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CDSSignatory">
+              <PropertyRef Name="CityMayor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDSSignatory_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="CDSSignatory" Type="Self.CDSSignatory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CDSSignatory">
+              <PropertyRef Name="CityTreasurer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDSSignatory_Employee2">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="CDSSignatory" Type="Self.CDSSignatory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CDSSignatory">
+              <PropertyRef Name="CItyAccountant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDSSignatory_Employee3">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="CDSSignatory" Type="Self.CDSSignatory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CDSSignatory">
+              <PropertyRef Name="AccountantRepresentative" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDSSignatory_Employee4">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="CDSSignatory" Type="Self.CDSSignatory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CDSSignatory">
+              <PropertyRef Name="CityAdministrator" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -709,6 +772,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="AuditTrail" EntityType="Self.AuditTrail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BankTrail" EntityType="Self.BankTrail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CDSSignatory" EntityType="Self.CDSSignatory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Check" EntityType="Self.Check" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CheckRelease" EntityType="Self.CheckRelease" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
@@ -723,7 +787,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="LicensingCode" EntityType="Self.LicensingCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payee" EntityType="Self.Payee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PayeeRepresentative" EntityType="Self.PayeeRepresentative" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReportParameter" EntityType="Self.ReportParameter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SecurityQuestionBank" EntityType="Self.SecurityQuestionBank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SecurityQuestionUser" EntityType="Self.SecurityQuestionUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubModule" EntityType="Self.SubModule" Schema="dbo" store:Type="Tables" />
@@ -747,6 +810,26 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <AssociationSet Name="FK_BankTrail_FundBank" Association="Self.FK_BankTrail_FundBank">
             <End Role="FundBank" EntitySet="FundBank" />
             <End Role="BankTrail" EntitySet="BankTrail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDSSignatory_Employee" Association="Self.FK_CDSSignatory_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CDSSignatory" EntitySet="CDSSignatory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDSSignatory_Employee1" Association="Self.FK_CDSSignatory_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CDSSignatory" EntitySet="CDSSignatory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDSSignatory_Employee2" Association="Self.FK_CDSSignatory_Employee2">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CDSSignatory" EntitySet="CDSSignatory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDSSignatory_Employee3" Association="Self.FK_CDSSignatory_Employee3">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CDSSignatory" EntitySet="CDSSignatory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDSSignatory_Employee4" Association="Self.FK_CDSSignatory_Employee4">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CDSSignatory" EntitySet="CDSSignatory" />
           </AssociationSet>
           <AssociationSet Name="FK_Check_Disbursement" Association="Self.FK_Check_Disbursement">
             <End Role="Disbursement" EntitySet="Disbursement" />
@@ -873,7 +956,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="LicensingCodes" EntityType="ImusCityHallModel.LicensingCode" />
           <EntitySet Name="Payees" EntityType="ImusCityHallModel.Payee" />
           <EntitySet Name="PayeeRepresentatives" EntityType="ImusCityHallModel.PayeeRepresentative" />
-          <EntitySet Name="ReportParameters" EntityType="ImusCityHallModel.ReportParameter" />
           <EntitySet Name="SecurityQuestionBanks" EntityType="ImusCityHallModel.SecurityQuestionBank" />
           <EntitySet Name="SecurityQuestionUsers" EntityType="ImusCityHallModel.SecurityQuestionUser" />
           <EntitySet Name="SubModules" EntityType="ImusCityHallModel.SubModule" />
@@ -986,6 +1068,27 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <AssociationSet Name="FK_FundBank_FundBank" Association="ImusCityHallModel.FK_FundBank_FundBank">
             <End Role="Fund" EntitySet="Funds" />
             <End Role="FundBank" EntitySet="FundBanks" />
+          </AssociationSet>
+          <EntitySet Name="CDSSignatories" EntityType="ImusCityHallModel.CDSSignatory" />
+          <AssociationSet Name="FK_CDSSignatory_Employee" Association="ImusCityHallModel.FK_CDSSignatory_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="CDSSignatory" EntitySet="CDSSignatories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDSSignatory_Employee1" Association="ImusCityHallModel.FK_CDSSignatory_Employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="CDSSignatory" EntitySet="CDSSignatories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDSSignatory_Employee2" Association="ImusCityHallModel.FK_CDSSignatory_Employee2">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="CDSSignatory" EntitySet="CDSSignatories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDSSignatory_Employee3" Association="ImusCityHallModel.FK_CDSSignatory_Employee3">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="CDSSignatory" EntitySet="CDSSignatories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CDSSignatory_Employee4" Association="ImusCityHallModel.FK_CDSSignatory_Employee4">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="CDSSignatory" EntitySet="CDSSignatories" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetCheckExpiryNotice_Result">
@@ -1235,6 +1338,11 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <NavigationProperty Name="SecurityQuestionUsers" Relationship="ImusCityHallModel.FK_SecurityQuestionUser_Employee" FromRole="Employee" ToRole="SecurityQuestionUser" />
           <NavigationProperty Name="SubModuleUsers" Relationship="ImusCityHallModel.FK_SubModuleUser_Employee" FromRole="Employee" ToRole="SubModuleUser" />
           <NavigationProperty Name="BankTrails" Relationship="ImusCityHallModel.FK_BankTrail_Employee" FromRole="Employee" ToRole="BankTrail" />
+          <NavigationProperty Name="CDSSignatories" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee" FromRole="Employee" ToRole="CDSSignatory" />
+          <NavigationProperty Name="CDSSignatories1" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee1" FromRole="Employee" ToRole="CDSSignatory" />
+          <NavigationProperty Name="CDSSignatories2" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee2" FromRole="Employee" ToRole="CDSSignatory" />
+          <NavigationProperty Name="CDSSignatories3" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee3" FromRole="Employee" ToRole="CDSSignatory" />
+          <NavigationProperty Name="CDSSignatories4" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee4" FromRole="Employee" ToRole="CDSSignatory" />
         </EntityType>
         <EntityType Name="EmployeePosition">
           <Key>
@@ -1315,14 +1423,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="EmployeeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Payee" Relationship="ImusCityHallModel.FK_PayeeRepresentative_Payee" FromRole="PayeeRepresentative" ToRole="Payee" />
           <NavigationProperty Name="Disbursements" Relationship="ImusCityHallModel.FK_Disbursement_PayeeRepresentative" FromRole="PayeeRepresentative" ToRole="Disbursement" />
-        </EntityType>
-        <EntityType Name="ReportParameter">
-          <Key>
-            <PropertyRef Name="ReportParameterID" />
-          </Key>
-          <Property Name="ReportParameterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CityAccountant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CItyTreasurer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SecurityQuestionBank">
           <Key>
@@ -1763,6 +1863,82 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CDSSignatory">
+          <Key>
+            <PropertyRef Name="CDSSignatoryID" />
+          </Key>
+          <Property Name="CDSSignatoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityMayor" Type="Int32" />
+          <Property Name="CityTreasurer" Type="Int32" />
+          <Property Name="CItyAccountant" Type="Int32" />
+          <Property Name="AccountantRepresentative" Type="Int32" />
+          <Property Name="CityAdministrator" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee" FromRole="CDSSignatory" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee1" FromRole="CDSSignatory" ToRole="Employee" />
+          <NavigationProperty Name="Employee2" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee2" FromRole="CDSSignatory" ToRole="Employee" />
+          <NavigationProperty Name="Employee3" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee3" FromRole="CDSSignatory" ToRole="Employee" />
+          <NavigationProperty Name="Employee4" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee4" FromRole="CDSSignatory" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_CDSSignatory_Employee">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CDSSignatory" Role="CDSSignatory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CDSSignatory">
+              <PropertyRef Name="CityMayor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDSSignatory_Employee1">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CDSSignatory" Role="CDSSignatory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CDSSignatory">
+              <PropertyRef Name="CityTreasurer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDSSignatory_Employee2">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CDSSignatory" Role="CDSSignatory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CDSSignatory">
+              <PropertyRef Name="CItyAccountant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDSSignatory_Employee3">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CDSSignatory" Role="CDSSignatory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CDSSignatory">
+              <PropertyRef Name="AccountantRepresentative" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CDSSignatory_Employee4">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CDSSignatory" Role="CDSSignatory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CDSSignatory">
+              <PropertyRef Name="CityAdministrator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2091,15 +2267,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ReportParameters">
-            <EntityTypeMapping TypeName="ImusCityHallModel.ReportParameter">
-              <MappingFragment StoreEntitySet="ReportParameter">
-                <ScalarProperty Name="CItyTreasurer" ColumnName="CItyTreasurer" />
-                <ScalarProperty Name="CityAccountant" ColumnName="CityAccountant" />
-                <ScalarProperty Name="ReportParameterID" ColumnName="ReportParameterID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SecurityQuestionBanks">
             <EntityTypeMapping TypeName="ImusCityHallModel.SecurityQuestionBank">
               <MappingFragment StoreEntitySet="SecurityQuestionBank">
@@ -2207,6 +2374,18 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="BankID" ColumnName="BankID" />
                 <ScalarProperty Name="FundID" ColumnName="FundID" />
                 <ScalarProperty Name="FundBankID" ColumnName="FundBankID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CDSSignatories">
+            <EntityTypeMapping TypeName="ImusCityHallModel.CDSSignatory">
+              <MappingFragment StoreEntitySet="CDSSignatory">
+                <ScalarProperty Name="CityAdministrator" ColumnName="CityAdministrator" />
+                <ScalarProperty Name="AccountantRepresentative" ColumnName="AccountantRepresentative" />
+                <ScalarProperty Name="CItyAccountant" ColumnName="CItyAccountant" />
+                <ScalarProperty Name="CityTreasurer" ColumnName="CityTreasurer" />
+                <ScalarProperty Name="CityMayor" ColumnName="CityMayor" />
+                <ScalarProperty Name="CDSSignatoryID" ColumnName="CDSSignatoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

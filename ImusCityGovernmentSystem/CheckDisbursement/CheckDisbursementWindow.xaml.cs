@@ -88,5 +88,13 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             account.Show();
             Mouse.OverrideCursor = null;
         }
+
+        private void cdssignatoriesbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            CheckDisbursement.CheckDisbursementSignatoryWindow signature = new CheckDisbursement.CheckDisbursementSignatoryWindow();
+            Mouse.OverrideCursor = null;
+            signature.Show();
+        }
     }
 }
