@@ -16,6 +16,7 @@ namespace ImusCityGovernmentSystem.Model
         public string FundName { get; set; }
         public string Branch { get; set; }
         public string AccountNumber { get; set; }
+        public string BankName { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public string CheckNo { get; set; }
         public string CompanyName { get; set; }

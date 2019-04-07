@@ -83,6 +83,15 @@ namespace ImusCityGovernmentSystem
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
 
-        public  const string DBConnectionErrorMessage = "Please check database connection";   
+        public  const string DBConnectionErrorMessage = "Please check database connection";
+
+        public static string GetSignatory(int? id)
+        {
+            string result = "";
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            ImusCityGovernmentSystem.Model.Employee employee = db.Employees.Find(id);
+            result = employee.FirstName + " " + employee.MiddleName + " " + employee.LastName;
+            return result;
+        }
     }
 }

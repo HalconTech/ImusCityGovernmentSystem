@@ -76,9 +76,9 @@ namespace ImusCityGovernmentSystem
                     dvl.Unit_Project = x.Unit_Project;
                     dvl.VoucherNo = x.VoucherNo;
                     dvl.PaymentName = x.PaymentName;
-                    dvl.Signatory = GetSignatory(signatories.CItyAccountant);
-                    dvl.Signatory2 = GetSignatory(signatories.CityTreasurer);
-                    dvl.Signatory3 = GetSignatory(signatories.CityAdministrator);
+                    dvl.Signatory = SystemClass.GetSignatory(signatories.CItyAccountant);
+                    dvl.Signatory2 = SystemClass.GetSignatory(signatories.CityTreasurer);
+                    dvl.Signatory3 = SystemClass.GetSignatory(signatories.CityAdministrator);
                     DVList.Add(dvl);
 
                     ReportDocument report;
@@ -110,8 +110,8 @@ namespace ImusCityGovernmentSystem
                 check.CheckDescription = checklist.CheckDescription;
                 check.VoucherNo = checklist.Disbursement.VoucherNo;
                 check.Amount = checklist.Amount.Value;
-                check.Signatory1 = GetSignatory(signatories.CityMayor);
-                check.Signatory2 = GetSignatory(signatories.CityTreasurer);
+                check.Signatory1 = SystemClass.GetSignatory(signatories.CityMayor);
+                check.Signatory2 = SystemClass.GetSignatory(signatories.CityTreasurer);
                 ReportDocument report;
                 report = new CheckReport();
                 report.SetDataSource(new[] { check });
@@ -122,15 +122,6 @@ namespace ImusCityGovernmentSystem
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-        }
-
-        public string GetSignatory(int? id)
-        {
-            string result = "";
-            ImusCityHallEntities db = new ImusCityHallEntities();
-            ImusCityGovernmentSystem.Model.Employee employee = db.Employees.Find(id);
-            result = employee.FirstName + " " + employee.MiddleName + " " + employee.LastName;
-            return result;
-        }
+        }       
     }
 }

@@ -62,19 +62,6 @@ namespace ImusCityGovernmentSystem.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckExpiryNotice_Result>("GetCheckExpiryNotice");
         }
     
-        public virtual ObjectResult<GetCheckRegister_Result> GetCheckRegister(Nullable<System.DateTime> date, Nullable<int> fundID)
-        {
-            var dateParameter = date.HasValue ?
-                new ObjectParameter("Date", date) :
-                new ObjectParameter("Date", typeof(System.DateTime));
-    
-            var fundIDParameter = fundID.HasValue ?
-                new ObjectParameter("FundID", fundID) :
-                new ObjectParameter("FundID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckRegister_Result>("GetCheckRegister", dateParameter, fundIDParameter);
-        }
-    
         public virtual ObjectResult<GetDisbursementVoucher_Result> GetDisbursementVoucher(Nullable<int> disbursementID)
         {
             var disbursementIDParameter = disbursementID.HasValue ?
@@ -82,6 +69,23 @@ namespace ImusCityGovernmentSystem.Model
                 new ObjectParameter("DisbursementID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDisbursementVoucher_Result>("GetDisbursementVoucher", disbursementIDParameter);
+        }
+    
+        public virtual ObjectResult<GetCheckRegister_Result> GetCheckRegister(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> fundBankID)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var fundBankIDParameter = fundBankID.HasValue ?
+                new ObjectParameter("FundBankID", fundBankID) :
+                new ObjectParameter("FundBankID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckRegister_Result>("GetCheckRegister", startDateParameter, endDateParameter, fundBankIDParameter);
         }
     }
 }

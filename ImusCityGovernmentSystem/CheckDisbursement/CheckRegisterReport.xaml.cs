@@ -60,20 +60,22 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     MessageBox.Show("Please select fund");
                 }
-                else if(String.IsNullOrEmpty(createddatedp.Text))
+                else if (String.IsNullOrEmpty(startdatedp.Text) && String.IsNullOrEmpty(enddatedp.Text))
                 {
-                    MessageBox.Show("Please select date");
+                    MessageBox.Show("Please select start date and end date");
                 }
                 else
                 {
+                    int accountId = (int)fundcb.SelectedValue;
                     ImusCityHallEntities db = new ImusCityHallEntities();
                     List<CheckRegisterModel> list = new List<CheckRegisterModel>();
-                    var result = db.GetCheckRegister(createddatedp.SelectedDate, (int)fundcb.SelectedValue);
-                    foreach(var checkregister in result)
+                    var result = db.GetCheckRegister(startdatedp.SelectedDate, enddatedp.SelectedDate, accountId);
+                    foreach (var checkregister in result)
                     {
                         var check = new CheckRegisterModel
                         {
-                            FundName = checkregister.FundName,
+                            //FundName = checkregister.FundName,
+                            FundName = checkregister.BankName,
                             Branch = checkregister.Branch,
                             AccoutNumber = checkregister.AccountNumber,
                             DateCreated = checkregister.DateCreated.Value,

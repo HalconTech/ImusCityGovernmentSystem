@@ -37,51 +37,17 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                            select new
                            {
                                ID = p.FundBankID,
-                               Name = p.Bank.BankName + " - " + p.Fund.FundName
+                               Name = p.Fund.FundName + " - " + p.Bank.BankCode + "(" + p.AccountNumber + ")"
                            };
                 fundcb.ItemsSource = fund.ToList();
                 fundcb.DisplayMemberPath = "Name";
                 fundcb.SelectedValuePath = "ID";
-
-                LoadSignatories();
-
-
             }
             else
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
         }
-
-         void LoadSignatories()
-        {
-            if(SystemClass.CheckConnection())
-            {
-                ImusCityHallEntities db = new ImusCityHallEntities();
-                var signatories = from p in db.Employees
-                                  orderby p.FirstName
-                                  select new
-                                  {
-                                      Name = p.FirstName + " " + p.MiddleName + " " + p.LastName,
-                                      id = p.EmployeeID 
-                                  };
-
-                signatory1cb.ItemsSource = signatories.ToList();
-                signatory1cb.DisplayMemberPath = "Name";
-                signatory1cb.SelectedValuePath = "Name";
-                signatory1cb.SelectedIndex = 0;
-                signatory2cb.ItemsSource = signatories.ToList();
-                signatory2cb.DisplayMemberPath = "Name";
-                signatory2cb.SelectedValuePath = "Name";
-                signatory2cb.SelectedIndex = 0;
-            }
-            else
-            {
-                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
-            }
-  
-        }
-
         private void generatebtn_Click(object sender, RoutedEventArgs e)
         {
             if (SystemClass.CheckConnection())
@@ -90,33 +56,30 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     MessageBox.Show("Please select fund");
                 }
-                else if (String.IsNullOrEmpty(createddatedp.Text))
+                else if (String.IsNullOrEmpty(startdatedp.Text) && String.IsNullOrEmpty(enddatedp.Text))
                 {
-                    MessageBox.Show("Please select date");
-                }
-                else if(String.IsNullOrEmpty(advicenotb.Text))
-                {
-                    MessageBox.Show("Please enter advice number");
+                    MessageBox.Show("Please select start date and end date");
                 }
                 else
                 {
+                    int accountId = (int)fundcb.SelectedValue;
                     ImusCityHallEntities db = new ImusCityHallEntities();
+                    CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
+                    FundBank account = db.FundBanks.Find(accountId);
                     List<CheckRegisterModel> list = new List<CheckRegisterModel>();
-                    var result = db.GetCheckRegister(createddatedp.SelectedDate, (int)fundcb.SelectedValue);
+                    var result = db.GetCheckRegister(startdatedp.SelectedDate,enddatedp.SelectedDate,accountId);
                     CurrencyToWords convert = new CurrencyToWords();
-                    //decimal totalAmount = db.GetCheckRegister(createddatedp.SelectedDate, (int)fundcb.SelectedValue).Sum(m => m.Amount).Value;
-                    //string sqlQuery = "SELECT dbo.fnCurrencyToWords({0})";
-                    //Object[] parameters = { totalAmount };
-                    //string amountInWords = db.Database.SqlQuery<string>(sqlQuery, parameters).FirstOrDefault();
-                    double totalAmount = Convert.ToDouble(db.GetCheckRegister(createddatedp.SelectedDate, (int)fundcb.SelectedValue).Sum(m => m.Amount).Value);
-                    string amountInWords = convert.NumberToWords(totalAmount).ToUpper();              
+                    double totalAmount = Convert.ToDouble(db.GetCheckRegister(startdatedp.SelectedDate, enddatedp.SelectedDate, accountId).Sum(m => m.Amount).Value);
+                    string amountInWords = convert.NumberToWords(totalAmount).ToUpper();
                     foreach (var checkregister in result)
                     {
                         var check = new CheckRegisterModel
                         {
-                            FundName = checkregister.FundName,
+                            //FundName = checkregister.FundName,
+                            FundName = checkregister.BankName,
                             Branch = checkregister.Branch,
                             AccoutNumber = checkregister.AccountNumber,
+                            BankName = checkregister.BankName,
                             DateCreated = checkregister.DateCreated.Value,
                             CheckNo = checkregister.CheckNo,
                             CompanyName = checkregister.CompanyName,
@@ -126,11 +89,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         list.Add(check);
                     }
                     ReportDocument report;
-                    report = new CheckDisbursement.Report.AccountantCheckDisbursementReport();           
+                    report = new CheckDisbursement.Report.AccountantCheckDisbursementReport();
                     report.SetDataSource(list);
-                    report.SetParameterValue("Signatory1", signatory1cb.SelectedValue.ToString());
-                    report.SetParameterValue("Signatory2", signatory2cb.SelectedValue.ToString());
-                    report.SetParameterValue("AdviceNo", advicenotb.Text);
+                    report.SetParameterValue("Signatory1", SystemClass.GetSignatory(signatories.CItyAccountant));
+                    report.SetParameterValue("Signatory2", SystemClass.GetSignatory(signatories.AccountantRepresentative));
+                    report.SetParameterValue("AdviceNo", account.AdviceNo.HasValue ? account.AdviceNo.ToString() : "");
                     reportviewer.ViewerCore.ReportSource = report;
                 }
             }
@@ -139,6 +102,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
         }
-   
+
     }
 }

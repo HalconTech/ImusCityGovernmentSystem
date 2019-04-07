@@ -758,8 +758,9 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
         </Association>
         <Function Name="GetCheckExpiryNotice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetCheckRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Date" Type="date" Mode="In" />
-          <Parameter Name="FundID" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+          <Parameter Name="FundBankID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetDisbursementVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DisbursementID" Type="int" Mode="In" />
@@ -931,10 +932,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
       <Schema Namespace="ImusCityHallModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ImusCityHallEntities" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="GetCheckExpiryNotice" ReturnType="Collection(ImusCityHallModel.GetCheckExpiryNotice_Result)" />
-          <FunctionImport Name="GetCheckRegister" ReturnType="Collection(ImusCityHallModel.GetCheckRegister_Result)">
-            <Parameter Name="Date" Mode="In" Type="DateTime" />
-            <Parameter Name="FundID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="GetDisbursementVoucher" ReturnType="Collection(ImusCityHallModel.GetDisbursementVoucher_Result)">
           <Parameter Name="DisbursementID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1091,6 +1088,11 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="FundBank" EntitySet="FundBanks" />
             <End Role="BankTrail" EntitySet="BankTrails" />
           </AssociationSet>
+          <FunctionImport Name="GetCheckRegister" ReturnType="Collection(ImusCityHallModel.GetCheckRegister_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="FundBankID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetCheckExpiryNotice_Result">
           <Property Type="String" Name="GroupName" Nullable="false" MaxLength="32" />
@@ -1099,16 +1101,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="CheckDescription" Nullable="true" MaxLength="Max" />
           <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="GetCheckRegister_Result">
-          <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Branch" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
-          <Property Type="String" Name="CheckNo" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="150" />
-          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
-          <Property Type="String" Name="AmountInWords" Nullable="true" MaxLength="8000" />
         </ComplexType>
         <ComplexType Name="GetDisbursementVoucher_Result">
           <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
@@ -1941,6 +1933,17 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetCheckRegister_Result">
+          <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Branch" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CheckNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="AmountInWords" Nullable="true" MaxLength="8000" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1956,20 +1959,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="CheckDescription" ColumnName="CheckDescription" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="FundName" ColumnName="FundName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetCheckRegister" FunctionName="ImusCityHallModel.Store.GetCheckRegister">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ImusCityHallModel.GetCheckRegister_Result">
-                <ScalarProperty Name="FundName" ColumnName="FundName" />
-                <ScalarProperty Name="Branch" ColumnName="Branch" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="AmountInWords" ColumnName="AmountInWords" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2392,6 +2381,21 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCheckRegister" FunctionName="ImusCityHallModel.Store.GetCheckRegister">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ImusCityHallModel.GetCheckRegister_Result">
+                <ScalarProperty Name="FundName" ColumnName="FundName" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="AmountInWords" ColumnName="AmountInWords" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
