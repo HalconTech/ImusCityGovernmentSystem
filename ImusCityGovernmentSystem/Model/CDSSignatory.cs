@@ -20,11 +20,13 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> CItyAccountant { get; set; }
         public Nullable<int> AccountantRepresentative { get; set; }
         public Nullable<int> CityAdministrator { get; set; }
+        public Nullable<int> DisbursingOfficer { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Employee Employee1 { get; set; }
         public virtual Employee Employee2 { get; set; }
         public virtual Employee Employee3 { get; set; }
         public virtual Employee Employee4 { get; set; }
+        public virtual Employee Employee5 { get; set; }
     }
 }

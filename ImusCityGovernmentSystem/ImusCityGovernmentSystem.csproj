@@ -176,12 +176,19 @@
     <Compile Include="CheckDisbursement\EditCheckWindow.xaml.cs">
       <DependentUpon>EditCheckWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CheckDisbursement\Model\CheckIssuedModel.cs" />
     <Compile Include="CheckDisbursement\PaymentType.cs" />
     <Compile Include="CheckDisbursement\Report\AccountantCheckDisbursementReport.cs">
       <DependentUpon>AccountantCheckDisbursementReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="CheckDisbursement\Report\CheckIssuedReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CheckIssuedReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CheckDisbursement\Report\CheckRegisterReport.cs">
       <AutoGen>True</AutoGen>
@@ -655,6 +662,10 @@
     <EmbeddedResource Include="CheckDisbursement\Report\AccountantCheckDisbursementReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AccountantCheckDisbursementReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckDisbursement\Report\CheckIssuedReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CheckIssuedReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CheckDisbursement\Report\CheckRegisterReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

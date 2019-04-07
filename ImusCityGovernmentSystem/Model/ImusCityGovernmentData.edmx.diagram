@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="ImusCityHallModel.AspNetUser" Width="1.5" PointX="5.75" PointY="3.625" />
         <EntityTypeShape EntityType="ImusCityHallModel.AuditTrail" Width="1.5" PointX="0.75" PointY="1.5" />
         <EntityTypeShape EntityType="ImusCityHallModel.Bank" Width="1.5" PointX="1.5" PointY="21.875" />
-        <EntityTypeShape EntityType="ImusCityHallModel.CDSSignatory" Width="1.5" PointX="7.5" PointY="23.75" />
         <EntityTypeShape EntityType="ImusCityHallModel.Check" Width="1.5" PointX="7.5" PointY="16.875" />
         <EntityTypeShape EntityType="ImusCityHallModel.CheckRelease" Width="1.5" PointX="9.75" PointY="22.125" />
         <EntityTypeShape EntityType="ImusCityHallModel.Department" Width="1.5" PointX="0.75" PointY="12.375" />
@@ -38,11 +37,6 @@
         <AssociationConnector Association="ImusCityHallModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="ImusCityHallModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="ImusCityHallModel.FK_FundBank_Bank" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee1" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee2" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee3" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee4" />
         <AssociationConnector Association="ImusCityHallModel.FK_Check_Disbursement" />
         <AssociationConnector Association="ImusCityHallModel.FK_Check_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Check" />
@@ -65,6 +59,13 @@
         <AssociationConnector Association="ImusCityHallModel.FK_BankTrail_Check" />
         <AssociationConnector Association="ImusCityHallModel.FK_BankTrail_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_BankTrail_FundBank" />
+        <EntityTypeShape EntityType="ImusCityHallModel.CDSSignatory" Width="1.5" PointX="7.5" PointY="22" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee1" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee2" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee3" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee4" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

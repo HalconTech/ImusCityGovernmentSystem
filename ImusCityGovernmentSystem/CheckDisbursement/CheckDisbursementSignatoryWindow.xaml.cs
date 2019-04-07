@@ -38,6 +38,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     signatory.CItyAccountant = (int)accountantcb.SelectedValue;
                     signatory.AccountantRepresentative = (int)accountantrepcb.SelectedValue;
                     signatory.CityAdministrator = (int)administratorcb.SelectedValue;
+                    signatory.DisbursingOfficer = (int)disbursingcb.SelectedValue;
                     db.SaveChanges();
                     MessageBox.Show("Signatories for CDS was updated");
                 }
@@ -49,6 +50,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     signatory.CItyAccountant = (int)accountantcb.SelectedValue;
                     signatory.AccountantRepresentative = (int)accountantrepcb.SelectedValue;
                     signatory.CityAdministrator = (int)administratorcb.SelectedValue;
+                    signatory.DisbursingOfficer = (int)disbursingcb.SelectedValue;
                     db.CDSSignatories.Add(signatory);
                     db.SaveChanges();
                     MessageBox.Show("Signatories for CDS was updated");
@@ -93,7 +95,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 administratorcb.DisplayMemberPath = "Name";
                 administratorcb.SelectedValuePath = "ID";
 
-                if(db.CDSSignatories.Any())
+                disbursingcb.ItemsSource = result.OrderBy(m => m.Name).ToList();
+                disbursingcb.DisplayMemberPath = "Name";
+                disbursingcb.SelectedValuePath = "ID";
+
+                if (db.CDSSignatories.Any())
                 {
                     ImusCityGovernmentSystem.Model.CDSSignatory signatory = db.CDSSignatories.FirstOrDefault();
                     mayorcb.SelectedValue = signatory.CityMayor;
@@ -101,6 +107,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     accountantcb.SelectedValue = signatory.CItyAccountant;
                     accountantrepcb.SelectedValue = signatory.AccountantRepresentative;
                     administratorcb.SelectedValue = signatory.CityAdministrator;
+                    disbursingcb.SelectedValue = signatory.DisbursingOfficer;
                 }
                 else
                 {
