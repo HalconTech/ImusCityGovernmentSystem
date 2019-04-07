@@ -161,6 +161,9 @@
     <Compile Include="CheckDisbursement\CheckDisbursementWindow.xaml.cs">
       <DependentUpon>CheckDisbursementWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CheckDisbursement\CheckIssuedReportWindow.xaml.cs">
+      <DependentUpon>CheckIssuedReportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CheckDisbursement\CheckListWindow.xaml.cs">
       <DependentUpon>CheckListWindow.xaml</DependentUpon>
     </Compile>
@@ -348,6 +351,9 @@
     <Compile Include="Model\GetCheckExpiryNotice_Result.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\GetCheckIssued_Result.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\GetCheckRegister_Result.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
@@ -431,6 +437,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CheckDisbursement\CheckDisbursementWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckDisbursement\CheckIssuedReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

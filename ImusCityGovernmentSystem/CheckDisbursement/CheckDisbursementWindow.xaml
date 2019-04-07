@@ -83,7 +83,7 @@
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>
-            <Controls:Tile  Background="#CC0050EF"    Title="Check Issued" TitleFontSize="10" Click="accountantreportbtn_Click" >
+            <Controls:Tile x:Name="checkissuedbtn"  Background="#CC0050EF"    Title="Check Issued" TitleFontSize="10" Click="checkissuedbtn_Click" >
                 <Rectangle Fill="White" Height="50" Width="50">
                     <Rectangle.OpacityMask>
                         <VisualBrush Visual="{StaticResource appbar_people_arrow_right}" Stretch="Fill" />
