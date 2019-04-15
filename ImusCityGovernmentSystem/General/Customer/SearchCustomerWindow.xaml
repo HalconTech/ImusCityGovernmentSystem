@@ -1,0 +1,39 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.Customer.SearchCustomerWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="Search Customer"
+                      TitleCaps="False"
+                      BorderThickness="0"
+                      WindowStartupLocation="CenterScreen"
+                      Height="395.5"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      GlowBrush="Black"
+                      Width="362" KeyDown="MetroWindow_KeyDown">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox Name="searchtb" VerticalContentAlignment="Center" BorderBrush="Black" Controls:TextBoxHelper.Watermark="Search" Margin="0,0,5,0" KeyDown="searchtb_KeyDown"/>
+        <Button Name="searchbtn" Grid.Column="1" Click="searchbtn_Click">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconModern Width="17" Height="17" Kind="Magnify" />
+                <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Text="Search" />
+            </StackPanel>
+        </Button>
+        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" BorderBrush="Black" Name="customerdg" BorderThickness="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0" MouseDoubleClick="customerdg_MouseDoubleClick" KeyDown="customerdg_KeyDown" GridLinesVisibility="All">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="240" Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date Added" Binding="{Binding DateAdded}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+    </Controls:MetroWindow>

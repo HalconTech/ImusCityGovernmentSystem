@@ -5,7 +5,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         WindowTitleBrush="#FF001834" TitleCaps="False" WindowState="Maximized"  BorderThickness="0" 
         GlowBrush="Black" WindowTransitionsEnabled="False" 
-        Loaded="MetroWindow_Loaded" Background="#FFECECEC"  >
+        Loaded="MetroWindow_Loaded" Background="#FFECECEC" Title="Check Issued Report"  >
 
     <Grid >
         <Grid.ColumnDefinitions>

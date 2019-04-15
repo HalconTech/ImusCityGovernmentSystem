@@ -12,31 +12,26 @@ namespace ImusCityGovernmentSystem.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Check
+    public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Check()
+        public Customer()
         {
-            this.BankTrails = new HashSet<BankTrail>();
             this.CheckReleases = new HashSet<CheckRelease>();
         }
     
-        public int CheckID { get; set; }
-        public Nullable<int> DisbursementID { get; set; }
-        public string CheckNo { get; set; }
-        public string CheckDescription { get; set; }
-        public Nullable<System.DateTime> DateCreated { get; set; }
-        public byte[] DateStamp { get; set; }
-        public Nullable<decimal> Amount { get; set; }
-        public Nullable<int> EmployeeID { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<int> AdviceNo { get; set; }
+        public int CustomerID { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public Nullable<System.DateTime> DateAdded { get; set; }
+        public Nullable<int> AddedBy { get; set; }
+        public byte[] DateTimeStamp { get; set; }
+        public string CompleteAddress { get; set; }
+        public Nullable<System.DateTime> Birthdate { get; set; }
     
-        public virtual Disbursement Disbursement { get; set; }
-        public virtual Employee Employee { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BankTrail> BankTrails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckRelease> CheckReleases { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

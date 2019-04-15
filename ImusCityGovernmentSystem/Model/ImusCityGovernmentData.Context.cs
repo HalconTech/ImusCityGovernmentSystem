@@ -35,7 +35,6 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<AuditTrail> AuditTrails { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Check> Checks { get; set; }
-        public virtual DbSet<CheckRelease> CheckReleases { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Disbursement> Disbursements { get; set; }
         public virtual DbSet<Division> Divisions { get; set; }
@@ -56,6 +55,8 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<PayeeRepresentativeView> PayeeRepresentativeViews { get; set; }
         public virtual DbSet<BankTrail> BankTrails { get; set; }
         public virtual DbSet<CDSSignatory> CDSSignatories { get; set; }
+        public virtual DbSet<CheckRelease> CheckReleases { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
     
         public virtual ObjectResult<GetCheckExpiryNotice_Result> GetCheckExpiryNotice()
         {

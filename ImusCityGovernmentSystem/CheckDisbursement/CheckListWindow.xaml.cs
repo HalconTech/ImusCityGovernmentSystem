@@ -137,6 +137,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     {
                         MessageBox.Show("Checked is already cancelled and it cannot be edited");
                     }
+                    else if (db.Checks.Find(id).Status == (int)CheckStatus.Released)
+                    {
+                        MessageBox.Show("Checked is already released and it cannot be edited");
+                    }
                     else
                     {
                         EditCheckWindow edit = new EditCheckWindow();

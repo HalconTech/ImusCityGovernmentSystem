@@ -15,16 +15,15 @@ namespace ImusCityGovernmentSystem.Model
     public partial class CheckRelease
     {
         public int CheckReleaseID { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public string CompleteAddress { get; set; }
-        public Nullable<System.DateTime> Birthdate { get; set; }
+        public Nullable<int> CustomerID { get; set; }
         public Nullable<System.DateTime> ReleasedDate { get; set; }
         public byte[] DateTimeStamp { get; set; }
         public Nullable<int> CheckID { get; set; }
         public byte[] Photo { get; set; }
+        public Nullable<int> ReleasedBy { get; set; }
     
         public virtual Check Check { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

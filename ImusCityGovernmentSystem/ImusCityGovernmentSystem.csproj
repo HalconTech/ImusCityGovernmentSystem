@@ -119,6 +119,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -129,6 +130,10 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WebCam_Capture, Version=1.0.2395.24959, Culture=neutral">
+      <HintPath>..\packages\Easywebcam.1.0.0\lib\WebCam_Capture.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -170,6 +175,18 @@
     <Compile Include="CheckDisbursement\CheckRegisterReport.xaml.cs">
       <DependentUpon>CheckRegisterReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CheckDisbursement\CheckReleasing\CheckReleasedListWindow.xaml.cs">
+      <DependentUpon>CheckReleasedListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CheckDisbursement\CheckReleasing\CheckReleasingWindow.xaml.cs">
+      <DependentUpon>CheckReleasingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CheckDisbursement\CheckReleasing\Helper.cs" />
+    <Compile Include="CheckDisbursement\CheckReleasing\Model\CheckReleasedListingModel.cs" />
+    <Compile Include="CheckDisbursement\CheckReleasing\ViewCheckReleasedWindow.xaml.cs">
+      <DependentUpon>ViewCheckReleasedWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CheckDisbursement\CheckReleasing\WebCam.cs" />
     <Compile Include="CheckDisbursement\CheckStatus.cs" />
     <Compile Include="CheckDisbursement\Data\CheckDisbursementDataTable.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -229,6 +246,13 @@
     </Compile>
     <Compile Include="General\Bank\EditBankWindow.xaml.cs">
       <DependentUpon>EditBankWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="General\Customer\CustomerMatchedWindow.xaml.cs">
+      <DependentUpon>CustomerMatchedWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="General\Customer\Model\CustomerEntity.cs" />
+    <Compile Include="General\Customer\SearchCustomerWindow.xaml.cs">
+      <DependentUpon>SearchCustomerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="General\EmployeeModule\EmployeeModuleWindow.xaml.cs">
       <DependentUpon>EmployeeModuleWindow.xaml</DependentUpon>
@@ -318,6 +342,9 @@
       <DependentUpon>LicenseCodeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\CheckRelease.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Customer.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Department.cs">
@@ -452,6 +479,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CheckDisbursement\CheckReleasing\CheckReleasedListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckDisbursement\CheckReleasing\CheckReleasingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckDisbursement\CheckReleasing\ViewCheckReleasedWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CheckDisbursement\EditCheckWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -477,6 +516,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="General\Bank\EditBankWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\Customer\CustomerMatchedWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\Customer\SearchCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,7 +4,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         BorderThickness="0"
         Title="Check Disbursement"   
-        WindowTransitionsEnabled="False"  Height="639" Width="681.571"   ResizeMode="NoResize"
+        WindowTransitionsEnabled="False"  Height="639" Width="831.571"   ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"   TitleCaps="False"  >
     <Grid Margin="45">
 
@@ -69,6 +69,13 @@
                 <Rectangle Fill="White" Height="50" Width="50">
                     <Rectangle.OpacityMask>
                         <VisualBrush Visual="{StaticResource appbar_user_tie}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <Controls:Tile x:Name="checkreleasingbtn" Background="#CC0050EF" Title="Check Releasing" TitleFontSize="12" Click="checkreleasingbtn_Click" >
+                <Rectangle Fill="White" Height="50" Width="50">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_arrow_right_left}" Stretch="Fill" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>

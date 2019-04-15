@@ -127,15 +127,26 @@
             <PropertyRef Name="CheckReleaseID" />
           </Key>
           <Property Name="CheckReleaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
-          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CompleteAddress" Type="nvarchar" MaxLength="150" />
-          <Property Name="Birthdate" Type="date" />
+          <Property Name="CustomerID" Type="int" />
           <Property Name="ReleasedDate" Type="datetime" />
           <Property Name="DateTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
           <Property Name="CheckID" Type="int" />
           <Property Name="Photo" Type="image" />
+          <Property Name="ReleasedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nchar" MaxLength="10" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="DateTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="CompleteAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="Birthdate" Type="date" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -521,6 +532,42 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CheckRelease_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="CheckRelease" Type="Self.CheckRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CheckRelease">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckRelease_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="CheckRelease" Type="Self.CheckRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CheckRelease">
+              <PropertyRef Name="ReleasedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -795,6 +842,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="CDSSignatory" EntityType="Self.CDSSignatory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Check" EntityType="Self.Check" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CheckRelease" EntityType="Self.CheckRelease" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disbursement" EntityType="Self.Disbursement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
@@ -866,6 +914,18 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <AssociationSet Name="FK_CheckRelease_Check" Association="Self.FK_CheckRelease_Check">
             <End Role="Check" EntitySet="Check" />
             <End Role="CheckRelease" EntitySet="CheckRelease" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckRelease_Customer" Association="Self.FK_CheckRelease_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CheckRelease" EntitySet="CheckRelease" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckRelease_Employee" Association="Self.FK_CheckRelease_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CheckRelease" EntitySet="CheckRelease" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Employee" Association="Self.FK_Customer_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -965,7 +1025,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="AuditTrails" EntityType="ImusCityHallModel.AuditTrail" />
           <EntitySet Name="Banks" EntityType="ImusCityHallModel.Bank" />
           <EntitySet Name="Checks" EntityType="ImusCityHallModel.Check" />
-          <EntitySet Name="CheckReleases" EntityType="ImusCityHallModel.CheckRelease" />
           <EntitySet Name="Departments" EntityType="ImusCityHallModel.Department" />
           <EntitySet Name="Disbursements" EntityType="ImusCityHallModel.Disbursement" />
           <EntitySet Name="Divisions" EntityType="ImusCityHallModel.Division" />
@@ -1011,10 +1070,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <AssociationSet Name="FK_Check_Employee" Association="ImusCityHallModel.FK_Check_Employee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Check" EntitySet="Checks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CheckRelease_Check" Association="ImusCityHallModel.FK_CheckRelease_Check">
-            <End Role="Check" EntitySet="Checks" />
-            <End Role="CheckRelease" EntitySet="CheckReleases" />
           </AssociationSet>
           <AssociationSet Name="FK_Disbursement_Department" Association="ImusCityHallModel.FK_Disbursement_Department">
             <End Role="Department" EntitySet="Departments" />
@@ -1124,6 +1179,24 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
             <Parameter Name="FundBankID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="CheckReleases" EntityType="ImusCityHallModel.CheckRelease" />
+          <AssociationSet Name="FK_CheckRelease_Check" Association="ImusCityHallModel.FK_CheckRelease_Check">
+            <End Role="Check" EntitySet="Checks" />
+            <End Role="CheckRelease" EntitySet="CheckReleases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckRelease_Employee" Association="ImusCityHallModel.FK_CheckRelease_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="CheckRelease" EntitySet="CheckReleases" />
+          </AssociationSet>
+          <EntitySet Name="Customers" EntityType="ImusCityHallModel.Customer" />
+          <AssociationSet Name="FK_CheckRelease_Customer" Association="ImusCityHallModel.FK_CheckRelease_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CheckRelease" EntitySet="CheckReleases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Employee" Association="ImusCityHallModel.FK_Customer_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetCheckExpiryNotice_Result">
           <Property Type="String" Name="GroupName" Nullable="false" MaxLength="32" />
@@ -1254,24 +1327,8 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="AdviceNo" Type="Int32" />
           <NavigationProperty Name="Disbursement" Relationship="ImusCityHallModel.FK_Check_Disbursement" FromRole="Check" ToRole="Disbursement" />
           <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_Check_Employee" FromRole="Check" ToRole="Employee" />
-          <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Check" FromRole="Check" ToRole="CheckRelease" />
           <NavigationProperty Name="BankTrails" Relationship="ImusCityHallModel.FK_BankTrail_Check" FromRole="Check" ToRole="BankTrail" />
-        </EntityType>
-        <EntityType Name="CheckRelease">
-          <Key>
-            <PropertyRef Name="CheckReleaseID" />
-          </Key>
-          <Property Name="CheckReleaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CompleteAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Birthdate" Type="DateTime" Precision="0" />
-          <Property Name="ReleasedDate" Type="DateTime" Precision="3" />
-          <Property Name="DateTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="CheckID" Type="Int32" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Check" Relationship="ImusCityHallModel.FK_CheckRelease_Check" FromRole="CheckRelease" ToRole="Check" />
+          <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Check" FromRole="Check" ToRole="CheckRelease" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -1396,6 +1453,8 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <NavigationProperty Name="CDSSignatories3" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee3" FromRole="Employee" ToRole="CDSSignatory" />
           <NavigationProperty Name="CDSSignatories4" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee4" FromRole="Employee" ToRole="CDSSignatory" />
           <NavigationProperty Name="CDSSignatories5" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee5" FromRole="Employee" ToRole="CDSSignatory" />
+          <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Employee" FromRole="Employee" ToRole="CheckRelease" />
+          <NavigationProperty Name="Customers" Relationship="ImusCityHallModel.FK_Customer_Employee" FromRole="Employee" ToRole="Customer" />
         </EntityType>
         <EntityType Name="EmployeePosition">
           <Key>
@@ -1641,18 +1700,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Principal>
             <Dependent Role="Check">
               <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CheckRelease_Check">
-          <End Type="ImusCityHallModel.Check" Role="Check" Multiplicity="0..1" />
-          <End Type="ImusCityHallModel.CheckRelease" Role="CheckRelease" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Check">
-              <PropertyRef Name="CheckID" />
-            </Principal>
-            <Dependent Role="CheckRelease">
-              <PropertyRef Name="CheckID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2003,6 +2050,85 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="FundPrefix" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="CheckRelease">
+          <Key>
+            <PropertyRef Name="CheckReleaseID" />
+          </Key>
+          <Property Name="CheckReleaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="ReleasedDate" Type="DateTime" Precision="3" />
+          <Property Name="DateTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CheckID" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ReleasedBy" Type="Int32" />
+          <NavigationProperty Name="Check" Relationship="ImusCityHallModel.FK_CheckRelease_Check" FromRole="CheckRelease" ToRole="Check" />
+          <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_CheckRelease_Employee" FromRole="CheckRelease" ToRole="Employee" />
+          <NavigationProperty Name="Customer" Relationship="ImusCityHallModel.FK_CheckRelease_Customer" FromRole="CheckRelease" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_CheckRelease_Check">
+          <End Type="ImusCityHallModel.Check" Role="Check" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CheckRelease" Role="CheckRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Check">
+              <PropertyRef Name="CheckID" />
+            </Principal>
+            <Dependent Role="CheckRelease">
+              <PropertyRef Name="CheckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckRelease_Employee">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CheckRelease" Role="CheckRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CheckRelease">
+              <PropertyRef Name="ReleasedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="DateTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CompleteAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Birthdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Customer" FromRole="Customer" ToRole="CheckRelease" />
+          <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_Customer_Employee" FromRole="Customer" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_CheckRelease_Customer">
+          <End Type="ImusCityHallModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CheckRelease" Role="CheckRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CheckRelease">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Employee">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2138,22 +2264,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
                 <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
                 <ScalarProperty Name="CheckID" ColumnName="CheckID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CheckReleases">
-            <EntityTypeMapping TypeName="ImusCityHallModel.CheckRelease">
-              <MappingFragment StoreEntitySet="CheckRelease">
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="CheckID" ColumnName="CheckID" />
-                <ScalarProperty Name="DateTimeStamp" ColumnName="DateTimeStamp" />
-                <ScalarProperty Name="ReleasedDate" ColumnName="ReleasedDate" />
-                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
-                <ScalarProperty Name="CompleteAddress" ColumnName="CompleteAddress" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="CheckReleaseID" ColumnName="CheckReleaseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2473,6 +2583,34 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CheckReleases">
+            <EntityTypeMapping TypeName="ImusCityHallModel.CheckRelease">
+              <MappingFragment StoreEntitySet="CheckRelease">
+                <ScalarProperty Name="ReleasedBy" ColumnName="ReleasedBy" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="CheckID" ColumnName="CheckID" />
+                <ScalarProperty Name="DateTimeStamp" ColumnName="DateTimeStamp" />
+                <ScalarProperty Name="ReleasedDate" ColumnName="ReleasedDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CheckReleaseID" ColumnName="CheckReleaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="ImusCityHallModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="CompleteAddress" ColumnName="CompleteAddress" />
+                <ScalarProperty Name="DateTimeStamp" ColumnName="DateTimeStamp" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

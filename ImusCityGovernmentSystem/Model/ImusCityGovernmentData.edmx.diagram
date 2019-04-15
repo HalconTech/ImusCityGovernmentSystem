@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="ImusCityHallModel.AuditTrail" Width="1.5" PointX="0.75" PointY="1.5" />
         <EntityTypeShape EntityType="ImusCityHallModel.Bank" Width="1.5" PointX="1.5" PointY="21.875" />
         <EntityTypeShape EntityType="ImusCityHallModel.Check" Width="1.5" PointX="7.5" PointY="16.875" />
-        <EntityTypeShape EntityType="ImusCityHallModel.CheckRelease" Width="1.5" PointX="9.75" PointY="22.125" />
         <EntityTypeShape EntityType="ImusCityHallModel.Department" Width="1.5" PointX="0.75" PointY="12.375" />
         <EntityTypeShape EntityType="ImusCityHallModel.Disbursement" Width="1.5" PointX="3" PointY="10.75" />
         <EntityTypeShape EntityType="ImusCityHallModel.Division" Width="1.5" PointX="3" PointY="18.5" />
@@ -39,7 +38,6 @@
         <AssociationConnector Association="ImusCityHallModel.FK_FundBank_Bank" />
         <AssociationConnector Association="ImusCityHallModel.FK_Check_Disbursement" />
         <AssociationConnector Association="ImusCityHallModel.FK_Check_Employee" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Check" />
         <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_Department" />
         <AssociationConnector Association="ImusCityHallModel.FK_Division_Department" />
         <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_Disbursement" />
@@ -66,6 +64,12 @@
         <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee3" />
         <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee4" />
         <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee5" />
+        <EntityTypeShape EntityType="ImusCityHallModel.CheckRelease" Width="1.5" PointX="9.75" PointY="21.5" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Check" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Employee" />
+        <EntityTypeShape EntityType="ImusCityHallModel.Customer" Width="1.5" PointX="7.5" PointY="26.375" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Customer" />
+        <AssociationConnector Association="ImusCityHallModel.FK_Customer_Employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

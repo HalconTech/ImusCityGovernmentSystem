@@ -1,6 +1,6 @@
 ﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.CheckDisbursement.CheckListWindow"
            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="Check Master List" Height="319.211" Width="631.155"  TitleCaps="False" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded">
 
