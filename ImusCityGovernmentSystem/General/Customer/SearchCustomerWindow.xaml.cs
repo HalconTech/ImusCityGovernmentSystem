@@ -50,6 +50,14 @@ namespace ImusCityGovernmentSystem.General.Customer
 
                     customerdg.ItemsSource = customerList;
                     customerdg.SelectedValuePath = "CustomerId";
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Searched item in customer list. SEARCH KEY: " + searchkey,
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+                    SystemClass.InsertLog(audit);
                 }
                 else
                 {

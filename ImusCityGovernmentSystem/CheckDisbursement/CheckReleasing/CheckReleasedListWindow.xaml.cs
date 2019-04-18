@@ -74,6 +74,15 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                         };
                         released.Add(check);
                     }
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Searched item in released check list. SEARCH KEY: " + id,
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
                 }
 
                 releasedcheckdg.ItemsSource = released;

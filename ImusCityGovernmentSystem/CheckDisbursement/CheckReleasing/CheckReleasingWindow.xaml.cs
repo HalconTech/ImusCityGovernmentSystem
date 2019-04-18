@@ -60,8 +60,16 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         }
         private void capturebtn_Click(object sender, RoutedEventArgs e)
         {
-            imagecapture.Source = currentimage.Source;
-            webcam.Stop();
+            MessageBoxResult result = MessageBox.Show("Image was captured. Would you like to retake a picture", "Warning", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.No)
+            {
+                imagecapture.Source = currentimage.Source;
+                webcam.Stop();
+            }
+            else
+            {
+                webcam.Start();
+            }              
         }
 
         public int customerId = 0;
@@ -151,6 +159,14 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 db.SaveChanges();
                 MessageBox.Show("Data is saved. Please click the save button to continue the transaction");
                 customerId = customer.CustomerID;
+
+                var audit = new AuditTrailModel
+                {
+                    Activity = "Adde new customer in the database CUSTOMER NAME: " + string.Join(" ",customer.FirstName,customer.MiddleName,customer.LastName),
+                    ModuleName = this.GetType().Name,
+                    EmployeeID = App.EmployeeID
+                };
+                SystemClass.InsertLog(audit);
             }
             else
             {
@@ -175,6 +191,15 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
 
                 db.SaveChanges();
                 MessageBox.Show("Transaction completed");
+
+                var audit = new AuditTrailModel
+                {
+                    Activity = "Released check to CUSTOMER ID: " + released.CustomerID.ToString() + " with CHECK NUMBER: " + released.Check.CheckNo,
+                    ModuleName = this.GetType().Name,
+                    EmployeeID = App.EmployeeID
+                };
+                SystemClass.InsertLog(audit);
+
                 ResetFields();            
             }
             else
@@ -284,6 +309,16 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing.CheckReleasedListWindow releasing = new CheckReleasedListWindow();
             releasing.Show();
             Mouse.OverrideCursor = null;
+        }
+
+        private void clearcapturedimgbtn_Click(object sender, RoutedEventArgs e)
+        {
+            imagecapture.Source = null;
+        }
+
+        private void MetroWindow_Closed(object sender, EventArgs e)
+        {
+            webcam.Stop();
         }
     }
 }

@@ -12,7 +12,7 @@
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
-                      Width="613.497" Loaded="MetroWindow_Loaded" >
+                      Width="613.497" Loaded="MetroWindow_Loaded" Closed="MetroWindow_Closed" >
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -84,10 +84,10 @@
                     </Grid>
                     
                     <TextBlock Grid.Column="1" Text="Photo" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
-                    <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="7" BorderBrush="Black" BorderThickness="1" Margin="5,0,0,0">
-                        <Image Name="imagecapture" ></Image>
+                    <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="6" BorderBrush="Black" BorderThickness="1" Margin="5,0,0,5">
+                        <Image Name="imagecapture" Margin="0" ></Image>
                     </Border>
-
+                    <Button x:Name="clearcapturedimgbtn" Grid.Row="7" Grid.Column="1" Content="Clear Photo" Margin="5,0,0,0" Click="clearcapturedimgbtn_Click"></Button>
                     <TextBlock Grid.Row="8" Grid.Column="1" Text="Signature" Margin="5,0,0,0"></TextBlock>
                     <Border Grid.Column="1" Grid.Row="9" Grid.RowSpan="3"  BorderBrush="Black" BorderThickness="1" Margin="5,0,0,0">
 

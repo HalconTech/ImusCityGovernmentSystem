@@ -41,6 +41,16 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     signatory.DisbursingOfficer = (int)disbursingcb.SelectedValue;
                     db.SaveChanges();
                     MessageBox.Show("Signatories for CDS was updated");
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Updated CDS signatories",
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+                 
                 }
                 else
                 {
@@ -54,6 +64,16 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     db.CDSSignatories.Add(signatory);
                     db.SaveChanges();
                     MessageBox.Show("Signatories for CDS was updated");
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Added new CDS Signatories",
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+
                 }
 
             }

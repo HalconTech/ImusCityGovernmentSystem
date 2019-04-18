@@ -48,16 +48,38 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     {
                         checklistdg.ItemsSource = result.Where(m => m.CompanyName.Contains(searchkey)).OrderByDescending(m => m.CheckID).ToList();
                         checklistdg.SelectedValuePath = "CheckID";
+
+                        var audit = new AuditTrailModel
+                        {
+                            Activity = "Searched item in check list. SEARCH KEY: " + searchkey,
+                            ModuleName = this.GetType().Name,
+                            EmployeeID = App.EmployeeID
+                        };
+                        SystemClass.InsertLog(audit);
                     }
                     else if (descrb.IsChecked == true)
                     {
                         checklistdg.ItemsSource = result.Where(m => m.CheckDescription.Contains(searchkey)).OrderByDescending(m => m.CheckID).ToList();
                         checklistdg.SelectedValuePath = "CheckID";
+                        var audit = new AuditTrailModel
+                        {
+                            Activity = "Searched item in check list. SEARCH KEY: " + searchkey,
+                            ModuleName = this.GetType().Name,
+                            EmployeeID = App.EmployeeID
+                        };
+                        SystemClass.InsertLog(audit);
                     }
                     else if (checknorb.IsChecked == true)
                     {
                         checklistdg.ItemsSource = result.Where(m => m.CheckNumber.Contains(searchkey)).OrderByDescending(m => m.CheckID).ToList();
                         checklistdg.SelectedValuePath = "CheckID";
+                        var audit = new AuditTrailModel
+                        {
+                            Activity = "Searched item in check list. SEARCH KEY: " + searchkey,
+                            ModuleName = this.GetType().Name,
+                            EmployeeID = App.EmployeeID
+                        };
+                        SystemClass.InsertLog(audit);
                     }
                     else if (allrb.IsChecked == true)
                     {
