@@ -195,5 +195,13 @@ namespace ImusCityGovernmentSystem
         {
             flyoutNotif.IsOpen = true;
         }
+
+        private void customerbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            ImusCityGovernmentSystem.General.Customer.CustomerListWindow customer = new General.Customer.CustomerListWindow();
+            customer.Show();
+            Mouse.OverrideCursor = null;
+        }
     }
 }

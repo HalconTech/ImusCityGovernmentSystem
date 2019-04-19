@@ -1,0 +1,50 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.Customer.CustomerListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="Customer List"
+                      TitleCaps="False"
+                      BorderThickness="0"
+                      WindowStartupLocation="CenterScreen"
+                      Height="395.5"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      GlowBrush="Black"
+                      Width="553.89" Loaded="MetroWindow_Loaded">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox Name="searchtb" VerticalContentAlignment="Center" BorderBrush="Black" Controls:TextBoxHelper.Watermark="Search" Margin="0,0,5,0" KeyDown="searchtb_KeyDown"/>
+        <Grid Grid.Row="1" Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Content="Add New Customer" Name="addbtn" Margin="0,0,5,0" FontSize="12" Click="addbtn_Click"></Button>
+            <Button Grid.Column="1" Content="Edit Customer" Name="editbtn" Margin="0,0,5,0" Click="editbtn_Click"></Button>
+            <Button Grid.Column="2" Content="Delete" Name="deletebtn" Margin="0,0,5,0" Click="deletebtn_Click"></Button>
+        </Grid>
+        <Button Name="searchbtn" Grid.Column="1" Click="searchbtn_Click">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconModern Width="17" Height="17" Kind="Magnify" />
+                <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Text="Search" />
+            </StackPanel>
+        </Button>
+        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" BorderBrush="Black" Name="customerdg" BorderThickness="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0" GridLinesVisibility="All">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="240" Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Birthdate" Binding="{Binding Birthdate}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+    </Controls:MetroWindow>

@@ -147,6 +147,7 @@
           <Property Name="DateTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
           <Property Name="CompleteAddress" Type="nvarchar" MaxLength="150" />
           <Property Name="Birthdate" Type="date" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -2102,6 +2103,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="DateTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="CompleteAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Birthdate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Customer" FromRole="Customer" ToRole="CheckRelease" />
           <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_Customer_Employee" FromRole="Customer" ToRole="Employee" />
         </EntityType>
@@ -2599,6 +2601,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="ImusCityHallModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
                 <ScalarProperty Name="CompleteAddress" ColumnName="CompleteAddress" />
                 <ScalarProperty Name="DateTimeStamp" ColumnName="DateTimeStamp" />

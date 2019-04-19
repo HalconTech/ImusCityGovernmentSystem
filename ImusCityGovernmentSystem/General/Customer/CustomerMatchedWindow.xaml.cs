@@ -34,7 +34,7 @@ namespace ImusCityGovernmentSystem.General.Customer
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 List<CustomerEntity> customerList = new List<CustomerEntity>();
-                var result = from p in db.Customers orderby p.FirstName where p.FirstName.Contains(fname) || p.MiddleName.Contains(mname) || p.LastName.Contains(lname) select p;
+                var result = from p in db.Customers orderby p.FirstName where (p.FirstName.Contains(fname) || p.MiddleName.Contains(mname) || p.LastName.Contains(lname)) || p.IsActive == true select p;
                 foreach (var item in result)
                 {
                     var customer = new CustomerEntity

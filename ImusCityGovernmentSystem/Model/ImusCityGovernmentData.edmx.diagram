@@ -70,7 +70,7 @@
         <EntityTypeShape EntityType="ImusCityHallModel.Customer" Width="1.5" PointX="7.5" PointY="26.375" />
         <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Customer" />
         <AssociationConnector Association="ImusCityHallModel.FK_Customer_Employee" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

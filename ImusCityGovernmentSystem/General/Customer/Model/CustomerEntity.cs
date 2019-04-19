@@ -11,5 +11,6 @@ namespace ImusCityGovernmentSystem.General.Customer.Model
         public int CustomerId { get; set; }
         public string Name { get; set; }
         public string DateAdded { get; set; }
+        public string Birthdate { get; set; }
     }
 }

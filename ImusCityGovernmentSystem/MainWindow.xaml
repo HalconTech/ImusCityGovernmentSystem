@@ -216,6 +216,15 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem x:Name="customerbtn"  VerticalContentAlignment="Center"  Header="Customer" Click="customerbtn_Click"  >
+                        <MenuItem.Icon>
+                            <Rectangle Fill="#FF002753" Width="12" Height="14">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_people_checkbox}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem x:Name="departmentbtn"    VerticalContentAlignment="Center"  Header="Department" Click="departmentbtn_Click"    >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="13" Height="14">

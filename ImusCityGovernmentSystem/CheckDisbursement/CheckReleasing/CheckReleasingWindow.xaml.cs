@@ -69,7 +69,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             else
             {
                 webcam.Start();
-            }              
+            }
         }
 
         public int customerId = 0;
@@ -89,7 +89,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                     Mouse.OverrideCursor = null;
                     MessageBox.Show("Image was not captured");
                 }
-                else if(CustomerExist() && customerId == 0)
+                else if (CustomerExist() && customerId == 0)
                 {
                     Mouse.OverrideCursor = null;
                     MessageBoxResult result = MessageBox.Show(CustomerMatched().ToString() + " records matched. Would you like to retrieve his/her information or by clicking 'No' the system will automatically create a new record for this person", "Check Releasing Warning", MessageBoxButton.YesNo);
@@ -113,13 +113,13 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                             break;
                         case MessageBoxResult.No:
                             CreateCustomer();
-                            break;                      
+                            break;
                     }
                 }
                 else
                 {
                     int checkId = (int)checklistcb.SelectedValue;
-                    if(db.Customers.Any())
+                    if (db.Customers.Any())
                     {
                         SaveCheckReleased(customerId, checkId);
                         customerId = 0;
@@ -130,7 +130,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                         SaveCheckReleased(customerId, checkId);
                         customerId = 0;
                     }
-                  
+
                 }
 
             }
@@ -162,7 +162,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
 
                 var audit = new AuditTrailModel
                 {
-                    Activity = "Adde new customer in the database CUSTOMER NAME: " + string.Join(" ",customer.FirstName,customer.MiddleName,customer.LastName),
+                    Activity = "Adde new customer in the database CUSTOMER NAME: " + string.Join(" ", customer.FirstName, customer.MiddleName, customer.LastName),
                     ModuleName = this.GetType().Name,
                     EmployeeID = App.EmployeeID
                 };
@@ -175,7 +175,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         }
         public void SaveCheckReleased(int Id, int checkId)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 ImusCityGovernmentSystem.Model.CheckRelease released = new CheckRelease();
@@ -200,7 +200,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 };
                 SystemClass.InsertLog(audit);
 
-                ResetFields();            
+                ResetFields();
             }
             else
             {
@@ -210,13 +210,13 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         public bool CustomerExist()
         {
             ImusCityHallEntities db = new ImusCityHallEntities();
-            return db.Customers.Any(m => m.FirstName == firstnametb.Text || m.MiddleName == middlenametb.Text || m.LastName == lastnametb.Text);
+            return db.Customers.Any(m => (m.FirstName == firstnametb.Text || m.MiddleName == middlenametb.Text || m.LastName == lastnametb.Text) && m.IsActive == true);
         }
 
         public int CustomerMatched()
         {
             ImusCityHallEntities db = new ImusCityHallEntities();
-            return db.Customers.Count(m => m.FirstName == firstnametb.Text || m.MiddleName == middlenametb.Text || m.LastName == lastnametb.Text);
+            return db.Customers.Count(m => (m.FirstName == firstnametb.Text || m.MiddleName == middlenametb.Text || m.LastName == lastnametb.Text) && m.IsActive == true);
         }
 
         private void checklistcb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -255,7 +255,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             System.Drawing.ImageConverter converter = new System.Drawing.ImageConverter();
             return (byte[])converter.ConvertTo(bitmap, typeof(byte[]));
         }
-     
+
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
             int? Id;
@@ -274,7 +274,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
 
         public void LoadCustomer(int id)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 ImusCityGovernmentSystem.Model.Customer customer = db.Customers.Find(id);

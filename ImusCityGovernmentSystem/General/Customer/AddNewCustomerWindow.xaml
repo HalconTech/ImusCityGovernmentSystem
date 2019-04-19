@@ -1,0 +1,33 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.Customer.AddNewCustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Add New Customer" Height="394.881" Width="396.188"  TitleCaps="False" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="First Name*"></TextBlock>
+        <TextBox Grid.Row="1" Name="firstnametb" VerticalContentAlignment="Center"></TextBox>
+        <TextBlock Grid.Row="2" Text="Middle Name"></TextBlock>
+        <TextBox Grid.Row="3" Name="middlenamebt" VerticalContentAlignment="Center"></TextBox>
+        <TextBlock Grid.Row="4" Text="Last Name*"></TextBlock>
+        <TextBox Grid.Row="5" Name="lastnametb" VerticalContentAlignment="Center"></TextBox>
+        <TextBlock Grid.Row="6" Text="Birthdate*"></TextBlock>
+        <DatePicker Grid.Row="7" Name="bdaydp" VerticalContentAlignment="Center"></DatePicker>
+        <TextBlock Grid.Row="8" Text="Complete Address*"></TextBlock>
+        <TextBox Grid.Row="9" TextWrapping="Wrap" Name="compaddresstb" Margin="0,0,0,5"></TextBox>
+        <Button Grid.Row="10" Content="Save" Name="savebtn" Click="savebtn_Click"></Button>
+    </Grid>
+    </Controls:MetroWindow>

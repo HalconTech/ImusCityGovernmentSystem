@@ -85,7 +85,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                     SystemClass.InsertLog(audit);
                 }
 
-                releasedcheckdg.ItemsSource = released;
+                releasedcheckdg.ItemsSource = released.OrderByDescending(m => m.DateReleased);
                 releasedcheckdg.SelectedValuePath = "ReleasedId";
                 Mouse.OverrideCursor = null;
             }
