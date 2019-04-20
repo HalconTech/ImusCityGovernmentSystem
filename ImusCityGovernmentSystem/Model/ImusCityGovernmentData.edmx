@@ -141,7 +141,7 @@
           <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nchar" MaxLength="10" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="DateAdded" Type="datetime" />
           <Property Name="AddedBy" Type="int" />
           <Property Name="DateTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
@@ -828,6 +828,9 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Parameter Name="EndDate" Type="date" Mode="In" />
           <Parameter Name="FundBankID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetCustomerTransactions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetDisbursementVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DisbursementID" Type="int" Mode="In" />
         </Function>
@@ -1189,6 +1192,9 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="Employee" EntitySet="Employees" />
             <End Role="CheckRelease" EntitySet="CheckReleases" />
           </AssociationSet>
+          <FunctionImport Name="GetCustomerTransactions" ReturnType="Collection(ImusCityHallModel.GetCustomerTransactions_Result)">
+          <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+          </FunctionImport>
           <EntitySet Name="Customers" EntityType="ImusCityHallModel.Customer" />
           <AssociationSet Name="FK_CheckRelease_Customer" Association="ImusCityHallModel.FK_CheckRelease_Customer">
             <End Role="Customer" EntitySet="Customers" />
@@ -2090,6 +2096,10 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetCustomerTransactions_Result">
+          <Property Type="String" Name="Activity" Nullable="false" MaxLength="14" />
+          <Property Type="DateTime" Name="TransactionDate" Nullable="true" Precision="23" />
+        </ComplexType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
@@ -2097,7 +2107,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateAdded" Type="DateTime" Precision="3" />
           <Property Name="AddedBy" Type="Int32" />
           <Property Name="DateTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
@@ -2598,6 +2608,14 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerTransactions" FunctionName="ImusCityHallModel.Store.GetCustomerTransactions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ImusCityHallModel.GetCustomerTransactions_Result">
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="ImusCityHallModel.Customer">
               <MappingFragment StoreEntitySet="Customer">

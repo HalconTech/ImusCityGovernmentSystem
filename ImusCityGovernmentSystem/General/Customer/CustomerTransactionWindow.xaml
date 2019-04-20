@@ -1,0 +1,27 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.Customer.CustomerTransactionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="Customer Transactions"
+                      TitleCaps="False"
+                      BorderThickness="0"
+                      WindowStartupLocation="CenterScreen"
+                      Height="291"
+                      WindowTransitionsEnabled="False"
+                      ShowIconOnTitleBar="True"
+                      ResizeMode="NoResize"
+                      GlowBrush="Black"
+                      Width="369.89" Loaded="MetroWindow_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="False" Name="customerTransactiondg" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="All">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="290" Header="Transaction Name" Binding="{Binding Activity}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding TransactionDate}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Controls:MetroWindow>

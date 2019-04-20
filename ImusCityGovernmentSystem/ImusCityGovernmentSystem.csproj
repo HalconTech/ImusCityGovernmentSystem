@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -256,10 +256,14 @@
     <Compile Include="General\Customer\CustomerMatchedWindow.xaml.cs">
       <DependentUpon>CustomerMatchedWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="General\Customer\CustomerTransactionWindow.xaml.cs">
+      <DependentUpon>CustomerTransactionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="General\Customer\EditCustomerWindow.xaml.cs">
       <DependentUpon>EditCustomerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="General\Customer\Model\CustomerEntity.cs" />
+    <Compile Include="General\Customer\Model\CustomerTransactionsEntity.cs" />
     <Compile Include="General\Customer\SearchCustomerWindow.xaml.cs">
       <DependentUpon>SearchCustomerWindow.xaml</DependentUpon>
     </Compile>
@@ -391,6 +395,9 @@
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetCheckRegister_Result.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetCustomerTransactions_Result.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetDisbursementVoucher_Result.cs">
@@ -537,6 +544,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="General\Customer\CustomerMatchedWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\Customer\CustomerTransactionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

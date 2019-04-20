@@ -145,5 +145,24 @@ namespace ImusCityGovernmentSystem.General.Customer
                 }
             }
         }
+
+        private void viewtransbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            if (customerdg.SelectedValue == null)
+            {
+                Mouse.OverrideCursor = null;
+                MessageBox.Show("Please select a customer from the list");
+            }
+            else
+            {
+                Mouse.OverrideCursor = null;
+                CustomerTransactionWindow transaction = new CustomerTransactionWindow();
+                transaction.id = (int)customerdg.SelectedValue;
+                transaction.ShowDialog();
+
+            }
+            Mouse.OverrideCursor = null;
+        }
     }
 }

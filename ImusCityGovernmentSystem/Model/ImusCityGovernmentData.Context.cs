@@ -105,5 +105,14 @@ namespace ImusCityGovernmentSystem.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckIssued_Result>("GetCheckIssued", startDateParameter, endDateParameter, fundBankIDParameter);
         }
+    
+        public virtual ObjectResult<GetCustomerTransactions_Result> GetCustomerTransactions(Nullable<int> customerID)
+        {
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerTransactions_Result>("GetCustomerTransactions", customerIDParameter);
+        }
     }
 }
