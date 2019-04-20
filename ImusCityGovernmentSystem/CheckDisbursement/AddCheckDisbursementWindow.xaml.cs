@@ -45,7 +45,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentName).ToList();
                 departmentcb.DisplayMemberPath = "DepartmentName";
                 departmentcb.SelectedValuePath = "DepartmentID";
-                departmentcb.SelectedIndex = 0;
 
                 fundtypecb.ItemsSource = db.FundBanks.OrderBy(m => m.Fund.FundName).ToList();
                 fundtypecb.SelectedValuePath = "FundBankID";
@@ -93,31 +92,31 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     }
                     else
                     {
-                        if(!String.IsNullOrEmpty(fundtypecb.Text))
+                        if (!String.IsNullOrEmpty(fundtypecb.Text))
                         {
 
                             int fundbankID = (int)fundtypecb.SelectedValue;
 
                             var fundbank = db.FundBanks.Find(fundbankID);
 
-                            if(fundbank.CurrentBalance < Convert.ToDecimal(amounttb.Text))
+                            if (fundbank.CurrentBalance < Convert.ToDecimal(amounttb.Text))
                             {
                                 MessageBox.Show("Selected fund have insufficient balance.");
                                 return;
                             }
 
                             Disbursement disbursement = new Disbursement();
-                            disbursement.PayeeID = optionpayeecb.IsChecked == true ? null : (int?)payeecb.SelectedValue;
+                            disbursement.PayeeID = optionpayeecb.IsChecked == true ? null : payeecb.SelectedValue == null ? (int?)null : (int)payeecb.SelectedValue;
                             disbursement.PaymentTypeID = (int)paymenttypecb.SelectedValue;
-                            disbursement.VoucherNo = vouchernotb.Text;
+                            disbursement.VoucherNo = voucherprefixtb.Text + vouchernotb.Text;
                             disbursement.DateCreated = DateTime.Now;
-                            disbursement.DepartmentID = (int)departmentcb.SelectedValue;
+                            disbursement.DepartmentID = departmentcb.SelectedValue == null ? null : (int?)departmentcb.SelectedValue;
                             disbursement.ProjectName = projectnametb.Text;
                             disbursement.Description = descriptiontb.Text;
                             disbursement.Amount = Convert.ToDecimal(amounttb.Text);
                             disbursement.Obligated = obligatedcb.IsChecked;
                             disbursement.DocCompleted = documentcb.IsChecked;
-                            disbursement.PayeeRepID = (int)payeerepcb.SelectedValue;
+                            disbursement.PayeeRepID = payeerepcb.SelectedValue == null ? (int?)null : (int)payeerepcb.SelectedValue;
                             disbursement.PayeeName = optionalpayee.Text;
                             disbursement.FundBankID = (int)fundtypecb.SelectedValue;
                             var x = db.Disbursements.Add(disbursement);
@@ -232,9 +231,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
 
                 if (fundbank != null)
                 {
+
                     string prefix = fundbank.Fund.FundPrefix + "-";
-                    vouchernotb.Text = prefix;
-                    MessageBox.Show(String.Format(new System.Globalization.CultureInfo("en-PH"), "{0:C}", fundbank.CurrentBalance), "Fund Current Balance", MessageBoxButton.OK, MessageBoxImage.Information);
+                    voucherprefixtb.Text = prefix;
+                    currentbalancetb.Text = String.Format(new System.Globalization.CultureInfo("en-PH"), "{0:C}", fundbank.CurrentBalance);
                     vouchernotb.Focus();
                 }
             }

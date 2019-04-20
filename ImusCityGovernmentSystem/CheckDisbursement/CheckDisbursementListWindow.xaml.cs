@@ -89,7 +89,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                     }
                     payeetb.Text = dis.Payee.CompanyName;
                     projectnametb.Text = dis.ProjectName;
-                    departmenttb.Text = dis.Department.DepartmentName;
+                    departmenttb.Text = dis.Department == null ? null : dis.Department.DepartmentName;
                     descriptiontb.Text = dis.Description;
                     obligatedcb.IsChecked = dis.Obligated;
                     documentcb.IsChecked = dis.DocCompleted;

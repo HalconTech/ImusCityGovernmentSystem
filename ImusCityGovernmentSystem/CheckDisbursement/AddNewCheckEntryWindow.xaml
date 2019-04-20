@@ -50,7 +50,7 @@
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
-                    <RowDefinition Height="50"></RowDefinition> 
+                    <RowDefinition Height="20"></RowDefinition> 
                     <RowDefinition Height="35"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -61,10 +61,10 @@
                 <TextBlock Text="Check No." VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="2" Name="checknotb" VerticalContentAlignment="Center"></TextBox>
                 <TextBlock Grid.Row="1" Text="Check Description" Grid.ColumnSpan="2" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="4" Grid.ColumnSpan="3"  VerticalAlignment="Center" FontSize="10" PreviewMouseDown="TextBlock_PreviewMouseDown">
+                <TextBlock Grid.Row="5" Grid.ColumnSpan="3"  VerticalAlignment="Center" FontSize="10" PreviewMouseDown="TextBlock_PreviewMouseDown">
                     <Hyperlink >Copy Description from the voucher</Hyperlink>
                 </TextBlock>
-                <TextBox Grid.Row="2" Grid.RowSpan="2" TextWrapping="Wrap" Name="checkdesctb"  Grid.ColumnSpan="3" Margin="0"></TextBox>
+                <TextBox Grid.Row="2" Grid.RowSpan="3" TextWrapping="Wrap" Name="checkdesctb"  Grid.ColumnSpan="3" Margin="0"></TextBox>
                 <Grid Grid.Row="5" Grid.ColumnSpan="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"></RowDefinition>
@@ -74,10 +74,6 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="City Mayor" FontWeight="Bold" ></TextBlock>
-                    <ComboBox Name="mayorcb" VerticalContentAlignment="Center" Grid.Row="1" Margin="0,0,5,0"></ComboBox>
-                    <TextBlock Grid.Column="1" Text="City Treasurer" FontWeight="Bold" ></TextBlock>
-                    <ComboBox Grid.Row="1" Grid.Column="1" Name="treasurercb" VerticalContentAlignment="Center"></ComboBox>
                 </Grid>
                 <TextBlock Text="Amount" Grid.Row="7" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                 <TextBox Grid.Row="7" Grid.Column="1" VerticalContentAlignment="Center" Name="checkamounttb" Margin="0,5,0,0"></TextBox>

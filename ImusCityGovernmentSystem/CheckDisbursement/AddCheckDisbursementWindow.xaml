@@ -36,22 +36,40 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Voucher No." FontWeight="Bold" FontSize="16" VerticalAlignment="Center"></TextBlock>
-            <TextBox x:Name="vouchernotb" Grid.Column="1" FontSize="16" Foreground="#FFB40000" FontWeight="Bold" Grid.ColumnSpan="3"/>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Name="voucherprefixtb" VerticalAlignment="Center" FontSize="16" Foreground="#FFB40000" FontWeight="Bold" ></TextBlock>
+                <TextBox x:Name="vouchernotb" Grid.Column="1" FontSize="16" Foreground="#FFB40000" FontWeight="Bold"/>
+            </Grid>
+            
 
             <TextBlock Text="Fund:" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
-            <ComboBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Name="fundtypecb" Margin="0,5,0,0" SelectionChanged="fundtypecb_SelectionChanged">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="220"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ComboBox VerticalContentAlignment="Center" Grid.Row="1"  Name="fundtypecb" Margin="0,5,5,0" SelectionChanged="fundtypecb_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
                 <Run Text="{Binding Bank.BankCode}" />
                             <Run Text=" - "/>
                 <Run Text="{Binding Fund.FundName}" />
                              <Run Text=" - "/>
                 <Run Text="{Binding AccountNumber}" />
-                        </TextBlock>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="Current Balance:" Margin="0,0,5,0"  Grid.Column="1"  VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+                <TextBlock Name="currentbalancetb" Grid.Column="2"  VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+            </Grid>
+         
 
             <TextBlock Text="Payment Type:" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
             <ComboBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="paymenttypecb" Margin="0,5,0,0"></ComboBox>
@@ -71,9 +89,9 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock  Text="Payee:" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
-                <ComboBox VerticalContentAlignment="Center" Name="payeecb" Grid.Column="1" SelectionChanged="payeecb_SelectionChanged"></ComboBox>
+                <ComboBox IsEditable="True" VerticalContentAlignment="Center" Name="payeecb" Grid.Column="1" SelectionChanged="payeecb_SelectionChanged"></ComboBox>
                 <TextBlock  Text="Payee Representative:" Grid.Column="2" FontWeight="Bold" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
-                <ComboBox VerticalContentAlignment="Center" Name="payeerepcb" Grid.Column="3"></ComboBox>
+                <ComboBox IsEditable="True" VerticalContentAlignment="Center" Name="payeerepcb" Grid.Column="3"></ComboBox>
                 <CheckBox x:Name="optionpayeecb" Grid.Row="1" Grid.ColumnSpan="4" Content="If payee is one time use only, tick check box and fill out the field" Foreground="Red"/>
                 <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.ColumnSpan="4" Name="optionalpayee"></TextBox>
             </Grid>
