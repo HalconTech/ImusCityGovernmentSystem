@@ -57,6 +57,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<CDSSignatory> CDSSignatories { get; set; }
         public virtual DbSet<CheckRelease> CheckReleases { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<ControlNumber> ControlNumbers { get; set; }
     
         public virtual ObjectResult<GetCheckExpiryNotice_Result> GetCheckExpiryNotice()
         {

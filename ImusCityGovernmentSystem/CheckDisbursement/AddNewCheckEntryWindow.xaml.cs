@@ -73,14 +73,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     MessageBox.Show("Check number is already been used");
                 }
-                else if (mayorcb.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select mayor");
-                }
-                else if (treasurercb.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select treasurer");
-                }
                 else if(db.FundBanks.Find(disbursement.FundBankID).CurrentBalance < Convert.ToDecimal(checkamounttb.Text))
                 {
                     MessageBox.Show("Check cannot be created, you have insufficients funds");
@@ -165,15 +157,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                                    id = p.EmployeeID,
                                    Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
                                };
-                mayorcb.ItemsSource = employee.ToList();
-                mayorcb.DisplayMemberPath = "Name";
-                mayorcb.SelectedValuePath = "id";
-                mayorcb.SelectedIndex = 0;
-
-                treasurercb.ItemsSource = employee.ToList();
-                treasurercb.DisplayMemberPath = "Name";
-                treasurercb.SelectedValuePath = "id";
-                treasurercb.SelectedIndex = 0;
             }
             else
             {

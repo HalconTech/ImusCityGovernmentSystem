@@ -19,6 +19,7 @@ namespace ImusCityGovernmentSystem.Model
         {
             this.Disbursements = new HashSet<Disbursement>();
             this.BankTrails = new HashSet<BankTrail>();
+            this.ControlNumbers = new HashSet<ControlNumber>();
         }
     
         public int FundBankID { get; set; }
@@ -39,5 +40,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BankTrail> BankTrails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ControlNumber> ControlNumbers { get; set; }
     }
 }

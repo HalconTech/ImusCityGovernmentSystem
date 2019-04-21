@@ -121,6 +121,7 @@
           <Property Name="EmployeeID" Type="int" />
           <Property Name="Status" Type="int" />
           <Property Name="AdviceNo" Type="int" />
+          <Property Name="ControlNo" Type="int" />
         </EntityType>
         <EntityType Name="CheckRelease">
           <Key>
@@ -133,6 +134,18 @@
           <Property Name="CheckID" Type="int" />
           <Property Name="Photo" Type="image" />
           <Property Name="ReleasedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="ControlNumber">
+          <Key>
+            <PropertyRef Name="ControlNoID" />
+          </Key>
+          <Property Name="ControlNoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FundBankID" Type="int" />
+          <Property Name="NextControlNo" Type="int" />
+          <Property Name="BeginingControlNo" Type="int" />
+          <Property Name="EndingControlNo" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Date" Type="datetime" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -557,6 +570,18 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ControlNumber_FundBank">
+          <End Role="FundBank" Type="Self.FundBank" Multiplicity="0..1" />
+          <End Role="ControlNumber" Type="Self.ControlNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FundBank">
+              <PropertyRef Name="FundBankID" />
+            </Principal>
+            <Dependent Role="ControlNumber">
+              <PropertyRef Name="FundBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Customer_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
@@ -846,6 +871,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="CDSSignatory" EntityType="Self.CDSSignatory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Check" EntityType="Self.Check" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CheckRelease" EntityType="Self.CheckRelease" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ControlNumber" EntityType="Self.ControlNumber" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disbursement" EntityType="Self.Disbursement" Schema="dbo" store:Type="Tables" />
@@ -926,6 +952,10 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <AssociationSet Name="FK_CheckRelease_Employee" Association="Self.FK_CheckRelease_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="CheckRelease" EntitySet="CheckRelease" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ControlNumber_FundBank" Association="Self.FK_ControlNumber_FundBank">
+            <End Role="FundBank" EntitySet="FundBank" />
+            <End Role="ControlNumber" EntitySet="ControlNumber" />
           </AssociationSet>
           <AssociationSet Name="FK_Customer_Employee" Association="Self.FK_Customer_Employee">
             <End Role="Employee" EntitySet="Employee" />
@@ -1204,6 +1234,11 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
+          <EntitySet Name="ControlNumbers" EntityType="ImusCityHallModel.ControlNumber" />
+          <AssociationSet Name="FK_ControlNumber_FundBank" Association="ImusCityHallModel.FK_ControlNumber_FundBank">
+            <End Role="FundBank" EntitySet="FundBanks" />
+            <End Role="ControlNumber" EntitySet="ControlNumbers" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetCheckExpiryNotice_Result">
           <Property Type="String" Name="GroupName" Nullable="false" MaxLength="32" />
@@ -1336,6 +1371,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_Check_Employee" FromRole="Check" ToRole="Employee" />
           <NavigationProperty Name="BankTrails" Relationship="ImusCityHallModel.FK_BankTrail_Check" FromRole="Check" ToRole="BankTrail" />
           <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Check" FromRole="Check" ToRole="CheckRelease" />
+          <Property Name="ControlNo" Type="Int32" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -1523,6 +1559,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <NavigationProperty Name="Disbursements" Relationship="ImusCityHallModel.FK_Disbursement_FundBank" FromRole="FundBank" ToRole="Disbursement" />
           <NavigationProperty Name="Fund" Relationship="ImusCityHallModel.FK_FundBank_FundBank" FromRole="FundBank" ToRole="Fund" />
           <NavigationProperty Name="BankTrails" Relationship="ImusCityHallModel.FK_BankTrail_FundBank" FromRole="FundBank" ToRole="BankTrail" />
+          <NavigationProperty Name="ControlNumbers" Relationship="ImusCityHallModel.FK_ControlNumber_FundBank" FromRole="FundBank" ToRole="ControlNumber" />
         </EntityType>
         <EntityType Name="LicensingCode">
           <Key>
@@ -2141,6 +2178,31 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ControlNumber">
+          <Key>
+            <PropertyRef Name="ControlNoID" />
+          </Key>
+          <Property Name="ControlNoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FundBankID" Type="Int32" />
+          <Property Name="NextControlNo" Type="Int32" />
+          <Property Name="BeginingControlNo" Type="Int32" />
+          <Property Name="EndingControlNo" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FundBank" Relationship="ImusCityHallModel.FK_ControlNumber_FundBank" FromRole="ControlNumber" ToRole="FundBank" />
+        </EntityType>
+        <Association Name="FK_ControlNumber_FundBank">
+          <End Type="ImusCityHallModel.FundBank" Role="FundBank" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.ControlNumber" Role="ControlNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FundBank">
+              <PropertyRef Name="FundBankID" />
+            </Principal>
+            <Dependent Role="ControlNumber">
+              <PropertyRef Name="FundBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2266,6 +2328,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySetMapping Name="Checks">
             <EntityTypeMapping TypeName="ImusCityHallModel.Check">
               <MappingFragment StoreEntitySet="Check">
+                <ScalarProperty Name="ControlNo" ColumnName="ControlNo" />
                 <ScalarProperty Name="AdviceNo" ColumnName="AdviceNo" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -2629,6 +2692,19 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ControlNumbers">
+            <EntityTypeMapping TypeName="ImusCityHallModel.ControlNumber">
+              <MappingFragment StoreEntitySet="ControlNumber">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="EndingControlNo" ColumnName="EndingControlNo" />
+                <ScalarProperty Name="BeginingControlNo" ColumnName="BeginingControlNo" />
+                <ScalarProperty Name="NextControlNo" ColumnName="NextControlNo" />
+                <ScalarProperty Name="FundBankID" ColumnName="FundBankID" />
+                <ScalarProperty Name="ControlNoID" ColumnName="ControlNoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
