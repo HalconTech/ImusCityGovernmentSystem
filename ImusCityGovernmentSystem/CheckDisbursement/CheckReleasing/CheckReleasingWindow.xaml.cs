@@ -16,7 +16,7 @@ using ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing;
 using ImusCityGovernmentSystem.Model;
 using System.IO;
 using ImusCityGovernmentSystem.General.Customer;
-
+using System.Runtime.InteropServices;
 
 namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
 {
@@ -30,11 +30,17 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         public CheckReleasingWindow()
         {
             InitializeComponent();
+            digitalsig.UseCustomCursor = true;
+            digitalsig.Cursor = Cursors.Pen;
+            digitalsig.MoveEnabled = false;
+           
         }
+     
 
         private void startcapturingbtn_Click(object sender, RoutedEventArgs e)
         {
             webcam.Start();
+
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -42,6 +48,9 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             webcam = new WebCam();
             webcam.InitializeWebCam(ref currentimage);
             LoadCheckList();
+            Point targetLoc = this.PointToScreen(new Point(0, 0));
+            System.Drawing.Rectangle r = new System.Drawing.Rectangle((int)targetLoc.X, (int)targetLoc.Y, (int)(targetLoc.X + this.Width), (int)(targetLoc.Y + this.Height));
+            ClipCursor(ref r);
         }
 
         public void LoadCheckList()
@@ -320,5 +329,12 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         {
             webcam.Stop();
         }
+
+        [DllImport("user32.dll")]
+        static extern void ClipCursor(ref System.Drawing.Rectangle rect);
+
+        [DllImport("user32.dll")]
+        static extern void ClipCursor(IntPtr rect);
+
     }
 }

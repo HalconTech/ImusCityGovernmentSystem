@@ -43,7 +43,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 descriptiontb.Text = disbursement.Description;
                 paymenttypecb.SelectedIndex = disbursement.PaymentTypeID.HasValue ? disbursement.PaymentTypeID.Value : 0;
                 voucheramounttb.Text = String.Format("{0:0.##}", disbursement.Amount);
-                LoadSignatories();
+               
             }
             else
             {
@@ -72,15 +72,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 else if (db.Checks.Any(m => m.CheckNo == checknotb.Text))
                 {
                     MessageBox.Show("Check number is already been used");
-                }
-                else if (mayorcb.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select mayor");
-                }
-                else if (treasurercb.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select treasurer");
-                }
+                }           
                 else if(db.FundBanks.Find(disbursement.FundBankID).CurrentBalance < Convert.ToDecimal(checkamounttb.Text))
                 {
                     MessageBox.Show("Check cannot be created, you have insufficients funds");
@@ -153,33 +145,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             checkdesctb.Text = descriptiontb.Text;
         }
 
-        public void LoadSignatories()
-        {
-            if (SystemClass.CheckConnection())
-            {
-                ImusCityHallEntities db = new ImusCityHallEntities();
-                var employee = from p in db.Employees
-                               orderby p.FirstName
-                               select new
-                               {
-                                   id = p.EmployeeID,
-                                   Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
-                               };
-                mayorcb.ItemsSource = employee.ToList();
-                mayorcb.DisplayMemberPath = "Name";
-                mayorcb.SelectedValuePath = "id";
-                mayorcb.SelectedIndex = 0;
-
-                treasurercb.ItemsSource = employee.ToList();
-                treasurercb.DisplayMemberPath = "Name";
-                treasurercb.SelectedValuePath = "id";
-                treasurercb.SelectedIndex = 0;
-            }
-            else
-            {
-                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
-            }
-        }
+        
 
     }
 }

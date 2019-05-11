@@ -114,6 +114,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Digital Signature" FontSize="16">
+                <InkCanvas ForceCursor="True" Name="digitalsig" EditingMode="Ink" ClipToBounds="True"/>
             </TabItem>
             <TabItem Header="Check Details" FontSize="16">
                 <Grid Margin="5">
