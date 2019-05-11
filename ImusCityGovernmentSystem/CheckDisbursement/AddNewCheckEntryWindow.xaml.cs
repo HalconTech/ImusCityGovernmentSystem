@@ -96,6 +96,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     check.Status = (int)CheckStatus.Created;
 
                     string formatted = string.Format("{0:0000000000}", cn.NextControlNo);
+                    cn.NextControlNo++;
                     check.ControlNo = formatted;
                     db.Checks.Add(check);
 
