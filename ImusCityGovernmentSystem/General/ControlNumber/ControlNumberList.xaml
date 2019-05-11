@@ -15,8 +15,8 @@
                       Width="586" Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width=".6*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Margin="0,0,2.5,0">
             <Grid.RowDefinitions>
@@ -37,28 +37,41 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Text="Account"></TextBlock>
-            <ComboBox IsEnabled="False" VerticalContentAlignment="Center" Grid.Row="1" Name="accountcb"></ComboBox>
+            <ComboBox VerticalContentAlignment="Center" Grid.Row="1"  Name="accountcb" SelectionChanged="accountcb_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                <Run Text="{Binding Bank.BankCode}" />
+                            <Run Text=" - "/>
+                <Run Text="{Binding Fund.FundName}" />
+                             <Run Text=" - "/>
+                <Run Text="{Binding AccountNumber}" />
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <TextBlock Grid.Row="2" Text="Fund"></TextBlock>
             <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Grid.Row="3" Name="fundtb"></TextBox>
             <TextBlock Grid.Row="4" Text="Bank Name"></TextBlock>
             <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Grid.Row="5" Name="banktb"></TextBox>
             <TextBlock Grid.Row="6" Text="Control Number- Beginning"></TextBlock>
-            <TextBox Grid.Row="7" IsEnabled="False" VerticalContentAlignment="Center" Name="controlnobegintb"></TextBox>
+            <Controls:NumericUpDown Minimum ="0" Maximum = "1000000" Grid.Row="7" IsEnabled="True" VerticalContentAlignment="Center" Name="controlnobegintb"/>
             <TextBlock Grid.Row="8" Text="Control Number- Ending"></TextBlock>
-            <TextBox IsEnabled="False" VerticalContentAlignment="Center" Grid.Row="9" Name="controlnoendtb"></TextBox>
+            <Controls:NumericUpDown Minimum ="0" Maximum = "1000000" VerticalContentAlignment="Center" Grid.Row="9" Name="controlnoendtb"/>
             <TextBlock Grid.Row="10" Text="Current Control Number"></TextBlock>
-            <TextBox IsEnabled="False" Grid.Row="11" VerticalAlignment="Center" Name="controlnocurrenttb"></TextBox>
+            <Controls:NumericUpDown Minimum ="0" Maximum = "1000000"  Grid.Row="11" VerticalAlignment="Center" Name="controlnocurrenttb"/>
             <TextBlock Grid.Row="12" Text="Is Active"></TextBlock>
-            <CheckBox Grid.Row="13" Name="activechk" VerticalContentAlignment="Center" IsEnabled="False" Content="Active"></CheckBox>
+            <CheckBox Grid.Row="13" Name="activechk" VerticalContentAlignment="Center" IsEnabled="True" IsChecked="True" Content="Active"></CheckBox>
             <Grid Grid.Row="14" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Content="Edit" Name="editbtn" Margin="0,0,2.5,0" Click="editbtn_Click"  VerticalAlignment="Bottom"/>
+               
                 <Button IsEnabled="False" Content="Save" Grid.Column="1" Name="savebtn" Margin="2.5,0" Click="savebtn_Click"  VerticalAlignment="Bottom"></Button>
-                <Button x:Name="addbtn" Content="Add" Grid.Column="2"  Margin="2.5,0,0,0" Click="addbtn_Click"  VerticalAlignment="Bottom"></Button>
+                <Button x:Name="addbtn" Content="Add" Grid.Column="0"  Margin="2.5,0,0,0" Click="addbtn_Click"  VerticalAlignment="Bottom"></Button>
+                <Button Grid.Column="2" Content="Reload" Name="refbtn" Margin="0,0,2.5,0" Click="refbtn_Click"  VerticalAlignment="Bottom"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Margin="2.5,0,0,0">
@@ -66,8 +79,21 @@
                 <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Text="Accounts Listing" FontWeight="Bold"></TextBlock>
-            <ListBox BorderBrush="Black"  BorderThickness="1" Grid.Row="1" Name="controlnolistlb" Margin="0" SelectionChanged="controlnolistlb_SelectionChanged"></ListBox>
+            <TextBlock Text="Control Number Listing" FontWeight="Bold"></TextBlock>
+            <DataGrid Grid.Row="1"  BorderThickness="1"  x:Name="dgControlNumberList" IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Single" BorderBrush="Black" GridLinesVisibility="Vertical" HorizontalGridLinesBrush="Black" SelectionChanged="dgControlNumberList_SelectionChanged"  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Acct" Width="*"  Binding="{Binding FundBank.AccountNumber}"/>
+                    <DataGridTextColumn Header="Start" Width="*"  Binding="{Binding BeginingControlNo}"/>
+                    <DataGridTextColumn Header="End" Width="*"  Binding="{Binding EndingControlNo}"/>
+                    <DataGridTextColumn Header="Next" Width="*"  Binding="{Binding NextControlNo}"/>
+                    <DataGridTextColumn Header="isActive" Width="*"  Binding="{Binding Active}"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="btnToggleActive" Header="Set to InActive" Click="btnToggleActive_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
         </Grid>
     </Grid>
 </Controls:MetroWindow>
