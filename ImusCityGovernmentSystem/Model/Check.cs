@@ -31,12 +31,12 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> EmployeeID { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<int> AdviceNo { get; set; }
-        public Nullable<int> ControlNo { get; set; }
+        public string ControlNo { get; set; }
     
-        public virtual Disbursement Disbursement { get; set; }
-        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BankTrail> BankTrails { get; set; }
+        public virtual Disbursement Disbursement { get; set; }
+        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckRelease> CheckReleases { get; set; }
     }
