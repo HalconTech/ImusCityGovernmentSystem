@@ -58,6 +58,13 @@
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>
+            <Controls:Tile x:Name="controlnumberbtn" Background="#CC0050EF" Title="Control Number Management" TitleFontSize="12" Click="controlnumberbtn_Click" >
+                <Rectangle Fill="White" Height="50" Width="50">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_sort_numeric}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
             <Controls:Tile x:Name="checkbtn"    Background="#CC0050EF"    Title="Checks Master List" TitleFontSize="12" Click="checkbtn_Click"  >
                 <Rectangle Fill="White" Height="50" Width="50">
                     <Rectangle.OpacityMask>

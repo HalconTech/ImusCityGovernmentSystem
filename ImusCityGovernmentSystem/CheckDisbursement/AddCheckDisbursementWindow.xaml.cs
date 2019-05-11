@@ -105,6 +105,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                                 return;
                             }
 
+                            
+
                             Disbursement disbursement = new Disbursement();
                             disbursement.PayeeID = optionpayeecb.IsChecked == true ? null : payeecb.SelectedValue == null ? (int?)null : (int)payeecb.SelectedValue;
                             disbursement.PaymentTypeID = (int)paymenttypecb.SelectedValue;
@@ -119,6 +121,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                             disbursement.PayeeRepID = payeerepcb.SelectedValue == null ? (int?)null : (int)payeerepcb.SelectedValue;
                             disbursement.PayeeName = optionalpayee.Text;
                             disbursement.FundBankID = (int)fundtypecb.SelectedValue;
+                            
                             var x = db.Disbursements.Add(disbursement);
                             db.SaveChanges();
                             var audit = new AuditTrailModel
