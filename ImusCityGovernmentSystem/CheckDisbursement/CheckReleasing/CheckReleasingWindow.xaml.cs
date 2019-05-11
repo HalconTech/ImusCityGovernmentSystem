@@ -33,7 +33,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             digitalsig.UseCustomCursor = true;
             digitalsig.Cursor = Cursors.Pen;
             digitalsig.MoveEnabled = false;
-           
+     
         }
      
 
