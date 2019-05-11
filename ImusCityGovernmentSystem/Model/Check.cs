@@ -31,6 +31,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> EmployeeID { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<int> AdviceNo { get; set; }
+        public Nullable<int> ControlNo { get; set; }
     
         public virtual Disbursement Disbursement { get; set; }
         public virtual Employee Employee { get; set; }

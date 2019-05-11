@@ -59,7 +59,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx">
@@ -247,6 +247,9 @@
     <Compile Include="General\Bank\EditBankWindow.xaml.cs">
       <DependentUpon>EditBankWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="General\ControlNumber\ControlNumberList.xaml.cs">
+      <DependentUpon>ControlNumberList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="General\Customer\AddNewCustomerWindow.xaml.cs">
       <DependentUpon>AddNewCustomerWindow.xaml</DependentUpon>
     </Compile>
@@ -355,6 +358,9 @@
       <DependentUpon>LicenseCodeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\CheckRelease.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ControlNumber.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Customer.cs">
@@ -532,6 +538,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="General\Bank\EditBankWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\ControlNumber\ControlNumberList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
