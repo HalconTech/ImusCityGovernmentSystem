@@ -172,5 +172,29 @@ namespace ImusCityGovernmentSystem.General.BankAccount
             accountslistlb.DisplayMemberPath = "AccountNumber";
             accountslistlb.SelectedValuePath = "FundBankID";
         }
+
+        private void adjustmentbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                if (accountslistlb.SelectedValue != null)
+                {
+                    int id = (int)accountslistlb.SelectedValue;
+                    FundAdjustmentWindow adjustment = new FundAdjustmentWindow();
+                    adjustment.FundBankID = id;
+                    adjustment.ShowDialog();
+                    LoadSelected(id);
+                }
+                else
+                {
+                    MessageBox.Show("Please select an account number in the list");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+        }
     }
 }

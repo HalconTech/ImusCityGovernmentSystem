@@ -9,6 +9,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
     public enum BankTrailEntry
     {
         CheckCreated,
-        CheckCancelled
+        CheckCancelled,
+        FundCreation,
+        Adjustment
     }
 }
