@@ -54,10 +54,10 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<PayeeRepresentativeView> PayeeRepresentativeViews { get; set; }
         public virtual DbSet<BankTrail> BankTrails { get; set; }
         public virtual DbSet<CDSSignatory> CDSSignatories { get; set; }
-        public virtual DbSet<CheckRelease> CheckReleases { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<ControlNumber> ControlNumbers { get; set; }
         public virtual DbSet<Check> Checks { get; set; }
+        public virtual DbSet<CheckRelease> CheckReleases { get; set; }
     
         public virtual ObjectResult<GetCheckExpiryNotice_Result> GetCheckExpiryNotice()
         {

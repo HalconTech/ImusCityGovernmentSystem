@@ -21,9 +21,10 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> CheckID { get; set; }
         public byte[] Photo { get; set; }
         public Nullable<int> ReleasedBy { get; set; }
+        public byte[] DigitalSignature { get; set; }
     
-        public virtual Employee Employee { get; set; }
-        public virtual Customer Customer { get; set; }
         public virtual Check Check { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

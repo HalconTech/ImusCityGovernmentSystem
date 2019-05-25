@@ -17,6 +17,7 @@ using ImusCityGovernmentSystem.Model;
 using System.IO;
 using ImusCityGovernmentSystem.General.Customer;
 using System.Runtime.InteropServices;
+using System.Drawing.Imaging;
 
 namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
 {
@@ -33,9 +34,9 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             digitalsig.UseCustomCursor = true;
             digitalsig.Cursor = Cursors.Pen;
             digitalsig.MoveEnabled = false;
-     
+
         }
-     
+
 
         private void startcapturingbtn_Click(object sender, RoutedEventArgs e)
         {
@@ -48,9 +49,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             webcam = new WebCam();
             webcam.InitializeWebCam(ref currentimage);
             LoadCheckList();
-            Point targetLoc = this.PointToScreen(new Point(0, 0));
-            System.Drawing.Rectangle r = new System.Drawing.Rectangle((int)targetLoc.X, (int)targetLoc.Y, (int)(targetLoc.X + this.Width), (int)(targetLoc.Y + this.Height));
-            ClipCursor(ref r);
         }
 
         public void LoadCheckList()
@@ -164,6 +162,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 customer.AddedBy = App.EmployeeID;
                 customer.Birthdate = birthdatedp.SelectedDate;
                 customer.CompleteAddress = completeaddresstb.Text;
+                customer.IsActive = true;
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 MessageBox.Show("Data is saved. Please click the save button to continue the transaction");
@@ -192,6 +191,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 released.ReleasedDate = DateTime.Now;
                 released.CheckID = checkId;
                 released.Photo = ConvertImageSourceToByte(imagecapture);
+                released.DigitalSignature = ConvertImageSourceToByte(digitalsignatureimg);
                 released.ReleasedBy = App.EmployeeID;
                 db.CheckReleases.Add(released);
 
@@ -336,5 +336,75 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         [DllImport("user32.dll")]
         static extern void ClipCursor(IntPtr rect);
 
+        private void sigcapturebtn_Click(object sender, RoutedEventArgs e)
+        {
+            double width = digitalsig.ActualWidth;
+            double height = digitalsig.ActualHeight;
+            RenderTargetBitmap bmpCopied = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), 96, 96, PixelFormats.Default);
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext dc = dv.RenderOpen())
+            {
+                VisualBrush vb = new VisualBrush(digitalsig);
+                dc.DrawRectangle(vb, null, new Rect(new System.Windows.Point(), new System.Windows.Size(width, height)));
+            }
+            bmpCopied.Render(dv);
+            System.Drawing.Bitmap bitmap;
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                // from System.Media.BitmapImage to System.Drawing.Bitmap 
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bmpCopied));
+                enc.Save(outStream);
+                bitmap = new System.Drawing.Bitmap(outStream);
+                Stream StreamObj = new MemoryStream(outStream.ToArray());
+                BitmapImage BitObj = new BitmapImage();
+                BitObj.BeginInit();
+                BitObj.StreamSource = StreamObj;
+                BitObj.EndInit();
+                digitalsignatureimg.Source = BitObj;
+            }
+
+        }
+        private ImageCodecInfo getEncoderInfo(string mimeType)
+        {
+            // Get image codecs for all image formats
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+
+            // Find the correct image codec
+            for (int i = 0; i < codecs.Length; i++)
+                if (codecs[i].MimeType == mimeType)
+                    return codecs[i];
+            return null;
+        }
+
+        private byte[] SignatureToBitmapBytes()
+        {
+            int margin = (int)this.digitalsig.Margin.Left;
+            int width = (int)this.digitalsig.ActualWidth - margin;
+            int height = (int)this.digitalsig.ActualHeight - margin;
+            RenderTargetBitmap rtb =
+            new RenderTargetBitmap(width, height, 96d, 96d, PixelFormats.Default);
+            BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(rtb));
+            byte[] bitmapBytes;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                ms.Position = 0;
+                bitmapBytes = ms.ToArray();
+            }
+
+            return bitmapBytes;
+        }
+
+        private void clearsigbtn_Click(object sender, RoutedEventArgs e)
+        {
+            digitalsig.Strokes.Clear();
+        }
+
+        private void clearsignbtn_Click(object sender, RoutedEventArgs e)
+        {
+            digitalsignatureimg.Source = null;
+        }
     }
 }

@@ -26,9 +26,9 @@ namespace ImusCityGovernmentSystem.Model
             this.CDSSignatories3 = new HashSet<CDSSignatory>();
             this.CDSSignatories4 = new HashSet<CDSSignatory>();
             this.CDSSignatories5 = new HashSet<CDSSignatory>();
-            this.CheckReleases = new HashSet<CheckRelease>();
             this.Customers = new HashSet<Customer>();
             this.Checks = new HashSet<Check>();
+            this.CheckReleases = new HashSet<CheckRelease>();
         }
     
         public int EmployeeID { get; set; }
@@ -109,10 +109,10 @@ namespace ImusCityGovernmentSystem.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CDSSignatory> CDSSignatories5 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CheckRelease> CheckReleases { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Check> Checks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CheckRelease> CheckReleases { get; set; }
     }
 }

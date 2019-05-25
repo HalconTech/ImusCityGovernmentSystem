@@ -134,6 +134,7 @@
           <Property Name="CheckID" Type="int" />
           <Property Name="Photo" Type="image" />
           <Property Name="ReleasedBy" Type="int" />
+          <Property Name="DigitalSignature" Type="image" />
         </EntityType>
         <EntityType Name="ControlNumber">
           <Key>
@@ -1200,19 +1201,10 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
             <Parameter Name="FundBankID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="CheckReleases" EntityType="ImusCityHallModel.CheckRelease" />
-          <AssociationSet Name="FK_CheckRelease_Employee" Association="ImusCityHallModel.FK_CheckRelease_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="CheckRelease" EntitySet="CheckReleases" />
-          </AssociationSet>
           <FunctionImport Name="GetCustomerTransactions" ReturnType="Collection(ImusCityHallModel.GetCustomerTransactions_Result)">
           <Parameter Name="CustomerID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Customers" EntityType="ImusCityHallModel.Customer" />
-          <AssociationSet Name="FK_CheckRelease_Customer" Association="ImusCityHallModel.FK_CheckRelease_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="CheckRelease" EntitySet="CheckReleases" />
-          </AssociationSet>
           <AssociationSet Name="FK_Customer_Employee" Association="ImusCityHallModel.FK_Customer_Employee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Customer" EntitySet="Customers" />
@@ -1235,8 +1227,17 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Check" EntitySet="Checks" />
           </AssociationSet>
+          <EntitySet Name="CheckReleases" EntityType="ImusCityHallModel.CheckRelease" />
           <AssociationSet Name="FK_CheckRelease_Check" Association="ImusCityHallModel.FK_CheckRelease_Check">
             <End Role="Check" EntitySet="Checks" />
+            <End Role="CheckRelease" EntitySet="CheckReleases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckRelease_Customer" Association="ImusCityHallModel.FK_CheckRelease_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CheckRelease" EntitySet="CheckReleases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckRelease_Employee" Association="ImusCityHallModel.FK_CheckRelease_Employee">
+            <End Role="Employee" EntitySet="Employees" />
             <End Role="CheckRelease" EntitySet="CheckReleases" />
           </AssociationSet>
           </EntityContainer>
@@ -1475,9 +1476,9 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <NavigationProperty Name="CDSSignatories3" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee3" FromRole="Employee" ToRole="CDSSignatory" />
           <NavigationProperty Name="CDSSignatories4" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee4" FromRole="Employee" ToRole="CDSSignatory" />
           <NavigationProperty Name="CDSSignatories5" Relationship="ImusCityHallModel.FK_CDSSignatory_Employee5" FromRole="Employee" ToRole="CDSSignatory" />
-          <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Employee" FromRole="Employee" ToRole="CheckRelease" />
           <NavigationProperty Name="Customers" Relationship="ImusCityHallModel.FK_Customer_Employee" FromRole="Employee" ToRole="Customer" />
           <NavigationProperty Name="Checks" Relationship="ImusCityHallModel.FK_Check_Employee" FromRole="Employee" ToRole="Check" />
+          <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Employee" FromRole="Employee" ToRole="CheckRelease" />
         </EntityType>
         <EntityType Name="EmployeePosition">
           <Key>
@@ -2038,33 +2039,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="FundPrefix" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="CheckRelease">
-          <Key>
-            <PropertyRef Name="CheckReleaseID" />
-          </Key>
-          <Property Name="CheckReleaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerID" Type="Int32" />
-          <Property Name="ReleasedDate" Type="DateTime" Precision="3" />
-          <Property Name="DateTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="CheckID" Type="Int32" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="ReleasedBy" Type="Int32" />
-          <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_CheckRelease_Employee" FromRole="CheckRelease" ToRole="Employee" />
-          <NavigationProperty Name="Customer" Relationship="ImusCityHallModel.FK_CheckRelease_Customer" FromRole="CheckRelease" ToRole="Customer" />
-          <NavigationProperty Name="Check" Relationship="ImusCityHallModel.FK_CheckRelease_Check" FromRole="CheckRelease" ToRole="Check" />
-        </EntityType>
-        <Association Name="FK_CheckRelease_Employee">
-          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
-          <End Type="ImusCityHallModel.CheckRelease" Role="CheckRelease" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="CheckRelease">
-              <PropertyRef Name="ReleasedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="GetCustomerTransactions_Result">
           <Property Type="String" Name="Activity" Nullable="false" MaxLength="14" />
           <Property Type="DateTime" Name="TransactionDate" Nullable="true" Precision="23" />
@@ -2083,21 +2057,9 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="CompleteAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Birthdate" Type="DateTime" Precision="0" />
           <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Customer" FromRole="Customer" ToRole="CheckRelease" />
           <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_Customer_Employee" FromRole="Customer" ToRole="Employee" />
+          <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Customer" FromRole="Customer" ToRole="CheckRelease" />
         </EntityType>
-        <Association Name="FK_CheckRelease_Customer">
-          <End Type="ImusCityHallModel.Customer" Role="Customer" Multiplicity="0..1" />
-          <End Type="ImusCityHallModel.CheckRelease" Role="CheckRelease" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerID" />
-            </Principal>
-            <Dependent Role="CheckRelease">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Customer_Employee">
           <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
           <End Type="ImusCityHallModel.Customer" Role="Customer" Multiplicity="*" />
@@ -2191,6 +2153,22 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CheckRelease">
+          <Key>
+            <PropertyRef Name="CheckReleaseID" />
+          </Key>
+          <Property Name="CheckReleaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="ReleasedDate" Type="DateTime" Precision="3" />
+          <Property Name="DateTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CheckID" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ReleasedBy" Type="Int32" />
+          <Property Name="DigitalSignature" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Check" Relationship="ImusCityHallModel.FK_CheckRelease_Check" FromRole="CheckRelease" ToRole="Check" />
+          <NavigationProperty Name="Customer" Relationship="ImusCityHallModel.FK_CheckRelease_Customer" FromRole="CheckRelease" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_CheckRelease_Employee" FromRole="CheckRelease" ToRole="Employee" />
+        </EntityType>
         <Association Name="FK_CheckRelease_Check">
           <End Type="ImusCityHallModel.Check" Role="Check" Multiplicity="0..1" />
           <End Type="ImusCityHallModel.CheckRelease" Role="CheckRelease" Multiplicity="*" />
@@ -2200,6 +2178,30 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Principal>
             <Dependent Role="CheckRelease">
               <PropertyRef Name="CheckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckRelease_Customer">
+          <End Type="ImusCityHallModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CheckRelease" Role="CheckRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CheckRelease">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckRelease_Employee">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CheckRelease" Role="CheckRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CheckRelease">
+              <PropertyRef Name="ReleasedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2641,19 +2643,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CheckReleases">
-            <EntityTypeMapping TypeName="ImusCityHallModel.CheckRelease">
-              <MappingFragment StoreEntitySet="CheckRelease">
-                <ScalarProperty Name="ReleasedBy" ColumnName="ReleasedBy" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="CheckID" ColumnName="CheckID" />
-                <ScalarProperty Name="DateTimeStamp" ColumnName="DateTimeStamp" />
-                <ScalarProperty Name="ReleasedDate" ColumnName="ReleasedDate" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="CheckReleaseID" ColumnName="CheckReleaseID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetCustomerTransactions" FunctionName="ImusCityHallModel.Store.GetCustomerTransactions">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ImusCityHallModel.GetCustomerTransactions_Result">
@@ -2705,6 +2694,20 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
                 <ScalarProperty Name="DisbursementID" ColumnName="DisbursementID" />
                 <ScalarProperty Name="CheckID" ColumnName="CheckID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CheckReleases">
+            <EntityTypeMapping TypeName="ImusCityHallModel.CheckRelease">
+              <MappingFragment StoreEntitySet="CheckRelease">
+                <ScalarProperty Name="DigitalSignature" ColumnName="DigitalSignature" />
+                <ScalarProperty Name="ReleasedBy" ColumnName="ReleasedBy" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="CheckID" ColumnName="CheckID" />
+                <ScalarProperty Name="DateTimeStamp" ColumnName="DateTimeStamp" />
+                <ScalarProperty Name="ReleasedDate" ColumnName="ReleasedDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CheckReleaseID" ColumnName="CheckReleaseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

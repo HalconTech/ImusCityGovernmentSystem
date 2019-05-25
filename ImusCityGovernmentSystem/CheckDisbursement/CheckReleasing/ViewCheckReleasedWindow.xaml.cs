@@ -52,6 +52,16 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                     BitObj.EndInit();
                     imagecapture.Source = BitObj;
                 }
+                if (released.DigitalSignature != null)
+                {
+                    Stream StreamObj = new MemoryStream(released.DigitalSignature);
+                    BitmapImage BitObj = new BitmapImage();
+                    BitObj.BeginInit();
+                    BitObj.StreamSource = StreamObj;
+                    BitObj.EndInit();
+                    imagesignature.Source = BitObj;
+
+                }
             }
             else
             {
