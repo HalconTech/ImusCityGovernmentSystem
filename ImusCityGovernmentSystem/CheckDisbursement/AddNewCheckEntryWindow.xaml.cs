@@ -43,8 +43,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 descriptiontb.Text = disbursement.Description;
                 paymenttypecb.SelectedIndex = disbursement.PaymentTypeID.HasValue ? disbursement.PaymentTypeID.Value : 0;
                 voucheramounttb.Text = String.Format("{0:0.##}", disbursement.Amount);
-
-                string formatted = disbursement.FundBank.ControlNumbers.FirstOrDefault().NextControlNo.HasValue ? disbursement.FundBank.ControlNumbers.FirstOrDefault().NextControlNo.Value.ToString("D10") : "0000000000";
+                
+                string formatted = disbursement.FundBank.ControlNumbers.FirstOrDefault(m=>m.Active == true).NextControlNo.HasValue ? disbursement.FundBank.ControlNumbers.FirstOrDefault().NextControlNo.Value.ToString("D10") : "0000000000";
                 //string.Format("{0:0000000000}", cn.NextControlNo);
                 checknotb.Text = formatted;
             }
@@ -60,7 +60,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(DisbursementID);
-                var cn = db.ControlNumbers.OrderByDescending(m => m.ControlNoID).FirstOrDefault(m => m.FundBankID == disbursement.FundBankID);
+                var cn = db.ControlNumbers.OrderByDescending(m => m.ControlNoID).FirstOrDefault(m => m.FundBankID == disbursement.FundBankID && m.Active == true);
                 if (String.IsNullOrEmpty(checknotb.Text))
                 {
                     MessageBox.Show("Please provide the check number");
