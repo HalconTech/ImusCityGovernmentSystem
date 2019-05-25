@@ -43,10 +43,22 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 descriptiontb.Text = disbursement.Description;
                 paymenttypecb.SelectedIndex = disbursement.PaymentTypeID.HasValue ? disbursement.PaymentTypeID.Value : 0;
                 voucheramounttb.Text = String.Format("{0:0.##}", disbursement.Amount);
-                
-                string formatted = disbursement.FundBank.ControlNumbers.FirstOrDefault(m=>m.Active == true).NextControlNo.HasValue ? disbursement.FundBank.ControlNumbers.FirstOrDefault().NextControlNo.Value.ToString("D10") : "0000000000";
-                //string.Format("{0:0000000000}", cn.NextControlNo);
-                checknotb.Text = formatted;
+
+                var controlNumber = disbursement.FundBank.ControlNumbers.FirstOrDefault(m => m.Active == true);
+                if (controlNumber == null)
+                {
+                    MessageBox.Show("Selected fund have no available check number");
+                    
+                }
+                else
+                {
+                    int checkNo = controlNumber.NextControlNo.HasValue ? controlNumber.NextControlNo.Value : 0;
+                    string formatted = checkNo.ToString("D10");
+                    
+                    checknotb.Text = formatted;
+
+                }
+
             }
             else
             {
@@ -64,6 +76,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 if (String.IsNullOrEmpty(checknotb.Text))
                 {
                     MessageBox.Show("Please provide the check number");
+                    this.Close();
                 }
                 else if (String.IsNullOrEmpty(checkdesctb.Text))
                 {
@@ -83,7 +96,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 }
                 else if (cn == null)
                 {
-                    MessageBox.Show("Selected fund have no check number set up.");
+                    MessageBox.Show("Selected fund have no available check number");
                 }
                 else
                 {
@@ -95,9 +108,12 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     check.EmployeeID = App.EmployeeID;
                     check.DateCreated = DateTime.Now;
                     check.Status = (int)CheckStatus.Created;
-                    
+
                     //Increment of the Check Number.
-                    cn.NextControlNo++;
+                    if (cn.EndingControlNo == cn.NextControlNo)
+                        cn.Active = false;
+                    else
+                        cn.NextControlNo++;
 
                     check.ControlNo = checknotb.Text;
                     db.Checks.Add(check);

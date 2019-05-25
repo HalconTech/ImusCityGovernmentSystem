@@ -103,13 +103,13 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 Mouse.OverrideCursor = null;
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-        
+
             Mouse.OverrideCursor = null;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
-            ImusCityGovernmentSystem.CheckDisbursement.AddCheckDisbursementWindow add = new CheckDisbursement.AddCheckDisbursementWindow();      
+            ImusCityGovernmentSystem.CheckDisbursement.AddCheckDisbursementWindow add = new CheckDisbursement.AddCheckDisbursementWindow();
             add.Show();
         }
         private void btnPrint_Click(object sender, RoutedEventArgs e)
@@ -125,7 +125,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
         private void checkbtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            if(voucherlistlb.SelectedValue == null)
+            if (voucherlistlb.SelectedValue == null)
             {
                 Mouse.OverrideCursor = null;
                 MessageBox.Show("Please select an item");
@@ -135,11 +135,34 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 CheckDisbursement.AddNewCheckEntryWindow addcheck = new CheckDisbursement.AddNewCheckEntryWindow();
                 Mouse.OverrideCursor = null;
                 addcheck.DisbursementID = (int)voucherlistlb.SelectedValue;
-                addcheck.ShowDialog();
+
+                if (SystemClass.CheckConnection())
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    Disbursement disbursement = db.Disbursements.Find((int)voucherlistlb.SelectedValue);
+
+                    var controlNumber = disbursement.FundBank.ControlNumbers.FirstOrDefault(m => m.Active == true);
+
+                    if (controlNumber == null)
+                    {
+                        MessageBox.Show("Selected fund have no available check number");
+                        return;
+                    }
+                    else
+                    {
+                        addcheck.ShowDialog();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+
+                
             }
             Mouse.OverrideCursor = null;
         }
 
-       
+
     }
 }
