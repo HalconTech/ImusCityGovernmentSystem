@@ -70,8 +70,9 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     {
                         MessageBox.Show("Please select payee from the dropdown list");
                     }
-                    else if (optionpayeecb.IsChecked == true)
+                    else if (optionpayeecb.IsChecked == true && String.IsNullOrEmpty(optionalpayee.Text))
                     {
+                        
                         MessageBox.Show("Please enter payee name");
                     }
                     else if (paymenttypecb.SelectedValue == null)

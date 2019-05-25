@@ -30,28 +30,48 @@ namespace ImusCityGovernmentSystem.General.Customer
         {
             if (SystemClass.CheckConnection())
             {
-                ImusCityHallEntities db = new ImusCityHallEntities();
-                ImusCityGovernmentSystem.Model.Customer customer = new ImusCityGovernmentSystem.Model.Customer();
-                customer.FirstName = firstnametb.Text;
-                customer.MiddleName = string.IsNullOrEmpty(middlenamebt.Text) ? null : middlenamebt.Text;
-                customer.LastName = lastnametb.Text;
-                customer.DateAdded = DateTime.Now;
-                customer.AddedBy = App.EmployeeID;
-                customer.CompleteAddress = compaddresstb.Text;
-                customer.Birthdate = bdaydp.SelectedDate;
-                customer.IsActive = true;
-                db.Customers.Add(customer);
-                db.SaveChanges();
-                MessageBox.Show("Customer added");
-
-                var audit = new AuditTrailModel
+                if(String.IsNullOrEmpty(firstnametb.Text))
                 {
-                    Activity = "Added new customer in the database CUSTOMER NAME: " + string.Join(" ", customer.FirstName, customer.MiddleName, customer.LastName),
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
-                SystemClass.InsertLog(audit);
-                ClearTextBox();
+                    MessageBox.Show("Please enter firs name");
+                }
+                else if(String.IsNullOrEmpty(lastnametb.Text))
+                {
+                    MessageBox.Show("Please enter last name");
+                }
+                else if(String.IsNullOrEmpty(bdaydp.Text))
+                {
+                    MessageBox.Show("Please enter birthdate");
+                }
+                else if(String.IsNullOrEmpty(compaddresstb.Text))
+                {
+                    MessageBox.Show("Please enter complete address");
+                }
+                else
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    ImusCityGovernmentSystem.Model.Customer customer = new ImusCityGovernmentSystem.Model.Customer();
+                    customer.FirstName = firstnametb.Text;
+                    customer.MiddleName = string.IsNullOrEmpty(middlenamebt.Text) ? null : middlenamebt.Text;
+                    customer.LastName = lastnametb.Text;
+                    customer.DateAdded = DateTime.Now;
+                    customer.AddedBy = App.EmployeeID;
+                    customer.CompleteAddress = compaddresstb.Text;
+                    customer.Birthdate = bdaydp.SelectedDate;
+                    customer.IsActive = true;
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+                    MessageBox.Show("Customer added");
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Added new customer in the database CUSTOMER NAME: " + string.Join(" ", customer.FirstName, customer.MiddleName, customer.LastName),
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+                    SystemClass.InsertLog(audit);
+                    ClearTextBox();
+                }
+              
                 
             }
             else
