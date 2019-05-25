@@ -150,7 +150,7 @@ namespace ImusCityGovernmentSystem.General.ControlNumber
                 var fundbank = db.FundBanks.Find(accountID);
                 if (fundbank != null)
                 {
-                    if(db.ControlNumbers.Where(m=>m.FundBankID == accountID&& m.Active == true) != null)
+                    if(db.ControlNumbers.Where(m=>m.FundBankID == accountID&& m.Active == true) == null)
                     {
                         MessageBox.Show("There is an active series for this Account.");
                         return;
