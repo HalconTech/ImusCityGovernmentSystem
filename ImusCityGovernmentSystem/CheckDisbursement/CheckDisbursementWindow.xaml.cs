@@ -112,5 +112,13 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             Mouse.OverrideCursor = null;
             releasing.Show();
         }
+
+        private void controlnumberbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            General.ControlNumber.ControlNumberList control = new General.ControlNumber.ControlNumberList();
+            Mouse.OverrideCursor = null;
+            control.Show();
+        }
     }
 }

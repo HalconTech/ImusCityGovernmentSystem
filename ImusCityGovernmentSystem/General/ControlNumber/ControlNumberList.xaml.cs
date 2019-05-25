@@ -277,7 +277,7 @@ namespace ImusCityGovernmentSystem.General.ControlNumber
 
                     if (x != null)
                     {
-                        accountcb.SelectedValue = x.ControlNoID;
+                        accountcb.SelectedValue = x.FundBankID;
                         fundtb.Text = x.FundBank.Fund.FundName;
                         banktb.Text = x.FundBank.Bank.BankName;
                         controlnobegintb.Value = x.BeginingControlNo.Value;

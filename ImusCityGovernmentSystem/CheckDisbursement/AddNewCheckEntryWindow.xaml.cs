@@ -57,6 +57,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(DisbursementID);
+                var cn = db.ControlNumbers.OrderByDescending(m => m.ControlNoID).FirstOrDefault(m => m.FundBankID == disbursement.FundBankID);
                 if (String.IsNullOrEmpty(checknotb.Text))
                 {
                     MessageBox.Show("Please provide the check number");
@@ -77,8 +78,13 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     MessageBox.Show("Check cannot be created, you have insufficients funds");
                 }
+                else if(cn == null)
+                {
+                        MessageBox.Show("Selected fund have no control number set up.");
+                }
                 else
                 {
+
 
                     Check check = new Check();
                     check.DisbursementID = DisbursementID;
@@ -88,6 +94,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     check.EmployeeID = App.EmployeeID;
                     check.DateCreated = DateTime.Now;
                     check.Status = (int)CheckStatus.Created;
+
+                    string formatted = string.Format("{0:0000000000}", cn.NextControlNo);
+                    cn.NextControlNo++;
+                    check.ControlNo = formatted;
                     db.Checks.Add(check);
 
 

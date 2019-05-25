@@ -55,11 +55,11 @@
             <TextBlock Grid.Row="4" Text="Bank Name"></TextBlock>
             <TextBox IsReadOnly="True" VerticalContentAlignment="Center" Grid.Row="5" Name="banktb"></TextBox>
             <TextBlock Grid.Row="6" Text="Control Number- Beginning"></TextBlock>
-            <Controls:NumericUpDown Minimum ="0" Maximum = "1000000" Grid.Row="7" IsEnabled="True" VerticalContentAlignment="Center" Name="controlnobegintb"/>
+            <Controls:NumericUpDown Minimum ="0" Maximum = "9999999999" Grid.Row="7" IsEnabled="True" VerticalContentAlignment="Center" Name="controlnobegintb"/>
             <TextBlock Grid.Row="8" Text="Control Number- Ending"></TextBlock>
-            <Controls:NumericUpDown Minimum ="0" Maximum = "1000000" VerticalContentAlignment="Center" Grid.Row="9" Name="controlnoendtb"/>
+            <Controls:NumericUpDown Minimum ="0" Maximum = "9999999999" VerticalContentAlignment="Center" Grid.Row="9" Name="controlnoendtb"/>
             <TextBlock Grid.Row="10" Text="Current Control Number"></TextBlock>
-            <Controls:NumericUpDown Minimum ="0" Maximum = "1000000"  Grid.Row="11" VerticalAlignment="Center" Name="controlnocurrenttb"/>
+            <Controls:NumericUpDown Minimum ="0" Maximum = "9999999999"  Grid.Row="11" VerticalAlignment="Center" Name="controlnocurrenttb"/>
             <TextBlock Grid.Row="12" Text="Is Active"></TextBlock>
             <CheckBox Grid.Row="13" Name="activechk" VerticalContentAlignment="Center" IsEnabled="True" IsChecked="True" Content="Active"></CheckBox>
             <Grid Grid.Row="14" Margin="0,5,0,0">
