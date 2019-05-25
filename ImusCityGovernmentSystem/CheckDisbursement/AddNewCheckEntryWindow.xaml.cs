@@ -43,7 +43,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 descriptiontb.Text = disbursement.Description;
                 paymenttypecb.SelectedIndex = disbursement.PaymentTypeID.HasValue ? disbursement.PaymentTypeID.Value : 0;
                 voucheramounttb.Text = String.Format("{0:0.##}", disbursement.Amount);
-               
+
+                string formatted = disbursement.FundBank.ControlNumbers.FirstOrDefault().NextControlNo.HasValue ? disbursement.FundBank.ControlNumbers.FirstOrDefault().NextControlNo.Value.ToString("D10") : "0000000000";
+                //string.Format("{0:0000000000}", cn.NextControlNo);
+                checknotb.Text = formatted;
             }
             else
             {
@@ -73,19 +76,17 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 else if (db.Checks.Any(m => m.CheckNo == checknotb.Text))
                 {
                     MessageBox.Show("Check number is already been used");
-                }           
-                else if(db.FundBanks.Find(disbursement.FundBankID).CurrentBalance < Convert.ToDecimal(checkamounttb.Text))
+                }
+                else if (db.FundBanks.Find(disbursement.FundBankID).CurrentBalance < Convert.ToDecimal(checkamounttb.Text))
                 {
                     MessageBox.Show("Check cannot be created, you have insufficients funds");
                 }
-                else if(cn == null)
+                else if (cn == null)
                 {
-                        MessageBox.Show("Selected fund have no control number set up.");
+                    MessageBox.Show("Selected fund have no check number set up.");
                 }
                 else
                 {
-
-
                     Check check = new Check();
                     check.DisbursementID = DisbursementID;
                     check.CheckNo = checknotb.Text;
@@ -94,10 +95,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     check.EmployeeID = App.EmployeeID;
                     check.DateCreated = DateTime.Now;
                     check.Status = (int)CheckStatus.Created;
-
-                    string formatted = string.Format("{0:0000000000}", cn.NextControlNo);
+                    
+                    //Increment of the Check Number.
                     cn.NextControlNo++;
-                    check.ControlNo = formatted;
+
+                    check.ControlNo = checknotb.Text;
                     db.Checks.Add(check);
 
 
@@ -155,7 +157,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             checkdesctb.Text = descriptiontb.Text;
         }
 
-        
+
 
     }
 }
