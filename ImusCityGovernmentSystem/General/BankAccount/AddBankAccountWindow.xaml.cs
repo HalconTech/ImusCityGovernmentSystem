@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
 using System.Text.RegularExpressions;
-
+using ImusCityGovernmentSystem.CheckDisbursement;
 namespace ImusCityGovernmentSystem.General.BankAccount
 {
     /// <summary>
@@ -78,6 +78,18 @@ namespace ImusCityGovernmentSystem.General.BankAccount
                     account.IsProcessed = true;
                     account.AmountLimit = Convert.ToDecimal(flooramounttb.Text);
                     db.FundBanks.Add(account);
+
+                    ImusCityGovernmentSystem.Model.BankTrail banktrail = new BankTrail();
+                    banktrail.DebitCredit = "D";
+                    banktrail.FundBankID = account.FundBankID;
+                    banktrail.Amount = Convert.ToDecimal(startingbalancetb.Text);
+                    banktrail.EntryName = nameof(BankTrailEntry.FundCreation);
+                    banktrail.CheckID = null;
+                    banktrail.EntryNameID = (int)BankTrailEntry.FundCreation;
+                    banktrail.EmployeeID = App.EmployeeID;
+                    banktrail.DateCreated = DateTime.Now;
+                    db.BankTrails.Add(banktrail);
+
                     db.SaveChanges();
 
                     var audit = new AuditTrailModel

@@ -12,11 +12,11 @@
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
                       GlowBrush="Black"
-                      Width="586" Loaded="MetroWindow_Loaded">
+                      Width="634" Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Margin="0,0,2.5,0">
             <Grid.RowDefinitions>
@@ -55,10 +55,12 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Content="Edit" Name="editbtn" Margin="0,0,2.5,0" Click="editbtn_Click" VerticalAlignment="Bottom"/>
-                <Button IsEnabled="False" Content="Save" Grid.Column="1" Name="savebtn" Margin="2.5,0" Click="savebtn_Click" VerticalAlignment="Bottom"></Button>
-                <Button x:Name="addbtn" Content="Add" Grid.Column="2"  Margin="2.5,0,0,0" Click="addbtn_Click" VerticalAlignment="Bottom"></Button>
+                <Button Content="Edit" Name="editbtn" Margin="0,0,2.5,0" Click="editbtn_Click" />
+                <Button IsEnabled="False" Content="Save" Grid.Column="1" Name="savebtn" Margin="2.5,0" Click="savebtn_Click" ></Button>
+                <Button x:Name="addbtn" Content="Add" Grid.Column="2"  Margin="2.5,0,2.5,0" Click="addbtn_Click" ></Button>
+                <Button x:Name="adjustmentbtn" Grid.Column="3" Content="Adjustment" FontSize="10" Margin="2.5,0,0,0" Click="adjustmentbtn_Click" ></Button>
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Margin="2.5,0,0,0">

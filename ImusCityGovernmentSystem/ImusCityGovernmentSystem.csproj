@@ -238,6 +238,9 @@
     <Compile Include="General\BankAccount\BankAccountListWindow.xaml.cs">
       <DependentUpon>BankAccountListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="General\BankAccount\FundAdjustmentWindow.xaml.cs">
+      <DependentUpon>FundAdjustmentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="General\Bank\AddNewBankWindow.xaml.cs">
       <DependentUpon>AddNewBankWindow.xaml</DependentUpon>
     </Compile>
@@ -526,6 +529,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="General\BankAccount\BankAccountListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\BankAccount\FundAdjustmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
