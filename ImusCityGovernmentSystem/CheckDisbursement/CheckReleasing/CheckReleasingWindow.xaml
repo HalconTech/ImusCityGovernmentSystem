@@ -84,23 +84,14 @@
                     </Grid>
                     
                     <TextBlock Grid.Column="1" Text="Photo" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
-                    <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="5" BorderBrush="Black" BorderThickness="1" Margin="5,0,0,5">
+                    <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="6" BorderBrush="Black" BorderThickness="1" Margin="5,0,0,5">
                         <Image Name="imagecapture" Margin="0" ></Image>
                     </Border>
-                    <Button x:Name="clearcapturedimgbtn" Grid.Row="6" Grid.Column="1" Content="Clear Photo" Margin="5,0,0,0" Click="clearcapturedimgbtn_Click"></Button>
-                    <Grid Grid.Row="7" Grid.Column="1" Grid.RowSpan="4" Margin="5,0,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="25"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition Height="35"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBlock  Text="Signature" ></TextBlock>
-                        <Border  Grid.Row="1"   BorderBrush="Black" BorderThickness="1" Margin="0,0,0,5" >
-                            <Image Name="signatureimg"></Image>
-                        </Border>
-                        <Button Content="Clear Signature" Grid.Row="2"></Button>
-                    </Grid>
-                   
+                    <Button x:Name="clearcapturedimgbtn" Grid.Row="7" Grid.Column="1" Content="Clear Photo" Margin="5,0,0,0" Click="clearcapturedimgbtn_Click"></Button>
+                    <TextBlock Grid.Row="8" Grid.Column="1" Text="Signature" Margin="5,0,0,0"></TextBlock>
+                    <Border Grid.Column="1" Grid.Row="9" Grid.RowSpan="3"  BorderBrush="Black" BorderThickness="1" Margin="5,0,0,0">
+
+                    </Border>
                 </Grid>
             </TabItem>
             <TabItem Header="Photo Capturing" FontSize="16">
@@ -123,25 +114,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Digital Signature" FontSize="16">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,5">
-                        <InkCanvas  ForceCursor="True" Name="digitalsig" EditingMode="Ink" ClipToBounds="True"/>
-                    </Border>
-
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Button Content="Capture Signature" Name="capturesigbtn" Margin="0,0,2.5,0" Click="capturesigbtn_Click"></Button>
-                        <Button Content="Clear" Grid.Column="1" Name="clearsigbtn" Margin="2.5,0,0,0" Click="clearsigbtn_Click"></Button>
-                    </Grid>
-                </Grid>
-    
+                <InkCanvas ForceCursor="True" Name="digitalsig" EditingMode="Ink" ClipToBounds="True"/>
             </TabItem>
             <TabItem Header="Check Details" FontSize="16">
                 <Grid Margin="5">
