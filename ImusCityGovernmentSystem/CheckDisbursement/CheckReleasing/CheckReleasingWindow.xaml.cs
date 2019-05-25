@@ -48,9 +48,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             webcam = new WebCam();
             webcam.InitializeWebCam(ref currentimage);
             LoadCheckList();
-            Point targetLoc = this.PointToScreen(new Point(0, 0));
-            System.Drawing.Rectangle r = new System.Drawing.Rectangle((int)targetLoc.X, (int)targetLoc.Y, (int)(targetLoc.X + this.Width), (int)(targetLoc.Y + this.Height));
-            ClipCursor(ref r);
         }
 
         public void LoadCheckList()
@@ -330,11 +327,44 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             webcam.Stop();
         }
 
-        [DllImport("user32.dll")]
-        static extern void ClipCursor(ref System.Drawing.Rectangle rect);
 
-        [DllImport("user32.dll")]
-        static extern void ClipCursor(IntPtr rect);
 
+        private void clearsigbtn_Click(object sender, RoutedEventArgs e)
+        {
+            digitalsig.Strokes.Clear();
+        }
+
+        private void capturesigbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Stream StreamObj = new MemoryStream(SignatureToBitmapBytes());
+            BitmapImage BitObj = new BitmapImage();
+            BitObj.BeginInit();
+            BitObj.StreamSource = StreamObj;
+            BitObj.EndInit();
+            signatureimg.Source = BitObj;
+        }
+        private byte[] SignatureToBitmapBytes()
+        {
+            //get the dimensions of the ink control
+            int margin = (int)this.digitalsig.Margin.Left;
+            int width = (int)this.digitalsig.ActualWidth - margin;
+            int height = (int)this.digitalsig.ActualHeight - margin;
+            //render ink to bitmap
+            RenderTargetBitmap rtb =
+            new RenderTargetBitmap(width, height, 96d, 96d, PixelFormats.Default);
+            rtb.Render(digitalsig);
+            //save the ink to a memory stream
+            BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(rtb));
+            byte[] bitmapBytes;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                //get the bitmap bytes from the memory stream
+                ms.Position = 0;
+                bitmapBytes = ms.ToArray();
+            }
+            return bitmapBytes;
+        }
     }
 }
