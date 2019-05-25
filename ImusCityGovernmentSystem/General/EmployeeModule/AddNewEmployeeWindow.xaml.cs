@@ -116,7 +116,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                         MessageBox.Show("Please select gender");
                         Mouse.OverrideCursor = null;
                     }
-                    else if (String.IsNullOrEmpty(mobilenotb.Text) || String.IsNullOrEmpty(landlinenotb.Text))
+                    else if (String.IsNullOrEmpty(mobilenotb.Text))
                     {
                         MessageBox.Show("Please enter mobile number or landline number");
                     }

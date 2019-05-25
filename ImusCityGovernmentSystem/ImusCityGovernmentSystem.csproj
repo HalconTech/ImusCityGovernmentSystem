@@ -412,6 +412,9 @@
     <Compile Include="Model\GetDisbursementVoucher_Result.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\IdentificationCardType.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ImusCityGovernmentData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

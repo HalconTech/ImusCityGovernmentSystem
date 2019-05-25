@@ -49,8 +49,23 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             webcam = new WebCam();
             webcam.InitializeWebCam(ref currentimage);
             LoadCheckList();
+            LoadIdentificationCardType();
         }
 
+        public void LoadIdentificationCardType()
+        {
+            if(SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                idtypecb.ItemsSource = db.IdentificationCardTypes.ToList();
+                idtypecb.DisplayMemberPath = "CardType";
+                idtypecb.SelectedValuePath = "IdentificationCardTypeID";
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+        }
         public void LoadCheckList()
         {
             if (SystemClass.CheckConnection())
@@ -95,6 +110,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 {
                     Mouse.OverrideCursor = null;
                     MessageBox.Show("Image was not captured");
+                }
+                else if(idtypecb.SelectedValue == null && String.IsNullOrEmpty(idcardnumbertb.Text))
+                {
+                    MessageBox.Show("Please select identification card presented and id number");
                 }
                 else if (CustomerExist() && customerId == 0)
                 {
@@ -193,6 +212,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 released.Photo = ConvertImageSourceToByte(imagecapture);
                 released.DigitalSignature = ConvertImageSourceToByte(digitalsignatureimg);
                 released.ReleasedBy = App.EmployeeID;
+                released.IdentificationCardNumber = idcardnumbertb.Text;
+                released.IdentificationCardTypeID = (int)idtypecb.SelectedValue;
                 db.CheckReleases.Add(released);
 
                 ImusCityGovernmentSystem.Model.Check check = db.Checks.Find(checkId);
@@ -290,6 +311,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 firstnametb.Text = customer.FirstName;
                 middlenametb.Text = customer.MiddleName;
                 lastnametb.Text = customer.LastName;
+                birthdatedp.SelectedDate = customer.Birthdate;
+                completeaddresstb.Text = customer.CompleteAddress;
             }
             else
             {

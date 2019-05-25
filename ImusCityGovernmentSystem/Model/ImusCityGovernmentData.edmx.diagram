@@ -68,10 +68,12 @@
         <AssociationConnector Association="ImusCityHallModel.FK_BankTrail_Check" />
         <AssociationConnector Association="ImusCityHallModel.FK_Check_Disbursement" />
         <AssociationConnector Association="ImusCityHallModel.FK_Check_Employee" />
-        <EntityTypeShape EntityType="ImusCityHallModel.CheckRelease" Width="1.5" PointX="10.125" PointY="21.625" />
+        <EntityTypeShape EntityType="ImusCityHallModel.IdentificationCardType" Width="1.5" PointX="10.375" PointY="7.875" />
+        <EntityTypeShape EntityType="ImusCityHallModel.CheckRelease" Width="1.5" PointX="15.625" PointY="16.875" />
         <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Check" />
         <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Customer" />
         <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Employee" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_IdentificationCardType" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
