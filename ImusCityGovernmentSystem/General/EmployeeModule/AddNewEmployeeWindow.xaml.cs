@@ -118,7 +118,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                     }
                     else if (String.IsNullOrEmpty(mobilenotb.Text))
                     {
-                        MessageBox.Show("Please enter mobile number or landline number");
+                        MessageBox.Show("Please enter mobile number");
                     }
                     else
                     {

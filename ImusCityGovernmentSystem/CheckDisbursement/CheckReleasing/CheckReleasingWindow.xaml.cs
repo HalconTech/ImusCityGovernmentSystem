@@ -111,6 +111,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                     Mouse.OverrideCursor = null;
                     MessageBox.Show("Image was not captured");
                 }
+                else if(digitalsignatureimg.Source == null)
+                {
+                    Mouse.OverrideCursor = null;
+                    MessageBox.Show("Signature was not captured");
+                }
                 else if(idtypecb.SelectedValue == null && String.IsNullOrEmpty(idcardnumbertb.Text))
                 {
                     MessageBox.Show("Please select identification card presented and id number");
@@ -332,6 +337,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             checkdescriptiontb.Text = "";
             banktb.Text = "";
             amountb.Text = "";
+            digitalsignatureimg.Source = null;
             LoadCheckList();
         }
 

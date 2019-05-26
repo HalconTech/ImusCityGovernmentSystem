@@ -32,12 +32,12 @@ namespace ImusCityGovernmentSystem.General.Customer
             Mouse.OverrideCursor = Cursors.Wait;
             if (SystemClass.CheckConnection())
             {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                List<CustomerEntity> customerList = new List<CustomerEntity>();
+                var result = from p in db.Customers orderby p.FirstName where p.IsActive == true select p;
                 if (!String.IsNullOrEmpty(searchtb.Text))
                 {
-                    ImusCityHallEntities db = new ImusCityHallEntities();
-                    List<CustomerEntity> customerList = new List<CustomerEntity>();
-                    var result = from p in db.Customers orderby p.FirstName where (p.FirstName.Contains(searchkey) || p.MiddleName.Contains(searchkey) || p.LastName.Contains(searchkey)) && p.IsActive == true select p;
-                    foreach (var item in result)
+                    foreach (var item in result.Where(m => m.FirstName.Contains(searchkey) || m.MiddleName.Contains(searchkey) || m.LastName.Contains(searchkey)))
                     {
                         var customer = new CustomerEntity
                         {
@@ -47,10 +47,6 @@ namespace ImusCityGovernmentSystem.General.Customer
                         };
                         customerList.Add(customer);
                     }
-
-                    customerdg.ItemsSource = customerList;
-                    customerdg.SelectedValuePath = "CustomerId";
-
                     var audit = new AuditTrailModel
                     {
                         Activity = "Searched item in customer list. SEARCH KEY: " + searchkey,
@@ -61,9 +57,19 @@ namespace ImusCityGovernmentSystem.General.Customer
                 }
                 else
                 {
-                    Mouse.OverrideCursor = null;
-                    MessageBox.Show("Please enter search key");
+                    foreach (var item in result)
+                    {
+                        var customer = new CustomerEntity
+                        {
+                            CustomerId = item.CustomerID,
+                            Name = item.FirstName + " " + item.MiddleName + " " + item.LastName,
+                            DateAdded = item.DateAdded.Value.ToShortDateString()
+                        };
+                        customerList.Add(customer);
+                    }
                 }
+                customerdg.ItemsSource = customerList;
+                customerdg.SelectedValuePath = "CustomerId";
             }
             else
             {
@@ -127,6 +133,11 @@ namespace ImusCityGovernmentSystem.General.Customer
             if (e.Key == Key.Enter)
                 CustomerFinder(searchtb.Text);
 
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            CustomerFinder(null);
         }
     }
 }

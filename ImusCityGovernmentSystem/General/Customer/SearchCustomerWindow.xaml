@@ -12,7 +12,7 @@
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
                       GlowBrush="Black"
-                      Width="362" KeyDown="MetroWindow_KeyDown">
+                      Width="362" KeyDown="MetroWindow_KeyDown" Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>

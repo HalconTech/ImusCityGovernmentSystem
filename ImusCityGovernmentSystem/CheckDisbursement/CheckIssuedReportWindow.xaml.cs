@@ -58,7 +58,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     MessageBox.Show("Please select fund");
                 }
-                else if (String.IsNullOrEmpty(startdatedp.Text) && String.IsNullOrEmpty(enddatedp.Text))
+                else if (String.IsNullOrEmpty(startdatedp.Text) || String.IsNullOrEmpty(enddatedp.Text))
                 {
                     MessageBox.Show("Please select start date and end date");
                 }
@@ -69,6 +69,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
                     FundBank account = db.FundBanks.Find(accountId);
                     List<CheckIssuedModel> list = new List<CheckIssuedModel>();
+                    if (db.GetCheckIssued(startdatedp.SelectedDate, enddatedp.SelectedDate, accountId).Count() <= 0)
+                    {
+                        MessageBox.Show("There are no record in this selection");
+                        return;
+                    }
                     var result = db.GetCheckIssued(startdatedp.SelectedDate, enddatedp.SelectedDate, accountId);
                     foreach (var checkIssued in result)
                     {
