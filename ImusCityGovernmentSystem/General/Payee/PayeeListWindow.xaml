@@ -7,11 +7,12 @@
                       TitleCaps="False"
                       BorderThickness="0"
                       WindowStartupLocation="CenterScreen"
-                      Height="670.5"
+                      Height="520.388"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
-                      Width="884" Loaded="MetroWindow_Loaded">
+                      GlowBrush="Black"
+                      Width="688.854" Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>

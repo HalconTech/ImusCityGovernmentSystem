@@ -34,6 +34,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();
                     var result = from p in db.Checks
+                                 orderby p.DateCreated descending
                                  select new
                                  {
                                      CheckID = p.CheckID,
@@ -42,7 +43,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                                      CompanyName = p.Disbursement.Payee.CompanyName,
                                      CheckDescription = p.CheckDescription,
                                      Amount = p.Amount,
-                                     Status = p.Status == 0 ? "Created" : p.Status == 1 ? "Cancelled" : p.Status == 2 ? "Released" : "Released"
+                                     Status = p.Status == 0 ? "Created" : p.Status == 1 ? "Cancelled" : p.Status == 2 ? "Released" : "Released",
+                                     CreatedDate = p.DateCreated
                                  };
                     if (payeerb.IsChecked == true)
                     {
@@ -112,7 +114,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                                  CompanyName = p.Disbursement.Payee.CompanyName,
                                  CheckDescription = p.CheckDescription,
                                  Amount = p.Amount,
-                                 Status = p.Status == 0 ? "Created" : p.Status == 1 ? "Cancelled" : p.Status == 2 ? "Released" : "Released"
+                                 Status = p.Status == 0 ? "Created" : p.Status == 1 ? "Cancelled" : p.Status == 2 ? "Released" : "Released",
+                                 CreatedDate = p.DateCreated
                              };
 
                 checklistdg.ItemsSource = result.OrderByDescending(m => m.CheckID).ToList();
