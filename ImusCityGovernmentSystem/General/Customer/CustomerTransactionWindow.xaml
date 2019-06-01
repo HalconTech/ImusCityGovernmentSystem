@@ -12,12 +12,12 @@
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
                       GlowBrush="Black"
-                      Width="369.89" Loaded="MetroWindow_Loaded">
-    <Grid>
+                      Width="440.89" Loaded="MetroWindow_Loaded">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid AutoGenerateColumns="False" Name="customerTransactiondg" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="All">
+        <DataGrid BorderBrush="Black" BorderThickness="1" AutoGenerateColumns="False" Name="customerTransactiondg" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="All">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="290" Header="Transaction Name" Binding="{Binding Activity}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Date" Binding="{Binding TransactionDate}"></DataGridTextColumn>

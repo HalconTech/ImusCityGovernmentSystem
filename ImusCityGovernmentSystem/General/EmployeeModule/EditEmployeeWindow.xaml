@@ -51,6 +51,7 @@
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
                                         ContentSource="Header"
+                                             
                                         Margin="10,2"/>
                                     </Border>
                                     <ControlTemplate.Triggers>
@@ -67,7 +68,10 @@
                     </Style>
 
                 </TabControl.Resources>
-                <TabItem Header="Employee Information" >
+                <TabItem >
+                    <TabItem.Header>
+                        <TextBlock Text="Employe Information" FontSize="14"></TextBlock>
+                    </TabItem.Header>
                     <Grid>
 
                         <Grid.ColumnDefinitions>
@@ -76,15 +80,14 @@
                         </Grid.ColumnDefinitions>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="17"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="17"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="17"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="17"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Employee No*" FontWeight="Bold"></TextBlock>
                             <TextBox  VerticalContentAlignment="Center" Name="employeenotb" Grid.Row="1"></TextBox>
@@ -96,20 +99,19 @@
                             <ComboBox Grid.Row="5" VerticalContentAlignment="Center" Name="positioncb"></ComboBox>
                             <TextBlock Text="Employee Status*" FontWeight="Bold" Grid.Row="6"></TextBlock>
                             <ComboBox Grid.Row="7" VerticalContentAlignment="Center" Name="statuscb"></ComboBox>
-
-                            <CheckBox Grid.Row="8" Content="Inactive" VerticalContentAlignment="Center" Name="activechk"></CheckBox>
-                           
                         </Grid>
+                        <CheckBox Grid.Row="8" Content="Inactive" Name="activechk"></CheckBox>
+
                         <Grid Grid.Column="1" Margin="5,0,0,0">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="17"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="17"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="17"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="17"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Date Hired*" FontWeight="Bold" Grid.Column="1"></TextBlock>
                             <DatePicker Grid.Column="1" Name="datehiredp" Grid.Row="1" VerticalContentAlignment="Center"></DatePicker>
@@ -123,7 +125,10 @@
 
                     </Grid>
                 </TabItem>
-                <TabItem Header="Personal Information">
+                <TabItem >
+                    <TabItem.Header>
+                        <TextBlock Text="Personal Information" FontSize="14"></TextBlock>
+                    </TabItem.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -132,20 +137,20 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBlock Text="First Name*" FontWeight="Bold"></TextBlock>
                         <TextBox Name="fnametb" VerticalContentAlignment="Center" Grid.Row="1"></TextBox>
@@ -166,7 +171,7 @@
                         </ComboBox>
                         <TextBlock Text="Citizenship" Grid.Row="4" Grid.Column="1" FontWeight="Bold" Margin="5,0,0,0"></TextBlock>
                         <TextBox Name="citizenshiptb" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5,0,0,0"></TextBox>
-                        <TextBlock Text="Civil Status*" FontWeight="Bold" Grid.Column="2" Grid.Row="4" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Text="Civil Status" FontWeight="Bold" Grid.Column="2" Grid.Row="4" Margin="5,0,0,0"></TextBlock>
                         <ComboBox Name="civilstatuscb" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="2" Margin="5,0,0,0">
                             <ComboBoxItem>Single</ComboBoxItem>
                             <ComboBoxItem>Married</ComboBoxItem>
@@ -177,16 +182,19 @@
                         <TextBlock Text="Religion" FontWeight="Bold" Grid.Column="3" Grid.Row="4" Margin="5,0,0,0"></TextBlock>
                         <TextBox Name="religiontb" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="3" Margin="5,0,0,0"></TextBox>
                         <TextBlock Grid.Row="6" Text="TIN No."  FontWeight="Bold"></TextBlock>
-                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="7" Name="tinnotb"></TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="12" Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="7" Name="tinnotb"></TextBox>
                         <TextBlock Grid.Row="8" Text="PAG-IBIG No."  FontWeight="Bold"></TextBlock>
-                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="9" Name="pagibignotb"></TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="12" Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="9" Name="pagibignotb"></TextBox>
                         <TextBlock Grid.Row="10" Text="SSS No."  FontWeight="Bold"></TextBlock>
-                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="11" Name="sssnotb"></TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="10" Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="11" Name="sssnotb"></TextBox>
                         <TextBlock Grid.Row="12" Text="PhilHealth No."  FontWeight="Bold"></TextBlock>
-                        <TextBox Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="13" Name="philhealthnotb"></TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="12"  Grid.ColumnSpan="4" VerticalContentAlignment="Center" Grid.Row="13" Name="philhealthnotb"></TextBox>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Contact Information">
+                <TabItem >
+                    <TabItem.Header>
+                        <TextBlock Text="Contact Information" FontSize="14"></TextBlock>
+                    </TabItem.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -195,16 +203,16 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
 
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="25"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="17"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBlock Text="Permanent Address*" FontWeight="Bold"></TextBlock>
                         <TextBox x:Name="permaddtb" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1"></TextBox>
@@ -213,7 +221,7 @@
                         <TextBox x:Name="currentadd" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Grid.Row="3"></TextBox>
                         <TextBlock Text="Landline No." Grid.Row="4" FontWeight="Bold"></TextBlock>
                         <TextBox Name="landlinenotb" VerticalContentAlignment="Center"  Grid.Row="5"></TextBox>
-                        <TextBlock Text="Mobile No." Grid.Row="4" Grid.Column="1" FontWeight="Bold" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Text="Mobile No.*" Grid.Row="4" Grid.Column="1" FontWeight="Bold" Margin="5,0,0,0"></TextBlock>
                         <TextBox Name="mobilenotb" Grid.Column="1" VerticalContentAlignment="Center"  Grid.Row="5" Margin="5,0,0,0"></TextBox>
                         <TextBlock Text="Primary Email Address*" Grid.Row="6" FontWeight="Bold" ></TextBlock>
                         <TextBox Name="primaryemailtb" VerticalContentAlignment="Center" Grid.ColumnSpan="2"  Grid.Row="7"></TextBox>

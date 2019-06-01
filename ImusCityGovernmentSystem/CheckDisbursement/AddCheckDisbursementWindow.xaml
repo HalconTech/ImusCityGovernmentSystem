@@ -7,11 +7,11 @@
                       TitleCaps="False"
                       BorderThickness="0"
                       WindowStartupLocation="CenterScreen"
-                      Height="524.666"
+                      Height="526.666"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
-                      Width="560"  Loaded="MetroWindow_Loaded" GlowBrush="Black">
+                      Width="627"  Loaded="MetroWindow_Loaded" GlowBrush="Black">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="430"></RowDefinition>
@@ -19,17 +19,17 @@
         </Grid.RowDefinitions>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="28"></RowDefinition>
-                <RowDefinition Height="33"></RowDefinition>
-                <RowDefinition Height="33"></RowDefinition>
-                <RowDefinition Height="90"></RowDefinition>
-                <RowDefinition Height="33"></RowDefinition>
-                <RowDefinition Height="33"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
                 <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="24"></RowDefinition>
                 <RowDefinition Height="24"></RowDefinition>
-                <RowDefinition Height="28"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
@@ -41,15 +41,15 @@
                     <ColumnDefinition Width="50"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Name="voucherprefixtb" VerticalAlignment="Center" FontSize="16" Foreground="#FFB40000" FontWeight="Bold" ></TextBlock>
-                <TextBox x:Name="vouchernotb" Grid.Column="1" FontSize="16" Foreground="#FFB40000" FontWeight="Bold"/>
+                <TextBox VerticalContentAlignment="Center" IsEnabled="False" Name="voucherprefixtb"  FontSize="16" Foreground="#FFB40000" FontWeight="Bold" ></TextBox>
+                <TextBox VerticalContentAlignment="Center" x:Name="vouchernotb" Grid.Column="1" FontSize="16" Foreground="#FFB40000" FontWeight="Bold" Margin="5,0,0,0"/>
             </Grid>
             
 
             <TextBlock Text="Fund:" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="220"></ColumnDefinition>
+                    <ColumnDefinition Width="250"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
@@ -77,16 +77,16 @@
 
             <Grid Grid.Row="3" Grid.ColumnSpan="4" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition Width="135"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
 
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="25"></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock  Text="Payee:" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
                 <ComboBox IsEditable="True" VerticalContentAlignment="Center" Name="payeecb" Grid.Column="1" SelectionChanged="payeecb_SelectionChanged"></ComboBox>
@@ -109,7 +109,7 @@
             <CheckBox x:Name="documentcb" Grid.Row="9" Content="Supporting documents completed" Grid.ColumnSpan="4"></CheckBox>
 
             <TextBlock Text="Amount:" FontWeight="Bold" FontSize="16" Grid.Row="10" VerticalAlignment="Center"></TextBlock>
-            <TextBox x:Name="amounttb" Grid.Column="1" FontSize="16" Grid.ColumnSpan="3" Grid.Row="10" Foreground="#FFB40000" FontWeight="Bold"/>
+            <TextBox VerticalContentAlignment="Center" x:Name="amounttb" Grid.Column="1" FontSize="16" Grid.ColumnSpan="3" Grid.Row="10" Foreground="#FFB40000" FontWeight="Bold"/>
         </Grid>
         <Button x:Name="savebtn" Grid.Row="3" Click="savebtn_Click" Margin="0,5,0,0">
             <StackPanel Orientation="Horizontal">

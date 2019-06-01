@@ -9,13 +9,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="30"/>
 
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="35"/>
 
 
         </Grid.RowDefinitions>
@@ -24,7 +24,7 @@
         <Label Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Right" Content="Rank:*" FontWeight="Bold"/>
 
        
-        <TextBox Grid.Column="1"  Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Position Name" Name="txtName"/>
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1"  Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Position Name" Name="txtName"/>
         <TextBox Grid.Column="1" Grid.Row="1" Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Description" Name="txtDesc" Grid.RowSpan="2" TextWrapping="Wrap"/>
 
         <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Rank" Name="cbRank"/>

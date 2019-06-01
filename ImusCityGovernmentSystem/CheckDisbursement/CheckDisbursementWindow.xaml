@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         BorderThickness="0"
-        Title="Check Disbursement"   
+        Title="Check Disbursement Module"   
         WindowTransitionsEnabled="False"  Height="639" Width="831.571"   ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"   TitleCaps="False"  >
     <Grid Margin="45">
@@ -14,7 +14,7 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Menu" FontSize="18"></TextBlock>
+        <TextBlock Text="Menu" FontSize="18" FontWeight="Bold"></TextBlock>
         <WrapPanel Grid.Row="1" >
             <Controls:Tile x:Name="disbursementlistbtn" Background="#CC0050EF"    Title="Disbursement List" TitleFontSize="12" Click="disbursementlistbtn_Click" >
                 <Rectangle Fill="White" Height="50" Width="50">
@@ -88,7 +88,7 @@
             </Controls:Tile>
 
         </WrapPanel>
-        <TextBlock Grid.Row="2" Text="Reports"  FontSize="18"/>
+        <TextBlock Grid.Row="2" Text="Reports"  FontSize="18" FontWeight="Bold"/>
         <WrapPanel Grid.Row="3" HorizontalAlignment="Left">
             <Controls:Tile x:Name="checkregisterbtn"  Background="#CC0050EF"    Title="Check Register" TitleFontSize="12" Click="checkregisterbtn_Click" >
                 <Rectangle Fill="White" Height="50" Width="50">

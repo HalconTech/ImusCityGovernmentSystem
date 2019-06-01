@@ -14,10 +14,10 @@
                       Width="315.99"  Loaded="MetroWindow_Loaded" >
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"></ColumnDefinition>
@@ -30,7 +30,7 @@
         <TextBlock Text="Check Status" Grid.Row="2" VerticalAlignment="Center"></TextBlock>
         <ComboBox Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" Name="checkstatuscb" Margin="0,5,0,0">
         </ComboBox>
-        <Button Grid.Row="3" Grid.Column="1" Content="Save" Name="savebtn" Margin="0,5,0,0" HorizontalAlignment="Right" Click="savebtn_Click"></Button>
+        <Button Grid.Row="3" Grid.Column="1" Width="100" Content="Save" Name="savebtn" Margin="0,5,0,0" HorizontalAlignment="Right" Click="savebtn_Click"></Button>
     </Grid>
 </Controls:MetroWindow>
 

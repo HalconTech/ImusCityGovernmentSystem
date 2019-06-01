@@ -2,7 +2,7 @@
           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="Add New Check Entry" Height="331.055" Width="655"  TitleCaps="False" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded">
+        Title="Add New Check Entry" Height="411.055" Width="685"  TitleCaps="False" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -18,12 +18,12 @@
         <GroupBox Header="Voucher Information" >
             <Grid Margin="5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
                  
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -45,13 +45,13 @@
         <GroupBox Grid.Column="1" Header="Check Information" Margin="5,0,0,0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition> 
-                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"></ColumnDefinition>

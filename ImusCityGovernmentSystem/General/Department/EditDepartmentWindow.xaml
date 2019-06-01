@@ -11,15 +11,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
       
         <Label Grid.Column="0"  HorizontalContentAlignment="Right" Content="Dept Code:" FontWeight="Bold" Margin="0,5,0,0"/>
         <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" Content="Dept Name:" FontWeight="Bold" Margin="0,5,0,0"/>
 
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1"   Controls:TextBoxHelper.Watermark="Department Code" Name="txtCode" Margin="0,5,0,0"/>
-        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Controls:TextBoxHelper.Watermark="Department Name" Name="txtName" Margin="0,5,0,0"/>
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1"   Controls:TextBoxHelper.Watermark="Department Code" Name="txtCode" Margin="0,0,0,2.5"/>
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Controls:TextBoxHelper.Watermark="Department Name" Name="txtName" Margin="0,2.5,0,0"/>
         <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Save" x:Name="savebtn" Margin="0,5,0,0" Click="savebtn_Click" IsDefault="True" HorizontalAlignment="Right" Width="100"/>
     </Grid>
 </Controls:MetroWindow>

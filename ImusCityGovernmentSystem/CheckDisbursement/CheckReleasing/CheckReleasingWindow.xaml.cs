@@ -40,6 +40,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
 
         private void startcapturingbtn_Click(object sender, RoutedEventArgs e)
         {
+          
             webcam.Start();
 
         }
@@ -116,7 +117,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                     Mouse.OverrideCursor = null;
                     MessageBox.Show("Signature was not captured");
                 }
-                else if(idtypecb.SelectedValue == null && String.IsNullOrEmpty(idcardnumbertb.Text))
+                else if(idtypecb.SelectedValue == null || String.IsNullOrEmpty(idcardnumbertb.Text))
                 {
                     MessageBox.Show("Please select identification card presented and id number");
                 }
@@ -434,6 +435,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         private void clearsignbtn_Click(object sender, RoutedEventArgs e)
         {
             digitalsignatureimg.Source = null;
+        }
+
+        private void stopcamerabtn_Click(object sender, RoutedEventArgs e)
+        {
+            webcam.Stop();
         }
     }
 }

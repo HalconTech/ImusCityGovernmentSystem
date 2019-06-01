@@ -2,17 +2,17 @@
          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="Edit Division" Height="197.167" Width="389" TitleCaps="False" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" >
+        Title="Edit Division" Height="211.992" Width="389" TitleCaps="False" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False" >
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".7*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
+            <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right" Content="Division Code:*" FontWeight="Bold"/>

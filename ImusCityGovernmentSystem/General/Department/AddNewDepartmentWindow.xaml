@@ -2,16 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="Add New Department" Height="158.739" Width="389" TitleCaps="False" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False">
+        Title="Add New Department" Height="167.69" Width="389" TitleCaps="False" WindowStartupLocation="CenterScreen" WindowTransitionsEnabled="False">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".7*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right" Content="Department Code:" FontWeight="Bold"/>

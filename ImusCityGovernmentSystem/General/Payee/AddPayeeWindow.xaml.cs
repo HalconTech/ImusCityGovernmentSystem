@@ -69,6 +69,7 @@ namespace ImusCityGovernmentSystem.General.Payee
                 }
 
                 represetativelb.ItemsSource = gd;
+                represetativelb.SelectedValuePath = "Id";
                 represetativelb.Items.Refresh();
             }
             else
@@ -149,6 +150,20 @@ namespace ImusCityGovernmentSystem.General.Payee
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void editbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(represetativelb.SelectedValue == null)
+            {
+                MessageBox.Show("Please select payee representative");
+            }
+            else
+            {
+                Payee.EditPayeeRepresentative edit = new EditPayeeRepresentative();
+                edit.id = (int)represetativelb.SelectedValue;
+                edit.ShowDialog();
+            }
         }
     }
 }

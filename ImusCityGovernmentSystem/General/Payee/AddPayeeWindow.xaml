@@ -16,20 +16,20 @@
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="17"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="17"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="17"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="17"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="17"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="17"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Payee No."></TextBlock>
         <TextBox PreviewTextInput="NumberValidationTextBox"  Grid.Row="1" VerticalContentAlignment="Center" Name="payeenotb"/>
@@ -44,6 +44,12 @@
         <Button x:Name="savebtn" Grid.Row="10" Content="Save" Margin="0,5,0,0" HorizontalAlignment="Right" Width="100" Click="savebtn_Click"></Button>
         <TextBlock Grid.Row="11" Text="List of Representatives"></TextBlock>
         <ListView Name="represetativelb" Grid.Row="12" BorderBrush="Black" BorderThickness="1" Margin="0,0,0,5">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="editbtn" Header="Edit Payee Representative" Click="editbtn_Click"/>
+               
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <CheckBox Foreground="Black" IsChecked="{Binding IsSelected}"   Content="{Binding Name}" Margin="0,0,0,0" >

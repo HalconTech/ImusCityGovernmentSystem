@@ -7,12 +7,12 @@
                       TitleCaps="False"
                       BorderThickness="0"
                       WindowStartupLocation="CenterScreen"
-                      Height="520.388"
+                      Height="416.388"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
                       GlowBrush="Black"
-                      Width="688.854" Loaded="MetroWindow_Loaded">
+                      Width="544.854" Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -45,5 +45,5 @@
             </StackPanel>
         </Button>
     </Grid>
-    </Controls:MetroWindow>
+</Controls:MetroWindow>
 

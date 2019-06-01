@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
 using Microsoft.Win32;
 using System.IO;
+using System.Text.RegularExpressions;
+
 namespace ImusCityGovernmentSystem.General.EmployeeModule
 {
     /// <summary>
@@ -170,7 +172,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                         employee.PrimaryEmail = primaryemailtb.Text;
                         employee.SecondaryEmail = secondaryemailtb.Text;
 
-                        employee.Archive = false;
+                        employee.Archive = activechk.IsChecked;
                         if (!String.IsNullOrEmpty(newimage))
                         {
                             FileStream fStream = File.OpenRead(newimage);
@@ -214,7 +216,11 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             }
          
         }
-
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             if(SystemClass.CheckConnection())
