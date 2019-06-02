@@ -325,6 +325,8 @@
           </Key>
           <Property Name="IdentificationCardTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CardType" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="DateAdded" Type="datetime" />
         </EntityType>
         <EntityType Name="LicensingCode">
           <Key>
@@ -1253,7 +1255,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Check" EntitySet="Checks" />
           </AssociationSet>
-          <EntitySet Name="IdentificationCardTypes" EntityType="ImusCityHallModel.IdentificationCardType" />
           <EntitySet Name="CheckReleases" EntityType="ImusCityHallModel.CheckRelease" />
           <AssociationSet Name="FK_CheckRelease_Check" Association="ImusCityHallModel.FK_CheckRelease_Check">
             <End Role="Check" EntitySet="Checks" />
@@ -1267,6 +1268,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="Employee" EntitySet="Employees" />
             <End Role="CheckRelease" EntitySet="CheckReleases" />
           </AssociationSet>
+          <EntitySet Name="IdentificationCardTypes" EntityType="ImusCityHallModel.IdentificationCardType" />
           <AssociationSet Name="FK_CheckRelease_IdentificationCardType" Association="ImusCityHallModel.FK_CheckRelease_IdentificationCardType">
             <End Role="IdentificationCardType" EntitySet="IdentificationCardTypes" />
             <End Role="CheckRelease" EntitySet="CheckReleases" />
@@ -2184,14 +2186,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="IdentificationCardType">
-          <Key>
-            <PropertyRef Name="IdentificationCardTypeID" />
-          </Key>
-          <Property Name="IdentificationCardTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CardType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_IdentificationCardType" FromRole="IdentificationCardType" ToRole="CheckRelease" />
-        </EntityType>
         <EntityType Name="CheckRelease">
           <Key>
             <PropertyRef Name="CheckReleaseID" />
@@ -2247,6 +2241,16 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="IdentificationCardType">
+          <Key>
+            <PropertyRef Name="IdentificationCardTypeID" />
+          </Key>
+          <Property Name="IdentificationCardTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_IdentificationCardType" FromRole="IdentificationCardType" ToRole="CheckRelease" />
+        </EntityType>
         <Association Name="FK_CheckRelease_IdentificationCardType">
           <End Type="ImusCityHallModel.IdentificationCardType" Role="IdentificationCardType" Multiplicity="0..1" />
           <End Type="ImusCityHallModel.CheckRelease" Role="CheckRelease" Multiplicity="*" />
@@ -2751,14 +2755,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="IdentificationCardTypes">
-            <EntityTypeMapping TypeName="ImusCityHallModel.IdentificationCardType">
-              <MappingFragment StoreEntitySet="IdentificationCardType">
-                <ScalarProperty Name="CardType" ColumnName="CardType" />
-                <ScalarProperty Name="IdentificationCardTypeID" ColumnName="IdentificationCardTypeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CheckReleases">
             <EntityTypeMapping TypeName="ImusCityHallModel.CheckRelease">
               <MappingFragment StoreEntitySet="CheckRelease">
@@ -2772,6 +2768,16 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="ReleasedDate" ColumnName="ReleasedDate" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="CheckReleaseID" ColumnName="CheckReleaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IdentificationCardTypes">
+            <EntityTypeMapping TypeName="ImusCityHallModel.IdentificationCardType">
+              <MappingFragment StoreEntitySet="IdentificationCardType">
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
+                <ScalarProperty Name="IdentificationCardTypeID" ColumnName="IdentificationCardTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -53,7 +53,7 @@ namespace ImusCityGovernmentSystem.General.Bank
                 {
                     var audit = new AuditTrailModel
                     {
-                        Activity = "Searched item in fund list. SEARCH KEY: " + searchtb.Text,
+                        Activity = "Searched item in bank list. SEARCH KEY: " + searchtb.Text,
                         ModuleName = this.GetType().Name,
                         EmployeeID = App.EmployeeID
                     };
@@ -77,7 +77,7 @@ namespace ImusCityGovernmentSystem.General.Bank
                 {
                     var audit = new AuditTrailModel
                     {
-                        Activity = "Searched item in fund list. SEARCH KEY: " + searchtb.Text,
+                        Activity = "Searched item in bank list. SEARCH KEY: " + searchtb.Text,
                         ModuleName = this.GetType().Name,
                         EmployeeID = App.EmployeeID
                     };

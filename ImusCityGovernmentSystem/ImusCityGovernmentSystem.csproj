@@ -276,6 +276,15 @@
     <Compile Include="General\EmployeeModule\EmployeeModuleWindow.xaml.cs">
       <DependentUpon>EmployeeModuleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="General\IdentificationCard\AddNewIdentificationCardWindow.xaml.cs">
+      <DependentUpon>AddNewIdentificationCardWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="General\IdentificationCard\EditIdentificationCardWindow.xaml.cs">
+      <DependentUpon>EditIdentificationCardWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="General\IdentificationCard\IdentificationCardListWindow.xaml.cs">
+      <DependentUpon>IdentificationCardListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="General\Payee\EditPayeeRepresentative.xaml.cs">
       <DependentUpon>EditPayeeRepresentative.xaml</DependentUpon>
     </Compile>
@@ -631,6 +640,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="General\Fund\FundListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\IdentificationCard\AddNewIdentificationCardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\IdentificationCard\EditIdentificationCardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="General\IdentificationCard\IdentificationCardListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

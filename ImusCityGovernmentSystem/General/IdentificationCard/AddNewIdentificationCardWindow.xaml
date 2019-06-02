@@ -1,13 +1,13 @@
-﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.Bank.AddNewBankWindow"
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.General.IdentificationCard.AddNewIdentificationCardWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-                      Title="Add New Bank"            
+                      Title="Add New Identification Card"            
                       TitleCaps="False"
                       BorderThickness="1"
                       WindowStartupLocation="CenterScreen"
-                      Height="266.297"
+                      Height="153.515"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
@@ -17,18 +17,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="35"></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="35"></RowDefinition>
+            
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Bank Code*"></TextBlock>
-        <TextBox Grid.Row="1" VerticalContentAlignment="Center" x:Name="bankcodetb"/>
-        <TextBlock Grid.Row="2" Text="Bank Name*"></TextBlock>
-        <TextBox Grid.Row="3" VerticalContentAlignment="Center" x:Name="banknametb" ></TextBox>
-        <TextBlock Grid.Row="4" Text="Branch*"></TextBlock>
-        <TextBox Grid.Row="5" VerticalContentAlignment="Center" x:Name="branchtb" ></TextBox>
+        <TextBlock Text="Card Type*"></TextBlock>
+        <TextBox Grid.Row="1" VerticalContentAlignment="Center" x:Name="cardnametb"/>
         <Grid Grid.Row="8" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -38,7 +31,7 @@
             <Button x:Name="clearbtn" Grid.Column="1" Content="Clear" Margin="2.5,0,0,0" Click="clearbtn_Click"></Button>
         </Grid>
     </Grid>
-</Controls:MetroWindow>
+    </Controls:MetroWindow>
 
 
 

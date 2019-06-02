@@ -203,5 +203,13 @@ namespace ImusCityGovernmentSystem
             customer.Show();
             Mouse.OverrideCursor = null;
         }
+
+        private void identicationcardbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            ImusCityGovernmentSystem.General.IdentificationCard.IdentificationCardListWindow card = new General.IdentificationCard.IdentificationCardListWindow();
+            card.Show();
+            Mouse.OverrideCursor = null;
+        }
     }
 }

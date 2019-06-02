@@ -243,6 +243,15 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Name="identicationcardbtn"    VerticalContentAlignment="Center"  Header="Identification Card" Click="identicationcardbtn_Click"  >
+                        <MenuItem.Icon>
+                            <Rectangle Fill="#FF002753" Width="16" Height="13">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_creditcard}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Name="accessbtn"    VerticalContentAlignment="Center"  Header="User Access" Click="accessbtn_Click"  >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="13" Height="16">
@@ -252,6 +261,7 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
+                    
 
                     <MenuItem x:Name="payeebtn" Visibility="Collapsed"   VerticalContentAlignment="Center"  Header="Payee Management" Click="payeebtn_Click"    >
                         <MenuItem.Icon>

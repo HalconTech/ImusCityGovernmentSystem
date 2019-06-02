@@ -47,7 +47,7 @@ namespace ImusCityGovernmentSystem.General.Customer
 
                     transactionlist.Add(transaction);
                 }
-
+                customernamelbl.Content = string.Join(" ", customer.FirstName, customer.LastName);
                 customerTransactiondg.ItemsSource = transactionlist;
             }
             else

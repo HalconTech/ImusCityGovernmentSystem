@@ -58,7 +58,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             if(SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                idtypecb.ItemsSource = db.IdentificationCardTypes.ToList();
+                idtypecb.ItemsSource = db.IdentificationCardTypes.Where(m => IsActive == true).OrderBy(m => m.CardType).ToList();
                 idtypecb.DisplayMemberPath = "CardType";
                 idtypecb.SelectedValuePath = "IdentificationCardTypeID";
             }

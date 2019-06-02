@@ -15,9 +15,19 @@
                       Width="440.89" Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid BorderBrush="Black" BorderThickness="1" AutoGenerateColumns="False" Name="customerTransactiondg" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="All">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="135"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Content="Customer Name:" FontWeight="Bold" FontSize="14"></Label>
+            <Label Grid.Column="1" Name="customernamelbl" FontSize="14"></Label>
+        
+        </Grid>
+        <DataGrid Grid.Row="1" BorderBrush="Black" BorderThickness="1" AutoGenerateColumns="False" Name="customerTransactiondg" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="All">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="290" Header="Transaction Name" Binding="{Binding Activity}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Date" Binding="{Binding TransactionDate}"></DataGridTextColumn>
