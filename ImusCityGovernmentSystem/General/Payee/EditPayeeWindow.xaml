@@ -15,6 +15,11 @@
                       Width="452.333" Loaded="MetroWindow_Loaded">
 
     <Grid Margin="10">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
@@ -51,11 +56,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="addrepbtn" Grid.Row="13" Click="addrepbtn_Click">
-            <StackPanel Orientation="Horizontal">
-                <iconPacks:PackIconModern Width="17" Height="17" Kind="Add" />
-                <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Text="Add Representative" />
-            </StackPanel>
+        <Button Content="Add Representative" x:Name="addrepbtn" Grid.Row="13" Click="addrepbtn_Click">
+           
         </Button>
     </Grid>
     </Controls:MetroWindow>

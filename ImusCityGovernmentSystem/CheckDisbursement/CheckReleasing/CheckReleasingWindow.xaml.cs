@@ -36,8 +36,6 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
             digitalsig.MoveEnabled = false;
 
         }
-
-
         private void startcapturingbtn_Click(object sender, RoutedEventArgs e)
         {
           

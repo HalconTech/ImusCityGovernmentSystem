@@ -15,6 +15,11 @@
                       Width="452.333" Loaded="MetroWindow_Loaded">
 
     <Grid Margin="10">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
@@ -31,15 +36,15 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Payee No."></TextBlock>
+        <TextBlock Text="Payee No.*"></TextBlock>
         <TextBox PreviewTextInput="NumberValidationTextBox"  Grid.Row="1" VerticalContentAlignment="Center" Name="payeenotb"/>
-        <TextBlock Grid.Row="2" Text="Company Name"></TextBlock>
+        <TextBlock Grid.Row="2" Text="Company Name*"></TextBlock>
         <TextBox Grid.Row="3" VerticalContentAlignment="Center" Name="companynametb"></TextBox>
-        <TextBlock Grid.Row="4" Text="Company Address"></TextBlock>
+        <TextBlock Grid.Row="4" Text="Company Address*"></TextBlock>
         <TextBox Grid.Row="5" Name="companyaddresstb" VerticalContentAlignment="Center"></TextBox>
         <TextBlock Grid.Row="6" Text="TIN No."></TextBlock>
         <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="7" VerticalContentAlignment="Center" MaxLength="12" Name="tinnotb"></TextBox>
-        <TextBlock Text="Contact No." Grid.Row="8"></TextBlock>
+        <TextBlock Text="Contact No.*" Grid.Row="8"></TextBlock>
         <TextBox Grid.Row="9" VerticalContentAlignment="Center" Name="contactnotb"></TextBox>
         <Button x:Name="savebtn" Grid.Row="10" Content="Save" Margin="0,5,0,0" HorizontalAlignment="Right" Width="100" Click="savebtn_Click"></Button>
         <TextBlock Grid.Row="11" Text="List of Representatives"></TextBlock>
@@ -57,11 +62,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Grid.Row="13" Click="Button_Click">
-            <StackPanel Orientation="Horizontal">
-                <iconPacks:PackIconModern Width="17" Height="17" Kind="Add" />
-                <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Text="Add Representative" />
-            </StackPanel>
+        <Button Content="Add Representative" Grid.Row="13" Click="Button_Click">
+            
         </Button>
     </Grid>
 </Controls:MetroWindow>

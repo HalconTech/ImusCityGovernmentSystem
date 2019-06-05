@@ -14,6 +14,11 @@
                       GlowBrush="Black"
                       Width="634" Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </Style>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition ></ColumnDefinition>
