@@ -60,11 +60,6 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<CheckRelease> CheckReleases { get; set; }
         public virtual DbSet<IdentificationCardType> IdentificationCardTypes { get; set; }
     
-        public virtual ObjectResult<GetCheckExpiryNotice_Result> GetCheckExpiryNotice()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckExpiryNotice_Result>("GetCheckExpiryNotice");
-        }
-    
         public virtual ObjectResult<GetDisbursementVoucher_Result> GetDisbursementVoucher(Nullable<int> disbursementID)
         {
             var disbursementIDParameter = disbursementID.HasValue ?
@@ -115,6 +110,11 @@ namespace ImusCityGovernmentSystem.Model
                 new ObjectParameter("CustomerID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerTransactions_Result>("GetCustomerTransactions", customerIDParameter);
+        }
+    
+        public virtual ObjectResult<GetCheckExpiryNotice_Result> GetCheckExpiryNotice()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckExpiryNotice_Result>("GetCheckExpiryNotice");
         }
     }
 }

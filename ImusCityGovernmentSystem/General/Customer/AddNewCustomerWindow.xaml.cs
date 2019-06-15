@@ -32,7 +32,7 @@ namespace ImusCityGovernmentSystem.General.Customer
             {
                 if(String.IsNullOrEmpty(firstnametb.Text))
                 {
-                    MessageBox.Show("Please enter firs name");
+                    MessageBox.Show("Please enter first name");
                 }
                 else if(String.IsNullOrEmpty(lastnametb.Text))
                 {

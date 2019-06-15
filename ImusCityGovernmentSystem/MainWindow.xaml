@@ -78,17 +78,17 @@
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
             <Controls:Flyout Name="flyoutNotif" Header="Notifications" Position="Right" Width="400">
-                <ListView Name="lvNotif">
+                <ListView Name="lvNotif" Margin="5,0,0,0" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Vertical" Margin="5">
-                                <TextBlock Text="{Binding CompanyName}" FontWeight="Bold" />
-                                <TextBlock>
-                                    <Run Text="{Binding FundName}"/>
-                                    <Run Text=" - "/>
+                            <StackPanel Orientation="Vertical" Margin="0,5" >
+                                <TextBlock Text="{Binding CompanyName}"  FontWeight="Bold" />
+                                <TextBlock>                               
                                     <Run Text="{Binding CheckNo}"/>
                                 </TextBlock>
-                                <TextBlock  Text="{Binding DateCreated,StringFormat=d}"/>
+                                <TextBlock>                                  
+                                    <Run Text="{Binding DateCreated,StringFormat=d}"/>
+                                </TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

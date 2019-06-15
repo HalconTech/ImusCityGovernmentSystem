@@ -14,10 +14,10 @@ namespace ImusCityGovernmentSystem.Model
     public partial class GetCheckExpiryNotice_Result
     {
         public string GroupName { get; set; }
-        public Nullable<System.DateTime> DateCreated { get; set; }
+        public string DateCreated { get; set; }
         public string CheckNo { get; set; }
         public string CheckDescription { get; set; }
         public string CompanyName { get; set; }
-        public string FundName { get; set; }
+        public Nullable<decimal> FundName { get; set; }
     }
 }
