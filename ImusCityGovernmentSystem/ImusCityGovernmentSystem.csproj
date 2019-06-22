@@ -470,6 +470,7 @@
     <Compile Include="Model\SubModuleUser.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\UserAccessModel.cs" />
     <Compile Include="Model\UserAccount.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>

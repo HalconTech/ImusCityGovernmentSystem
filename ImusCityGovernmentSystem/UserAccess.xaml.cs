@@ -20,6 +20,7 @@ namespace ImusCityGovernmentSystem
     /// </summary>
     public partial class UserAccess : MetroWindow
     {
+        List<UserAccessModel> userAccessList = new List<UserAccessModel>();
         public UserAccess()
         {
             InitializeComponent();
@@ -43,25 +44,45 @@ namespace ImusCityGovernmentSystem
             employeecb.SelectedIndex = 0;
         }
 
-        void LoadFirstEmployee(int id)
-        {
-            ImusCityHallEntities db = new ImusCityHallEntities();
-            assignedmodulelb.ItemsSource = db.SubModuleUsers.Where(m => m.EmployeeID == id).OrderBy(m => m.SubModule.Name).ToList();
-            assignedmodulelb.DisplayMemberPath = "SubModule.Name";
-            assignedmodulelb.SelectedValuePath = "SubModuleUserID";
-        }
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        public void LoadUserAccess(int id)
         {
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                moduleslb.ItemsSource = db.SubModules.OrderBy(m => m.Name).ToList();
-                moduleslb.DisplayMemberPath = "Name";
-                moduleslb.SelectedValuePath = "SubModuleID";
+                userAccessList.Clear();
+                db = new ImusCityHallEntities();
+                var subModules = db.SubModules.OrderBy(m => m.Name).ToList();
+                foreach (var subModule in subModules)
+                {
+                    bool selectedSubModule = false;
+                    if (db.SubModuleUsers.Any(m => m.EmployeeID == id && m.SubModuleID == subModule.SubModuleID))
+                    {
+                        selectedSubModule = true;
+                    }
+                    UserAccessModel userAccess = new UserAccessModel()
+                    {
+                        Name = subModule.Name,
+                        Id = subModule.SubModuleID,
+                        IsSelected = selectedSubModule
+                    };
+                    userAccessList.Add(userAccess);
+                }
+
+                moduleslb.ItemsSource = userAccessList;
+                moduleslb.SelectedValuePath = "Id";
+                moduleslb.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
                 LoadEmployee();
-                LoadFirstEmployee((int)employeecb.SelectedValue);
-
-
             }
             else
             {
@@ -73,10 +94,8 @@ namespace ImusCityGovernmentSystem
         {
             if (SystemClass.CheckConnection())
             {
-                ImusCityHallEntities db = new ImusCityHallEntities();
-                assignedmodulelb.ItemsSource = db.SubModuleUsers.Where(m => m.EmployeeID == (int)employeecb.SelectedValue).OrderBy(m => m.SubModule.Name).ToList();
-                assignedmodulelb.DisplayMemberPath = "SubModule.Name";
-                assignedmodulelb.SelectedValuePath = "SubModuleUserID";
+                int employeeId = (int)employeecb.SelectedValue;
+                LoadUserAccess(employeeId);
             }
             else
             {
@@ -84,70 +103,52 @@ namespace ImusCityGovernmentSystem
             }
         }
 
-        private void removebtn_Click(object sender, RoutedEventArgs e)
+        private void savebtn_Click(object sender, RoutedEventArgs e)
         {
             if (SystemClass.CheckConnection())
             {
-                if (assignedmodulelb.SelectedValue != null)
+                if(employeecb.SelectedValue == null)
                 {
-                    ImusCityHallEntities db = new ImusCityHallEntities();
-                    SubModuleUser submoduleuser = db.SubModuleUsers.Find((int)assignedmodulelb.SelectedValue);
-                    db.SubModuleUsers.Remove(submoduleuser);
-                    db.SaveChanges();
-                    db = new ImusCityHallEntities();
-                    assignedmodulelb.ItemsSource = db.SubModuleUsers.Where(m => m.EmployeeID == (int)employeecb.SelectedValue).OrderBy(m => m.SubModule.Name).ToList();
-                    assignedmodulelb.DisplayMemberPath = "SubModule.Name";
-                    assignedmodulelb.SelectedValuePath = "SubModuleUserID";
+                    MessageBox.Show("Please select/load an employee");
                 }
                 else
                 {
-                    MessageBox.Show("Please select as assigned module that will be remove");
-                }
-
-            }
-            else
-            {
-                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
-            }
-        }
-
-        private void addbtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (SystemClass.CheckConnection())
-            {
-                if (moduleslb.SelectedValue != null)
-                {
                     ImusCityHallEntities db = new ImusCityHallEntities();
-                    if (!db.SubModuleUsers.Any(m => m.EmployeeID == (int)employeecb.SelectedValue && m.SubModuleID == (int)moduleslb.SelectedValue))
+                    int employeeId = (int)employeecb.SelectedValue;
+                    foreach (var userAccess in userAccessList.Where(m => m.IsSelected == true))
                     {
-                        SubModuleUser submoduleuser = new SubModuleUser();
-                        var user = new SubModuleUser
+                        if (db.SubModuleUsers.Any(m => m.EmployeeID == employeeId && m.SubModuleID == userAccess.Id))
                         {
-                            SubModuleID = (int)moduleslb.SelectedValue,
-                            EmployeeID = (int)employeecb.SelectedValue
-                        };
-                        db.SubModuleUsers.Add(user);
-                        db.SaveChanges();
-                        db = new ImusCityHallEntities();
-                        assignedmodulelb.ItemsSource = db.SubModuleUsers.Where(m => m.EmployeeID == (int)employeecb.SelectedValue).OrderBy(m => m.SubModule.Name).ToList();
-                        assignedmodulelb.DisplayMemberPath = "SubModule.Name";
-                        assignedmodulelb.SelectedValuePath = "SubModuleUserID";
-                    }
-                    else
-                    {
-                        MessageBox.Show("The module that you are trying to add is already assigned to this employee");
+
+                        }
+                        else
+                        {
+                            SubModuleUser userSubModule = new SubModuleUser();
+                            userSubModule.EmployeeID = employeeId;
+                            userSubModule.SubModuleID = userAccess.Id;       
+                            db.SubModuleUsers.Add(userSubModule);
+                            db.SaveChanges();
+                        }
                     }
 
+                    foreach (var userAccess in userAccessList.Where(m => m.IsSelected == false))
+                    {
+                        if (db.SubModuleUsers.Any(m => m.EmployeeID == employeeId && m.SubModuleID == userAccess.Id))
+                        {
+                            SubModuleUser userSubModule = db.SubModuleUsers.FirstOrDefault(m => m.EmployeeID == employeeId && m.SubModuleID == userAccess.Id );
+                            db.SubModuleUsers.Remove(userSubModule);
+                            db.SaveChanges();
+                        }
+                    }
+                    MessageBox.Show("Employee user access updated successfully");
                 }
-                else
-                {
-                    MessageBox.Show("Please select the module that needs to be assigned in this employee");
-                }
+
             }
             else
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+          
         }
     }
 }

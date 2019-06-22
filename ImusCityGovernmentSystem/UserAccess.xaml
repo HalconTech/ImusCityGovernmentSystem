@@ -11,7 +11,7 @@
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
-                      Width="641.99" Loaded="MetroWindow_Loaded" >
+                      Width="370.969" Loaded="MetroWindow_Loaded" >
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -19,37 +19,28 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="100"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Select Employee:"></TextBlock>
         <ComboBox Grid.Row="1" Name="employeecb" SelectionChanged="employeecb_SelectionChanged"></ComboBox>
         <TextBlock Text="List of Modules" Grid.Row="2" VerticalAlignment="Bottom"></TextBlock>
-        <ListBox Grid.Row="3" BorderBrush="Black" BorderThickness="1" Name="moduleslb" Margin="0,0,5,0"></ListBox>
-        <Grid Grid.Column="1" Grid.Row="4" VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Button Name="removebtn" Margin="0,0,0,5" Click="removebtn_Click">
-                <StackPanel Orientation="Horizontal">
-
-                    <iconPacks:PackIconModern Width="17" Height="17" Kind="ArrowLeft" />
-                    
-                </StackPanel>
-            </Button>
-            <Button Name="addbtn" Margin="0,0,0,5" Grid.Row="1" Click="addbtn_Click">
-                <StackPanel Orientation="Horizontal">
-                    <iconPacks:PackIconModern Width="17" Height="17" Kind="ArrowRight" />
-                    <TextBlock Margin="5 0 0 0" VerticalAlignment="Center"  />
-                </StackPanel>
-            </Button>
+        <ListView Grid.Row="3" BorderBrush="Black" BorderThickness="1" Name="moduleslb" Margin="0,0,0,5">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Foreground="Black" IsChecked="{Binding IsSelected}"   Content="{Binding Name}" Margin="0,0,0,0" >
+                    </CheckBox>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Column="1" Grid.Row="4" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Content="Save" Name="savebtn" Click="savebtn_Click"></Button>
         </Grid>
-        <TextBlock Text="List of Assigned Modules" Grid.Row="2" Grid.Column="2"></TextBlock>
-        <ListBox Grid.Column="2" BorderThickness="1" BorderBrush="Black"  Grid.Row="4" Margin="5,0,0,0" Name="assignedmodulelb"></ListBox>
     </Grid>
       
     </Controls:MetroWindow>
