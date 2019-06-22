@@ -207,7 +207,7 @@
                             </StackPanel>
                         </DataTemplate>
                     </MenuItem.HeaderTemplate>
-                    <MenuItem  VerticalContentAlignment="Center" Name="empmanagebtn" Header="Employee Management" Click="empmanagebtn_Click" >
+                    <MenuItem  VerticalContentAlignment="Center" Name="EMP" Header="Employee Management" Click="empmanagebtn_Click" >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="14" Height="14">
                                 <Rectangle.OpacityMask>
@@ -216,7 +216,7 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="customerbtn"  VerticalContentAlignment="Center"  Header="Customer" Click="customerbtn_Click"  >
+                    <MenuItem x:Name="CUST"  VerticalContentAlignment="Center"  Header="Customer" Click="customerbtn_Click"  >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="12" Height="14">
                                 <Rectangle.OpacityMask>
@@ -225,7 +225,7 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="departmentbtn"    VerticalContentAlignment="Center"  Header="Department" Click="departmentbtn_Click"    >
+                    <MenuItem x:Name="DEPT"    VerticalContentAlignment="Center"  Header="Department" Click="departmentbtn_Click"    >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="13" Height="14">
                                 <Rectangle.OpacityMask>
@@ -234,7 +234,7 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="divisionbtn"    VerticalContentAlignment="Center"  Header="Division" Click="divisionbtn_Click"    >
+                    <MenuItem x:Name="DIV"    VerticalContentAlignment="Center"  Header="Division" Click="divisionbtn_Click"    >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="13" Height="13">
                                 <Rectangle.OpacityMask>
@@ -243,7 +243,7 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="identicationcardbtn"    VerticalContentAlignment="Center"  Header="Identification Card" Click="identicationcardbtn_Click"  >
+                    <MenuItem Name="ID"    VerticalContentAlignment="Center"  Header="Identification Card" Click="identicationcardbtn_Click"  >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="16" Height="13">
                                 <Rectangle.OpacityMask>
@@ -252,7 +252,7 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="accessbtn"    VerticalContentAlignment="Center"  Header="User Access" Click="accessbtn_Click"  >
+                    <MenuItem Name="UA"    VerticalContentAlignment="Center"  Header="User Access" Click="accessbtn_Click"  >
                         <MenuItem.Icon>
                             <Rectangle Fill="#FF002753" Width="13" Height="16">
                                 <Rectangle.OpacityMask>

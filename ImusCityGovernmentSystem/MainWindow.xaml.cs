@@ -155,7 +155,30 @@ namespace ImusCityGovernmentSystem
                 {
                     foreach (var module in submodule)
                     {
-                        CDS.IsEnabled = module.SubModule.Acronym == CDS.Name ? true : false;
+                        switch (module.SubModule.Acronym)
+                        {
+                            case "CDS":
+                                CDS.IsEnabled = module.SubModule.Acronym == CDS.Name ? true : false;
+                                break;
+                            case "EMP":
+                                EMP.IsEnabled = module.SubModule.Acronym == EMP.Name ? true : false;
+                                break;
+                            case "CUST":
+                                CUST.IsEnabled = module.SubModule.Acronym == CUST.Name ? true : false;
+                                break;
+                            case "DEPT":
+                                DEPT.IsEnabled = module.SubModule.Acronym == DEPT.Name ? true : false;
+                                break;
+                            case "DIV":
+                                DIV.IsEnabled = module.SubModule.Acronym == DIV.Name ? true : false;
+                                break;
+                            case "ID":
+                                ID.IsEnabled = module.SubModule.Acronym == ID.Name ? true : false;
+                                break;
+                            case "UA":
+                                UA.IsEnabled = module.SubModule.Acronym == UA.Name ? true : false;
+                                break;
+                        }                    
                     }
                 }
                 else
