@@ -93,7 +93,7 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Personal Information" FontSize="16">
+            <TabItem Header="Customer Information" FontSize="16">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
