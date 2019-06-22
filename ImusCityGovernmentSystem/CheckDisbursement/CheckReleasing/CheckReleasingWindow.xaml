@@ -127,7 +127,7 @@
                     <TextBlock Grid.Row="8" Text="Birthdate"></TextBlock>
                     <DatePicker Grid.Row="9" VerticalContentAlignment="Center" Name="birthdatedp"></DatePicker>
                     <TextBlock Grid.Row="10" Text="Identification Card Preseneted"></TextBlock>
-                    <ComboBox Grid.Row="11" VerticalContentAlignment="Center" Name="idtypecb" Margin="0,5,0,26" Grid.RowSpan="2"></ComboBox>
+                    <ComboBox Grid.Row="11" VerticalContentAlignment="Center" Name="idtypecb" Margin="0,5,0,26" Grid.RowSpan="2" SelectionChanged="idtypecb_SelectionChanged"></ComboBox>
                     <TextBlock Grid.Row="12" Text="ID Number"></TextBlock>
                     <TextBox Grid.Row="13" Name="idcardnumbertb" VerticalContentAlignment="Center"></TextBox>
                     <Grid Grid.Row="43" Margin="0,5,0,0">

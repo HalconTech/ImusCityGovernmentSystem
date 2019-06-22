@@ -248,7 +248,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 CustomerIdentificationCard customerCard = db.CustomerIdentificationCards.FirstOrDefault(m => m.IdentificationCardTypeID == cardId && m.CustomerID == Id && m.IdentificationCardType.IsActive == true);
                 if (customerCard != null)
                 {
-                   
+                    customerCard.IdentificationNumber = idcardnumbertb.Text;
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -491,6 +492,34 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         private void stopcamerabtn_Click(object sender, RoutedEventArgs e)
         {
             webcam.Stop();
+        }
+
+        private void idtypecb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                if(idtypecb.SelectedValue == null)
+                {
+                    return;
+                }
+                int cardId = (int)idtypecb.SelectedValue;
+                CustomerIdentificationCard custCard = db.CustomerIdentificationCards.FirstOrDefault(m => m.CustomerID == customerId && m.IdentificationCardTypeID == cardId);
+                if(custCard == null)
+                {
+                    idcardnumbertb.Text = string.Empty;
+                }
+                else
+                {
+                    idcardnumbertb.Text = custCard.IdentificationNumber;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+           
         }
     }
 }

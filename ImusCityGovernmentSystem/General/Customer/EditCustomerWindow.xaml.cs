@@ -121,7 +121,9 @@ namespace ImusCityGovernmentSystem.General.Customer
                     {
                         if (db.CustomerIdentificationCards.Any(m => m.CustomerID == customer.CustomerID && m.IdentificationCardTypeID == list.Id))
                         {
-
+                            CustomerIdentificationCard custCard = db.CustomerIdentificationCards.FirstOrDefault(m => m.CustomerID == customer.CustomerID && m.IdentificationCardTypeID == list.Id);
+                            custCard.IdentificationNumber = list.CardNumber;
+                            db.SaveChanges();
                         }
                         else
                         {
