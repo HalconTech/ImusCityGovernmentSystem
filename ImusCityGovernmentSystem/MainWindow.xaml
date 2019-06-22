@@ -182,7 +182,7 @@
                                 </Rectangle.OpacityMask>
                             </Rectangle>
                         </MenuItem.Icon>
-                        <MenuItem x:Name="CDS"   VerticalContentAlignment="Center"  Header="Check Disbursement" Click="checkdisbursementbtn_Click"   >
+                        <MenuItem x:Name="CDS"    VerticalContentAlignment="Center"  Header="Check Disbursement" Click="checkdisbursementbtn_Click"   >
                             <MenuItem.Icon>
                                 <Rectangle Fill="#FF002753" Width="14" Height="14">
                                     <Rectangle.OpacityMask>

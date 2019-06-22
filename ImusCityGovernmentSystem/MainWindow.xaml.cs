@@ -147,6 +147,13 @@ namespace ImusCityGovernmentSystem
 
         public void CheckUserAccess()
         {
+            CDS.IsEnabled = false;
+            EMP.IsEnabled = false;
+            CUST.IsEnabled = false;
+            DEPT.IsEnabled = false;
+            DIV.IsEnabled = false;
+            ID.IsEnabled = false;
+            UA.IsEnabled = false;
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
