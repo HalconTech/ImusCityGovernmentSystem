@@ -149,8 +149,17 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                     int checkId = (int)checklistcb.SelectedValue;
                     if (db.Customers.Any())
                     {
-                        SaveCheckReleased(customerId, checkId);
-                        customerId = 0;
+                        if(db.Customers.Any(m => m.FirstName == firstnametb.Text && m.LastName == lastnametb.Text))
+                        {
+                            SaveCheckReleased(customerId, checkId);
+                            customerId = 0;
+                        }
+                        else
+                        {
+                            CreateCustomer();
+                            SaveCheckReleased(customerId, checkId);
+                            customerId = 0;
+                        }                      
                     }
                     else
                     {
@@ -272,7 +281,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         public bool CustomerExist()
         {
             ImusCityHallEntities db = new ImusCityHallEntities();
-            return db.Customers.Any(m => (m.FirstName == firstnametb.Text || m.MiddleName == middlenametb.Text || m.LastName == lastnametb.Text) && m.IsActive == true);
+            return db.Customers.Any(m => (m.FirstName == firstnametb.Text || m.LastName == lastnametb.Text) && m.IsActive == true);
         }
 
         public int CustomerMatched()
