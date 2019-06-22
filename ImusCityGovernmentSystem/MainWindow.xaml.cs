@@ -232,16 +232,18 @@ namespace ImusCityGovernmentSystem
         {
             Mouse.OverrideCursor = Cursors.Wait;
             ImusCityGovernmentSystem.General.Customer.CustomerListWindow customer = new General.Customer.CustomerListWindow();
-            customer.ShowDialog();
             Mouse.OverrideCursor = null;
+            customer.ShowDialog();
+           
         }
 
         private void identicationcardbtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
             ImusCityGovernmentSystem.General.IdentificationCard.IdentificationCardListWindow card = new General.IdentificationCard.IdentificationCardListWindow();
-            card.ShowDialog();
             Mouse.OverrideCursor = null;
+            card.ShowDialog();
+           
         }
         private void MetroWindow_Activated(object sender, EventArgs e)
         {
