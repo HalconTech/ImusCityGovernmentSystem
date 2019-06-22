@@ -73,6 +73,7 @@ namespace ImusCityGovernmentSystem
                 moduleslb.Items.Refresh();
                 Employee employee = db.Employees.Find(id);
                 adminchk.IsChecked = employee.IsAdmin == true ? true : false;
+                db.SaveChanges();
             }
             else
             {
