@@ -71,6 +71,8 @@ namespace ImusCityGovernmentSystem
                 moduleslb.ItemsSource = userAccessList;
                 moduleslb.SelectedValuePath = "Id";
                 moduleslb.Items.Refresh();
+                Employee employee = db.Employees.Find(id);
+                adminchk.IsChecked = employee.IsAdmin == true ? true : false;
             }
             else
             {
@@ -140,6 +142,9 @@ namespace ImusCityGovernmentSystem
                             db.SaveChanges();
                         }
                     }
+
+                    Employee employee = db.Employees.Find(employeeId);
+                    employee.IsAdmin = adminchk.IsChecked == true ? true : false;
                     MessageBox.Show("Employee user access updated successfully");
                 }
 

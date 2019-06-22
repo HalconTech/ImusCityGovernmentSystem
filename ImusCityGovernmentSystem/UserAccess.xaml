@@ -7,7 +7,7 @@
                       TitleCaps="False"
                       BorderThickness="1"
                       WindowStartupLocation="CenterScreen"
-                      Height="380.72"
+                      Height="404.111"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
@@ -19,6 +19,7 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -35,7 +36,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Grid Grid.Column="1" Grid.Row="4" >
+        <CheckBox x:Name="adminchk" Grid.Row="4" Content="Set as Administrator"></CheckBox>
+        <Grid Grid.Column="1" Grid.Row="5" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>

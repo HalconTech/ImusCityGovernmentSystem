@@ -149,7 +149,6 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                         employee.DatePermanency = String.IsNullOrEmpty(datepermanetdp.Text) ? null : datepermanetdp.SelectedDate;
                         employee.DateEndContract = String.IsNullOrEmpty(dateendodp.Text) ? null : dateendodp.SelectedDate;
                         employee.DateResigned = String.IsNullOrEmpty(dateresignationdp.Text) ? null : dateresignationdp.SelectedDate;
-                        employee.IsAdmin = admincb.IsChecked == true ? true : false;
 
                         //Personal Information
                         employee.FirstName = fnametb.Text;
@@ -263,7 +262,6 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             datepermanetdp.SelectedDate = null;
             dateendodp.SelectedDate = null;
             dateresignationdp.SelectedDate = null;
-            admincb.IsChecked = false;
 
             //Personal Information
             fnametb.Text = null;

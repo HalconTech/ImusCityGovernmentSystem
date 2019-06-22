@@ -259,11 +259,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 ImusCityGovernmentSystem.Model.Employee employee = db.Employees.Find(App.EmployeeID);
-                resetpasswordbtn.IsEnabled = false;
-                if (employee.EmployeePosition == null || employee.IsAdmin == true)
-                {
-                    resetpasswordbtn.IsEnabled = true;
-                }
+                resetpasswordbtn.IsEnabled = employee.IsAdmin == true ? true : false;
             }
             else
             {
