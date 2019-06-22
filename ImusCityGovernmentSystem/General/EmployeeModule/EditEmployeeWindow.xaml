@@ -118,13 +118,13 @@
                                 <RowDefinition Height="35"></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Date Hired*" FontWeight="Bold" Grid.Column="1"></TextBlock>
-                            <DatePicker Grid.Column="1" Name="datehiredp" Grid.Row="1" VerticalContentAlignment="Center"></DatePicker>
+                            <DatePicker Grid.Column="1" Name="datehiredp" Grid.Row="1" VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="mm/dd/yyyy"></DatePicker>
                             <TextBlock Text="Date of Permanency" FontWeight="Bold" Grid.Row="2" Grid.Column="1"></TextBlock>
-                            <DatePicker Grid.Column="1" Grid.Row="3" Name="datepermanetdp" VerticalContentAlignment="Center"></DatePicker>
+                            <DatePicker Grid.Column="1" Grid.Row="3" Name="datepermanetdp" VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="mm/dd/yyyy"></DatePicker>
                             <TextBlock Text="Date of Endo" FontWeight="Bold" Grid.Row="4" Grid.Column="1"></TextBlock>
-                            <DatePicker Grid.Column="1" Grid.Row="5" Name="dateendodp" VerticalContentAlignment="Center"></DatePicker>
+                            <DatePicker Grid.Column="1" Grid.Row="5" Name="dateendodp" VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="mm/dd/yyyy"></DatePicker>
                             <TextBlock Text="Date of Resignation" FontWeight="Bold" Grid.Row="6" Grid.Column="1"></TextBlock>
-                            <DatePicker Grid.Column="1" Grid.Row="7" Name="dateresignationdp" VerticalContentAlignment="Center"></DatePicker>
+                            <DatePicker Grid.Column="1" Grid.Row="7" Name="dateresignationdp" VerticalContentAlignment="Center" Controls:TextBoxHelper.Watermark="mm/dd/yyyy"></DatePicker>
                         </Grid>
 
                     </Grid>
@@ -165,7 +165,7 @@
                         <TextBlock Text="Name Suffix" FontWeight="Bold" Grid.Column="3" Margin="5,0,0,0"></TextBlock>
                         <TextBox Name="namesuffixtb" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="3" Margin="5,0,0,0"></TextBox>
                         <TextBlock Grid.Row="2" Text="Date of Birth*" FontWeight="Bold"></TextBlock>
-                        <DatePicker VerticalContentAlignment="Center" Grid.Row="3" Name="birthdatedp"></DatePicker>
+                        <DatePicker VerticalContentAlignment="Center" Grid.Row="3" Name="birthdatedp" Controls:TextBoxHelper.Watermark="mm/dd/yyyy"></DatePicker>
                         <TextBlock Grid.Row="2" Text="Place of Birth*" Grid.Column="1" FontWeight="Bold" Margin="5,0,0,0"></TextBlock>
                         <TextBox VerticalContentAlignment="Center" Grid.ColumnSpan="3" Grid.Row="3" Grid.Column="1" Name="birthplacetb" Margin="5,0,0,0"></TextBox>
                         <TextBlock Grid.Row="4" Text="Gender*"  FontWeight="Bold"></TextBlock>
