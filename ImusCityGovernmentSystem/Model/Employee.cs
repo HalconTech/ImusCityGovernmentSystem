@@ -17,8 +17,6 @@ namespace ImusCityGovernmentSystem.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
-            this.SubModuleUsers = new HashSet<SubModuleUser>();
             this.BankTrails = new HashSet<BankTrail>();
             this.CDSSignatories = new HashSet<CDSSignatory>();
             this.CDSSignatories1 = new HashSet<CDSSignatory>();
@@ -26,9 +24,11 @@ namespace ImusCityGovernmentSystem.Model
             this.CDSSignatories3 = new HashSet<CDSSignatory>();
             this.CDSSignatories4 = new HashSet<CDSSignatory>();
             this.CDSSignatories5 = new HashSet<CDSSignatory>();
-            this.Customers = new HashSet<Customer>();
             this.Checks = new HashSet<Check>();
             this.CheckReleases = new HashSet<CheckRelease>();
+            this.Customers = new HashSet<Customer>();
+            this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
+            this.SubModuleUsers = new HashSet<SubModuleUser>();
         }
     
         public int EmployeeID { get; set; }
@@ -86,14 +86,8 @@ namespace ImusCityGovernmentSystem.Model
         public byte[] Photo { get; set; }
         public string NameSuffix { get; set; }
         public string BankAccountNo { get; set; }
+        public Nullable<bool> IsAdmin { get; set; }
     
-        public virtual Division Division { get; set; }
-        public virtual EmployeePosition EmployeePosition { get; set; }
-        public virtual EmployeeStatu EmployeeStatu { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BankTrail> BankTrails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -109,10 +103,17 @@ namespace ImusCityGovernmentSystem.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CDSSignatory> CDSSignatories5 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Check> Checks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckRelease> CheckReleases { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual Division Division { get; set; }
+        public virtual EmployeePosition EmployeePosition { get; set; }
+        public virtual EmployeeStatu EmployeeStatu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
     }
 }

@@ -88,6 +88,9 @@
                                 <RowDefinition Height="35"></RowDefinition>
                                 <RowDefinition Height="20"></RowDefinition>
                                 <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Employee No*" FontWeight="Bold"></TextBlock>
                             <TextBox  VerticalContentAlignment="Center" Name="employeenotb" Grid.Row="1"></TextBox>
@@ -99,8 +102,11 @@
                             <ComboBox Grid.Row="5" VerticalContentAlignment="Center" Name="positioncb"></ComboBox>
                             <TextBlock Text="Employee Status*" FontWeight="Bold" Grid.Row="6"></TextBlock>
                             <ComboBox Grid.Row="7" VerticalContentAlignment="Center" Name="statuscb"></ComboBox>
+                            <TextBlock Text="Admin Status" FontWeight="Bold" Grid.Row="8"></TextBlock>
+                            <CheckBox x:Name="admincb" Grid.Row="9"  Content="Mark as Admin" Margin="5,0,0,0"></CheckBox>
+                            <CheckBox Grid.Row="10" Content="Inactive" Name="activechk"></CheckBox>
                         </Grid>
-                        <CheckBox Grid.Row="8" Content="Inactive" Name="activechk"></CheckBox>
+                       
 
                         <Grid Grid.Column="1" Margin="5,0,0,0">
                             <Grid.RowDefinitions>

@@ -18,7 +18,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> SubModuleID { get; set; }
         public Nullable<int> EmployeeID { get; set; }
     
-        public virtual Employee Employee { get; set; }
         public virtual SubModule SubModule { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

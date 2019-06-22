@@ -31,8 +31,8 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<System.DateTime> Birthdate { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
-        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckRelease> CheckReleases { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

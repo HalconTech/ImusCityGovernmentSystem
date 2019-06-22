@@ -25,7 +25,6 @@ namespace ImusCityGovernmentSystem.Model
         public string Description { get; set; }
         public Nullable<bool> Active { get; set; }
         public string EmployeePositionName { get; set; }
-        public Nullable<bool> IsAdmin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }

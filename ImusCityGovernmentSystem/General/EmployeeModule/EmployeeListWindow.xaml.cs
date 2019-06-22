@@ -182,7 +182,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                     var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
                     aspuser.PasswordHash = passwordHasher.HashPassword("imuscitygov");
                     db.SaveChanges();
-                    MessageBox.Show("Employee account has been reset");
+                    MessageBox.Show("Employee account has been reset to"+Environment.NewLine+ "Default Password: imuscitygov");
                 }
             }
             else
@@ -260,7 +260,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 ImusCityGovernmentSystem.Model.Employee employee = db.Employees.Find(App.EmployeeID);
                 resetpasswordbtn.IsEnabled = false;
-                if (employee.EmployeePosition == null || employee.EmployeePosition.IsAdmin == true)
+                if (employee.EmployeePosition == null || employee.IsAdmin == true)
                 {
                     resetpasswordbtn.IsEnabled = true;
                 }

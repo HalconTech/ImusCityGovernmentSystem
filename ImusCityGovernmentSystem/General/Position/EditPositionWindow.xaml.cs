@@ -55,7 +55,7 @@ namespace ImusCityGovernmentSystem.General.Position
                             chkActive.IsChecked = true;
                         else
                             chkActive.IsChecked = false;
-                        admincb.IsChecked = find.IsAdmin;
+                        
                        
                     }
                 }
@@ -83,7 +83,7 @@ namespace ImusCityGovernmentSystem.General.Position
                         find.EmployeePositionName = txtName.Text;
                         find.Description = txtDesc.Text;
                         find.EmployeeRankID = Convert.ToInt32(cbRank.SelectedValue);
-                        find.IsAdmin = admincb.IsChecked == true ? true : false;
+                        
                         if (chkActive.IsChecked == true)
                             find.Active = true;
                         else

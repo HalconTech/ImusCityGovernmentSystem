@@ -27,7 +27,7 @@ namespace ImusCityGovernmentSystem.Model
     
         public virtual Check Check { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual Employee Employee { get; set; }
         public virtual IdentificationCardType IdentificationCardType { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

@@ -24,8 +24,8 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> EmployeeID { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
     
-        public virtual Employee Employee { get; set; }
         public virtual FundBank FundBank { get; set; }
         public virtual Check Check { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

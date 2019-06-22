@@ -28,7 +28,7 @@
         <TextBox Grid.Column="1" Grid.Row="1" Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Description" Name="txtDesc" Grid.RowSpan="2" TextWrapping="Wrap"/>
 
         <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Rank" Name="cbRank"/>
-        <CheckBox x:Name="admincb" Grid.Row="4" Grid.Column="1" Content="Mark as Admin" Margin="5,0,0,0"></CheckBox>
+        
         <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="Save" x:Name="btnAdd" IsDefault="True" HorizontalAlignment="Right" Width="100" Click="btnAdd_Click"/>
     </Grid>
     </Controls:MetroWindow>

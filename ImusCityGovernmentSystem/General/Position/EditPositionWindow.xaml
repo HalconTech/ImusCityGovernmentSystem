@@ -28,8 +28,6 @@
         <ComboBox Grid.Column="1" Grid.Row="4" Margin="5,2" Controls:TextBoxHelper.Watermark="Rank" Name="cbRank"/>
 
         <CheckBox Grid.Column="1" Grid.Row="5" Margin="5,2"  Name="chkActive" Content="Active" />
-
-        <CheckBox x:Name="admincb" Grid.Row="6" Grid.Column="1" Content="Mark as Admin" Margin="5,0,0,0"></CheckBox>
         <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Save" Name="btnUpdate"  Click="btnUpdate_Click" IsDefault="True" HorizontalAlignment="Right" Width="100"/>
     </Grid>
 </Controls:MetroWindow>
