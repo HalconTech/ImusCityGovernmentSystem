@@ -5,7 +5,7 @@
         BorderThickness="0"
         Title="Check Disbursement Module"   
         WindowTransitionsEnabled="False"  Height="639" Width="831.571"   ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"   TitleCaps="False"  >
+        WindowStartupLocation="CenterScreen"   TitleCaps="False" Loaded="MetroWindow_Loaded"  >
     <Grid Margin="45">
 
         <Grid.RowDefinitions>

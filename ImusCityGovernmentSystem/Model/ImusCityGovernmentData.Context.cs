@@ -41,7 +41,6 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<EmployeeStatu> EmployeeStatus { get; set; }
         public virtual DbSet<Fund> Funds { get; set; }
         public virtual DbSet<FundBank> FundBanks { get; set; }
-        public virtual DbSet<LicensingCode> LicensingCodes { get; set; }
         public virtual DbSet<Payee> Payees { get; set; }
         public virtual DbSet<PayeeRepresentative> PayeeRepresentatives { get; set; }
         public virtual DbSet<SecurityQuestionBank> SecurityQuestionBanks { get; set; }
@@ -60,6 +59,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeePosition> EmployeePositions { get; set; }
         public virtual DbSet<CustomerIdentificationCard> CustomerIdentificationCards { get; set; }
+        public virtual DbSet<LicensingCode> LicensingCodes { get; set; }
     
         public virtual ObjectResult<GetDisbursementVoucher_Result> GetDisbursementVoucher(Nullable<int> disbursementID)
         {

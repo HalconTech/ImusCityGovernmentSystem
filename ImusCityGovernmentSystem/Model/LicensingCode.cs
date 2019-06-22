@@ -19,5 +19,8 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<bool> IsActive { get; set; }
         public string MachineName { get; set; }
         public Nullable<bool> IsDemo { get; set; }
+        public Nullable<int> SubModuleID { get; set; }
+    
+        public virtual SubModule SubModule { get; set; }
     }
 }

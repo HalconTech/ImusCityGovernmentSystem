@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using ImusCityGovernmentSystem.Model;
 namespace ImusCityGovernmentSystem.Check_Disbursement
 {
     /// <summary>
@@ -119,6 +119,48 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             General.ControlNumber.ControlNumberList control = new General.ControlNumber.ControlNumberList();
             Mouse.OverrideCursor = null;
             control.ShowDialog();
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                LicensingCode license = db.LicensingCodes.FirstOrDefault(m => m.MachineName == Environment.MachineName && m.SubModule.Acronym == "CDS");
+
+                if (license == null)
+                {
+                    MessageBox.Show("This machine is not yet licensed. Please contact your administrator");
+                    LicenseCodeWindow lc = new LicenseCodeWindow();
+                    lc.Show();
+                    this.Close();
+                }
+                else if (license.ExpirationDate < DateTime.Now)
+                {
+                    MessageBox.Show("This license that have been issued to this machine is expired! Please input new license");
+                    LicenseCodeWindow lc = new LicenseCodeWindow();
+                    lc.Show();
+                    this.Close();
+                }
+                else
+                {
+                    if (license.IsDemo == true)
+                    {
+                        App.LicenseKey = license.LicenseKey;
+                        this.Title = "Check Disbursement Module (DEMO)";
+                    }
+                    else
+                    {
+                        App.LicenseKey = license.LicenseKey;
+                        this.Title = "Check Disbursement Module";
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
         }
     }
 }

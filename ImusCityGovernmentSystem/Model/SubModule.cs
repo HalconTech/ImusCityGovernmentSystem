@@ -18,6 +18,7 @@ namespace ImusCityGovernmentSystem.Model
         public SubModule()
         {
             this.SubModuleUsers = new HashSet<SubModuleUser>();
+            this.LicensingCodes = new HashSet<LicensingCode>();
         }
     
         public int SubModuleID { get; set; }
@@ -27,5 +28,7 @@ namespace ImusCityGovernmentSystem.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LicensingCode> LicensingCodes { get; set; }
     }
 }

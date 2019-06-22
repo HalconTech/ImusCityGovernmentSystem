@@ -140,14 +140,9 @@ namespace ImusCityGovernmentSystem
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (db.LicensingCodes.Find(App.LicenseKey).IsDemo == true)
-            {
-                demotb.Visibility = Visibility.Visible;
-            }
+        {           
             CheckUserAccess();
             LoadNotification();
-
         }
 
         public void CheckUserAccess()
