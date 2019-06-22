@@ -38,9 +38,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         }
         private void startcapturingbtn_Click(object sender, RoutedEventArgs e)
         {
-          
             webcam.Start();
-
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -53,10 +51,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
 
         public void LoadIdentificationCardType()
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                idtypecb.ItemsSource = db.IdentificationCardTypes.Where(m => IsActive == true).OrderBy(m => m.CardType).ToList();
+                idtypecb.ItemsSource = db.IdentificationCardTypes.Where(m => m.IsActive == true).OrderBy(m => m.CardType).ToList();
                 idtypecb.DisplayMemberPath = "CardType";
                 idtypecb.SelectedValuePath = "IdentificationCardTypeID";
             }
@@ -110,12 +108,12 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                     Mouse.OverrideCursor = null;
                     MessageBox.Show("Image was not captured");
                 }
-                else if(digitalsignatureimg.Source == null)
+                else if (digitalsignatureimg.Source == null)
                 {
                     Mouse.OverrideCursor = null;
                     MessageBox.Show("Signature was not captured");
                 }
-                else if(idtypecb.SelectedValue == null || String.IsNullOrEmpty(idcardnumbertb.Text))
+                else if (idtypecb.SelectedValue == null || String.IsNullOrEmpty(idcardnumbertb.Text))
                 {
                     MessageBox.Show("Please select identification card presented and id number");
                 }
@@ -176,28 +174,42 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
         {
             if (SystemClass.CheckConnection())
             {
-                ImusCityHallEntities db = new ImusCityHallEntities();
-                ImusCityGovernmentSystem.Model.Customer customer = new Customer();
-                customer.FirstName = firstnametb.Text;
-                customer.MiddleName = middlenametb.Text;
-                customer.LastName = lastnametb.Text;
-                customer.DateAdded = DateTime.Now;
-                customer.AddedBy = App.EmployeeID;
-                customer.Birthdate = birthdatedp.SelectedDate;
-                customer.CompleteAddress = completeaddresstb.Text;
-                customer.IsActive = true;
-                db.Customers.Add(customer);
-                db.SaveChanges();
-                MessageBox.Show("Data is saved. Please click the save button to continue the transaction");
-                customerId = customer.CustomerID;
-
-                var audit = new AuditTrailModel
+                if (idtypecb.SelectedValue == null || String.IsNullOrEmpty(idcardnumbertb.Text))
                 {
-                    Activity = "Adde new customer in the database CUSTOMER NAME: " + string.Join(" ", customer.FirstName, customer.MiddleName, customer.LastName),
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
-                SystemClass.InsertLog(audit);
+                    MessageBox.Show("Please select identification card presented and id number");
+                }
+                else
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    ImusCityGovernmentSystem.Model.Customer customer = new Customer();
+                    customer.FirstName = firstnametb.Text;
+                    customer.MiddleName = middlenametb.Text;
+                    customer.LastName = lastnametb.Text;
+                    customer.DateAdded = DateTime.Now;
+                    customer.AddedBy = App.EmployeeID;
+                    customer.Birthdate = birthdatedp.SelectedDate;
+                    customer.CompleteAddress = completeaddresstb.Text;
+                    customer.IsActive = true;
+                    db.Customers.Add(customer);
+
+                    CustomerIdentificationCard custCard = new CustomerIdentificationCard();
+                    custCard.CustomerID = customer.CustomerID;
+                    custCard.IdentificationCardTypeID = (int)idtypecb.SelectedValue;
+                    custCard.IdentificationNumber = idcardnumbertb.Text;
+                    db.CustomerIdentificationCards.Add(custCard);
+
+                    db.SaveChanges();
+                    MessageBox.Show("Data is saved. Please click the save button to continue the transaction");
+                    customerId = customer.CustomerID;
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Adde new customer in the database CUSTOMER NAME: " + string.Join(" ", customer.FirstName, customer.MiddleName, customer.LastName),
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+                    SystemClass.InsertLog(audit);
+                }
             }
             else
             {
@@ -223,8 +235,24 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 ImusCityGovernmentSystem.Model.Check check = db.Checks.Find(checkId);
                 check.Status = (int)CheckStatus.Released;
 
+                int cardId = (int)idtypecb.SelectedValue;
+                CustomerIdentificationCard customerCard = db.CustomerIdentificationCards.FirstOrDefault(m => m.IdentificationCardTypeID == cardId && m.CustomerID == Id && m.IdentificationCardType.IsActive == true);
+                if (customerCard != null)
+                {
+                   
+                }
+                else
+                {
+                    CustomerIdentificationCard custCard = new CustomerIdentificationCard();
+                    custCard.CustomerID = Id;
+                    custCard.IdentificationCardTypeID = (int)idtypecb.SelectedValue;
+                    custCard.IdentificationNumber = idcardnumbertb.Text;
+                    db.CustomerIdentificationCards.Add(custCard);
+                }
+
                 db.SaveChanges();
-                MessageBox.Show("Transaction completed");
+                MessageBox.Show("Check has been successfully released");
+                LoadIdentificationCardType();
 
                 var audit = new AuditTrailModel
                 {
@@ -317,6 +345,22 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 lastnametb.Text = customer.LastName;
                 birthdatedp.SelectedDate = customer.Birthdate;
                 completeaddresstb.Text = customer.CompleteAddress;
+
+                if (db.CheckReleases.Any(m => m.CustomerID == customer.CustomerID))
+                {
+                    CheckRelease releasedCheck = db.CheckReleases.Where(m => m.CustomerID == customer.CustomerID).OrderByDescending(m => m.CheckReleaseID).FirstOrDefault();
+                    CustomerIdentificationCard customerCard = db.CustomerIdentificationCards.FirstOrDefault(m => m.IdentificationCardTypeID == releasedCheck.IdentificationCardTypeID && m.CustomerID == customer.CustomerID && m.IdentificationCardType.IsActive == true);
+                    if (customerCard != null)
+                    {
+                        idtypecb.SelectedValue = customerCard.IdentificationCardTypeID;
+                        idcardnumbertb.Text = customerCard.IdentificationNumber;
+                    }
+                    else
+                    {
+                        idtypecb.SelectedValue = releasedCheck.IdentificationCardTypeID;
+                        idcardnumbertb.Text = releasedCheck.IdentificationCardNumber;
+                    }
+                }
             }
             else
             {

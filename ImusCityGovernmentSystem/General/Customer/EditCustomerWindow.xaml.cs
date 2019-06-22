@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
+using ImusCityGovernmentSystem.General.Customer.Model;
 namespace ImusCityGovernmentSystem.General.Customer
 {
     /// <summary>
@@ -20,12 +21,50 @@ namespace ImusCityGovernmentSystem.General.Customer
     /// </summary>
     public partial class EditCustomerWindow : MetroWindow
     {
+        List<IdentificationCardModel> gd = new List<IdentificationCardModel>();
         public int id;
         public EditCustomerWindow()
         {
             InitializeComponent();
         }
 
+        public void LoadIdentificationCards(int id)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                gd.Clear();
+                db = new ImusCityHallEntities();
+                var identicationCards = db.IdentificationCardTypes.Where(m => m.IsActive == true).OrderBy(m => m.CardType).ToList();
+                foreach (var dr in identicationCards)
+                {
+                    bool selectedCard = false;
+                    string cardNumber = string.Empty;
+                    if (db.CustomerIdentificationCards.Any(m => m.CustomerID == id && m.IdentificationCardTypeID == dr.IdentificationCardTypeID))
+                    {
+                        selectedCard = true;
+                        cardNumber = db.CustomerIdentificationCards.FirstOrDefault(m => m.CustomerID == id && m.IdentificationCardTypeID == dr.IdentificationCardTypeID).IdentificationNumber;
+                    }
+                    IdentificationCardModel i = new IdentificationCardModel()
+                    {
+                        Name = dr.CardType,
+                        Id = dr.IdentificationCardTypeID,
+                        IsSelected = selectedCard,
+                        CardNumber = cardNumber
+                    };
+                    gd.Add(i);
+                }
+
+                customercardlb.ItemsSource = gd;
+                customercardlb.SelectedValuePath = "Id";
+                customercardlb.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+
+        }
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             if (SystemClass.CheckConnection())
@@ -37,6 +76,7 @@ namespace ImusCityGovernmentSystem.General.Customer
                 lastnametb.Text = customer.LastName;
                 bdaydp.SelectedDate = customer.Birthdate;
                 compaddresstb.Text = customer.CompleteAddress;
+                LoadIdentificationCards(customer.CustomerID);
             }
             else
             {
@@ -76,6 +116,35 @@ namespace ImusCityGovernmentSystem.General.Customer
                     customer.CompleteAddress = compaddresstb.Text;
                     customer.Birthdate = bdaydp.SelectedDate;
                     customer.IsActive = true;
+
+                    foreach (var list in gd.Where(m => m.IsSelected == true))
+                    {
+                        if (db.CustomerIdentificationCards.Any(m => m.CustomerID == customer.CustomerID && m.IdentificationCardTypeID == list.Id))
+                        {
+
+                        }
+                        else
+                        {
+                            CustomerIdentificationCard custCard = new CustomerIdentificationCard();
+                            IdentificationCardType card = db.IdentificationCardTypes.Find(list.Id);
+                            custCard.CustomerID = customer.CustomerID;
+                            custCard.IdentificationCardTypeID = list.Id;
+                            custCard.IdentificationNumber = list.CardNumber;
+                            db.CustomerIdentificationCards.Add(custCard);
+                            db.SaveChanges();
+                        }
+                    }
+
+                    foreach (var list in gd.Where(m => m.IsSelected == false))
+                    {
+                        if (db.CustomerIdentificationCards.Any(m => m.CustomerID == customer.CustomerID && m.IdentificationCardTypeID == list.Id))
+                        {
+                            CustomerIdentificationCard custCard = db.CustomerIdentificationCards.FirstOrDefault(m => m.CustomerID == customer.CustomerID && m.IdentificationCardTypeID == list.Id);
+                            db.CustomerIdentificationCards.Remove(custCard);
+                            db.SaveChanges();
+                        }
+                    }
+
                     db.SaveChanges();
                     MessageBox.Show("Customer updated");
 
@@ -87,7 +156,7 @@ namespace ImusCityGovernmentSystem.General.Customer
                     };
                     SystemClass.InsertLog(audit);
                 }
-                
+
             }
             else
             {

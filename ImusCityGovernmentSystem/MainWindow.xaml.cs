@@ -96,7 +96,7 @@ namespace ImusCityGovernmentSystem
         {
             Mouse.OverrideCursor = Cursors.Wait;
             General.Department.DepartmentListWindow dept = new General.Department.DepartmentListWindow();
-            dept.Show();
+            dept.ShowDialog();
             Mouse.OverrideCursor = null;
         }
 
@@ -104,7 +104,7 @@ namespace ImusCityGovernmentSystem
         {
             Mouse.OverrideCursor = Cursors.Wait;
             General.Division.DivisionListWindow division = new General.Division.DivisionListWindow();
-            division.Show();
+            division.ShowDialog();
             Mouse.OverrideCursor = null;
         }
 
@@ -200,7 +200,7 @@ namespace ImusCityGovernmentSystem
         {
             Mouse.OverrideCursor = Cursors.Wait;
             ImusCityGovernmentSystem.General.Customer.CustomerListWindow customer = new General.Customer.CustomerListWindow();
-            customer.Show();
+            customer.ShowDialog();
             Mouse.OverrideCursor = null;
         }
 
@@ -208,7 +208,7 @@ namespace ImusCityGovernmentSystem
         {
             Mouse.OverrideCursor = Cursors.Wait;
             ImusCityGovernmentSystem.General.IdentificationCard.IdentificationCardListWindow card = new General.IdentificationCard.IdentificationCardListWindow();
-            card.Show();
+            card.ShowDialog();
             Mouse.OverrideCursor = null;
         }
     }

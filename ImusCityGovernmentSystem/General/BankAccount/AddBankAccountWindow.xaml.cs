@@ -52,10 +52,6 @@ namespace ImusCityGovernmentSystem.General.BankAccount
                 {
                     MessageBox.Show("Please input starting balance");
                 }
-                else if(String.IsNullOrEmpty(currentbalancetb.Text))
-                {
-                    MessageBox.Show("Please input current balance");
-                }
                 else if(String.IsNullOrEmpty(advicenumbertb.Text))
                 {
                     MessageBox.Show("Please input advice number");
@@ -70,7 +66,7 @@ namespace ImusCityGovernmentSystem.General.BankAccount
                     account.FundID = (int)fundcb.SelectedValue;
                     account.BankID = (int)bankcb.SelectedValue;
                     account.AccountNumber = accountnumbertb.Text;
-                    account.CurrentBalance = Convert.ToDecimal(currentbalancetb.Text);
+                    account.CurrentBalance = Convert.ToDecimal(startingbalancetb.Text);
                     account.StartingBalance = Convert.ToDecimal(startingbalancetb.Text);
                     account.IsActive = true;
                     account.DateAdded = DateTime.Now;

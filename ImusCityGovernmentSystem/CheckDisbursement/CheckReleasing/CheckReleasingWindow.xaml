@@ -45,6 +45,54 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
+            <TabItem Header="Check Details" FontSize="16">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Center" Text="Check Number"></TextBlock>
+                    <ComboBox IsEditable="True" Grid.Row="1" VerticalContentAlignment="Center" Name="checklistcb" SelectionChanged="checklistcb_SelectionChanged" FontSize="16"></ComboBox>
+                    <GroupBox Grid.Row="2" Header="Check Details" Margin="0,5,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Voucher Number:"></TextBlock>
+                            <TextBlock Grid.Column="1" Name="voucherNumbertb"></TextBlock>
+                            <TextBlock Grid.Row="1" Text="Check Number:"></TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Name="checknumbertb"></TextBlock>
+                            <TextBlock Grid.Row="2" Text="Check Date:"></TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Name="checkdatetb"></TextBlock>
+                            <TextBlock Grid.Row="3" Text="Company Name:"></TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Name="companynametb"></TextBlock>
+                            <TextBlock Grid.Row="4" Text="Check Description:"></TextBlock>
+                            <TextBlock  Grid.Row="4" Grid.Column="1" Grid.RowSpan="2" Name="checkdescriptiontb"></TextBlock>
+                            <TextBlock Grid.Row="6" Text="Bank/Fund"></TextBlock>
+                            <TextBlock Grid.Row="6" Grid.Column="1"></TextBlock>
+                            <TextBlock Grid.Column="1" Grid.Row="6" Name="banktb"></TextBlock>
+                            <TextBlock Grid.Row="8" Text="Amount"></TextBlock>
+                            <TextBlock Grid.Row="8" Grid.Column="1" Name="amountb"></TextBlock>
+
+
+
+
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
             <TabItem Header="Personal Information" FontSize="16">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
@@ -79,7 +127,7 @@
                     <TextBlock Grid.Row="8" Text="Birthdate"></TextBlock>
                     <DatePicker Grid.Row="9" VerticalContentAlignment="Center" Name="birthdatedp"></DatePicker>
                     <TextBlock Grid.Row="10" Text="Identification Card Preseneted"></TextBlock>
-                    <ComboBox Grid.Row="11" VerticalContentAlignment="Center" Name="idtypecb"></ComboBox>
+                    <ComboBox Grid.Row="11" VerticalContentAlignment="Center" Name="idtypecb" Margin="0,5,0,26" Grid.RowSpan="2"></ComboBox>
                     <TextBlock Grid.Row="12" Text="ID Number"></TextBlock>
                     <TextBox Grid.Row="13" Name="idcardnumbertb" VerticalContentAlignment="Center"></TextBox>
                     <Grid Grid.Row="43" Margin="0,5,0,0">
@@ -147,54 +195,7 @@
                     <Button Content="Clear Content" Name="clearsigbtn" Grid.Row="1" Grid.Column="1" Margin="2.5,0,0,0" Click="clearsigbtn_Click"></Button>
                 </Grid>
             </TabItem>
-            <TabItem Header="Check Details" FontSize="16">
-                <Grid Margin="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock VerticalAlignment="Center" Text="Check Number"></TextBlock>
-                    <ComboBox IsEditable="True" Grid.Row="1" VerticalContentAlignment="Center" Name="checklistcb" SelectionChanged="checklistcb_SelectionChanged" FontSize="16"></ComboBox>
-                    <GroupBox Grid.Row="2" Header="Check Details" Margin="0,5,0,0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="140"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Voucher Number:"></TextBlock>
-                            <TextBlock Grid.Column="1" Name="voucherNumbertb"></TextBlock>
-                            <TextBlock Grid.Row="1" Text="Check Number:"></TextBlock>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Name="checknumbertb"></TextBlock>
-                            <TextBlock Grid.Row="2" Text="Check Date:"></TextBlock>
-                            <TextBlock Grid.Row="2" Grid.Column="1" Name="checkdatetb"></TextBlock>
-                            <TextBlock Grid.Row="3" Text="Company Name:"></TextBlock>
-                            <TextBlock Grid.Row="3" Grid.Column="1" Name="companynametb"></TextBlock>
-                            <TextBlock Grid.Row="4" Text="Check Description:"></TextBlock>
-                            <TextBlock  Grid.Row="4" Grid.Column="1" Grid.RowSpan="2" Name="checkdescriptiontb"></TextBlock>
-                            <TextBlock Grid.Row="6" Text="Bank/Fund"></TextBlock>
-                            <TextBlock Grid.Row="6" Grid.Column="1"></TextBlock>
-                            <TextBlock Grid.Column="1" Grid.Row="6" Name="banktb"></TextBlock>
-                            <TextBlock Grid.Row="8" Text="Amount"></TextBlock>
-                            <TextBlock Grid.Row="8" Grid.Column="1" Name="amountb"></TextBlock>
-
-
-
-
-                        </Grid>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
+      
         </TabControl>
         <Button x:Name="savebtn" Grid.Row="1" Content="Save" HorizontalAlignment="Left" Width="100" Click="savebtn_Click" Margin="487,0,0,0"></Button>
     </Grid>

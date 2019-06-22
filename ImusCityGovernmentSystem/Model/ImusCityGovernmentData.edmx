@@ -165,6 +165,15 @@
           <Property Name="Birthdate" Type="date" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <EntityType Name="CustomerIdentificationCard">
+          <Key>
+            <PropertyRef Name="CustomerIdentificationCardID" />
+          </Key>
+          <Property Name="CustomerIdentificationCardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="IdentificationCardTypeID" Type="int" />
+          <Property Name="IdentificationNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="DepartmentID" />
@@ -618,6 +627,30 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CustomerIdentificationCard_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="CustomerIdentificationCard" Type="Self.CustomerIdentificationCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CustomerIdentificationCard">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerIdentificationCard_IdentificationCardType">
+          <End Role="IdentificationCardType" Type="Self.IdentificationCardType" Multiplicity="0..1" />
+          <End Role="CustomerIdentificationCard" Type="Self.CustomerIdentificationCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IdentificationCardType">
+              <PropertyRef Name="IdentificationCardTypeID" />
+            </Principal>
+            <Dependent Role="CustomerIdentificationCard">
+              <PropertyRef Name="IdentificationCardTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -897,6 +930,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="CheckRelease" EntityType="Self.CheckRelease" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ControlNumber" EntityType="Self.ControlNumber" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerIdentificationCard" EntityType="Self.CustomerIdentificationCard" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disbursement" EntityType="Self.Disbursement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
@@ -989,6 +1023,14 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <AssociationSet Name="FK_Customer_Employee" Association="Self.FK_Customer_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerIdentificationCard_Customer" Association="Self.FK_CustomerIdentificationCard_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerIdentificationCard" EntitySet="CustomerIdentificationCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerIdentificationCard_IdentificationCardType" Association="Self.FK_CustomerIdentificationCard_IdentificationCardType">
+            <End Role="IdentificationCardType" EntitySet="IdentificationCardType" />
+            <End Role="CustomerIdentificationCard" EntitySet="CustomerIdentificationCard" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1272,6 +1314,15 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <AssociationSet Name="FK_EmployeePosition_EmployeeRank" Association="ImusCityHallModel.FK_EmployeePosition_EmployeeRank">
             <End Role="EmployeeRank" EntitySet="EmployeeRanks" />
             <End Role="EmployeePosition" EntitySet="EmployeePositions" />
+          </AssociationSet>
+          <EntitySet Name="CustomerIdentificationCards" EntityType="ImusCityHallModel.CustomerIdentificationCard" />
+          <AssociationSet Name="FK_CustomerIdentificationCard_Customer" Association="ImusCityHallModel.FK_CustomerIdentificationCard_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CustomerIdentificationCard" EntitySet="CustomerIdentificationCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerIdentificationCard_IdentificationCardType" Association="ImusCityHallModel.FK_CustomerIdentificationCard_IdentificationCardType">
+            <End Role="IdentificationCardType" EntitySet="IdentificationCardTypes" />
+            <End Role="CustomerIdentificationCard" EntitySet="CustomerIdentificationCards" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetDisbursementVoucher_Result">
@@ -1840,6 +1891,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_Customer" FromRole="Customer" ToRole="CheckRelease" />
           <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_Customer_Employee" FromRole="Customer" ToRole="Employee" />
+          <NavigationProperty Name="CustomerIdentificationCards" Relationship="ImusCityHallModel.FK_CustomerIdentificationCard_Customer" FromRole="Customer" ToRole="CustomerIdentificationCard" />
         </EntityType>
         <EntityType Name="ControlNumber">
           <Key>
@@ -1962,6 +2014,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="DateAdded" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CheckReleases" Relationship="ImusCityHallModel.FK_CheckRelease_IdentificationCardType" FromRole="IdentificationCardType" ToRole="CheckRelease" />
+          <NavigationProperty Name="CustomerIdentificationCards" Relationship="ImusCityHallModel.FK_CustomerIdentificationCard_IdentificationCardType" FromRole="IdentificationCardType" ToRole="CustomerIdentificationCard" />
         </EntityType>
         <Association Name="FK_CheckRelease_IdentificationCardType">
           <End Type="ImusCityHallModel.IdentificationCardType" Role="IdentificationCardType" Multiplicity="0..1" />
@@ -2260,6 +2313,41 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Principal>
             <Dependent Role="EmployeePosition">
               <PropertyRef Name="EmployeeRankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CustomerIdentificationCard">
+          <Key>
+            <PropertyRef Name="CustomerIdentificationCardID" />
+          </Key>
+          <Property Name="CustomerIdentificationCardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="IdentificationCardTypeID" Type="Int32" />
+          <Property Name="IdentificationNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="ImusCityHallModel.FK_CustomerIdentificationCard_Customer" FromRole="CustomerIdentificationCard" ToRole="Customer" />
+          <NavigationProperty Name="IdentificationCardType" Relationship="ImusCityHallModel.FK_CustomerIdentificationCard_IdentificationCardType" FromRole="CustomerIdentificationCard" ToRole="IdentificationCardType" />
+        </EntityType>
+        <Association Name="FK_CustomerIdentificationCard_Customer">
+          <End Type="ImusCityHallModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CustomerIdentificationCard" Role="CustomerIdentificationCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CustomerIdentificationCard">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerIdentificationCard_IdentificationCardType">
+          <End Type="ImusCityHallModel.IdentificationCardType" Role="IdentificationCardType" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.CustomerIdentificationCard" Role="CustomerIdentificationCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IdentificationCardType">
+              <PropertyRef Name="IdentificationCardTypeID" />
+            </Principal>
+            <Dependent Role="CustomerIdentificationCard">
+              <PropertyRef Name="IdentificationCardTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2778,6 +2866,16 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="EmployeeRankID" ColumnName="EmployeeRankID" />
                 <ScalarProperty Name="EmployeePositionID" ColumnName="EmployeePositionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerIdentificationCards">
+            <EntityTypeMapping TypeName="ImusCityHallModel.CustomerIdentificationCard">
+              <MappingFragment StoreEntitySet="CustomerIdentificationCard">
+                <ScalarProperty Name="IdentificationNumber" ColumnName="IdentificationNumber" />
+                <ScalarProperty Name="IdentificationCardTypeID" ColumnName="IdentificationCardTypeID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerIdentificationCardID" ColumnName="CustomerIdentificationCardID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

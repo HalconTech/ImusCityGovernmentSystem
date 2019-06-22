@@ -52,8 +52,8 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <CheckBox x:Name="checkcb" Content="Check"></CheckBox>
-                <CheckBox x:Name="cashcb" Grid.Column="1" Content="Cash"></CheckBox>
-                <CheckBox x:Name="otherscb" Grid.Column="2" Content="Others"></CheckBox>
+                <CheckBox Visibility="Hidden" x:Name="cashcb" Grid.Column="1" Content="Cash"></CheckBox>
+                <CheckBox Visibility="Hidden" x:Name="otherscb" Grid.Column="2" Content="Others"></CheckBox>
             </Grid>
             <TextBlock Grid.Row="2" Text="Payee:" FontWeight="Bold"></TextBlock>
             <TextBlock x:Name="payeetb" Grid.ColumnSpan="3" Grid.Row="2" Grid.Column="1"/>

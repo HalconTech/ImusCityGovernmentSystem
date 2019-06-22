@@ -18,6 +18,7 @@ namespace ImusCityGovernmentSystem.Model
         public IdentificationCardType()
         {
             this.CheckReleases = new HashSet<CheckRelease>();
+            this.CustomerIdentificationCards = new HashSet<CustomerIdentificationCard>();
         }
     
         public int IdentificationCardTypeID { get; set; }
@@ -27,5 +28,7 @@ namespace ImusCityGovernmentSystem.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckRelease> CheckReleases { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerIdentificationCard> CustomerIdentificationCards { get; set; }
     }
 }

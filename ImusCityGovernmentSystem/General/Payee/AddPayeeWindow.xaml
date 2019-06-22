@@ -52,7 +52,6 @@
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="editbtn" Header="Edit Payee Representative" Click="editbtn_Click"/>
-               
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.ItemTemplate>

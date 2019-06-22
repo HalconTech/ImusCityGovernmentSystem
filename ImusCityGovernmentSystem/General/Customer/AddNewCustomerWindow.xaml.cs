@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
 using MahApps.Metro.Controls;
-
+using ImusCityGovernmentSystem.General.Customer.Model;
 namespace ImusCityGovernmentSystem.General.Customer
 {
     /// <summary>
@@ -21,9 +21,39 @@ namespace ImusCityGovernmentSystem.General.Customer
     /// </summary>
     public partial class AddNewCustomerWindow : MetroWindow
     {
+        List<IdentificationCardModel> gd = new List<IdentificationCardModel>();
         public AddNewCustomerWindow()
         {
             InitializeComponent();
+        }
+
+        public void LoadIdentificationCards()
+        {
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                gd.Clear();
+                db = new ImusCityHallEntities();
+                var identificationCards = db.IdentificationCardTypes.Where(m => m.IsActive == true).OrderBy(m => m.CardType).ToList();
+                foreach (var dr in identificationCards)
+                {
+                    IdentificationCardModel i = new IdentificationCardModel()
+                    {
+                        Name = dr.CardType.ToString(),
+                        Id = dr.IdentificationCardTypeID
+                    };
+                    gd.Add(i);
+                }
+
+                customercardlb.ItemsSource = gd;
+                customercardlb.SelectedValuePath = "Id";
+                customercardlb.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+
         }
 
         private void savebtn_Click(object sender, RoutedEventArgs e)
@@ -59,6 +89,17 @@ namespace ImusCityGovernmentSystem.General.Customer
                     customer.Birthdate = bdaydp.SelectedDate;
                     customer.IsActive = true;
                     db.Customers.Add(customer);
+
+                 
+                    foreach (var list in gd.Where(m => m.IsSelected == true))
+                    {
+                        CustomerIdentificationCard custCard = new CustomerIdentificationCard();
+                        IdentificationCardType card = db.IdentificationCardTypes.Find(list.Id);
+                        custCard.CustomerID = customer.CustomerID;
+                        custCard.IdentificationCardTypeID = list.Id;
+                        custCard.IdentificationNumber = list.CardNumber;
+                        db.CustomerIdentificationCards.Add(custCard);
+                    }
                     db.SaveChanges();
                     MessageBox.Show("Customer added");
 
@@ -69,6 +110,7 @@ namespace ImusCityGovernmentSystem.General.Customer
                         EmployeeID = App.EmployeeID
                     };
                     SystemClass.InsertLog(audit);
+                    LoadIdentificationCards();
                     ClearTextBox();
                 }
               
@@ -87,6 +129,11 @@ namespace ImusCityGovernmentSystem.General.Customer
             lastnametb.Clear();
             bdaydp.Text = null;
             compaddresstb.Clear();
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadIdentificationCards();
         }
     }
 }

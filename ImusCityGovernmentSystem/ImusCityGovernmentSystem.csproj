@@ -270,6 +270,7 @@
     </Compile>
     <Compile Include="General\Customer\Model\CustomerEntity.cs" />
     <Compile Include="General\Customer\Model\CustomerTransactionsEntity.cs" />
+    <Compile Include="General\Customer\Model\IdentificationCardModel.cs" />
     <Compile Include="General\Customer\SearchCustomerWindow.xaml.cs">
       <DependentUpon>SearchCustomerWindow.xaml</DependentUpon>
     </Compile>
@@ -379,6 +380,9 @@
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Customer.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerIdentificationCard.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Department.cs">

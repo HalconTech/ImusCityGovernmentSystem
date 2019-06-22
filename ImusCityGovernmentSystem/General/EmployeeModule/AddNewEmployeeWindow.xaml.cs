@@ -25,7 +25,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
     /// </summary>
     public partial class AddNewEmployeeWindow : MetroWindow
     {
-      
+
         public string newimage;
         public AddNewEmployeeWindow()
         {
@@ -42,13 +42,19 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
         //Insertion of new employee information
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 Mouse.OverrideCursor = Cursors.Wait;
                 try
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();
                     Employee employee = new Employee();
+
+                    string birthdateInput = birthdatedp.Text;
+                    DateTime returnBirthDate;
+
+                    string dateHiredInput = datehiredp.Text;
+                    DateTime returnDateHired;
 
                     if (db.Employees.Where(m => m.EmployeeNo == employeenotb.Text).FirstOrDefault() != null)
                     {
@@ -120,6 +126,14 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                     {
                         MessageBox.Show("Please enter mobile number");
                         Mouse.OverrideCursor = null;
+                    }
+                    else if (!DateTime.TryParse(birthdateInput, out returnBirthDate))
+                    {
+                        MessageBox.Show("Please enter valid date format for birthdate (mm/dd/yyyy)");
+                    }
+                    else if(!DateTime.TryParse(dateHiredInput, out returnDateHired))
+                    {
+                        MessageBox.Show("Please enter valid date format for date hired (mm/dd/yyyy)");
                     }
                     else
                     {
@@ -238,7 +252,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-           
+
 
         }
 
@@ -258,7 +272,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             namesuffixtb.Text = null;
             birthdatedp.SelectedDate = null;
             birthplacetb.Text = null;
-            
+
 
 
             citizenshiptb.Text = null;
@@ -283,7 +297,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
         }
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 divisioncb.ItemsSource = db.Divisions.Where(m => m.IsActive == true).OrderBy(m => m.DivisionCode).ToList();
@@ -308,7 +322,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-            
+
         }
 
         private void browsebtn_Click(object sender, RoutedEventArgs e)

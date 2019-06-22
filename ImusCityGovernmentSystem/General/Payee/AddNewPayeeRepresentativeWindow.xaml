@@ -33,13 +33,13 @@
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="First Name"></TextBlock>
+        <TextBlock Text="First Name*"></TextBlock>
         <TextBox Grid.Row="1" VerticalContentAlignment="Center" Name="fnametb"></TextBox>
         <TextBlock Text="Middle Name" Grid.Row="2"></TextBlock>
         <TextBox Grid.Row="3" Name="mnametb" VerticalContentAlignment="Center"></TextBox>
-        <TextBlock Grid.Row="4" Text="Last Name"></TextBlock>
+        <TextBlock Grid.Row="4" Text="Last Name*"></TextBlock>
         <TextBox Grid.Row="5" VerticalContentAlignment="Center" Name="lnametb"></TextBox>
-        <TextBlock Grid.Row="6" Text="Mobile No."></TextBlock>
+        <TextBlock Grid.Row="6" Text="Mobile No.*"></TextBlock>
         <TextBox Grid.Row="7" VerticalContentAlignment="Center" Name="mobilenotb"></TextBox>
         <TextBlock Text="Landline No." Grid.Row="8"></TextBlock>
         <TextBox Name="landlinetb" Grid.Row="9" VerticalContentAlignment="Center"></TextBox>

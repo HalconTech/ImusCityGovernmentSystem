@@ -41,6 +41,10 @@ namespace ImusCityGovernmentSystem.General.Payee
                     Mouse.OverrideCursor = null;
                     MessageBox.Show("Please input first name and last name field!");
                 }
+                else if(String.IsNullOrEmpty(mobilenotb.Text))
+                {
+                    MessageBox.Show("Please input mobile number");
+                }
                 else
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();

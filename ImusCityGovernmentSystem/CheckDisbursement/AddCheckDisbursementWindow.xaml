@@ -92,7 +92,7 @@
                 <ComboBox IsEditable="True" VerticalContentAlignment="Center" Name="payeecb" Grid.Column="1" SelectionChanged="payeecb_SelectionChanged"></ComboBox>
                 <TextBlock  Text="Payee Representative:" Grid.Column="2" FontWeight="Bold" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
                 <ComboBox IsEditable="True" VerticalContentAlignment="Center" Name="payeerepcb" Grid.Column="3"></ComboBox>
-                <CheckBox x:Name="optionpayeecb" Grid.Row="1" Grid.ColumnSpan="4" Content="If payee is one time use only, tick check box and fill out the field" Foreground="Red"/>
+                <CheckBox x:Name="optionpayeecb" Grid.Row="1" Grid.ColumnSpan="4" Content="If payee is one time use only, tick check box and fill out the field" Foreground="Red" Checked="optionpayeecb_Checked" Unchecked="optionpayeecb_Unchecked"/>
                 <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.ColumnSpan="4" Name="optionalpayee"></TextBox>
             </Grid>
 

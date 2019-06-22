@@ -74,6 +74,9 @@
         <AssociationConnector Association="ImusCityHallModel.FK_SecurityQuestionUser_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_SubModuleUser_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_EmployeePosition_EmployeeRank" />
+        <EntityTypeShape EntityType="ImusCityHallModel.CustomerIdentificationCard" Width="1.5" PointX="14" PointY="13.75" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CustomerIdentificationCard_Customer" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CustomerIdentificationCard_IdentificationCardType" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

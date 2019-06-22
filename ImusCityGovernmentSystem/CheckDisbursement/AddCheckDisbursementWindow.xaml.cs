@@ -28,6 +28,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            optionalpayee.IsEnabled = false;
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
@@ -41,6 +42,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     paymenttypecb.Items.Add(item);
                 }
                 paymenttypecb.SelectedIndex = 0;
+                paymenttypecb.IsEnabled = false;
 
                 departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentName).ToList();
                 departmentcb.DisplayMemberPath = "DepartmentName";
@@ -266,6 +268,42 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
+        }
+
+        private void optionpayeecb_Checked(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                payeecb.ItemsSource = db.Payees.Where(m => m.IsActive == true).OrderBy(m => m.CompanyName).ToList();
+                payeecb.DisplayMemberPath = "CompanyName";
+                payeecb.SelectedValuePath = "PayeeID";
+                payeecb.IsEnabled = false;
+                optionalpayee.IsEnabled = true;
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+        }
+
+        private void optionpayeecb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                payeecb.ItemsSource = db.Payees.Where(m => m.IsActive == true).OrderBy(m => m.CompanyName).ToList();
+                payeecb.DisplayMemberPath = "CompanyName";
+                payeecb.SelectedValuePath = "PayeeID";
+                payeecb.IsEnabled = true;
+                optionalpayee.IsEnabled = false;
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+          
+
         }
     }
 }
