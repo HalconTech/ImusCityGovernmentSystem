@@ -32,23 +32,31 @@ namespace ImusCityGovernmentSystem.General.IdentificationCard
             {
                 if(!String.IsNullOrEmpty(cardnametb.Text))
                 {
+              
                     ImusCityHallEntities db = new ImusCityHallEntities();
-                    IdentificationCardType card = new IdentificationCardType();
-                    card.CardType = cardnametb.Text;
-                    card.IsActive = true;
-                    card.DateAdded = DateTime.Now;
-                    db.IdentificationCardTypes.Add(card);
-                    db.SaveChanges();
-
-                    var audit = new AuditTrailModel
+                    if(db.IdentificationCardTypes.Any(m => m.CardType == cardnametb.Text))
                     {
-                        Activity = "Added new identification card type in the database. CARD NAME: " + cardnametb.Text,
-                        ModuleName = this.GetType().Name,
-                        EmployeeID = App.EmployeeID
-                    };
+                        MessageBox.Show("Card name is already used");
+                    }
+                    else
+                    {
+                        IdentificationCardType card = new IdentificationCardType();
+                        card.CardType = cardnametb.Text;
+                        card.IsActive = true;
+                        card.DateAdded = DateTime.Now;
+                        db.IdentificationCardTypes.Add(card);
+                        db.SaveChanges();
 
-                    SystemClass.InsertLog(audit);
-                    MessageBox.Show("New type of card inserted in the database");
+                        var audit = new AuditTrailModel
+                        {
+                            Activity = "Added new identification card type in the database. CARD NAME: " + cardnametb.Text,
+                            ModuleName = this.GetType().Name,
+                            EmployeeID = App.EmployeeID
+                        };
+
+                        SystemClass.InsertLog(audit);
+                        MessageBox.Show("New type of card inserted in the database");
+                    }
                 }
                 else
                 {
