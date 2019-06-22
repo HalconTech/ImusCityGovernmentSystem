@@ -36,6 +36,7 @@ namespace ImusCityGovernmentSystem
                 {
                     license.MachineName = Environment.MachineName;
                     db.SaveChanges();
+                    MessageBox.Show("License key applied");
                     App.LicenseKey = licensekey.Text;
                     this.Close();
                 }
