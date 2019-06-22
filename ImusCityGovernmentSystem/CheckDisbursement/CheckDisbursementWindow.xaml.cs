@@ -132,14 +132,14 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 {
                     MessageBox.Show("This machine is not yet licensed. Please contact your administrator");
                     LicenseCodeWindow lc = new LicenseCodeWindow();
-                    lc.Show();
+                    lc.ShowDialog();
                     this.Close();
                 }
                 else if (license.ExpirationDate < DateTime.Now)
                 {
                     MessageBox.Show("This license that have been issued to this machine is expired! Please input new license");
                     LicenseCodeWindow lc = new LicenseCodeWindow();
-                    lc.Show();
+                    lc.ShowDialog();
                     this.Close();
                 }
                 else
