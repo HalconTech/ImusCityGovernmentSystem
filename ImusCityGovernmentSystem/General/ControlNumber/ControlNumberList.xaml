@@ -91,7 +91,6 @@
                     <DataGridTextColumn Header="Start" Width="*"  Binding="{Binding BeginingControlNo}"/>
                     <DataGridTextColumn Header="End" Width="*"  Binding="{Binding EndingControlNo}"/>
                     <DataGridTextColumn Header="Next" Width="*"  Binding="{Binding NextControlNo}"/>
-                    <DataGridTextColumn Header="isActive" Width="*"  Binding="{Binding Active}"/>
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>

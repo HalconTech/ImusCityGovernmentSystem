@@ -118,7 +118,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             Mouse.OverrideCursor = Cursors.Wait;
             General.ControlNumber.ControlNumberList control = new General.ControlNumber.ControlNumberList();
             Mouse.OverrideCursor = null;
-            control.Show();
+            control.ShowDialog();
         }
     }
 }

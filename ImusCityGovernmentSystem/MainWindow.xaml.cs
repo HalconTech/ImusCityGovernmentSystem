@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using ImusCityGovernmentSystem.Model;
+
+
 namespace ImusCityGovernmentSystem
 {
     /// <summary>
@@ -21,8 +23,10 @@ namespace ImusCityGovernmentSystem
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+
         ImusCityHallEntities db = new ImusCityHallEntities();
         public string Password;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +36,11 @@ namespace ImusCityGovernmentSystem
                 Employee employee = db.Employees.Find(App.EmployeeID);
                 empname.Content = "Welcome! " + employee.FirstName + " " + employee.LastName;
             }
+            
+        }
 
+        public void LoadNotification()
+        {
             var notif = db.GetCheckExpiryNotice().ToList();
 
             if (notif.Count != 0)
@@ -41,14 +49,13 @@ namespace ImusCityGovernmentSystem
                 btnNotif.Visibility = Visibility.Visible;
                 lvNotif.ItemsSource = notif;
 
+                    
+
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvNotif.ItemsSource);
                 PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupName");
                 view.GroupDescriptions.Add(groupDescription);
+                
             }
-
-
-
-
         }
 
         private void empmgntbtn_Click(object sender, RoutedEventArgs e)
@@ -139,7 +146,7 @@ namespace ImusCityGovernmentSystem
                 demotb.Visibility = Visibility.Visible;
             }
             CheckUserAccess();
-
+            LoadNotification();
 
         }
 
@@ -210,6 +217,10 @@ namespace ImusCityGovernmentSystem
             ImusCityGovernmentSystem.General.IdentificationCard.IdentificationCardListWindow card = new General.IdentificationCard.IdentificationCardListWindow();
             card.Show();
             Mouse.OverrideCursor = null;
+        }
+        private void MetroWindow_Activated(object sender, EventArgs e)
+        {
+            LoadNotification();
         }
     }
 }
