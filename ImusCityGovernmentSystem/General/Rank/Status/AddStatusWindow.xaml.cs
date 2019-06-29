@@ -47,24 +47,30 @@ namespace ImusCityGovernmentSystem.General.Rank.Status
                     {
                         if (!String.IsNullOrEmpty(txtName.Text) && !String.IsNullOrEmpty(txtCode.Text))
                         {
-                            Model.EmployeeStatu es = new Model.EmployeeStatu();
-                            es.EmployeeStatusName = txtName.Text;
-                            es.EmployeeStatusCode = txtCode.Text;
-                            db.EmployeeStatus.Add(es);
-                            db.SaveChanges();
-
-                            var audit = new AuditTrailModel
+                            if(db.EmployeeStatus.Any(m => m.EmployeeStatusCode == txtCode.Text))
                             {
-                                Activity = "Added new employee status in the database. STAT CODE: " + txtCode.Text,
-                                ModuleName = this.GetType().Name,
-                                EmployeeID = App.EmployeeID
-                            };
+                                MessageBox.Show("Employee status code is already used");
+                            }
+                            else
+                            {
+                                Model.EmployeeStatu es = new Model.EmployeeStatu();
+                                es.EmployeeStatusName = txtName.Text;
+                                es.EmployeeStatusCode = txtCode.Text;
+                                db.EmployeeStatus.Add(es);
+                                db.SaveChanges();
 
-                            SystemClass.InsertLog(audit);
+                                var audit = new AuditTrailModel
+                                {
+                                    Activity = "Added new employee status in the database. STAT CODE: " + txtCode.Text,
+                                    ModuleName = this.GetType().Name,
+                                    EmployeeID = App.EmployeeID
+                                };
 
-                            MessageBox.Show("Status added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                            TextClear();
+                                SystemClass.InsertLog(audit);
 
+                                MessageBox.Show("Status added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                                TextClear();
+                            }
                         }
                         else
                         {

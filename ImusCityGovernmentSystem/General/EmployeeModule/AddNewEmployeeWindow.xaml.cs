@@ -33,6 +33,20 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
 
 
         }
+        public bool CheckNumberOfUser()
+        {
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            int totalEmployees = db.Employees.Count() - 2;
+            int maxUsers = db.SystemSettings.FirstOrDefault().NumberOfUser.Value;
+            if (totalEmployees >= maxUsers)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
@@ -135,6 +149,11 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                     {
                         MessageBox.Show("Please enter valid date format for date hired (mm/dd/yyyy)");
                     }
+                    else if(CheckNumberOfUser())
+                    {
+                        Mouse.OverrideCursor = null;
+                        MessageBox.Show("Maximum number of users already reached. Please contact your vendor");
+                    }
                     else
                     {
                         employee.EmployeeNo = employeenotb.Text;
@@ -197,7 +216,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                         }
                         else
                         {
-                            string roleid = "1";
+                            string roleid = "2";
                             if (String.IsNullOrEmpty(roleid))
                             {
                                 MessageBox.Show("Role is not specified", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -236,7 +255,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
 
                         SystemClass.InsertLog(audit);
 
-                        MessageBox.Show("Employee user account created");
+                        MessageBox.Show("Employee user account created" + Environment.NewLine + "Default Password: imuscitygov");
                         ClearTextBoxes();
                     }
 

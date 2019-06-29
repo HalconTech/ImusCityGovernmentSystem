@@ -47,24 +47,31 @@ namespace ImusCityGovernmentSystem.General.Department
                     {
                         if (!String.IsNullOrEmpty(txtCode.Text) && !String.IsNullOrEmpty(txtName.Text))
                         {
-                            Model.Department d = new Model.Department();
-                            d.DepartmentCode = txtCode.Text;
-                            d.DepartmentName = txtName.Text;
-                            d.IsActive = true;
-                            db.Departments.Add(d);
-                            db.SaveChanges();
-
-                            var audit = new AuditTrailModel
+                            if(db.Departments.Any(m => m.DepartmentCode == txtCode.Text))
                             {
-                                Activity = "Added new department in the database. DEPT CODE: " + txtCode.Text,
-                                ModuleName = this.GetType().Name,
-                                EmployeeID = App.EmployeeID
-                            };
+                                MessageBox.Show("Department code is already used");
+                            }
+                            else
+                            {
+                                Model.Department d = new Model.Department();
+                                d.DepartmentCode = txtCode.Text;
+                                d.DepartmentName = txtName.Text;
+                                d.IsActive = true;
+                                db.Departments.Add(d);
+                                db.SaveChanges();
 
-                            SystemClass.InsertLog(audit);
-                            MessageBox.Show("Department added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                            TextClear();
+                                var audit = new AuditTrailModel
+                                {
+                                    Activity = "Added new department in the database. DEPT CODE: " + txtCode.Text,
+                                    ModuleName = this.GetType().Name,
+                                    EmployeeID = App.EmployeeID
+                                };
 
+                                SystemClass.InsertLog(audit);
+                                MessageBox.Show("Department added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                                TextClear();
+
+                            }
                         }
                         else
                         {

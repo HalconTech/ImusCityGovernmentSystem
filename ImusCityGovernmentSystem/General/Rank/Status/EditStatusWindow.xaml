@@ -17,7 +17,7 @@
         <Label Grid.Column="0"  HorizontalContentAlignment="Right" Content="Status Name:*" FontWeight="Bold"/>
         <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" Content="Status Code:*" FontWeight="Bold"/>
         <TextBox Grid.Column="1"  Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Status Name" Name="txtName"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Status Code" Name="txtCode"/>
+        <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="1" Margin="5,2,0,2" Controls:TextBoxHelper.Watermark="Status Code" Name="txtCode"/>
 
         <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Save" Name="btnUpdate"  Click="btnUpdate_Click" IsDefault="True" HorizontalAlignment="Right" Width="123"/>
     </Grid>

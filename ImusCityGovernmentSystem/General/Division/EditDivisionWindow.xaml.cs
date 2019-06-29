@@ -33,7 +33,7 @@ namespace ImusCityGovernmentSystem.General.Division
 
         public void DivisionUpdate()
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 try
                 {
@@ -66,11 +66,11 @@ namespace ImusCityGovernmentSystem.General.Division
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-            
+
         }
         public void LoadDivision()
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 try
                 {
@@ -92,14 +92,14 @@ namespace ImusCityGovernmentSystem.General.Division
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-          
+
         }
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentName).ToList();
+                departmentcb.ItemsSource = db.Departments.Where(m => m.IsActive == true).OrderBy(m => m.DepartmentName).ToList();
                 departmentcb.DisplayMemberPath = "DepartmentName";
                 departmentcb.SelectedValuePath = "DepartmentID";
             }

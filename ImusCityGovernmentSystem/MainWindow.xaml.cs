@@ -24,13 +24,13 @@ namespace ImusCityGovernmentSystem
     public partial class MainWindow : MetroWindow
     {
 
-        ImusCityHallEntities db = new ImusCityHallEntities();
+       
         public string Password;
 
         public MainWindow()
         {
             InitializeComponent();
-
+            ImusCityHallEntities db = new ImusCityHallEntities();
             if (App.ByPass != true)
             {
                 Employee employee = db.Employees.Find(App.EmployeeID);
@@ -41,6 +41,7 @@ namespace ImusCityGovernmentSystem
 
         public void LoadNotification()
         {
+            ImusCityHallEntities db = new ImusCityHallEntities();
             var notif = db.GetCheckExpiryNotice().ToList();
 
             if (notif.Count != 0)
@@ -103,16 +104,18 @@ namespace ImusCityGovernmentSystem
         {
             Mouse.OverrideCursor = Cursors.Wait;
             General.Department.DepartmentListWindow dept = new General.Department.DepartmentListWindow();
-            dept.ShowDialog();
             Mouse.OverrideCursor = null;
+            dept.ShowDialog();
+      
         }
 
         private void divisionbtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
             General.Division.DivisionListWindow division = new General.Division.DivisionListWindow();
-            division.ShowDialog();
             Mouse.OverrideCursor = null;
+            division.ShowDialog();
+   
         }
 
         private void positionbtn_Click(object sender, RoutedEventArgs e)
@@ -218,7 +221,8 @@ namespace ImusCityGovernmentSystem
         private void empmanagebtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            if(db.SystemSettings.Any())
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            if (db.SystemSettings.Any())
             {
                 General.EmployeeModule.EmployeeModuleWindow employee = new General.EmployeeModule.EmployeeModuleWindow();
                 Mouse.OverrideCursor = null;
@@ -273,6 +277,16 @@ namespace ImusCityGovernmentSystem
             SystemSettings systemSettings = new SystemSettings();
             Mouse.OverrideCursor = null;
             systemSettings.ShowDialog();
+        }
+
+        private void MetroWindow_Deactivated(object sender, EventArgs e)
+        {
+            LoadNotification();
+        }
+
+        private void MetroWindow_GotFocus(object sender, RoutedEventArgs e)
+        {
+            LoadNotification();
         }
     }
 }

@@ -34,11 +34,11 @@ namespace ImusCityGovernmentSystem.General.BankAccount
                 accountslistlb.DisplayMemberPath = "AccountNumber";
                 accountslistlb.SelectedValuePath = "FundBankID";
 
-                bankcb.ItemsSource = db.Banks.OrderBy(m => m.BankName).ToList();
+                bankcb.ItemsSource = db.Banks.Where(m => m.IsActive == true).OrderBy(m => m.BankName).ToList();
                 bankcb.DisplayMemberPath = "BankName";
                 bankcb.SelectedValuePath = "BankID";
 
-                fundcb.ItemsSource = db.Funds.OrderBy(m => m.FundName).ToList();
+                fundcb.ItemsSource = db.Funds.Where(m => m.IsActive == true).OrderBy(m => m.FundName).ToList();
                 fundcb.DisplayMemberPath = "FundName";
                 fundcb.SelectedValuePath = "FundID";
 

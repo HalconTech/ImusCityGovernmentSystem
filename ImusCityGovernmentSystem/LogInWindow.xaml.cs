@@ -91,7 +91,7 @@ namespace ImusCityGovernmentSystem
                                     ChangePasswordWindow password = new ChangePasswordWindow();
                                     password.Show();
                                 }
-                                else if (emp.SecurityQuestionUsers.Count < 3)
+                                else if (emp.SecurityQuestionUsers.Count < 3 && emp.EmployeeNo != "123456")
                                 {
                                     Mouse.OverrideCursor = null;
                                     MessageBox.Show("Please set-up your security questions.");

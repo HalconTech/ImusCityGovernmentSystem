@@ -45,48 +45,54 @@ namespace ImusCityGovernmentSystem.General.BankAccount
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 ImusCityGovernmentSystem.Model.FundBank account = db.FundBanks.Find(FundBankID);
-
                 ImusCityGovernmentSystem.Model.BankTrail banktrail = new BankTrail();
 
-
-                switch (adjustmenttypecb.Text.Substring(0, 1))
+                if(String.IsNullOrEmpty(amounttb.Text))
                 {
-                    case "D":
-                        if (Convert.ToDecimal(amounttb.Text) > account.CurrentBalance)
-                        {
-                            MessageBox.Show("Cannot be debited, you will have an insufficients funds");
-                            return;
-                        }
-                        account.CurrentBalance -= Convert.ToDecimal(amounttb.Text);
-                        banktrail.DebitCredit = "D";
-                        break;
-                    case "C":
-                        account.CurrentBalance += Convert.ToDecimal(amounttb.Text);
-                        banktrail.DebitCredit = "C";
-                        break;
+                    MessageBox.Show("Please enter the amount to be adjusted");
                 }
-                banktrail.FundBankID = FundBankID;
-                banktrail.Amount = Convert.ToDecimal(amounttb.Text);
-                banktrail.EntryName = nameof(BankTrailEntry.Adjustment);
-                banktrail.CheckID = null;
-                banktrail.EntryNameID = (int)BankTrailEntry.Adjustment;
-                banktrail.EmployeeID = App.EmployeeID;
-                banktrail.DateCreated = DateTime.Now;
-                db.BankTrails.Add(banktrail);
-
-                db.SaveChanges();
-
-
-                var audit = new AuditTrailModel
+                else
                 {
-                    Activity = "Adjusted current amount of FUNDBANK ID: " + FundBankID.ToString(),
-                    ModuleName = this.GetType().Name,
-                    EmployeeID = App.EmployeeID
-                };
+                    switch (adjustmenttypecb.Text.Substring(0, 1))
+                    {
+                        case "D":
+                            if (Convert.ToDecimal(amounttb.Text) > account.CurrentBalance)
+                            {
+                                MessageBox.Show("Cannot be debited, you will have an insufficients funds");
+                                return;
+                            }
+                            account.CurrentBalance -= Convert.ToDecimal(amounttb.Text);
+                            banktrail.DebitCredit = "D";
+                            break;
+                        case "C":
+                            account.CurrentBalance += Convert.ToDecimal(amounttb.Text);
+                            banktrail.DebitCredit = "C";
+                            break;
+                    }
+                    banktrail.FundBankID = FundBankID;
+                    banktrail.Amount = Convert.ToDecimal(amounttb.Text);
+                    banktrail.EntryName = nameof(BankTrailEntry.Adjustment);
+                    banktrail.CheckID = null;
+                    banktrail.EntryNameID = (int)BankTrailEntry.Adjustment;
+                    banktrail.EmployeeID = App.EmployeeID;
+                    banktrail.DateCreated = DateTime.Now;
+                    db.BankTrails.Add(banktrail);
 
-                SystemClass.InsertLog(audit);
-                MessageBox.Show("Adjustment added succesfully");
-                this.Close();
+                    db.SaveChanges();
+
+
+                    var audit = new AuditTrailModel
+                    {
+                        Activity = "Adjusted current amount of FUNDBANK ID: " + FundBankID.ToString(),
+                        ModuleName = this.GetType().Name,
+                        EmployeeID = App.EmployeeID
+                    };
+
+                    SystemClass.InsertLog(audit);
+                    MessageBox.Show("Adjustment added succesfully");
+                    this.Close();
+                }
+
             }
             else
             {

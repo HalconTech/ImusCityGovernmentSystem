@@ -33,7 +33,7 @@ namespace ImusCityGovernmentSystem.General.Division
         }
         public void DivisionAdd()
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 try
                 {
@@ -41,25 +41,31 @@ namespace ImusCityGovernmentSystem.General.Division
                     {
                         if (!String.IsNullOrEmpty(txtCode.Text) && !String.IsNullOrEmpty(txtName.Text) && departmentcb.SelectedValue != null)
                         {
-                            Model.Division d = new Model.Division();
-                            d.DivisionCode = txtCode.Text;
-                            d.DivisionName = txtName.Text;
-                            d.DepartmentID = (int)departmentcb.SelectedValue;
-                            d.IsActive = true;
-                            db.Divisions.Add(d);
-                            db.SaveChanges();
-
-                            var audit = new AuditTrailModel
+                            if (db.Divisions.Any(m => m.DivisionCode == txtCode.Text))
                             {
-                                Activity = "Added new division in the database. DEPT CODE: " + txtCode.Text,
-                                ModuleName = this.GetType().Name,
-                                EmployeeID = App.EmployeeID
-                            };
+                                MessageBox.Show("Division code is already used");
+                            }
+                            else
+                            {
+                                Model.Division d = new Model.Division();
+                                d.DivisionCode = txtCode.Text;
+                                d.DivisionName = txtName.Text;
+                                d.DepartmentID = (int)departmentcb.SelectedValue;
+                                d.IsActive = true;
+                                db.Divisions.Add(d);
+                                db.SaveChanges();
 
-                            SystemClass.InsertLog(audit);
-                            MessageBox.Show("Division added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                            TextClear();
+                                var audit = new AuditTrailModel
+                                {
+                                    Activity = "Added new division in the database. DEPT CODE: " + txtCode.Text,
+                                    ModuleName = this.GetType().Name,
+                                    EmployeeID = App.EmployeeID
+                                };
 
+                                SystemClass.InsertLog(audit);
+                                MessageBox.Show("Division added successfully", "System Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                                TextClear();
+                            }
                         }
                         else
                         {
@@ -78,7 +84,7 @@ namespace ImusCityGovernmentSystem.General.Division
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-           
+
 
         }
         public void TextClear()
@@ -90,10 +96,10 @@ namespace ImusCityGovernmentSystem.General.Division
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                departmentcb.ItemsSource = db.Departments.OrderBy(m => m.DepartmentName).ToList();
+                departmentcb.ItemsSource = db.Departments.Where(m => m.IsActive == true).OrderBy(m => m.DepartmentName).ToList();
                 departmentcb.DisplayMemberPath = "DepartmentName";
                 departmentcb.SelectedValuePath = "DepartmentID";
             }
