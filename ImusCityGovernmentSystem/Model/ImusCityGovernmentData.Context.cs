@@ -60,6 +60,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<EmployeePosition> EmployeePositions { get; set; }
         public virtual DbSet<CustomerIdentificationCard> CustomerIdentificationCards { get; set; }
         public virtual DbSet<LicensingCode> LicensingCodes { get; set; }
+        public virtual DbSet<SystemSetting> SystemSettings { get; set; }
     
         public virtual ObjectResult<GetDisbursementVoucher_Result> GetDisbursementVoucher(Nullable<int> disbursementID)
         {

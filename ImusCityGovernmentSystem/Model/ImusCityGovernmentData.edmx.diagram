@@ -76,8 +76,10 @@
         <EntityTypeShape EntityType="ImusCityHallModel.CustomerIdentificationCard" Width="1.5" PointX="14" PointY="13.75" />
         <AssociationConnector Association="ImusCityHallModel.FK_CustomerIdentificationCard_Customer" />
         <AssociationConnector Association="ImusCityHallModel.FK_CustomerIdentificationCard_IdentificationCardType" />
-        <EntityTypeShape EntityType="ImusCityHallModel.LicensingCode" Width="1.5" PointX="10.875" PointY="11.5" />
+        <EntityTypeShape EntityType="ImusCityHallModel.LicensingCode" Width="1.5" PointX="10.875" PointY="11.125" />
+        <AssociationConnector Association="ImusCityHallModel.FK_LicensingCode_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_LicensingCode_SubModule" />
+        <EntityTypeShape EntityType="ImusCityHallModel.SystemSetting" Width="1.5" PointX="3.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

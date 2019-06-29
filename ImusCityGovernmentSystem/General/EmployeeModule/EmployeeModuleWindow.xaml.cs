@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using ImusCityGovernmentSystem.Model;
 namespace ImusCityGovernmentSystem.General.EmployeeModule
 {
     /// <summary>
@@ -37,10 +37,33 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
         {
             Mouse.OverrideCursor = Cursors.Wait;
             AddNewEmployeeWindow addemp = new AddNewEmployeeWindow();
-            Mouse.OverrideCursor = null;
-            addemp.ShowDialog();
+            if(CheckNumberOfUser())
+            {
+                Mouse.OverrideCursor = null;
+                MessageBox.Show("Maximum number of users already reached. Please contact your vendor");
+            }
+            else
+
+            {
+                Mouse.OverrideCursor = null;
+                addemp.ShowDialog();
+            }                
         }
 
+        public bool CheckNumberOfUser()
+        {
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            int totalEmployees = db.Employees.Count() - 2;
+            int maxUsers = db.SystemSettings.FirstOrDefault().NumberOfUser.Value;
+            if(totalEmployees >= maxUsers)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private void departmentbtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;

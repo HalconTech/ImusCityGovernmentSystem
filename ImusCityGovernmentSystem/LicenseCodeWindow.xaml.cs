@@ -27,14 +27,15 @@ namespace ImusCityGovernmentSystem
 
         private void acceptbtn_Click(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 LicensingCode license = db.LicensingCodes.FirstOrDefault(m => m.LicenseKey == licensekey.Text);
 
                 if (license != null && license.ExpirationDate > DateTime.Now.Date)
                 {
-                    license.MachineName = Environment.MachineName;
+                    //license.MachineName = Environment.MachineName;
+                    license.UserID = App.EmployeeID;
                     db.SaveChanges();
                     MessageBox.Show("License key applied");
                     App.LicenseKey = licensekey.Text;
@@ -52,17 +53,16 @@ namespace ImusCityGovernmentSystem
                 {
                     MessageBox.Show("The license that youve entering is expired!");
                 }
-                else if (!String.IsNullOrEmpty(license.MachineName))
+                else if (license.LicenseKey == licensekey.Text && license.UserID == App.EmployeeID)
                 {
-                    MessageBox.Show("The license have been already used");
+                    MessageBox.Show("This license is associated with another user");
                 }
-
             }
             else
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-            
+
         }
     }
 }

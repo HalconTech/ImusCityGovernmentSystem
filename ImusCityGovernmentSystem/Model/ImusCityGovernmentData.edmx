@@ -347,6 +347,7 @@
           <Property Name="MachineName" Type="nvarchar" MaxLength="50" />
           <Property Name="IsDemo" Type="bit" />
           <Property Name="SubModuleID" Type="int" />
+          <Property Name="UserID" Type="int" />
         </EntityType>
         <EntityType Name="Payee">
           <Key>
@@ -405,6 +406,13 @@
           <Property Name="SubModuleUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SubModuleID" Type="int" />
           <Property Name="EmployeeID" Type="int" />
+        </EntityType>
+        <EntityType Name="SystemSetting">
+          <Key>
+            <PropertyRef Name="SystemSettingId" />
+          </Key>
+          <Property Name="SystemSettingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumberOfUser" Type="int" />
         </EntityType>
         <EntityType Name="UserAccount">
           <Key>
@@ -840,6 +848,18 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LicensingCode_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="LicensingCode" Type="Self.LicensingCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="LicensingCode">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LicensingCode_SubModule">
           <End Role="SubModule" Type="Self.SubModule" Multiplicity="0..1" />
           <End Role="LicensingCode" Type="Self.LicensingCode" Multiplicity="*" />
@@ -961,6 +981,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="SecurityQuestionUser" EntityType="Self.SecurityQuestionUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubModule" EntityType="Self.SubModule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubModuleUser" EntityType="Self.SubModuleUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemSetting" EntityType="Self.SystemSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PayeeRepresentativeView" EntityType="Self.PayeeRepresentativeView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1104,6 +1125,10 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <AssociationSet Name="FK_FundBank_FundBank" Association="Self.FK_FundBank_FundBank">
             <End Role="Fund" EntitySet="Fund" />
             <End Role="FundBank" EntitySet="FundBank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LicensingCode_Employee" Association="Self.FK_LicensingCode_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="LicensingCode" EntitySet="LicensingCode" />
           </AssociationSet>
           <AssociationSet Name="FK_LicensingCode_SubModule" Association="Self.FK_LicensingCode_SubModule">
             <End Role="SubModule" EntitySet="SubModule" />
@@ -1341,10 +1366,15 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="CustomerIdentificationCard" EntitySet="CustomerIdentificationCards" />
           </AssociationSet>
           <EntitySet Name="LicensingCodes" EntityType="ImusCityHallModel.LicensingCode" />
+          <AssociationSet Name="FK_LicensingCode_Employee" Association="ImusCityHallModel.FK_LicensingCode_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="LicensingCode" EntitySet="LicensingCodes" />
+          </AssociationSet>
           <AssociationSet Name="FK_LicensingCode_SubModule" Association="ImusCityHallModel.FK_LicensingCode_SubModule">
             <End Role="SubModule" EntitySet="SubModules" />
             <End Role="LicensingCode" EntitySet="LicensingCodes" />
           </AssociationSet>
+          <EntitySet Name="SystemSettings" EntityType="ImusCityHallModel.SystemSetting" />
           </EntityContainer>
         <ComplexType Name="GetDisbursementVoucher_Result">
           <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
@@ -2123,6 +2153,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <NavigationProperty Name="EmployeeStatu" Relationship="ImusCityHallModel.FK_Employee_EmployeeStatus" FromRole="Employee" ToRole="EmployeeStatu" />
           <NavigationProperty Name="SecurityQuestionUsers" Relationship="ImusCityHallModel.FK_SecurityQuestionUser_Employee" FromRole="Employee" ToRole="SecurityQuestionUser" />
           <NavigationProperty Name="SubModuleUsers" Relationship="ImusCityHallModel.FK_SubModuleUser_Employee" FromRole="Employee" ToRole="SubModuleUser" />
+          <NavigationProperty Name="LicensingCodes" Relationship="ImusCityHallModel.FK_LicensingCode_Employee" FromRole="Employee" ToRole="LicensingCode" />
         </EntityType>
         <EntityType Name="EmployeePosition">
           <Key>
@@ -2373,8 +2404,22 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Name="MachineName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsDemo" Type="Boolean" />
           <Property Name="SubModuleID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="ImusCityHallModel.FK_LicensingCode_Employee" FromRole="LicensingCode" ToRole="Employee" />
           <NavigationProperty Name="SubModule" Relationship="ImusCityHallModel.FK_LicensingCode_SubModule" FromRole="LicensingCode" ToRole="SubModule" />
         </EntityType>
+        <Association Name="FK_LicensingCode_Employee">
+          <End Type="ImusCityHallModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ImusCityHallModel.LicensingCode" Role="LicensingCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="LicensingCode">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LicensingCode_SubModule">
           <End Type="ImusCityHallModel.SubModule" Role="SubModule" Multiplicity="0..1" />
           <End Type="ImusCityHallModel.LicensingCode" Role="LicensingCode" Multiplicity="*" />
@@ -2387,6 +2432,13 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SystemSetting">
+          <Key>
+            <PropertyRef Name="SystemSettingId" />
+          </Key>
+          <Property Name="SystemSettingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumberOfUser" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2907,12 +2959,21 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySetMapping Name="LicensingCodes">
             <EntityTypeMapping TypeName="ImusCityHallModel.LicensingCode">
               <MappingFragment StoreEntitySet="LicensingCode">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="SubModuleID" ColumnName="SubModuleID" />
                 <ScalarProperty Name="IsDemo" ColumnName="IsDemo" />
                 <ScalarProperty Name="MachineName" ColumnName="MachineName" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
                 <ScalarProperty Name="LicenseKey" ColumnName="LicenseKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemSettings">
+            <EntityTypeMapping TypeName="ImusCityHallModel.SystemSetting">
+              <MappingFragment StoreEntitySet="SystemSetting">
+                <ScalarProperty Name="NumberOfUser" ColumnName="NumberOfUser" />
+                <ScalarProperty Name="SystemSettingId" ColumnName="SystemSettingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -29,16 +29,8 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
 
             if (SystemClass.CheckConnection())
             {
-                ImusCityHallEntities db = new ImusCityHallEntities();
-                var employeelist = from p in db.Employees
-                                   orderby p.FirstName
-                                   select new
-                                   {
-                                       p.EmployeeID,
-                                       Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
-                                   };
-                employeelistlb.ItemsSource = employeelist.ToList();
-                employeelistlb.DisplayMemberPath = "Name";
+                employeelistlb.ItemsSource = LoadEmployees(searchtb.Text);
+                employeelistlb.DisplayMemberPath = "FirstName";
                 employeelistlb.SelectedValuePath = "EmployeeID";
                 employeelistlb.SelectedIndex = 0;
                 searchtb.Focus();
@@ -51,6 +43,41 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
 
         }
 
+        public List<Employee> LoadEmployees(string searchKey)
+        {
+            List<Employee> employeeList = new List<Employee>();
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+
+
+                if (String.IsNullOrEmpty(searchKey))
+                {
+                    foreach (var employee in db.Employees.Where(m => m.EmployeeNo != "123456"))
+                    {
+                        employee.FirstName = string.Join(" ", employee.FirstName, employee.LastName);
+                        employeeList.Add(employee);
+                    }
+                }
+                else
+                {
+                    foreach (var employee in db.Employees.Where(m => (m.FirstName.Contains(searchKey) || m.MiddleName.Contains(searchKey) || m.LastName.Contains(searchKey)) && m.EmployeeNo != "123456"))
+                    {
+                        employee.FirstName = string.Join(" ", employee.FirstName, employee.LastName);
+                        employeeList.Add(employee);
+                    }
+                }
+
+
+                return employeeList;
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                return employeeList;
+            }
+
+        }
         private void employeelistlb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (SystemClass.CheckConnection())
@@ -114,16 +141,8 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                     editemp.EmployeeID = (int)employeelistlb.SelectedValue;
                     editemp.ShowDialog();
 
-                    db = new ImusCityHallEntities();
-                    var employeelist = from p in db.Employees
-                                       orderby p.FirstName
-                                       select new
-                                       {
-                                           p.EmployeeID,
-                                           Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
-                                       };
-                    employeelistlb.ItemsSource = employeelist.ToList();
-                    employeelistlb.DisplayMemberPath = "Name";
+                    employeelistlb.ItemsSource = LoadEmployees(searchtb.Text);
+                    employeelistlb.DisplayMemberPath = "FirstName";
                     employeelistlb.SelectedValuePath = "EmployeeID";
                     employeelistlb.SelectedIndex = 0;
 
@@ -145,16 +164,8 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 AddNewEmployeeWindow add = new AddNewEmployeeWindow();
                 add.ShowDialog();
-                db = new ImusCityHallEntities();
-                var employeelist = from p in db.Employees
-                                   orderby p.FirstName
-                                   select new
-                                   {
-                                       p.EmployeeID,
-                                       Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
-                                   };
-                employeelistlb.ItemsSource = employeelist.ToList();
-                employeelistlb.DisplayMemberPath = "Name";
+                employeelistlb.ItemsSource = LoadEmployees(searchtb.Text);
+                employeelistlb.DisplayMemberPath = "FirstName";
                 employeelistlb.SelectedValuePath = "EmployeeID";
                 employeelistlb.SelectedIndex = 0;
             }
@@ -182,7 +193,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                     var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
                     aspuser.PasswordHash = passwordHasher.HashPassword("imuscitygov");
                     db.SaveChanges();
-                    MessageBox.Show("Employee account has been reset to"+Environment.NewLine+ "Default Password: imuscitygov");
+                    MessageBox.Show("Employee account has been reset to" + Environment.NewLine + "Default Password: imuscitygov");
                 }
             }
             else
@@ -197,18 +208,9 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
         {
             if (SystemClass.CheckConnection())
             {
-                ImusCityHallEntities db = new ImusCityHallEntities();
                 Mouse.OverrideCursor = Cursors.Wait;
-                var employeelist = from p in db.Employees
-                                   where p.FirstName.Contains(searchtb.Text) || p.MiddleName.Contains(searchtb.Text) || p.LastName.Contains(searchtb.Text)
-                                   orderby p.FirstName
-                                   select new
-                                   {
-                                       p.EmployeeID,
-                                       Name = p.FirstName + " " + p.MiddleName + " " + p.LastName
-                                   };
-                employeelistlb.ItemsSource = employeelist.ToList();
-                employeelistlb.DisplayMemberPath = "Name";
+                employeelistlb.ItemsSource = LoadEmployees(searchtb.Text);
+                employeelistlb.DisplayMemberPath = "FirstName";
                 employeelistlb.SelectedValuePath = "EmployeeID";
                 employeelistlb.SelectedIndex = 0;
 
@@ -255,7 +257,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 ImusCityGovernmentSystem.Model.Employee employee = db.Employees.Find(App.EmployeeID);

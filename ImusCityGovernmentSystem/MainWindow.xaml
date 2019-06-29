@@ -261,7 +261,16 @@
                             </Rectangle>
                         </MenuItem.Icon>
                     </MenuItem>
-                    
+
+                    <MenuItem Name="SS"    VerticalContentAlignment="Center"  Header="System Settings" Visibility="Collapsed" Click="SS_Click">
+                        <MenuItem.Icon>
+                            <Rectangle Fill="#FF002753" Width="13" Height="13">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_settings}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
                     <MenuItem x:Name="payeebtn" Visibility="Collapsed"   VerticalContentAlignment="Center"  Header="Payee Management" Click="payeebtn_Click"    >
                         <MenuItem.Icon>

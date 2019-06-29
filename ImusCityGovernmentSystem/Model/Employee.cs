@@ -29,6 +29,7 @@ namespace ImusCityGovernmentSystem.Model
             this.Customers = new HashSet<Customer>();
             this.SecurityQuestionUsers = new HashSet<SecurityQuestionUser>();
             this.SubModuleUsers = new HashSet<SubModuleUser>();
+            this.LicensingCodes = new HashSet<LicensingCode>();
         }
     
         public int EmployeeID { get; set; }
@@ -115,5 +116,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual ICollection<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LicensingCode> LicensingCodes { get; set; }
     }
 }

@@ -192,6 +192,14 @@ namespace ImusCityGovernmentSystem
                 {
                     modules.IsEnabled = false;
                 }
+
+                Employee superAdmin = db.Employees.Find(App.EmployeeID);
+                AspNetUser user = db.AspNetUsers.FirstOrDefault(m => m.UserName == superAdmin.EmployeeNo);
+                
+                if (user.AspNetUserRoles.FirstOrDefault().RoleId == "1")
+                {
+                    SS.Visibility = Visibility.Visible;
+                }
             }
             else
             {
@@ -210,9 +218,18 @@ namespace ImusCityGovernmentSystem
         private void empmanagebtn_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            General.EmployeeModule.EmployeeModuleWindow employee = new General.EmployeeModule.EmployeeModuleWindow();
-            Mouse.OverrideCursor = null;
-            employee.ShowDialog();
+            if(db.SystemSettings.Any())
+            {
+                General.EmployeeModule.EmployeeModuleWindow employee = new General.EmployeeModule.EmployeeModuleWindow();
+                Mouse.OverrideCursor = null;
+                employee.ShowDialog();
+            }
+            else
+            {
+                Mouse.OverrideCursor = null;
+                MessageBox.Show("System settings is not yet defined. Please contact your vendor");
+            }
+
         }
 
         private void accessbtn_Click(object sender, RoutedEventArgs e)
@@ -248,6 +265,14 @@ namespace ImusCityGovernmentSystem
         private void MetroWindow_Activated(object sender, EventArgs e)
         {
             LoadNotification();
+        }
+
+        private void SS_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            SystemSettings systemSettings = new SystemSettings();
+            Mouse.OverrideCursor = null;
+            systemSettings.ShowDialog();
         }
     }
 }

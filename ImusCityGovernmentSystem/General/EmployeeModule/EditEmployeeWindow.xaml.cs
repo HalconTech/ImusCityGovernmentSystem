@@ -24,14 +24,14 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
     /// </summary>
     public partial class EditEmployeeWindow : MetroWindow
     {
-     
+
         public int EmployeeID;
         public string newimage;
         public EditEmployeeWindow()
         {
             InitializeComponent();
 
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 divisioncb.ItemsSource = db.Divisions.Where(m => m.IsActive == true).OrderBy(m => m.DivisionCode).ToList();
@@ -50,12 +50,12 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-          
+
         }
 
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 Mouse.OverrideCursor = Cursors.Wait;
                 try
@@ -214,7 +214,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-         
+
         }
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
@@ -223,7 +223,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
         }
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if(SystemClass.CheckConnection())
+            if (SystemClass.CheckConnection())
             {
                 try
                 {
@@ -242,7 +242,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                     datepermanetdp.SelectedDate = employee.DatePermanency;
                     dateendodp.SelectedDate = employee.DateEndContract;
                     dateresignationdp.SelectedDate = employee.DateResigned;
-  
+
                     //Personal Information
                     fnametb.Text = employee.FirstName;
                     mnametb.Text = employee.MiddleName;
@@ -253,7 +253,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                     genderdp.SelectedIndex = employee.Sex == "M" ? 0 : 1;
 
                     citizenshiptb.Text = employee.Nationality;
-                    civilstatuscb.Text = employee.CivilStatus.ToString();
+                    civilstatuscb.Text = String.IsNullOrEmpty(employee.CivilStatus) ? null : employee.CivilStatus.ToString();
 
                     religiontb.Text = employee.Religion;
                     tinnotb.Text = employee.TIN;
