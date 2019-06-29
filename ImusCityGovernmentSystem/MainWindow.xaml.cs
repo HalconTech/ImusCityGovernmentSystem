@@ -57,6 +57,12 @@ namespace ImusCityGovernmentSystem
                 view.GroupDescriptions.Add(groupDescription);
                 
             }
+            else
+            {
+                bdgNotif.Badge = 0;
+                btnNotif.Visibility = Visibility.Visible;
+                lvNotif.ItemsSource = null;
+            }
         }
 
         private void empmgntbtn_Click(object sender, RoutedEventArgs e)

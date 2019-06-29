@@ -7,7 +7,7 @@
         <Controls:WindowCommands>
             <Button Name="empname" />
             <Button x:Name="btnlogout" Content="Sign-out" Click="btnlogout_Click"/>
-            <Controls:Badged Badge="{Binding Path=BadgeValue}" BadgeBackground="Red" Name="bdgNotif" BadgePlacementMode="Bottom" Grid.Column="3" Margin="5">
+            <Controls:Badged Badge="{Binding Path=BadgeValue}" BadgeBackground="Red" Name="bdgNotif"  BadgePlacementMode="Bottom" Grid.Column="3" Margin="5">
                 <!-- Control to wrap goes here -->
                 <Button Name="btnNotif" Click="btnNotif_Click" Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
