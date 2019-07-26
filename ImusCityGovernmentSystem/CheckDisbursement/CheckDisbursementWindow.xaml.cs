@@ -123,44 +123,66 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //if (SystemClass.CheckConnection())
-            //{
-            //    ImusCityHallEntities db = new ImusCityHallEntities();
-            //    LicensingCode license = db.LicensingCodes.FirstOrDefault(m => m.UserID == App.EmployeeID && m.SubModule.Acronym == "CDS");
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                var licenseList = from p in db.LicensingCodes
+                                  select new
+                                  {
+                                      p.ActivatedDate,
+                                      p.ExpirationDate,
+                                      p.SubModule,
+                                      LicenseKey = p.LicenseKey.Replace("\r\n", string.Empty),
+                                      p.IsDemo
+                                  };
+                var licenseCode = licenseList.FirstOrDefault(m => m.SubModule.Acronym == "CDS" && m.LicenseKey == App.LicenseKey && m.ActivatedDate != null);
 
-            //    if (license == null)
-            //    {
-            //        MessageBox.Show("The user is not yet licensed. Please contact your administrator");
-            //        LicenseCodeWindow lc = new LicenseCodeWindow();
-            //        lc.ShowDialog();
-            //        this.Close();
-            //    }
-            //    else if (license.ExpirationDate < DateTime.Now)
-            //    {
-            //        MessageBox.Show("This license that have been issued to this user is expired! Please input new license");
-            //        LicenseCodeWindow lc = new LicenseCodeWindow();
-            //        lc.ShowDialog();
-            //        this.Close();
-            //    }
-            //    else
-            //    {
-            //        if (license.IsDemo == true)
-            //        {
-            //            App.LicenseKey = license.LicenseKey;
-            //            this.Title = "Check Disbursement Module (DEMO)";
-            //        }
-            //        else
-            //        {
-            //            App.LicenseKey = license.LicenseKey;
-            //            this.Title = "Check Disbursement Module";
-            //        }
+                LicensingCode license = new LicensingCode();
+                if (licenseCode != null)
+                {
 
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
-            //}
+                    license.ActivatedDate = licenseCode.ActivatedDate;
+                    license.LicenseKey = licenseCode.LicenseKey;
+                    license.ExpirationDate = licenseCode.ExpirationDate;
+                    license.SubModule = licenseCode.SubModule;
+                }
+
+
+                if (licenseCode == null)
+                {
+                    MessageBox.Show("The system is not yet activated. Please contact your administrator");
+                    LicenseCodeWindow lc = new LicenseCodeWindow();
+                    lc.subModuleCode = "CDS";
+                    lc.ShowDialog();
+                    this.Close();
+                }
+                else if (licenseCode.ExpirationDate < DateTime.Now)
+                {
+                    MessageBox.Show("This license that have been issued is expired! Please input new license");
+                    LicenseCodeWindow lc = new LicenseCodeWindow();
+                    lc.subModuleCode = "CDS";
+                    lc.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    if (licenseCode.IsDemo == true)
+                    {
+
+                        this.Title = "Check Disbursement Module (DEMO)";
+                    }
+                    else
+                    {
+
+                        this.Title = "Check Disbursement Module";
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
         }
     }
 }

@@ -45,6 +45,7 @@
                 <TextBlock Text="LIST OF RANK"  FontWeight="Bold" />
                 <DataGrid Grid.Row="1"  BorderThickness="1"  x:Name="dgRankList" IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Single" BorderBrush="Black" GridLinesVisibility="Vertical" HorizontalGridLinesBrush="Black"  >
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="Rank Code" Width="100" Binding="{Binding RankCode}"/>
                         <DataGridTextColumn Header="Rank Name" Width="*" Binding="{Binding RankName}"/>
                     </DataGrid.Columns>
                 </DataGrid>

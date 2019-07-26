@@ -14,6 +14,7 @@ namespace ImusCityGovernmentSystem.Model
     
     public partial class LicensingCode
     {
+        public int LicenseId { get; set; }
         public string LicenseKey { get; set; }
         public Nullable<System.DateTime> ExpirationDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
@@ -21,6 +22,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<bool> IsDemo { get; set; }
         public Nullable<int> SubModuleID { get; set; }
         public Nullable<int> UserID { get; set; }
+        public Nullable<System.DateTime> ActivatedDate { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual SubModule SubModule { get; set; }

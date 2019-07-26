@@ -14,7 +14,7 @@ namespace ImusCityGovernmentSystem
     public partial class App : Application
     {
         public static int EmployeeID;
-        public static string LicenseKey;
+        public static string LicenseKey = "2LGQMFN6";
         public static int ReportID;
         public static bool ByPass;
     }

@@ -19,7 +19,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> EmployeeID { get; set; }
         public string Answer { get; set; }
     
-        public virtual SecurityQuestionBank SecurityQuestionBank { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual SecurityQuestionBank SecurityQuestionBank { get; set; }
     }
 }

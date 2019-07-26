@@ -43,6 +43,7 @@ namespace ImusCityGovernmentSystem.General.Rank
                 {
                     var find = db.EmployeeRanks.Find(RankID);
                     txtName.Text = find.EmployeeRankName;
+                    txtCode.Text = find.RankCode;
                 }
             }
             catch (Exception ex)
@@ -61,6 +62,7 @@ namespace ImusCityGovernmentSystem.General.Rank
                     {
                         var find = db.EmployeeRanks.Find(RankID);
                         find.EmployeeRankName = txtName.Text;
+                        find.RankCode = txtCode.Text;
                         db.SaveChanges();
 
                         var audit = new AuditTrailModel

@@ -24,6 +24,7 @@ namespace ImusCityGovernmentSystem.General.Rank
         {
             public int RankID { get; set; }
             public string RankName { get; set; }
+            public string RankCode { get; set; }
         }
         List<RankList> RList = new List<RankList>();
         public RankListWindow()
@@ -65,6 +66,7 @@ namespace ImusCityGovernmentSystem.General.Rank
                             RankList rl = new RankList();
                             rl.RankID = item.EmployeeRankID;
                             rl.RankName = item.EmployeeRankName;
+                            rl.RankCode = item.RankCode;
                             RList.Add(rl);
 
                         }
@@ -159,6 +161,7 @@ namespace ImusCityGovernmentSystem.General.Rank
                             RankList rl = new RankList();
                             rl.RankID = item.EmployeeRankID;
                             rl.RankName = item.EmployeeRankName;
+                            rl.RankCode = item.RankCode;
                             RList.Add(rl);
 
                         }

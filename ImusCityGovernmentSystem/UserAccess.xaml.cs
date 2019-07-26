@@ -31,7 +31,7 @@ namespace ImusCityGovernmentSystem
             ImusCityHallEntities db = new ImusCityHallEntities();
             var employees = from p in db.Employees
                             orderby p.FirstName
-                            where p.EmployeeID != App.EmployeeID
+                            where p.EmployeeID != App.EmployeeID && p.EmployeeNo != "123456" && p.EmployeeNo != "0000001"
                             select new
                             {
                                 Name = p.FirstName + " " + p.MiddleName + " " + p.LastName,

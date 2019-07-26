@@ -22,6 +22,7 @@ namespace ImusCityGovernmentSystem.Model
     
         public int EmployeeRankID { get; set; }
         public string EmployeeRankName { get; set; }
+        public string RankCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeePosition> EmployeePositions { get; set; }

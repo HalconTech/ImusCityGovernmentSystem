@@ -48,10 +48,7 @@ namespace ImusCityGovernmentSystem
             {
                 bdgNotif.Badge = notif.Count;
                 btnNotif.Visibility = Visibility.Visible;
-                lvNotif.ItemsSource = notif;
-
-                    
-
+                lvNotif.ItemsSource = notif;            
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvNotif.ItemsSource);
                 PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupName");
                 view.GroupDescriptions.Add(groupDescription);

@@ -43,6 +43,7 @@ namespace ImusCityGovernmentSystem.General.Rank
                         {
                             Model.EmployeeRank er = new Model.EmployeeRank();
                             er.EmployeeRankName = txtName.Text;
+                            er.RankCode = txtCode.Text;
                             db.EmployeeRanks.Add(er);
                             db.SaveChanges();
 
@@ -83,12 +84,14 @@ namespace ImusCityGovernmentSystem.General.Rank
         public void TextClear()
         {
             txtName.Clear();
-            txtName.Focus();
+
+            txtCode.Clear();
+            txtCode.Focus();
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            txtName.Focus();
+            txtCode.Focus();
         }
     }
 }

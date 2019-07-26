@@ -34,33 +34,34 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<AuditTrail> AuditTrails { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
+        public virtual DbSet<BankTrail> BankTrails { get; set; }
+        public virtual DbSet<CDSSignatory> CDSSignatories { get; set; }
+        public virtual DbSet<Check> Checks { get; set; }
+        public virtual DbSet<CheckRelease> CheckReleases { get; set; }
+        public virtual DbSet<ControlNumber> ControlNumbers { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CustomerIdentificationCard> CustomerIdentificationCards { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Disbursement> Disbursements { get; set; }
         public virtual DbSet<Division> Divisions { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<EmployeePosition> EmployeePositions { get; set; }
         public virtual DbSet<EmployeeRank> EmployeeRanks { get; set; }
         public virtual DbSet<EmployeeStatu> EmployeeStatus { get; set; }
         public virtual DbSet<Fund> Funds { get; set; }
         public virtual DbSet<FundBank> FundBanks { get; set; }
+        public virtual DbSet<IdentificationCardType> IdentificationCardTypes { get; set; }
+        public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<Payee> Payees { get; set; }
         public virtual DbSet<PayeeRepresentative> PayeeRepresentatives { get; set; }
         public virtual DbSet<SecurityQuestionBank> SecurityQuestionBanks { get; set; }
         public virtual DbSet<SecurityQuestionUser> SecurityQuestionUsers { get; set; }
         public virtual DbSet<SubModule> SubModules { get; set; }
         public virtual DbSet<SubModuleUser> SubModuleUsers { get; set; }
+        public virtual DbSet<SystemSetting> SystemSettings { get; set; }
         public virtual DbSet<UserAccount> UserAccounts { get; set; }
         public virtual DbSet<PayeeRepresentativeView> PayeeRepresentativeViews { get; set; }
-        public virtual DbSet<BankTrail> BankTrails { get; set; }
-        public virtual DbSet<CDSSignatory> CDSSignatories { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<ControlNumber> ControlNumbers { get; set; }
-        public virtual DbSet<Check> Checks { get; set; }
-        public virtual DbSet<CheckRelease> CheckReleases { get; set; }
-        public virtual DbSet<IdentificationCardType> IdentificationCardTypes { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<EmployeePosition> EmployeePositions { get; set; }
-        public virtual DbSet<CustomerIdentificationCard> CustomerIdentificationCards { get; set; }
         public virtual DbSet<LicensingCode> LicensingCodes { get; set; }
-        public virtual DbSet<SystemSetting> SystemSettings { get; set; }
     
         public virtual ObjectResult<GetDisbursementVoucher_Result> GetDisbursementVoucher(Nullable<int> disbursementID)
         {

@@ -12,24 +12,18 @@ namespace ImusCityGovernmentSystem.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class SubModule
+    public partial class Module
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SubModule()
+        public Module()
         {
-            this.SubModuleUsers = new HashSet<SubModuleUser>();
-            this.LicensingCodes = new HashSet<LicensingCode>();
+            this.SubModules = new HashSet<SubModule>();
         }
     
-        public int SubModuleID { get; set; }
-        public string Name { get; set; }
-        public string Acronym { get; set; }
-        public Nullable<int> ModuleID { get; set; }
+        public int ModuleID { get; set; }
+        public string ModuleName { get; set; }
     
-        public virtual Module Module { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubModuleUser> SubModuleUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LicensingCode> LicensingCodes { get; set; }
+        public virtual ICollection<SubModule> SubModules { get; set; }
     }
 }

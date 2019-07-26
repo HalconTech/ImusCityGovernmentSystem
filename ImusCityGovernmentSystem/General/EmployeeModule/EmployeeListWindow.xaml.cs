@@ -53,7 +53,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
 
                 if (String.IsNullOrEmpty(searchKey))
                 {
-                    foreach (var employee in db.Employees.Where(m => m.EmployeeNo != "123456"))
+                    foreach (var employee in db.Employees.Where(m => m.EmployeeNo != "123456" && m.EmployeeNo != "0000001"))
                     {
                         employee.FirstName = string.Join(" ", employee.FirstName, employee.LastName);
                         employeeList.Add(employee);
@@ -61,7 +61,7 @@ namespace ImusCityGovernmentSystem.General.EmployeeModule
                 }
                 else
                 {
-                    foreach (var employee in db.Employees.Where(m => (m.FirstName.Contains(searchKey) || m.MiddleName.Contains(searchKey) || m.LastName.Contains(searchKey)) && m.EmployeeNo != "123456"))
+                    foreach (var employee in db.Employees.Where(m => (m.FirstName.Contains(searchKey) || m.MiddleName.Contains(searchKey) || m.LastName.Contains(searchKey)) && m.EmployeeNo != "123456" && m.EmployeeNo != "0000001"))
                     {
                         employee.FirstName = string.Join(" ", employee.FirstName, employee.LastName);
                         employeeList.Add(employee);

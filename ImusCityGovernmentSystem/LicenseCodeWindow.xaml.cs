@@ -20,6 +20,7 @@ namespace ImusCityGovernmentSystem
     /// </summary>
     public partial class LicenseCodeWindow : MetroWindow
     {
+        public string subModuleCode;
         public LicenseCodeWindow()
         {
             InitializeComponent();
@@ -30,20 +31,44 @@ namespace ImusCityGovernmentSystem
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                LicensingCode license = db.LicensingCodes.FirstOrDefault(m => m.LicenseKey == licensekey.Text);
+                var licenseList = from p in db.LicensingCodes
+                                  select new
+                                  {
+                                      p.LicenseId,
+                                      p.ExpirationDate,
+                                      p.SubModule,
+                                      LicenseKey = p.LicenseKey.Replace("\r\n", string.Empty)
+                                  };
 
-                if (license != null && license.ExpirationDate > DateTime.Now.Date)
+              
+                if (String.IsNullOrEmpty(licensekey.Text))
                 {
+                    MessageBox.Show("The license key field is empty");
+                    return;
+                }
+                var licenseCode = licenseList.FirstOrDefault(m => m.LicenseKey == licensekey.Text);
+                LicensingCode license = new LicensingCode()
+                {
+                    LicenseId = licenseCode.LicenseId,
+                    LicenseKey = licenseCode.LicenseKey,
+                    ExpirationDate = licenseCode.ExpirationDate,
+                    SubModule = licenseCode.SubModule
+                };
+
+
+                if (license != null && license.ExpirationDate > DateTime.Now.Date && license.SubModule.Acronym == subModuleCode && license.LicenseKey == App.LicenseKey)
+                {
+                    LicensingCode dbLicense = db.LicensingCodes.Find(license.LicenseId);
                     //license.MachineName = Environment.MachineName;
-                    license.UserID = App.EmployeeID;
+                    //license.UserID = App.EmployeeID;
+                    dbLicense.ActivatedDate = DateTime.Now;
                     db.SaveChanges();
                     MessageBox.Show("License key applied");
-                    App.LicenseKey = licensekey.Text;
                     this.Close();
                 }
                 else if (String.IsNullOrEmpty(licensekey.Text))
                 {
-                    MessageBox.Show("Please enter a valid license key.");
+                    MessageBox.Show("The license key field is empty");
                 }
                 else if (license == null)
                 {
@@ -53,10 +78,18 @@ namespace ImusCityGovernmentSystem
                 {
                     MessageBox.Show("The license that youve entering is expired!");
                 }
-                else if (license.LicenseKey == licensekey.Text && license.UserID == App.EmployeeID)
+                else if (licensekey.Text != App.LicenseKey)
                 {
-                    MessageBox.Show("This license is associated with another user");
+                    MessageBox.Show("Please enter a valid license key.");
                 }
+                else if (license.SubModule.Acronym != subModuleCode && license != null)
+                {
+                    MessageBox.Show("The license that you are applying is not meant for the specified module");
+                }
+                //else if (license.LicenseKey == licensekey.Text && license.UserID == App.EmployeeID)
+                //{
+                //    MessageBox.Show("This license is associated with another user");
+                //}
             }
             else
             {

@@ -449,6 +449,9 @@
     <Compile Include="Model\LicensingCode.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Module.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Payee.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
