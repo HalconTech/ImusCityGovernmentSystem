@@ -87,7 +87,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                             checkcb.IsChecked = false;
                             break;
                     }
-                    payeetb.Text = dis.Payee.CompanyName;
+                    payeetb.Text = dis.Payee == null ? null : dis.Payee.CompanyName ;
                     projectnametb.Text = dis.ProjectName;
                     departmenttb.Text = dis.Department == null ? null : dis.Department.DepartmentName;
                     descriptiontb.Text = dis.Description;
@@ -115,10 +115,19 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            ReportWindow report = new ReportWindow();
-            report.id = (int)voucherlistlb.SelectedValue;
-            App.ReportID = 1;
-            report.Show();
+            if (voucherlistlb.SelectedValue == null)
+            {
+                Mouse.OverrideCursor = null;
+                MessageBox.Show("Please select an item");
+            }
+            else
+            {
+                ReportWindow report = new ReportWindow();
+                report.id = (int)voucherlistlb.SelectedValue;
+                App.ReportID = 1;
+                report.Show();
+                Mouse.OverrideCursor = null;
+            }
             Mouse.OverrideCursor = null;
         }
 
@@ -158,7 +167,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                     MessageBox.Show(SystemClass.DBConnectionErrorMessage);
                 }
 
-                
+
             }
             Mouse.OverrideCursor = null;
         }

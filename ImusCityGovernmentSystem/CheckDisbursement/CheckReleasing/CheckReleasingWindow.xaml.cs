@@ -305,7 +305,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.CheckReleasing
                 voucherNumbertb.Text = check.Disbursement.VoucherNo;
                 checknumbertb.Text = check.CheckNo;
                 checkdatetb.Text = check.DateCreated.Value.ToShortDateString();
-                companynametb.Text = check.Disbursement.Payee.CompanyName;
+                companynametb.Text = check.Disbursement.Payee == null ? check.Disbursement.PayeeName : check.Disbursement.Payee.CompanyName;
                 checkdescriptiontb.Text = check.CheckDescription;
                 banktb.Text = string.Join("/", check.Disbursement.FundBank.Fund.FundName, check.Disbursement.FundBank.Bank.BankName);
                 amountb.Text = string.Format("{0:n}", check.Amount);

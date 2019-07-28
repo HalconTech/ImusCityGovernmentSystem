@@ -103,7 +103,7 @@ namespace ImusCityGovernmentSystem
                 ImusCityGovernmentSystem.Model.Check checklist = db.Checks.Find(id);
                 check.CheckNo = checklist.CheckNo;
                 check.CheckDate = checklist.DateCreated.Value;
-                check.CompanyName = checklist.Disbursement.Payee.CompanyName;
+                check.CompanyName = checklist.Disbursement.Payee == null ? checklist.Disbursement.PayeeName : checklist.Disbursement.Payee.CompanyName;
                 CurrencyToWords convert = new CurrencyToWords();
                 double amount = Convert.ToDouble(checklist.Amount.Value);
                 check.AmountInWords = convert.NumberToWords(amount).ToUpper();

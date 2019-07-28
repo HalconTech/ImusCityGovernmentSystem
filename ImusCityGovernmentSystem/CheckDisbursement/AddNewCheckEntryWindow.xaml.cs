@@ -39,7 +39,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 Disbursement disbursement = db.Disbursements.Find(DisbursementID);
                 vouchernotb.Text = disbursement.VoucherNo;
-                payeetb.Text = disbursement.Payee.CompanyName;
+                payeetb.Text = disbursement.Payee == null ? disbursement.PayeeName : disbursement.Payee.CompanyName;
                 descriptiontb.Text = disbursement.Description;
                 paymenttypecb.SelectedIndex = disbursement.PaymentTypeID.HasValue ? disbursement.PaymentTypeID.Value : 0;
                 voucheramounttb.Text = String.Format("{0:0.##}", disbursement.Amount);
