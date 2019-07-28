@@ -79,7 +79,7 @@
                             <TextBlock Grid.Row="3" Text="Company Name:"></TextBlock>
                             <TextBlock Grid.Row="3" Grid.Column="1" Name="companynametb"></TextBlock>
                             <TextBlock Grid.Row="4" Text="Check Description:"></TextBlock>
-                            <TextBlock  Grid.Row="4" Grid.Column="1" Grid.RowSpan="2" Name="checkdescriptiontb"></TextBlock>
+                            <TextBlock Grid.Row="4" Grid.Column="1" Grid.RowSpan="2" Name="checkdescriptiontb"></TextBlock>
                             <TextBlock Grid.Row="6" Text="Bank/Fund"></TextBlock>
                             <TextBlock Grid.Row="6" Grid.Column="1"></TextBlock>
                             <TextBlock Grid.Column="1" Grid.Row="6" Name="banktb"></TextBlock>
