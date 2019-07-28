@@ -74,7 +74,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     }
                     else if (optionpayeecb.IsChecked == true && String.IsNullOrEmpty(optionalpayee.Text))
                     {
-                        
+
                         MessageBox.Show("Please enter payee name");
                     }
                     else if (paymenttypecb.SelectedValue == null)
@@ -108,7 +108,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                                 return;
                             }
 
-                            
+
 
                             Disbursement disbursement = new Disbursement();
                             disbursement.PayeeID = optionpayeecb.IsChecked == true ? null : payeecb.SelectedValue == null ? (int?)null : (int)payeecb.SelectedValue;
@@ -124,7 +124,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                             disbursement.PayeeRepID = payeerepcb.SelectedValue == null ? (int?)null : (int)payeerepcb.SelectedValue;
                             disbursement.PayeeName = optionalpayee.Text;
                             disbursement.FundBankID = (int)fundtypecb.SelectedValue;
-                            
+
                             var x = db.Disbursements.Add(disbursement);
                             db.SaveChanges();
                             var audit = new AuditTrailModel
@@ -238,7 +238,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 if (fundbank != null)
                 {
 
-                    string prefix = fundbank.Fund.FundPrefix + "-";
+                    string prefix = fundbank.Fund.FundPrefix + "-" + DateTime.Now.Year.ToString().Substring(2, 2) + "-";
                     voucherprefixtb.Text = prefix;
                     currentbalancetb.Text = String.Format(new System.Globalization.CultureInfo("en-PH"), "{0:C}", fundbank.CurrentBalance);
                     vouchernotb.Focus();
@@ -302,7 +302,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-          
+
 
         }
     }
