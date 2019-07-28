@@ -279,6 +279,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 payeecb.DisplayMemberPath = "CompanyName";
                 payeecb.SelectedValuePath = "PayeeID";
                 payeecb.IsEnabled = false;
+                payeerepcb.IsEnabled = false;
                 optionalpayee.IsEnabled = true;
             }
             else
@@ -296,6 +297,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 payeecb.DisplayMemberPath = "CompanyName";
                 payeecb.SelectedValuePath = "PayeeID";
                 payeecb.IsEnabled = true;
+                payeerepcb.IsEnabled = true;
                 optionalpayee.IsEnabled = false;
             }
             else
