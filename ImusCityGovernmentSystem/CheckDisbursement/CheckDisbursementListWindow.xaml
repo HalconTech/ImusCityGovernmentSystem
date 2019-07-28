@@ -86,7 +86,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Text="Voucher List" Grid.Column="1" FontWeight="Bold" FontSize="14"></TextBlock>
-            <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="voucherlistdg"  BorderBrush="Black" Grid.Row="1" BorderThickness="1"  Grid.Column="1" SelectionChanged="voucherlistdg_SelectionChanged_1" Margin="0" GridLinesVisibility="All" >
+            <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="voucherlistdg"  BorderBrush="Black" Grid.Row="1" BorderThickness="1" SelectionChanged="voucherlistdg_SelectionChanged_1" GridLinesVisibility="All" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Voucher Number" Binding="{ Binding VoucherNo}"></DataGridTextColumn>
                     <DataGridTextColumn Width="280" Header="Payee" Binding="{ Binding PayeeName}"></DataGridTextColumn>

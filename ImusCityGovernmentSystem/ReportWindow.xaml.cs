@@ -122,6 +122,6 @@ namespace ImusCityGovernmentSystem
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-        }       
+        }
     }
 }

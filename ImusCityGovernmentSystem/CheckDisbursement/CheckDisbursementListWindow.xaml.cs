@@ -110,18 +110,28 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 if (SystemClass.CheckConnection())
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();
-                    Disbursement disbursement = db.Disbursements.Find((int)voucherlistdg.SelectedValue);
-
-                    var controlNumber = disbursement.FundBank.ControlNumbers.FirstOrDefault(m => m.Active == true);
-
-                    if (controlNumber == null)
+                    CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
+                    if (signatories == null)
                     {
-                        MessageBox.Show("Selected fund have no available check number");
-                        return;
+                        MessageBox.Show("Please add report signatories");
+                    }
+                    else if (signatories.CityMayor.Equals(null) || signatories.CityTreasurer.Equals(null))
+                    {
+                        MessageBox.Show("Please add report signatories");
                     }
                     else
                     {
-                        addcheck.ShowDialog();
+                        Disbursement disbursement = db.Disbursements.Find((int)voucherlistdg.SelectedValue);
+                        var controlNumber = disbursement.FundBank.ControlNumbers.FirstOrDefault(m => m.Active == true);
+                        if (controlNumber == null)
+                        {
+                            MessageBox.Show("Selected fund have no available check number");
+                            return;
+                        }
+                        else
+                        {
+                            addcheck.ShowDialog();
+                        }
                     }
                 }
                 else
