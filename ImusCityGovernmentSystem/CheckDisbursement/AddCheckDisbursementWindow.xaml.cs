@@ -122,7 +122,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                             disbursement.Obligated = obligatedcb.IsChecked;
                             disbursement.DocCompleted = documentcb.IsChecked;
                             disbursement.PayeeRepID = payeerepcb.SelectedValue == null ? (int?)null : (int)payeerepcb.SelectedValue;
-                            disbursement.PayeeName = optionalpayee.Text;
+                            disbursement.PayeeName = optionalpayee.Text.ToUpper();
                             disbursement.FundBankID = (int)fundtypecb.SelectedValue;
 
                             var x = db.Disbursements.Add(disbursement);
