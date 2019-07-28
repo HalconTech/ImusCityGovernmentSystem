@@ -93,5 +93,14 @@ namespace ImusCityGovernmentSystem
             result = employee.FirstName + " " + employee.MiddleName + " " + employee.LastName;
             return result;
         }
+
+        public static string Employee(int id)
+        {
+            string result = "";
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            ImusCityGovernmentSystem.Model.Employee employee = db.Employees.Find(id);
+            result = employee.FirstName + " " + employee.LastName;
+            return result;
+        }
     }
 }

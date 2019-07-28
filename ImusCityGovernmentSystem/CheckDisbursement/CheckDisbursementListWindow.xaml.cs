@@ -31,15 +31,25 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             InitializeComponent();
         }
 
+
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            List<Disbursement> disbursementList = new List<Disbursement>();
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
-                voucherlistlb.ItemsSource = db.Disbursements.OrderByDescending(m => m.DisbursementID).ToList();
-                voucherlistlb.DisplayMemberPath = "VoucherNo";
-                voucherlistlb.SelectedValuePath = "DisbursementID";
-                voucherlistlb.SelectedIndex = 0;
+                foreach (var item in db.Disbursements)
+                {
+                    var disbursement = new Disbursement()
+                    {
+                        DisbursementID = item.DisbursementID,
+                        VoucherNo = item.VoucherNo,
+                        PayeeName = item.Payee == null ? item.PayeeName : item.Payee.CompanyName
+                    };
+                    disbursementList.Add(disbursement);
+                }
+                voucherlistdg.ItemsSource = disbursementList;
+                voucherlistdg.SelectedValuePath = "DisbursementID";
             }
             else
             {
@@ -47,22 +57,107 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             }
 
         }
+        private void addbtn_Click(object sender, RoutedEventArgs e)
+        {
+            ImusCityGovernmentSystem.CheckDisbursement.AddCheckDisbursementWindow add = new CheckDisbursement.AddCheckDisbursementWindow();
+            add.Show();
+        }
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
+            if (voucherlistdg.SelectedValue == null)
+            {
+                Mouse.OverrideCursor = null;
+                MessageBox.Show("Please select an item");
+            }
+            else if (signatories == null)
+            {
+                Mouse.OverrideCursor = null;
+                MessageBox.Show("Please add report signatories");
+            }
+            else if (signatories.CItyAccountant.Equals(null) || signatories.CityTreasurer.Equals(null) || signatories.CityAdministrator.Equals(null))
+            {
+                Mouse.OverrideCursor = null;
+                MessageBox.Show("Please add report signatories");
+            }
+            else
+            {
+                ReportWindow report = new ReportWindow();
+                report.id = (int)voucherlistdg.SelectedValue;
+                App.ReportID = 1;
+                report.Show();
+                Mouse.OverrideCursor = null;
+            }
+            Mouse.OverrideCursor = null;
+        }
 
-        private void voucherlistlb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void checkbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            if (voucherlistdg.SelectedValue == null)
+            {
+                Mouse.OverrideCursor = null;
+                MessageBox.Show("Please select an item");
+            }
+            else
+            {
+                CheckDisbursement.AddNewCheckEntryWindow addcheck = new CheckDisbursement.AddNewCheckEntryWindow();
+                Mouse.OverrideCursor = null;
+                addcheck.DisbursementID = (int)voucherlistdg.SelectedValue;
+
+                if (SystemClass.CheckConnection())
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
+                    if (signatories == null)
+                    {
+                        MessageBox.Show("Please add report signatories");
+                    }
+                    else if (signatories.CityMayor.Equals(null) || signatories.CityTreasurer.Equals(null))
+                    {
+                        MessageBox.Show("Please add report signatories");
+                    }
+                    else
+                    {
+                        Disbursement disbursement = db.Disbursements.Find((int)voucherlistdg.SelectedValue);
+                        var controlNumber = disbursement.FundBank.ControlNumbers.FirstOrDefault(m => m.Active == true);
+                        if (controlNumber == null)
+                        {
+                            MessageBox.Show("Selected fund have no available check number");
+                            return;
+                        }
+                        else
+                        {
+                            addcheck.ShowDialog();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+
+
+            }
+            Mouse.OverrideCursor = null;
+        }
+
+        private void voucherlistdg_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
             if (SystemClass.CheckConnection())
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 db = new ImusCityHallEntities();
-                if (voucherlistlb.SelectedValue == null)
+                if (voucherlistdg.SelectedValue == null)
                 {
                     return;
                 }
                 else
                 {
-
-                    int DisbursementID = (int)voucherlistlb.SelectedValue;
+                    int DisbursementID = (int)voucherlistdg.SelectedValue;
                     Disbursement dis = db.Disbursements.Find(DisbursementID);
                     vouchernotb.Text = dis.VoucherNo;
                     datetb.Text = dis.DateCreated.HasValue ? dis.DateCreated.Value.ToShortDateString() : null;
@@ -75,6 +170,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                             checkcb.IsChecked = true;
                             cashcb.IsChecked = false;
                             otherscb.IsChecked = false;
+                            paymenttypetb.Text = "Check";
                             break;
                         case (int)PaymentType.Cash:
                             cashcb.IsChecked = true;
@@ -87,7 +183,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                             checkcb.IsChecked = false;
                             break;
                     }
-                    payeetb.Text = dis.Payee == null ? null : dis.Payee.CompanyName ;
+                    payeetb.Text = dis.Payee == null ? dis.PayeeName : dis.Payee.CompanyName;
                     projectnametb.Text = dis.ProjectName;
                     departmenttb.Text = dis.Department == null ? null : dis.Department.DepartmentName;
                     descriptiontb.Text = dis.Description;
@@ -106,72 +202,5 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
 
             Mouse.OverrideCursor = null;
         }
-
-        private void addbtn_Click(object sender, RoutedEventArgs e)
-        {
-            ImusCityGovernmentSystem.CheckDisbursement.AddCheckDisbursementWindow add = new CheckDisbursement.AddCheckDisbursementWindow();
-            add.Show();
-        }
-        private void btnPrint_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            if (voucherlistlb.SelectedValue == null)
-            {
-                Mouse.OverrideCursor = null;
-                MessageBox.Show("Please select an item");
-            }
-            else
-            {
-                ReportWindow report = new ReportWindow();
-                report.id = (int)voucherlistlb.SelectedValue;
-                App.ReportID = 1;
-                report.Show();
-                Mouse.OverrideCursor = null;
-            }
-            Mouse.OverrideCursor = null;
-        }
-
-        private void checkbtn_Click(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            if (voucherlistlb.SelectedValue == null)
-            {
-                Mouse.OverrideCursor = null;
-                MessageBox.Show("Please select an item");
-            }
-            else
-            {
-                CheckDisbursement.AddNewCheckEntryWindow addcheck = new CheckDisbursement.AddNewCheckEntryWindow();
-                Mouse.OverrideCursor = null;
-                addcheck.DisbursementID = (int)voucherlistlb.SelectedValue;
-
-                if (SystemClass.CheckConnection())
-                {
-                    ImusCityHallEntities db = new ImusCityHallEntities();
-                    Disbursement disbursement = db.Disbursements.Find((int)voucherlistlb.SelectedValue);
-
-                    var controlNumber = disbursement.FundBank.ControlNumbers.FirstOrDefault(m => m.Active == true);
-
-                    if (controlNumber == null)
-                    {
-                        MessageBox.Show("Selected fund have no available check number");
-                        return;
-                    }
-                    else
-                    {
-                        addcheck.ShowDialog();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
-                }
-
-
-            }
-            Mouse.OverrideCursor = null;
-        }
-
-
     }
 }

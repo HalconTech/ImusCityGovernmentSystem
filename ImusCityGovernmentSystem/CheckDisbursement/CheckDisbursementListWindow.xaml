@@ -8,7 +8,7 @@
                       GlowBrush="Black"
                       BorderThickness="0"
                       WindowStartupLocation="CenterScreen"
-                      Height="498.5"
+                      Height="505.5"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       Width="778.571"  Loaded="MetroWindow_Loaded">
@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="420"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid>
             <Grid.RowDefinitions>
@@ -29,10 +29,10 @@
                 <RowDefinition Height="25"></RowDefinition>
                 <RowDefinition Height="25"></RowDefinition>
                 <RowDefinition ></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
@@ -51,29 +51,31 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <CheckBox x:Name="checkcb" Content="Check"></CheckBox>
+                <TextBlock Name="paymenttypetb" Grid.ColumnSpan="3" VerticalAlignment="Center"></TextBlock>
+                <CheckBox Visibility="Hidden" x:Name="checkcb"  Content="Check"></CheckBox>
                 <CheckBox Visibility="Hidden" x:Name="cashcb" Grid.Column="1" Content="Cash"></CheckBox>
                 <CheckBox Visibility="Hidden" x:Name="otherscb" Grid.Column="2" Content="Others"></CheckBox>
             </Grid>
-            <TextBlock Grid.Row="2" Text="Payee:" FontWeight="Bold"></TextBlock>
-            <TextBlock x:Name="payeetb" Grid.ColumnSpan="3" Grid.Row="2" Grid.Column="1"/>
-            <TextBlock Grid.Row="3" Text="Project Name:" FontWeight="Bold"></TextBlock>
-            <TextBlock x:Name="projectnametb" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"></TextBlock>
-            <TextBlock Grid.Row="4" Text="Department:" FontWeight="Bold"></TextBlock>
-            <TextBlock x:Name="departmenttb" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"></TextBlock>
-            <TextBlock Grid.Row="5" Text="Description:" FontWeight="Bold"></TextBlock>
-            <TextBox x:Name="descriptiontb" Grid.Row="6" TextWrapping="Wrap" Grid.ColumnSpan="4" ></TextBox>
+            <TextBlock Grid.Row="2" VerticalAlignment="Center"   Text="Payee:" FontWeight="Bold"></TextBlock>
+            <TextBlock x:Name="payeetb" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" Grid.Column="1"/>
+            <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="Project Name:" FontWeight="Bold"></TextBlock>
+            <TextBlock x:Name="projectnametb" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"></TextBlock>
+            <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="Department:" FontWeight="Bold"></TextBlock>
+            <TextBlock x:Name="departmenttb" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"></TextBlock>
+            <TextBlock Grid.Row="5" Text="Description:" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+            <TextBox IsReadOnly="True" IsEnabled="False" x:Name="descriptiontb"  Grid.Row="6" TextWrapping="Wrap" Grid.ColumnSpan="4" ></TextBox>
 
             <CheckBox x:Name="obligatedcb" Grid.Row="7" Content="Allotment obligated for the purpose as indicated above" Grid.ColumnSpan="4"></CheckBox>
             <CheckBox x:Name="documentcb" Grid.Row="8" Content="Supporting documents completed" Grid.ColumnSpan="4"></CheckBox>
-            <TextBlock VerticalAlignment="Center" Text="Amount:" FontWeight="Bold" FontSize="16" Grid.Row="9"></TextBlock>
+            <Border Grid.Row="9" Grid.ColumnSpan="4" Background="#FFDADADA"/>
+            <TextBlock Padding="5" VerticalAlignment="Center" Text="Amount:" FontWeight="Bold" FontSize="16" Grid.Row="9"></TextBlock>
             <TextBlock VerticalAlignment="Center" x:Name="amounttb" Grid.Column="1" FontSize="16" Grid.ColumnSpan="3" Grid.Row="9" Foreground="#FFB40000" FontWeight="Bold"/>
-            <Grid Grid.Row="10"  Grid.ColumnSpan="4">
+            <Grid Grid.Row="10"  Grid.ColumnSpan="4" Margin="0,10,0,0" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnPrint"  Content="Print Dis. Voucher"  Click="btnPrint_Click" FontSize="12" Margin="0,0,5,0"/>
+                <Button x:Name="btnPrint"  Content="Print Disbursement Voucher"  Click="btnPrint_Click" FontSize="11" Margin="0,0,5,0"/>
                 <Button Name="checkbtn" Grid.Column="1" Content="Generate Check" Click="checkbtn_Click"></Button>
             </Grid>
 
@@ -83,8 +85,13 @@
                 <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Text="Voucher List" Grid.Column="1" FontWeight="Bold"></TextBlock>
-            <ListBox Name="voucherlistlb"  BorderBrush="Black" Grid.Row="1" BorderThickness="1"  Grid.Column="1" SelectionChanged="voucherlistlb_SelectionChanged" Margin="0" ></ListBox>
+            <TextBlock Text="Voucher List" Grid.Column="1" FontWeight="Bold" FontSize="14"></TextBlock>
+            <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="voucherlistdg"  BorderBrush="Black" Grid.Row="1" BorderThickness="1" SelectionChanged="voucherlistdg_SelectionChanged_1" GridLinesVisibility="All" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Voucher Number" Binding="{ Binding VoucherNo}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="280" Header="Payee" Binding="{ Binding PayeeName}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
 
     </Grid>

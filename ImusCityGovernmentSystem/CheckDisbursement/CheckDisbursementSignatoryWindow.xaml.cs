@@ -33,12 +33,12 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 if (db.CDSSignatories.Any())
                 {
                     ImusCityGovernmentSystem.Model.CDSSignatory signatory = db.CDSSignatories.FirstOrDefault();
-                    signatory.CityMayor = (int)mayorcb.SelectedValue;
-                    signatory.CityTreasurer = (int)treasurercb.SelectedValue;
-                    signatory.CItyAccountant = (int)accountantcb.SelectedValue;
-                    signatory.AccountantRepresentative = (int)accountantrepcb.SelectedValue;
-                    signatory.CityAdministrator = (int)administratorcb.SelectedValue;
-                    signatory.DisbursingOfficer = (int)disbursingcb.SelectedValue;
+                    signatory.CityMayor = mayorcb.SelectedValue == null ? null : (int?)mayorcb.SelectedValue;
+                    signatory.CityTreasurer = treasurercb.SelectedValue == null ? null : (int?)treasurercb.SelectedValue;
+                    signatory.CItyAccountant = accountantcb.SelectedValue == null ? null : (int?)accountantcb.SelectedValue;
+                    signatory.AccountantRepresentative = accountantrepcb.SelectedValue == null ? null : (int?)accountantrepcb.SelectedValue;
+                    signatory.CityAdministrator = administratorcb.SelectedValue == null ? null : (int?)administratorcb.SelectedValue;
+                    signatory.DisbursingOfficer = disbursingcb.SelectedValue == null ? null : (int?)disbursingcb.SelectedValue;
                     db.SaveChanges();
                     MessageBox.Show("Signatories for CDS was updated");
 
@@ -50,17 +50,17 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     };
 
                     SystemClass.InsertLog(audit);
-                 
+
                 }
                 else
                 {
                     ImusCityGovernmentSystem.Model.CDSSignatory signatory = new CDSSignatory();
-                    signatory.CityMayor = (int)mayorcb.SelectedValue;
-                    signatory.CityTreasurer = (int)treasurercb.SelectedValue;
-                    signatory.CItyAccountant = (int)accountantcb.SelectedValue;
-                    signatory.AccountantRepresentative = (int)accountantrepcb.SelectedValue;
-                    signatory.CityAdministrator = (int)administratorcb.SelectedValue;
-                    signatory.DisbursingOfficer = (int)disbursingcb.SelectedValue;
+                    signatory.CityMayor = mayorcb.SelectedValue == null ? null : (int?)mayorcb.SelectedValue;
+                    signatory.CityTreasurer = treasurercb.SelectedValue == null ? null : (int?)treasurercb.SelectedValue;
+                    signatory.CItyAccountant = accountantcb.SelectedValue == null ? null : (int?)accountantcb.SelectedValue;
+                    signatory.AccountantRepresentative = accountantrepcb.SelectedValue == null ? null : (int?)accountantrepcb.SelectedValue;
+                    signatory.CityAdministrator = administratorcb.SelectedValue == null ? null : (int?)administratorcb.SelectedValue;
+                    signatory.DisbursingOfficer = disbursingcb.SelectedValue == null ? null : (int?)disbursingcb.SelectedValue;
                     db.CDSSignatories.Add(signatory);
                     db.SaveChanges();
                     MessageBox.Show("Signatories for CDS was updated");
@@ -131,7 +131,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 }
                 else
                 {
-                   
+
                 }
             }
             else
