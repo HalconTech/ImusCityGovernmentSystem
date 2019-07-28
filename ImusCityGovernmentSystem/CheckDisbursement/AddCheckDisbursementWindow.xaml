@@ -3,6 +3,7 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
                       Title="Add Disbursement"
                       TitleCaps="False"
                       BorderThickness="0"
@@ -11,8 +12,10 @@
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
-                      Width="627"  Loaded="MetroWindow_Loaded" GlowBrush="Black">
+                      Width="627"  Loaded="MetroWindow_Loaded" GlowBrush="Black"
+                      >
     <Grid Margin="10">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="430"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
@@ -109,7 +112,7 @@
             <CheckBox x:Name="documentcb" Grid.Row="9" Content="Supporting documents completed" Grid.ColumnSpan="4"></CheckBox>
 
             <TextBlock Text="Amount:" FontWeight="Bold" FontSize="16" Grid.Row="10" VerticalAlignment="Center"></TextBlock>
-            <TextBox VerticalContentAlignment="Center" x:Name="amounttb" Grid.Column="1" FontSize="16" Grid.ColumnSpan="3" Grid.Row="10" Foreground="#FFB40000" FontWeight="Bold"/>
+            <currency:CurrencyTextBox StringFormat="N2" VerticalContentAlignment="Center" x:Name="amounttb"  Grid.Column="1" FontSize="16" Grid.ColumnSpan="3" Grid.Row="10" Foreground="#FFB40000" FontWeight="Bold"/>
         </Grid>
         <Button x:Name="savebtn" Grid.Row="3" Click="savebtn_Click" Margin="0,5,0,0">
             <StackPanel Orientation="Horizontal">

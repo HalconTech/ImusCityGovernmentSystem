@@ -3,6 +3,7 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
                       Title="Fund Adjustment"
                       TitleCaps="False"
                       BorderThickness="0"
@@ -48,9 +49,9 @@
                 <ComboBoxItem>Credit</ComboBoxItem>
             </ComboBox>
             <TextBlock Grid.Row="8" Text="Current Balance"></TextBlock>
-            <TextBox PreviewTextInput="NumberValidationTextBox" IsEnabled="False" VerticalContentAlignment="Center" Grid.Row="9" Name="currentamounttb"></TextBox>
+            <currency:CurrencyTextBox StringFormat="N2" PreviewTextInput="NumberValidationTextBox" IsEnabled="False" VerticalContentAlignment="Center" Grid.Row="9" Name="currentamounttb"/>
             <TextBlock Grid.Row="10" Text="Amount*"></TextBlock>
-            <TextBox PreviewTextInput="NumberValidationTextBox" VerticalContentAlignment="Center" Grid.Row="11" Name="amounttb"></TextBox>
+            <currency:CurrencyTextBox StringFormat="N2" PreviewTextInput="NumberValidationTextBox" VerticalContentAlignment="Center" Grid.Row="11" Name="amounttb"/>
             <Grid Grid.Row="12" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>

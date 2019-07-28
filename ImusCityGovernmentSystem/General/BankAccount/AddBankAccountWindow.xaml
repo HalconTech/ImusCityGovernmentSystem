@@ -3,6 +3,7 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
                       Title="Add Bank Account"
                       TitleCaps="False"
                       BorderThickness="0"
@@ -44,11 +45,11 @@
             <TextBlock Grid.Row="4" Text="Account Number*"></TextBlock>
             <TextBox VerticalContentAlignment="Center" Grid.Row="5" Name="accountnumbertb"></TextBox>
             <TextBlock Grid.Row="6" Text="Starting Balance*"></TextBlock>
-            <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="7" VerticalContentAlignment="Center" Name="startingbalancetb"></TextBox>
+            <currency:CurrencyTextBox StringFormat="N2" PreviewTextInput="NumberValidationTextBox" Grid.Row="7" VerticalContentAlignment="Center" Name="startingbalancetb"/>
             <TextBlock Grid.Row="8" Text="Current Advice Number*"></TextBlock>
             <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="9"  Name="advicenumbertb"></TextBox>
             <TextBlock Grid.Row="10" Text="Floor Amount*"></TextBlock>
-            <TextBox Grid.Row="11" VerticalContentAlignment="Center" Name="flooramounttb"></TextBox>
+            <currency:CurrencyTextBox StringFormat="N2" Grid.Row="11" VerticalContentAlignment="Center" Name="flooramounttb"/>
             <Grid Grid.Row="12" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
