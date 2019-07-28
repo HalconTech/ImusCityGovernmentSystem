@@ -195,6 +195,6 @@
             </TabItem>
       
         </TabControl>
-        <Button x:Name="savebtn" Grid.Row="1" Content="Save" HorizontalAlignment="Left" Width="100" Click="savebtn_Click" Margin="487,0,0,0"></Button>
+        <Button x:Name="savebtn" Grid.Row="1" Content="Save" HorizontalAlignment="Right" Width="120" Click="savebtn_Click" ></Button>
     </Grid>
 </Controls:MetroWindow>
