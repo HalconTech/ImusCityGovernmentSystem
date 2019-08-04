@@ -9,16 +9,16 @@
                       TitleCaps="False"
                       BorderThickness="0"
                       WindowStartupLocation="CenterScreen"
-                      Height="526.666"
+                      Height="602.666"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
-                      Width="538"  Loaded="MetroWindow_Loaded" GlowBrush="Black"
+                      Width="622"  Loaded="MetroWindow_Loaded" GlowBrush="Black"
                       >
     <Grid Margin="10">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="430"/>
+            <RowDefinition Height="510"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid>
@@ -79,16 +79,14 @@
             <TextBlock Grid.Row="6" Text="Department:" FontWeight="Bold" VerticalAlignment="Center"/>
             <ComboBox IsEditable="True" VerticalContentAlignment="Center" x:Name="departmentcb" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,2.5"/>
             <TextBlock Grid.Row="7" Text="Description:" FontWeight="Bold"/>
-            <DataGrid Grid.Row="8" Name="voucheritemsdg" BorderBrush="Black" Grid.ColumnSpan="2" BorderThickness="1" AutoGenerateColumns="True" GridLinesVisibility="All">
+            <DataGrid Grid.Row="8" Name="voucheritemsdg" Grid.RowSpan="2" BorderBrush="Black" Grid.ColumnSpan="2" BorderThickness="1" AutoGenerateColumns="false" GridLinesVisibility="All">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Explanation" Width="350" Binding="{Binding Explanation}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Amount" Width="150" Binding="{Binding Amount}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <CheckBox x:Name="obligatedcb" Grid.Row="9" Content="Allotment obligated for the purpose as indicated above" Grid.ColumnSpan="4"/>
-            <CheckBox x:Name="documentcb" Grid.Row="10" Content="Supporting documents completed" Grid.ColumnSpan="4"/>
-            <TextBlock Text="Amount:" FontWeight="Bold" FontSize="16" Grid.Row="11" VerticalAlignment="Center"/>
-            <TextBlock Text="0.00" FontWeight="Bold" FontSize="16" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <CheckBox x:Name="obligatedcb" Grid.Row="10" Content="Allotment obligated for the purpose as indicated above" Grid.ColumnSpan="4"/>
+            <CheckBox x:Name="documentcb" Grid.Row="11" Content="Supporting documents completed" Grid.ColumnSpan="4"/>
         </Grid>
         <Button x:Name="savebtn" Grid.Row="3" Click="savebtn_Click" Margin="0,5,0,0">
             <StackPanel Orientation="Horizontal">

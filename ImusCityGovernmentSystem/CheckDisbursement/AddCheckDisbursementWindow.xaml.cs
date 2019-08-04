@@ -46,6 +46,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 departmentcb.DisplayMemberPath = "DepartmentName";
                 departmentcb.SelectedValuePath = "DepartmentID";
                 voucheritemsdg.ItemsSource = voucherList;
+                voucherprefixtb.Text = VoucherPrefix();
                 IncrementAdviceNo();
             }
             else
@@ -54,6 +55,13 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             }
         }
 
+        public string VoucherPrefix()
+        {
+            DateTime dateToday = DateTime.Now;
+            string year = dateToday.Year.ToString().Substring(dateToday.Year.ToString().Length - 2);
+            string month = dateToday.Month.ToString().PadLeft(2, '0');
+            return string.Join("-", year, month);
+        }
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
             if (SystemClass.CheckConnection())
@@ -96,7 +104,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         disbursement.Obligated = obligatedcb.IsChecked;
                         disbursement.DocCompleted = documentcb.IsChecked;
                         disbursement.CreatedBy = App.EmployeeID;
-                        foreach(var voucherItem in voucherList)
+                        foreach (var voucherItem in voucherList)
                         {
                             var item = new DisbursementItem()
                             {
@@ -208,6 +216,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 payeecb.DisplayMemberPath = "CompanyName";
                 payeecb.SelectedValuePath = "PayeeID";
                 payeecb.IsEnabled = false;
+                payeerepcb.ItemsSource = null;
                 payeerepcb.IsEnabled = false;
                 optionalpayee.IsEnabled = true;
             }
@@ -227,14 +236,13 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 payeecb.SelectedValuePath = "PayeeID";
                 payeecb.IsEnabled = true;
                 payeerepcb.IsEnabled = true;
+                payeerepcb.ItemsSource = null;
                 optionalpayee.IsEnabled = false;
             }
             else
             {
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
-
-
         }
     }
 }

@@ -58,9 +58,10 @@ namespace ImusCityGovernmentSystem
                 DVList = new List<DisbursementVoucherModel>();
                 var disburse = db.GetDisbursementVoucher(id).ToList();
                 CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
-                DisbursementVoucherModel dvl = new DisbursementVoucherModel();
+             
                 foreach (var x in disburse)
                 {
+                    DisbursementVoucherModel dvl = new DisbursementVoucherModel();
                     dvl.Amount = x.Amount.HasValue ? x.Amount.Value : 0;
                     dvl.Certification = x.Certification;
                     dvl.CompanyAddress = x.CompanyAddress;
