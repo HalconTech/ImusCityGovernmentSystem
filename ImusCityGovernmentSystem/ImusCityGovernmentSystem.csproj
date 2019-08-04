@@ -395,6 +395,9 @@
     <Compile Include="Model\Disbursement.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\DisbursementItem.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\DisbursementVoucherModel.cs" />
     <Compile Include="Model\Division.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
@@ -484,6 +487,7 @@
     <Compile Include="Model\UserAccount.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\VoucherItemsModel.cs" />
     <Compile Include="RefreshClass.cs" />
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>

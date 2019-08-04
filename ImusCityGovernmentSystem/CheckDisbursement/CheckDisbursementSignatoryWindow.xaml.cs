@@ -35,7 +35,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     ImusCityGovernmentSystem.Model.CDSSignatory signatory = db.CDSSignatories.FirstOrDefault();
                     signatory.CityMayor = mayorcb.SelectedValue == null ? null : (int?)mayorcb.SelectedValue;
                     signatory.CityTreasurer = treasurercb.SelectedValue == null ? null : (int?)treasurercb.SelectedValue;
-                    signatory.CItyAccountant = accountantcb.SelectedValue == null ? null : (int?)accountantcb.SelectedValue;
+                    signatory.CityAccountant = accountantcb.SelectedValue == null ? null : (int?)accountantcb.SelectedValue;
                     signatory.AccountantRepresentative = accountantrepcb.SelectedValue == null ? null : (int?)accountantrepcb.SelectedValue;
                     signatory.CityAdministrator = administratorcb.SelectedValue == null ? null : (int?)administratorcb.SelectedValue;
                     signatory.DisbursingOfficer = disbursingcb.SelectedValue == null ? null : (int?)disbursingcb.SelectedValue;
@@ -57,7 +57,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     ImusCityGovernmentSystem.Model.CDSSignatory signatory = new CDSSignatory();
                     signatory.CityMayor = mayorcb.SelectedValue == null ? null : (int?)mayorcb.SelectedValue;
                     signatory.CityTreasurer = treasurercb.SelectedValue == null ? null : (int?)treasurercb.SelectedValue;
-                    signatory.CItyAccountant = accountantcb.SelectedValue == null ? null : (int?)accountantcb.SelectedValue;
+                    signatory.CityAccountant = accountantcb.SelectedValue == null ? null : (int?)accountantcb.SelectedValue;
                     signatory.AccountantRepresentative = accountantrepcb.SelectedValue == null ? null : (int?)accountantrepcb.SelectedValue;
                     signatory.CityAdministrator = administratorcb.SelectedValue == null ? null : (int?)administratorcb.SelectedValue;
                     signatory.DisbursingOfficer = disbursingcb.SelectedValue == null ? null : (int?)disbursingcb.SelectedValue;
@@ -124,7 +124,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     ImusCityGovernmentSystem.Model.CDSSignatory signatory = db.CDSSignatories.FirstOrDefault();
                     mayorcb.SelectedValue = signatory.CityMayor;
                     treasurercb.SelectedValue = signatory.CityTreasurer;
-                    accountantcb.SelectedValue = signatory.CItyAccountant;
+                    accountantcb.SelectedValue = signatory.CityAccountant;
                     accountantrepcb.SelectedValue = signatory.AccountantRepresentative;
                     administratorcb.SelectedValue = signatory.CityAdministrator;
                     disbursingcb.SelectedValue = signatory.DisbursingOfficer;

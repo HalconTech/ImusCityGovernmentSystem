@@ -30,31 +30,35 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
         {
             if (SystemClass.CheckConnection())
             {
-
-                foreach (var item in Enum.GetValues(typeof(PaymentType)))
-                {
-                    paymenttypecb.Items.Add(item);
-                }
-
+                List<VoucherItemsModel> voucherList = new List<VoucherItemsModel>();
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 Disbursement disbursement = db.Disbursements.Find(DisbursementID);
                 vouchernotb.Text = disbursement.VoucherNo;
                 payeetb.Text = disbursement.Payee == null ? disbursement.PayeeName : disbursement.Payee.CompanyName;
-                descriptiontb.Text = disbursement.Description;
-                paymenttypecb.SelectedIndex = disbursement.PaymentTypeID.HasValue ? disbursement.PaymentTypeID.Value : 0;
-                voucheramounttb.Text = String.Format("{0:0.##}", disbursement.Amount);
 
+                paymenttypetb.Text = disbursement.PaymentType;
+                decimal totalAmount = disbursement.DisbursementItems.Sum(m => m.Amount);
+                voucheramounttb.Text = String.Format("{0:n}", totalAmount);
+
+                foreach (var item in disbursement.DisbursementItems)
+                {
+                    var voucherItem = new VoucherItemsModel()
+                    {
+                        Explanation = item.Explanation,
+                        Amount = String.Format("{0:n}", item.Amount)
+                    };
+                    voucherList.Add(voucherItem);
+                }
+                voucheritemsdg.ItemsSource = voucherList;
                 var controlNumber = disbursement.FundBank.ControlNumbers.FirstOrDefault(m => m.Active == true);
                 if (controlNumber == null)
                 {
                     MessageBox.Show("Selected fund have no available check number");
-                    
                 }
                 else
                 {
                     int checkNo = controlNumber.NextControlNo.HasValue ? controlNumber.NextControlNo.Value : 0;
                     string formatted = checkNo.ToString("D10");
-                    
                     checknotb.Text = formatted;
 
                 }
@@ -168,12 +172,5 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             report.Show();
             Mouse.OverrideCursor = null;
         }
-        private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            checkdesctb.Text = descriptiontb.Text;
-        }
-
-
-
     }
 }

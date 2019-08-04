@@ -8,10 +8,10 @@
                       GlowBrush="Black"
                       BorderThickness="0"
                       WindowStartupLocation="CenterScreen"
-                      Height="505.5"
+                      Height="583.5"
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
-                      Width="778.571"  Loaded="MetroWindow_Loaded">
+                      Width="846.071"  Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition ></RowDefinition>
@@ -22,13 +22,13 @@
         </Grid.ColumnDefinitions>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"></RowDefinition>
                 <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition ></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition></RowDefinition>
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
@@ -40,37 +40,31 @@
                 <ColumnDefinition Width="50"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Voucher No." FontWeight="Bold" FontSize="14"></TextBlock>
-            <TextBlock x:Name="vouchernotb" Grid.Column="1" FontSize="14" Foreground="#FFB40000" FontWeight="Bold"/>
+            <TextBlock Text="Voucher No." FontWeight="Bold" VerticalAlignment="Center" FontSize="14"></TextBlock>
+            <TextBlock x:Name="vouchernotb" Grid.Column="1" VerticalAlignment="Center" FontSize="14" Foreground="#FFB40000" FontWeight="Bold"/>
             <TextBlock Text="Payment Type:" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
-            <TextBlock Grid.Column="2" Text="Date:" FontWeight="Bold" FontSize="14"></TextBlock>
-            <TextBlock x:Name="datetb" Grid.Column="3" Foreground="#FFB40000" FontSize="14" FontWeight="Bold"/>
-            <Grid Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Name="paymenttypetb" Grid.ColumnSpan="3" VerticalAlignment="Center"></TextBlock>
-                <CheckBox Visibility="Hidden" x:Name="checkcb"  Content="Check"></CheckBox>
-                <CheckBox Visibility="Hidden" x:Name="cashcb" Grid.Column="1" Content="Cash"></CheckBox>
-                <CheckBox Visibility="Hidden" x:Name="otherscb" Grid.Column="2" Content="Others"></CheckBox>
-            </Grid>
+            <TextBlock Name="paymenttypetb" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+            <TextBlock VerticalAlignment="Center" Grid.Column="2" Text="Date:" FontWeight="Bold" FontSize="14"></TextBlock>
+            <TextBlock VerticalAlignment="Center" x:Name="datetb" Grid.Column="3" Foreground="#FFB40000" FontSize="14" FontWeight="Bold"/>
             <TextBlock Grid.Row="2" VerticalAlignment="Center"   Text="Payee:" FontWeight="Bold"></TextBlock>
             <TextBlock x:Name="payeetb" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" Grid.Column="1"/>
             <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="Project Name:" FontWeight="Bold"></TextBlock>
             <TextBlock x:Name="projectnametb" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"></TextBlock>
             <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="Department:" FontWeight="Bold"></TextBlock>
             <TextBlock x:Name="departmenttb" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"></TextBlock>
-            <TextBlock Grid.Row="5" Text="Description:" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
-            <TextBox IsReadOnly="True" IsEnabled="False" x:Name="descriptiontb"  Grid.Row="6" TextWrapping="Wrap" Grid.ColumnSpan="4" ></TextBox>
-
+            <TextBlock Grid.Row="5" Text="Items" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+            <DataGrid Grid.Row="6" Name="voucheritemsdg" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="1" AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="All">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Explanation" Binding="{Binding Explanation}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
             <CheckBox x:Name="obligatedcb" Grid.Row="7" Content="Allotment obligated for the purpose as indicated above" Grid.ColumnSpan="4"></CheckBox>
             <CheckBox x:Name="documentcb" Grid.Row="8" Content="Supporting documents completed" Grid.ColumnSpan="4"></CheckBox>
             <Border Grid.Row="9" Grid.ColumnSpan="4" Background="#FFDADADA"/>
             <TextBlock Padding="5" VerticalAlignment="Center" Text="Amount:" FontWeight="Bold" FontSize="16" Grid.Row="9"></TextBlock>
             <TextBlock VerticalAlignment="Center" x:Name="amounttb" Grid.Column="1" FontSize="16" Grid.ColumnSpan="3" Grid.Row="9" Foreground="#FFB40000" FontWeight="Bold"/>
-            <Grid Grid.Row="10"  Grid.ColumnSpan="4" Margin="0,10,0,0" >
+            <Grid Grid.Row="12"  Grid.ColumnSpan="4" Margin="0,10,0,0" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -83,13 +77,21 @@
         <Grid Grid.Column="1" Margin="5,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Text="Voucher List" Grid.Column="1" FontWeight="Bold" FontSize="14"></TextBlock>
-            <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="voucherlistdg"  BorderBrush="Black" Grid.Row="1" BorderThickness="1" SelectionChanged="voucherlistdg_SelectionChanged_1" GridLinesVisibility="All" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Voucher List"  FontWeight="Bold" FontSize="14"></TextBlock>
+            <TextBox Name="searchtb" VerticalContentAlignment="Center" Grid.Row="1" Margin="0,0,5,0" Controls:TextBoxHelper.Watermark="Search" KeyDown="searchtb_KeyDown"></TextBox>
+            <Button x:Name="s" Grid.Row="1" Grid.Column="1" Content="Search" Click="s_Click"></Button>
+            <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="voucherlistdg"  BorderBrush="Black" Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" SelectionChanged="voucherlistdg_SelectionChanged_1" GridLinesVisibility="All" Margin="0,5,0,0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Voucher Number" Binding="{ Binding VoucherNo}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="280" Header="Payee" Binding="{ Binding PayeeName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Payee" Binding="{ Binding PayeeName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date Created" Binding="{ Binding DateCreated}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

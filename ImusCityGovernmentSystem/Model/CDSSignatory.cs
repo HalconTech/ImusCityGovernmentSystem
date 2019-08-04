@@ -17,7 +17,7 @@ namespace ImusCityGovernmentSystem.Model
         public int CDSSignatoryID { get; set; }
         public Nullable<int> CityMayor { get; set; }
         public Nullable<int> CityTreasurer { get; set; }
-        public Nullable<int> CItyAccountant { get; set; }
+        public Nullable<int> CityAccountant { get; set; }
         public Nullable<int> AccountantRepresentative { get; set; }
         public Nullable<int> CityAdministrator { get; set; }
         public Nullable<int> DisbursingOfficer { get; set; }

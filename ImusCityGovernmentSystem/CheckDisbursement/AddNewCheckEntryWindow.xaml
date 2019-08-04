@@ -35,12 +35,17 @@
                 <TextBox Grid.Column="1" VerticalContentAlignment="Center" IsReadOnly="True" Name="vouchernotb"></TextBox>
                 <TextBlock Text="Payee" Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
                 <TextBox Grid.Column="1" Grid.Row="1" Name="payeetb" VerticalContentAlignment="Center" IsReadOnly="True" Margin="0,5,0,0"></TextBox>
-                <TextBlock Grid.Row="2" Text="Description" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
-                <TextBox Grid.Row="3" Grid.ColumnSpan="2" TextWrapping="Wrap" Name="descriptiontb" Margin="0,0,0,5"></TextBox>
+                <TextBlock Grid.Row="2" Text="Voucher Items" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                <DataGrid Grid.Row="3" Name="voucheritemsdg" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="1" AutoGenerateColumns="false" CanUserAddRows="False" GridLinesVisibility="All" Margin="0,0,0,5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Explanation" Binding="{Binding Explanation}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Amount" Binding="{Binding Amount}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
                 <TextBlock Text="Amount" Grid.Row="4" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                 <currency:CurrencyTextBox StringFormat="N2" Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" Name="voucheramounttb"  IsReadOnly="True"/>
-                <TextBlock Text="Payment Type" Grid.Row="5" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
-                <ComboBox Grid.Row="5" Grid.Column="1" VerticalContentAlignment="Center" Name="paymenttypecb" IsReadOnly="True" IsEnabled="False" Margin="0,5,0,0" ></ComboBox>
+                <TextBlock Text="Payment Type:" Grid.Row="5" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+                <TextBox Grid.Row="5" Grid.Column="1" VerticalContentAlignment="Center" Name="paymenttypetb" IsReadOnly="True" IsEnabled="False" Margin="0,5,0,0" ></TextBox>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Check Information" Margin="5,0,0,0">
@@ -62,9 +67,6 @@
                 <TextBlock Text="Check No." VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="2" Name="checknotb" VerticalContentAlignment="Center" IsReadOnly="True"></TextBox>
                 <TextBlock Grid.Row="1" Text="Check Description" Grid.ColumnSpan="2" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="5" Grid.ColumnSpan="3"  VerticalAlignment="Center" FontSize="10" PreviewMouseDown="TextBlock_PreviewMouseDown">
-                    <Hyperlink >Copy Description from the voucher</Hyperlink>
-                </TextBlock>
                 <TextBox Grid.Row="2" Grid.RowSpan="3" TextWrapping="Wrap" Name="checkdesctb"  Grid.ColumnSpan="3" Margin="0"></TextBox>
                 <Grid Grid.Row="5" Grid.ColumnSpan="3">
                     <Grid.RowDefinitions>

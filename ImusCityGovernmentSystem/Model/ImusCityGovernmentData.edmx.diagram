@@ -5,40 +5,38 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a4d1b2383e9146c29f19f75d0f127d3d" Name="Diagram1" ZoomLevel="71">
-        <EntityTypeShape EntityType="ImusCityHallModel.AspNetRole" Width="1.5" PointX="5.75" PointY="36" />
-        <EntityTypeShape EntityType="ImusCityHallModel.AspNetUserClaim" Width="1.5" PointX="5" PointY="1.875" />
-        <EntityTypeShape EntityType="ImusCityHallModel.AspNetUserLogin" Width="1.5" PointX="5" PointY="5.25" />
-        <EntityTypeShape EntityType="ImusCityHallModel.AspNetUserRole" Width="1.5" PointX="8" PointY="3.875" />
-        <EntityTypeShape EntityType="ImusCityHallModel.AspNetUser" Width="1.5" PointX="2.75" PointY="2.875" />
-        <EntityTypeShape EntityType="ImusCityHallModel.AuditTrail" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ImusCityHallModel.Bank" Width="1.5" PointX="1.5" PointY="29.875" />
-        <EntityTypeShape EntityType="ImusCityHallModel.BankTrail" Width="1.5" PointX="12.75" PointY="19.5" />
-        <EntityTypeShape EntityType="ImusCityHallModel.CDSSignatory" Width="1.5" PointX="7.5" PointY="23.875" />
-        <EntityTypeShape EntityType="ImusCityHallModel.Check" Width="1.5" PointX="7.5" PointY="18.5" />
-        <EntityTypeShape EntityType="ImusCityHallModel.CheckRelease" Width="1.5" PointX="12.75" PointY="24.125" />
-        <EntityTypeShape EntityType="ImusCityHallModel.ControlNumber" Width="1.5" PointX="3" PointY="8.25" />
-        <EntityTypeShape EntityType="ImusCityHallModel.Customer" Width="1.5" PointX="7.5" PointY="30.875" />
-        <EntityTypeShape EntityType="ImusCityHallModel.CustomerIdentificationCard" Width="1.5" PointX="9.75" PointY="31.5" />
-        <EntityTypeShape EntityType="ImusCityHallModel.Department" Width="1.5" PointX="0.75" PointY="13.875" />
-        <EntityTypeShape EntityType="ImusCityHallModel.Disbursement" Width="1.5" PointX="3" PointY="12.25" />
-        <EntityTypeShape EntityType="ImusCityHallModel.Division" Width="1.5" PointX="3" PointY="20" />
-        <EntityTypeShape EntityType="ImusCityHallModel.Employee" Width="1.5" PointX="5.25" PointY="13.75" />
-        <EntityTypeShape EntityType="ImusCityHallModel.EmployeePosition" Width="1.5" PointX="3" PointY="33.25" />
-        <EntityTypeShape EntityType="ImusCityHallModel.EmployeeRank" Width="1.5" PointX="0.75" PointY="33.5" />
-        <EntityTypeShape EntityType="ImusCityHallModel.EmployeeStatu" Width="1.5" PointX="3" PointY="23.625" />
-        <EntityTypeShape EntityType="ImusCityHallModel.Fund" Width="1.5" PointX="1.5" PointY="27" />
-        <EntityTypeShape EntityType="ImusCityHallModel.FundBank" Width="1.5" PointX="0.75" PointY="21.5" />
-        <EntityTypeShape EntityType="ImusCityHallModel.IdentificationCardType" Width="1.5" PointX="10.5" PointY="26" />
-        <EntityTypeShape EntityType="ImusCityHallModel.Module" Width="1.5" PointX="6" PointY="10.375" />
-        <EntityTypeShape EntityType="ImusCityHallModel.Payee" Width="1.5" PointX="0.75" PointY="17.5" />
-        <EntityTypeShape EntityType="ImusCityHallModel.PayeeRepresentative" Width="1.5" PointX="0.75" PointY="8.75" />
-        <EntityTypeShape EntityType="ImusCityHallModel.SecurityQuestionBank" Width="1.5" PointX="8.25" PointY="15.375" />
-        <EntityTypeShape EntityType="ImusCityHallModel.SecurityQuestionUser" Width="1.5" PointX="10.5" PointY="20" />
-        <EntityTypeShape EntityType="ImusCityHallModel.SubModule" Width="1.5" PointX="8.25" PointY="10" />
-        <EntityTypeShape EntityType="ImusCityHallModel.SubModuleUser" Width="1.5" PointX="10.5" PointY="23.125" />
-        <EntityTypeShape EntityType="ImusCityHallModel.SystemSetting" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ImusCityHallModel.UserAccount" Width="1.5" PointX="7.75" PointY="6.75" />
-        <EntityTypeShape EntityType="ImusCityHallModel.PayeeRepresentativeView" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ImusCityHallModel.AspNetRole" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ImusCityHallModel.AspNetUserClaim" Width="1.5" PointX="10" PointY="8.5" />
+        <EntityTypeShape EntityType="ImusCityHallModel.AspNetUserLogin" Width="1.5" PointX="10" PointY="3.25" />
+        <EntityTypeShape EntityType="ImusCityHallModel.AspNetUserRole" Width="1.5" PointX="13" PointY="4.5" />
+        <EntityTypeShape EntityType="ImusCityHallModel.AspNetUser" Width="1.5" PointX="7.75" PointY="3.625" />
+        <EntityTypeShape EntityType="ImusCityHallModel.AuditTrail" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="ImusCityHallModel.Bank" Width="1.5" PointX="1.5" PointY="25.875" />
+        <EntityTypeShape EntityType="ImusCityHallModel.BankTrail" Width="1.5" PointX="12.75" PointY="21.625" />
+        <EntityTypeShape EntityType="ImusCityHallModel.Check" Width="1.5" PointX="10.5" PointY="18.75" />
+        <EntityTypeShape EntityType="ImusCityHallModel.CheckRelease" Width="1.5" PointX="12.75" PointY="26.375" />
+        <EntityTypeShape EntityType="ImusCityHallModel.ControlNumber" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="ImusCityHallModel.Customer" Width="1.5" PointX="7.5" PointY="33.25" />
+        <EntityTypeShape EntityType="ImusCityHallModel.CustomerIdentificationCard" Width="1.5" PointX="9.75" PointY="33.875" />
+        <EntityTypeShape EntityType="ImusCityHallModel.Department" Width="1.5" PointX="0.75" PointY="16.25" />
+        <EntityTypeShape EntityType="ImusCityHallModel.Division" Width="1.5" PointX="3" PointY="22.125" />
+        <EntityTypeShape EntityType="ImusCityHallModel.Employee" Width="1.5" PointX="5.25" PointY="15.875" />
+        <EntityTypeShape EntityType="ImusCityHallModel.EmployeePosition" Width="1.5" PointX="3" PointY="35.375" />
+        <EntityTypeShape EntityType="ImusCityHallModel.EmployeeRank" Width="1.5" PointX="0.75" PointY="35.625" />
+        <EntityTypeShape EntityType="ImusCityHallModel.EmployeeStatu" Width="1.5" PointX="3" PointY="11.875" />
+        <EntityTypeShape EntityType="ImusCityHallModel.Fund" Width="1.5" PointX="1.5" PointY="28.75" />
+        <EntityTypeShape EntityType="ImusCityHallModel.FundBank" Width="1.5" PointX="0.75" PointY="20.375" />
+        <EntityTypeShape EntityType="ImusCityHallModel.IdentificationCardType" Width="1.5" PointX="10.5" PointY="28.25" />
+        <EntityTypeShape EntityType="ImusCityHallModel.LicensingCode" Width="1.5" PointX="10.5" PointY="23.75" />
+        <EntityTypeShape EntityType="ImusCityHallModel.Module" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="ImusCityHallModel.Payee" Width="1.5" PointX="0.75" PointY="31.625" />
+        <EntityTypeShape EntityType="ImusCityHallModel.PayeeRepresentative" Width="1.5" PointX="0.75" PointY="11.125" />
+        <EntityTypeShape EntityType="ImusCityHallModel.SecurityQuestionBank" Width="1.5" PointX="5.25" PointY="31.5" />
+        <EntityTypeShape EntityType="ImusCityHallModel.SecurityQuestionUser" Width="1.5" PointX="7.5" PointY="27.25" />
+        <EntityTypeShape EntityType="ImusCityHallModel.SubModule" Width="1.5" PointX="5.25" PointY="8.125" />
+        <EntityTypeShape EntityType="ImusCityHallModel.SubModuleUser" Width="1.5" PointX="7.5" PointY="19.25" />
+        <EntityTypeShape EntityType="ImusCityHallModel.SystemSetting" Width="1.5" PointX="2.75" PointY="1.5" />
+        <EntityTypeShape EntityType="ImusCityHallModel.UserAccount" Width="1.5" PointX="4.75" PointY="1.5" />
         <AssociationConnector Association="ImusCityHallModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" />
         <AssociationConnector Association="ImusCityHallModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="ImusCityHallModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
@@ -47,13 +45,6 @@
         <AssociationConnector Association="ImusCityHallModel.FK_BankTrail_Check" />
         <AssociationConnector Association="ImusCityHallModel.FK_BankTrail_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_BankTrail_FundBank" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee1" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee2" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee3" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee4" />
-        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee5" />
-        <AssociationConnector Association="ImusCityHallModel.FK_Check_Disbursement" />
         <AssociationConnector Association="ImusCityHallModel.FK_Check_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Check" />
         <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Customer" />
@@ -63,26 +54,38 @@
         <AssociationConnector Association="ImusCityHallModel.FK_Customer_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_CustomerIdentificationCard_Customer" />
         <AssociationConnector Association="ImusCityHallModel.FK_CustomerIdentificationCard_IdentificationCardType" />
-        <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_Department" />
         <AssociationConnector Association="ImusCityHallModel.FK_Division_Department" />
-        <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_Disbursement" />
-        <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_FundBank" />
-        <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_PayeeRepresentative" />
         <AssociationConnector Association="ImusCityHallModel.FK_Employee_Division" />
         <AssociationConnector Association="ImusCityHallModel.FK_Employee_EmployeePosition" />
         <AssociationConnector Association="ImusCityHallModel.FK_Employee_EmployeeStatus" />
+        <AssociationConnector Association="ImusCityHallModel.FK_LicensingCode_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_SecurityQuestionUser_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_SubModuleUser_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_EmployeePosition_EmployeeRank" />
         <AssociationConnector Association="ImusCityHallModel.FK_FundBank_FundBank" />
+        <AssociationConnector Association="ImusCityHallModel.FK_LicensingCode_SubModule" />
         <AssociationConnector Association="ImusCityHallModel.FK_SubModule_Module" />
         <AssociationConnector Association="ImusCityHallModel.FK_PayeeRepresentative_Payee" />
         <AssociationConnector Association="ImusCityHallModel.FK_SecurityQuestionUser_SecurityQuestionBank" />
         <AssociationConnector Association="ImusCityHallModel.FK_SubModuleUser_SubModule" />
-        <EntityTypeShape EntityType="ImusCityHallModel.LicensingCode" Width="1.5" PointX="10.5" PointY="15.75" />
-        <AssociationConnector Association="ImusCityHallModel.FK_LicensingCode_Employee" />
-        <AssociationConnector Association="ImusCityHallModel.FK_LicensingCode_SubModule" />
-      </Diagram>
+        <EntityTypeShape EntityType="ImusCityHallModel.Disbursement" Width="1.5" PointX="13.5" PointY="14.875" />
+        <AssociationConnector Association="ImusCityHallModel.FK_Check_Disbursement" />
+        <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_Department" />
+        <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_Employee" />
+        <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_FundBank" />
+        <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_Payee" />
+        <AssociationConnector Association="ImusCityHallModel.FK_Disbursement_PayeeRepresentative" />
+        <EntityTypeShape EntityType="ImusCityHallModel.CDSSignatory" Width="1.5" PointX="7.5" PointY="22.625" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee1" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee2" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee3" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee4" />
+        <AssociationConnector Association="ImusCityHallModel.FK_CDSSignatory_Employee5" />
+        <EntityTypeShape EntityType="ImusCityHallModel.DisbursementItem" Width="1.5" PointX="15.75" PointY="16.75" />
+        <AssociationConnector Association="ImusCityHallModel.FK_DisbursementItem_Disbursement" />
+        <EntityTypeShape EntityType="ImusCityHallModel.PayeeRepresentativeView" Width="1.5" PointX="7.375" PointY="0.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

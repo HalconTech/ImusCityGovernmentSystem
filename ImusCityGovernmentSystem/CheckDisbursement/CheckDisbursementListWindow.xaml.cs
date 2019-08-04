@@ -30,8 +30,6 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
         {
             InitializeComponent();
         }
-
-
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             List<Disbursement> disbursementList = new List<Disbursement>();
@@ -77,7 +75,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 Mouse.OverrideCursor = null;
                 MessageBox.Show("Please add report signatories");
             }
-            else if (signatories.CItyAccountant.Equals(null) || signatories.CityTreasurer.Equals(null) || signatories.CityAdministrator.Equals(null))
+            else if (signatories.CityAccountant.Equals(null) || signatories.CityTreasurer.Equals(null) || signatories.CityAdministrator.Equals(null))
             {
                 Mouse.OverrideCursor = null;
                 MessageBox.Show("Please add report signatories");
@@ -157,41 +155,30 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 }
                 else
                 {
+                    List<VoucherItemsModel> voucherItemsList = new List<VoucherItemsModel>();
                     int DisbursementID = (int)voucherlistdg.SelectedValue;
-                    Disbursement dis = db.Disbursements.Find(DisbursementID);
-                    vouchernotb.Text = dis.VoucherNo;
-                    datetb.Text = dis.DateCreated.HasValue ? dis.DateCreated.Value.ToShortDateString() : null;
-                    checkcb.IsEnabled = false;
-                    cashcb.IsEnabled = false;
-                    otherscb.IsEnabled = false;
-                    switch (dis.PaymentTypeID)
+                    Disbursement disbursement = db.Disbursements.Find(DisbursementID);
+                    foreach (var voucherItem in disbursement.DisbursementItems)
                     {
-                        case (int)PaymentType.Check:
-                            checkcb.IsChecked = true;
-                            cashcb.IsChecked = false;
-                            otherscb.IsChecked = false;
-                            paymenttypetb.Text = "Check";
-                            break;
-                        case (int)PaymentType.Cash:
-                            cashcb.IsChecked = true;
-                            checkcb.IsChecked = false;
-                            otherscb.IsChecked = false;
-                            break;
-                        case (int)PaymentType.Others:
-                            otherscb.IsChecked = true;
-                            cashcb.IsChecked = false;
-                            checkcb.IsChecked = false;
-                            break;
+                        var item = new VoucherItemsModel()
+                        {
+                            Explanation = voucherItem.Explanation,
+                            Amount = String.Format("{0:n}", voucherItem.Amount)
+                        };
+                        voucherItemsList.Add(item);
                     }
-                    payeetb.Text = dis.Payee == null ? dis.PayeeName : dis.Payee.CompanyName;
-                    projectnametb.Text = dis.ProjectName;
-                    departmenttb.Text = dis.Department == null ? null : dis.Department.DepartmentName;
-                    descriptiontb.Text = dis.Description;
-                    obligatedcb.IsChecked = dis.Obligated;
-                    documentcb.IsChecked = dis.DocCompleted;
-                    amounttb.Text = String.Format("{0:n}", dis.Amount);
+                    vouchernotb.Text = disbursement.VoucherNo;
+                    datetb.Text = disbursement.DateCreated.HasValue ? disbursement.DateCreated.Value.ToShortDateString() : null;
+                    paymenttypetb.Text = disbursement.PaymentType;
+                    payeetb.Text = disbursement.Payee == null ? disbursement.PayeeName : disbursement.Payee.CompanyName;
+                    projectnametb.Text = disbursement.ProjectName;
+                    departmenttb.Text = disbursement.Department == null ? null : disbursement.Department.DepartmentName;
+                    obligatedcb.IsChecked = disbursement.Obligated;
+                    documentcb.IsChecked = disbursement.DocCompleted;
+                    decimal totalAmount = disbursement.DisbursementItems.Sum(m => m.Amount);
+                    amounttb.Text = String.Format("{0:n}", totalAmount);
+                    voucheritemsdg.ItemsSource = voucherItemsList;
                     Mouse.OverrideCursor = null;
-
                 }
             }
             else
@@ -201,6 +188,71 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
             }
 
             Mouse.OverrideCursor = null;
+        }
+
+        private void s_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(searchtb.Text))
+            {
+                List<Disbursement> disbursementList = new List<Disbursement>();
+                if (SystemClass.CheckConnection())
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    foreach (var item in db.Disbursements)
+                    {
+                        var disbursement = new Disbursement()
+                        {
+                            DisbursementID = item.DisbursementID,
+                            VoucherNo = item.VoucherNo,
+                            PayeeName = item.Payee == null ? item.PayeeName : item.Payee.CompanyName
+                        };
+                        disbursementList.Add(disbursement);
+                    }
+                    voucherlistdg.ItemsSource = disbursementList;
+                    voucherlistdg.SelectedValuePath = "DisbursementID";
+                }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+            }
+            else
+            {
+                List<Disbursement> disbursementList = new List<Disbursement>();
+                if (SystemClass.CheckConnection())
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    foreach (var item in db.Disbursements.Where(m => m.VoucherNo.Contains(searchtb.Text) || m.PayeeName.Contains(searchtb.Text) || m.Payee.CompanyName.Contains(searchtb.Text)))
+                    {
+                        var disbursement = new Disbursement()
+                        {
+                            DisbursementID = item.DisbursementID,
+                            VoucherNo = item.VoucherNo,
+                            PayeeName = item.Payee == null ? item.PayeeName : item.Payee.CompanyName,
+                            DateCreated = item.DateCreated
+                        };
+                        disbursementList.Add(disbursement);
+                    }
+                    voucherlistdg.ItemsSource = disbursementList;
+                    voucherlistdg.SelectedValuePath = "DisbursementID";
+                }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+            }
+        }
+
+        private void searchtb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                s_Click(sender, e);
+
+
+
+            }
         }
     }
 }

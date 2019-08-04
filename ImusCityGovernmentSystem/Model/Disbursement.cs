@@ -18,32 +18,35 @@ namespace ImusCityGovernmentSystem.Model
         public Disbursement()
         {
             this.Checks = new HashSet<Check>();
+            this.DisbursementItems = new HashSet<DisbursementItem>();
         }
     
         public int DisbursementID { get; set; }
         public Nullable<int> PayeeID { get; set; }
-        public Nullable<int> PaymentTypeID { get; set; }
+        public string PayeeName { get; set; }
+        public Nullable<int> PayeeRepID { get; set; }
+        public Nullable<int> DepartmentID { get; set; }
+        public Nullable<int> FundBankID { get; set; }
+        public string PaymentType { get; set; }
         public string VoucherNo { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
-        public Nullable<int> DepartmentID { get; set; }
         public string ProjectName { get; set; }
-        public string Description { get; set; }
-        public Nullable<decimal> Amount { get; set; }
         public Nullable<bool> Obligated { get; set; }
         public Nullable<bool> DocCompleted { get; set; }
         public string Certification { get; set; }
         public byte[] DateStamp { get; set; }
-        public Nullable<int> PayeeRepID { get; set; }
         public string ObligationRequestNo { get; set; }
-        public string PayeeName { get; set; }
         public Nullable<int> AdviceNo { get; set; }
-        public Nullable<int> FundBankID { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Check> Checks { get; set; }
         public virtual Department Department { get; set; }
-        public virtual Payee Payee { get; set; }
+        public virtual Employee Employee { get; set; }
         public virtual FundBank FundBank { get; set; }
+        public virtual Payee Payee { get; set; }
         public virtual PayeeRepresentative PayeeRepresentative { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementItem> DisbursementItems { get; set; }
     }
 }
