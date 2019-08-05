@@ -155,10 +155,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             if (checklistdg.SelectedValue != null)
             {
                 int id = (int)checklistdg.SelectedValue;
-                if(SystemClass.CheckConnection())
+                if (SystemClass.CheckConnection())
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();
-                    if(db.Checks.Find(id).Status == (int)CheckStatus.Cancelled)
+                    if (db.Checks.Find(id).Status == (int)CheckStatus.Cancelled)
                     {
                         MessageBox.Show("Checked is already cancelled and it cannot be edited");
                     }
@@ -171,6 +171,48 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         EditCheckWindow edit = new EditCheckWindow();
                         edit.CheckID = id;
                         edit.ShowDialog();
+                        LoadItems();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please select an entry");
+            }
+        }
+
+        private void deletebtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (checklistdg.SelectedValue != null)
+            {
+                int id = (int)checklistdg.SelectedValue;
+                if (SystemClass.CheckConnection())
+                {
+                    ImusCityHallEntities db = new ImusCityHallEntities();
+                    if (db.Checks.Find(id).Status == (int)CheckStatus.Cancelled)
+                    {
+                        MessageBox.Show("Checked is already cancelled and it cannot be deleted");
+                    }
+                    else if (db.Checks.Find(id).Status == (int)CheckStatus.Released)
+                    {
+                        MessageBox.Show("Checked is already released and it cannot be deleted");
+                    }
+                    else
+                    {
+                        Check che = db.Checks.Find(id);
+                        string deletedcheck = che.ControlNo;
+                        foreach (BankTrail b in db.BankTrails.Where(m => m.CheckID == che.CheckID).ToList())
+                        {
+                            db.BankTrails.Remove(b);
+                        }
+                        db.Checks.Remove(che);
+                        db.SaveChanges();
+                        MessageBox.Show("Check: " + deletedcheck + " is deleted" + Environment.NewLine + "Adjust Control Number, to use the CHECK number again");
                         LoadItems();
                     }
                 }
