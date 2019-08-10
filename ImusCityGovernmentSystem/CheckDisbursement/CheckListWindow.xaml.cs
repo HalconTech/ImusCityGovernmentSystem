@@ -40,6 +40,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                                      CheckID = p.CheckID,
                                      CheckNumber = p.CheckNo,
                                      VoucherNumber = p.Disbursement.VoucherNo,
+                                     FundName = p.Disbursement.FundBank.Fund.FundPrefix + "-" + p.Disbursement.FundBank.Fund.FundCode + "-" + p.Disbursement.FundBank.Bank.BankCode,
                                      CompanyName = p.Disbursement.Payee.CompanyName,
                                      CheckDescription = p.CheckDescription,
                                      Amount = p.Amount,
@@ -111,6 +112,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                                  CheckID = p.CheckID,
                                  CheckNumber = p.CheckNo,
                                  VoucherNumber = p.Disbursement.VoucherNo,
+                                 FundName = p.Disbursement.FundBank.Fund.FundPrefix + "-" + p.Disbursement.FundBank.Fund.FundCode + "-" + p.Disbursement.FundBank.Bank.BankCode,
                                  CompanyName = p.Disbursement.Payee.CompanyName,
                                  CheckDescription = p.CheckDescription,
                                  Amount = p.Amount,
@@ -226,6 +228,34 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             {
                 MessageBox.Show("Please select an entry");
             }
+        }
+
+        private void printbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (checklistdg.SelectedValue == null)
+            {
+                MessageBox.Show("Please select check");
+            }
+            else
+            {
+                int checkId = (int)checklistdg.SelectedValue;
+                PrintReport(checkId);
+            }
+
+        }
+
+        void PrintReport(int id)
+        {
+            int checkId = (int)checklistdg.SelectedValue;
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            string bankCode = db.Checks.Find(checkId).Disbursement.FundBank.Bank.BankCode;
+            Mouse.OverrideCursor = Cursors.Wait;
+            ReportWindow report = new ReportWindow();
+            report.id = id;
+            report.bankName = bankCode;
+            App.ReportID = 2;
+            report.Show();
+            Mouse.OverrideCursor = null;
         }
     }
 }
