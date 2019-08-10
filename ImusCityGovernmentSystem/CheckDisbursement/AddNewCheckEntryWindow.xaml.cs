@@ -50,18 +50,8 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     voucherList.Add(voucherItem);
                 }
                 voucheritemsdg.ItemsSource = voucherList;
-                var controlNumber = disbursement.FundBank.ControlNumbers.FirstOrDefault(m => m.Active == true);
-                if (controlNumber == null)
-                {
-                    MessageBox.Show("Selected fund have no available check number");
-                }
-                else
-                {
-                    int checkNo = controlNumber.NextControlNo.HasValue ? controlNumber.NextControlNo.Value : 0;
-                    string formatted = checkNo.ToString("D10");
-                    checknotb.Text = formatted;
 
-                }
+                LoadFund();
 
             }
             else
@@ -70,96 +60,151 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             }
         }
 
+        public void LoadFund()
+        {
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            List<FundModel> fundList = new List<FundModel>();
+            foreach (var item in db.FundBanks)
+            {
+                var fund = new FundModel()
+                {
+                    id = item.FundBankID,
+                    FundBankName = string.Join("-", item.Fund.FundPrefix, item.AccountNumber, item.Fund.FundName, item.Bank.BankCode),
+                    FundName = item.Fund.FundName,
+                    BankName = item.Bank.BankCode,
+                    Prefix = item.Fund.FundPrefix,
+                    AccountNumber = item.AccountNumber,
+                    CurrentBalance = item.CurrentBalance.HasValue ? item.CurrentBalance.Value : 0
+                };
+
+                fundList.Add(fund);
+            }
+
+            fundcb.ItemsSource = fundList;
+            fundcb.SelectedValuePath = "id";
+            fundcb.DisplayMemberPath = "FundBankName";
+        }
+
         private void savebtn_Click(object sender, RoutedEventArgs e)
         {
-            if (SystemClass.CheckConnection())
+            try
             {
-                ImusCityHallEntities db = new ImusCityHallEntities();
-                ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(DisbursementID);
-                var cn = db.ControlNumbers.OrderByDescending(m => m.ControlNoID).FirstOrDefault(m => m.FundBankID == disbursement.FundBankID && m.Active == true);
-                if (String.IsNullOrEmpty(checknotb.Text))
+                Mouse.OverrideCursor = Cursors.Wait;
+                if (SystemClass.CheckConnection())
                 {
-                    MessageBox.Show("Please provide the check number");
-                    this.Close();
-                }
-                else if (String.IsNullOrEmpty(checkdesctb.Text))
-                {
-                    MessageBox.Show("Please provide check description");
-                }
-                else if (String.IsNullOrEmpty(checkamounttb.Text))
-                {
-                    MessageBox.Show("Please enter check amount");
-                }
-                else if (db.Checks.Any(m => m.CheckNo == checknotb.Text))
-                {
-                    MessageBox.Show("Check number is already been used");
-                }
-                else if (db.FundBanks.Find(disbursement.FundBankID).CurrentBalance < Convert.ToDecimal(checkamounttb.Text))
-                {
-                    MessageBox.Show("Check cannot be created, you have insufficients funds");
-                }
-                else if (cn == null)
-                {
-                    MessageBox.Show("Selected fund have no available check number");
+                    if (fundcb.SelectedValue == null)
+                    {
+                        Mouse.OverrideCursor = null;
+                        MessageBox.Show("Please select fund");
+                    }
+                    else
+                    {
+                        ImusCityHallEntities db = new ImusCityHallEntities();
+                        int fundBankId = (int)fundcb.SelectedValue;
+                        ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(DisbursementID);
+
+                        var controlNumber = db.ControlNumbers.OrderByDescending(m => m.ControlNoID).FirstOrDefault(m => m.FundBankID == fundBankId && m.Active == true);
+
+                        if (String.IsNullOrEmpty(checknotb.Text))
+                        {
+                            MessageBox.Show("Please provide the check number");
+                            this.Close();
+                        }
+                        else if (String.IsNullOrEmpty(checkdesctb.Text))
+                        {
+                            Mouse.OverrideCursor = null;
+                            MessageBox.Show("Please provide check description");
+                        }
+                        else if (checkamounttb.Text.Equals("0.00"))
+                        {
+                            Mouse.OverrideCursor = null;
+                            MessageBox.Show("Please enter check amount");
+                        }
+                        else if (db.Checks.Any(m => m.CheckNo == checknotb.Text))
+                        {
+                            Mouse.OverrideCursor = null;
+                            MessageBox.Show("Check number is already been used");
+                        }
+                        else if (db.FundBanks.Find(fundBankId).CurrentBalance < Convert.ToDecimal(checkamounttb.Text))
+                        {
+                            Mouse.OverrideCursor = null;
+                            MessageBox.Show("Check cannot be created, you have insufficients funds");
+                        }
+                        else if (controlNumber == null)
+                        {
+                            Mouse.OverrideCursor = null;
+                            MessageBox.Show("Selected fund have no available check number");
+                        }
+                        else
+                        {
+                            Check check = new Check();
+                            check.DisbursementID = DisbursementID;
+                            check.CheckNo = checknotb.Text;
+                            check.CheckDescription = checkdesctb.Text;
+                            check.Amount = Convert.ToDecimal(checkamounttb.Text);
+                            check.EmployeeID = App.EmployeeID;
+                            check.DateCreated = DateTime.Now;
+                            check.Status = (int)CheckStatus.Created;
+
+                            //Increment of the Check Number.
+                            if (controlNumber.EndingControlNo == controlNumber.NextControlNo)
+                                controlNumber.Active = false;
+                            else
+                                controlNumber.NextControlNo++;
+
+                            check.ControlNo = checknotb.Text;
+                            var savedCheck = db.Checks.Add(check);
+
+
+                            ImusCityGovernmentSystem.Model.BankTrail banktrail = new BankTrail();
+                            banktrail.DebitCredit = "D";
+                            banktrail.FundBankID = fundBankId;
+                            banktrail.Amount = Convert.ToDecimal(checkamounttb.Text);
+                            banktrail.EntryName = nameof(BankTrailEntry.CheckCreated);
+                            banktrail.CheckID = savedCheck.CheckID;
+                            banktrail.EntryNameID = (int)BankTrailEntry.CheckCreated;
+                            banktrail.EmployeeID = App.EmployeeID;
+                            banktrail.DateCreated = DateTime.Now;
+                            db.BankTrails.Add(banktrail);
+
+                            ImusCityGovernmentSystem.Model.FundBank account = db.FundBanks.Find(fundBankId);
+                            account.CurrentBalance -= Convert.ToDecimal(checkamounttb.Text);
+
+                            disbursement.FundBankID = fundBankId;
+
+                            db.SaveChanges();
+
+                            var audit = new AuditTrailModel
+                            {
+                                Activity = "Created new check entry DIS ID: " + DisbursementID.ToString(),
+                                ModuleName = this.GetType().Name,
+                                EmployeeID = App.EmployeeID
+                            };
+
+                            SystemClass.InsertLog(audit);
+                            Mouse.OverrideCursor = null;
+                            MessageBox.Show("Check created successfully!");
+                            PrintReport(check.CheckID);
+
+                            checknotb.Clear();
+                            checkdesctb.Clear();
+                            checkamounttb.Clear();
+                            currentbalancetb.Text = "";
+                            LoadFund();
+                        }
+
+                    }
                 }
                 else
                 {
-                    Check check = new Check();
-                    check.DisbursementID = DisbursementID;
-                    check.CheckNo = checknotb.Text;
-                    check.CheckDescription = checkdesctb.Text;
-                    check.Amount = Convert.ToDecimal(checkamounttb.Text);
-                    check.EmployeeID = App.EmployeeID;
-                    check.DateCreated = DateTime.Now;
-                    check.Status = (int)CheckStatus.Created;
-
-                    //Increment of the Check Number.
-                    if (cn.EndingControlNo == cn.NextControlNo)
-                        cn.Active = false;
-                    else
-                        cn.NextControlNo++;
-
-                    check.ControlNo = checknotb.Text;
-                    db.Checks.Add(check);
-
-
-                    ImusCityGovernmentSystem.Model.BankTrail banktrail = new BankTrail();
-                    banktrail.DebitCredit = "D";
-                    banktrail.FundBankID = disbursement.FundBankID;
-                    banktrail.Amount = Convert.ToDecimal(checkamounttb.Text);
-                    banktrail.EntryName = nameof(BankTrailEntry.CheckCreated);
-                    banktrail.CheckID = check.CheckID;
-                    banktrail.EntryNameID = (int)BankTrailEntry.CheckCreated;
-                    banktrail.EmployeeID = App.EmployeeID;
-                    banktrail.DateCreated = DateTime.Now;
-                    db.BankTrails.Add(banktrail);
-
-                    ImusCityGovernmentSystem.Model.FundBank account = db.FundBanks.Find(disbursement.FundBankID);
-                    account.CurrentBalance -= Convert.ToDecimal(checkamounttb.Text);
-
-                    db.SaveChanges();
-
-                    var audit = new AuditTrailModel
-                    {
-                        Activity = "Created new check entry DIS ID: " + DisbursementID.ToString(),
-                        ModuleName = this.GetType().Name,
-                        EmployeeID = App.EmployeeID
-                    };
-
-                    SystemClass.InsertLog(audit);
-                    MessageBox.Show("Check created successfully!");
-                    PrintReport(check.CheckID);
-
-                    checknotb.Clear();
-                    checkdesctb.Clear();
-                    checkamounttb.Clear();
+                    Mouse.OverrideCursor = null;
+                    MessageBox.Show(SystemClass.DBConnectionErrorMessage);
                 }
-
-
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+                Mouse.OverrideCursor = null;
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -171,6 +216,33 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             App.ReportID = 2;
             report.Show();
             Mouse.OverrideCursor = null;
+        }
+
+        private void fundcb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (fundcb.SelectedValue == null)
+            {
+                return;
+            }
+            else
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                int fundBankId = (int)fundcb.SelectedValue;
+                var controlNumber = db.FundBanks.Find(fundBankId).ControlNumbers;
+                var fundBank = db.FundBanks.Find(fundBankId);
+                if (controlNumber == null)
+                {
+                    MessageBox.Show("Selected fund have no available check number");
+                }
+                else
+                {
+                    int checkNo = controlNumber.Where(m => m.Active == true).FirstOrDefault().NextControlNo.HasValue ? controlNumber.Where(m => m.Active == true).FirstOrDefault().NextControlNo.Value : 0;
+                    string formatted = checkNo.ToString("D10");
+                    checknotb.Text = formatted;
+                    currentbalancetb.Text = String.Format("{0:n}", fundBank.CurrentBalance);
+                }
+            }
+
         }
     }
 }
