@@ -201,6 +201,7 @@
       <DependentUpon>EditCheckWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CheckDisbursement\Model\CheckIssuedModel.cs" />
+    <Compile Include="CheckDisbursement\Model\CheckListingModel.cs" />
     <Compile Include="CheckDisbursement\PaymentType.cs" />
     <Compile Include="CheckDisbursement\Report\AccountantCheckDisbursementReport.cs">
       <DependentUpon>AccountantCheckDisbursementReport.rpt</DependentUpon>
@@ -443,6 +444,9 @@
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetCheckIssued_Result.cs">
+      <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetCheckListing_Result.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetCheckRegister_Result.cs">

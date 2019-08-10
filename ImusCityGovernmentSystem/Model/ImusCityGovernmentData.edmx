@@ -992,6 +992,10 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Parameter Name="EndDate" Type="date" Mode="In" />
           <Parameter Name="FundBankID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetCheckListing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+        </Function>
         <Function Name="GetCheckRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StartDate" Type="date" Mode="In" />
           <Parameter Name="EndDate" Type="date" Mode="In" />
@@ -1455,7 +1459,11 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           </AssociationSet>
           <EntitySet Name="PayeeRepresentativeViews" EntityType="ImusCityHallModel.PayeeRepresentativeView" />
           <FunctionImport Name="GetDisbursementVoucher" ReturnType="Collection(ImusCityHallModel.GetDisbursementVoucher_Result)">
-            <Parameter Name="DisbursementID" Mode="In" Type="Int32" />
+          <Parameter Name="DisbursementID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCheckListing" ReturnType="Collection(ImusCityHallModel.GetCheckListing_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetCheckRegister_Result">
@@ -2578,6 +2586,23 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="PaymentType" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="GetCheckListing_Result">
+          <Property Type="String" Name="CheckNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CheckDescription" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="CheckDateCreated" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="CheckAmount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="ControlNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="9" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+          <Property Type="String" Name="CHECK_USER" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProjectName" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="VoucherDateCreated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FundID" Nullable="true" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="BankID" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3130,6 +3155,27 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
                 <ScalarProperty Name="FundName" ColumnName="FundName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCheckListing" FunctionName="ImusCityHallModel.Store.GetCheckListing">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ImusCityHallModel.GetCheckListing_Result">
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="CheckDescription" ColumnName="CheckDescription" />
+                <ScalarProperty Name="CheckDateCreated" ColumnName="CheckDateCreated" />
+                <ScalarProperty Name="CheckAmount" ColumnName="CheckAmount" />
+                <ScalarProperty Name="ControlNo" ColumnName="ControlNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CHECK_USER" ColumnName="CHECK_USER" />
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="VoucherDateCreated" ColumnName="VoucherDateCreated" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="FundID" ColumnName="FundID" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

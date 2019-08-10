@@ -120,5 +120,18 @@ namespace ImusCityGovernmentSystem.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDisbursementVoucher_Result>("GetDisbursementVoucher", disbursementIDParameter);
         }
+    
+        public virtual ObjectResult<GetCheckListing_Result> GetCheckListing(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckListing_Result>("GetCheckListing", startDateParameter, endDateParameter);
+        }
     }
 }
