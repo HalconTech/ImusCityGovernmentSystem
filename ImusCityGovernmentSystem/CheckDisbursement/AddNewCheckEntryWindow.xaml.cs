@@ -101,6 +101,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     {
                         ImusCityHallEntities db = new ImusCityHallEntities();
                         int fundBankId = (int)fundcb.SelectedValue;
+                        var fundBank = db.FundBanks.Find(fundBankId);
                         ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(DisbursementID);
 
                         var controlNumber = db.ControlNumbers.OrderByDescending(m => m.ControlNoID).FirstOrDefault(m => m.FundBankID == fundBankId && m.Active == true);
@@ -170,6 +171,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                             ImusCityGovernmentSystem.Model.FundBank account = db.FundBanks.Find(fundBankId);
                             account.CurrentBalance -= Convert.ToDecimal(checkamounttb.Text);
 
+                            disbursement.VoucherNo = string.Join("-", fundBank.Fund.FundPrefix, disbursement.VoucherNo);
                             disbursement.FundBankID = fundBankId;
 
                             db.SaveChanges();

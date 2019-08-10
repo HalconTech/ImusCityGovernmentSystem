@@ -53,7 +53,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"></RowDefinition>
                     <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -69,7 +69,7 @@
                 <TextBlock Text="Check No." VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="2" Name="checknotb" VerticalContentAlignment="Center" IsReadOnly="True"></TextBox>
                 <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="Current Balance" FontWeight="Bold"></TextBlock>
-                <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Name="currentbalancetb" FontWeight="Bold"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Name="currentbalancetb"></TextBlock>
                 <TextBlock Text="Fund" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                 <ComboBox Margin="0,5,0,0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Name="fundcb" SelectionChanged="fundcb_SelectionChanged"></ComboBox>
                 <TextBlock Grid.Row="3" Text="Check Description" Grid.ColumnSpan="2" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>

@@ -36,7 +36,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="160"></ColumnDefinition>
                 <ColumnDefinition Width="50"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -83,11 +83,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Voucher List"  FontWeight="Bold" FontSize="14"></TextBlock>
             <TextBox Name="searchtb" VerticalContentAlignment="Center" Grid.Row="1" Margin="0,0,5,0" Controls:TextBoxHelper.Watermark="Search" KeyDown="searchtb_KeyDown"></TextBox>
-            <Button x:Name="s" Grid.Row="1" Grid.Column="1" Content="Search" Click="s_Click"></Button>
-            <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="voucherlistdg"  BorderBrush="Black" Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" SelectionChanged="voucherlistdg_SelectionChanged_1" GridLinesVisibility="All" Margin="0,5,0,0" >
+            <Button x:Name="s" Grid.Row="1" Grid.Column="1" Content="Search" Click="s_Click" Margin="0,0,2.5,0"></Button>
+            <Button x:Name="refresh" Grid.Row="1" Grid.Column="2" Content="Reload" Click="refresh_Click" Margin="2.5,0,0,0"></Button>
+            <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="voucherlistdg"  BorderBrush="Black" Grid.Row="2" Grid.ColumnSpan="3" BorderThickness="1" SelectionChanged="voucherlistdg_SelectionChanged_1" GridLinesVisibility="All" Margin="0,5,0,0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Voucher Number" Binding="{ Binding VoucherNo}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Payee" Binding="{ Binding PayeeName}"></DataGridTextColumn>

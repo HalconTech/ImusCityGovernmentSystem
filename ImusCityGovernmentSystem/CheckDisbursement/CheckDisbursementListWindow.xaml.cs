@@ -118,7 +118,7 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                         MessageBox.Show("Please add report signatories");
                     }
                     else
-                    {                 
+                    {
                         addcheck.ShowDialog();
                     }
                 }
@@ -237,12 +237,34 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
         {
             if (e.Key == Key.Enter)
             {
-
                 s_Click(sender, e);
-
-
-
             }
+        }
+
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            List<Disbursement> disbursementList = new List<Disbursement>();
+            if (SystemClass.CheckConnection())
+            {
+                ImusCityHallEntities db = new ImusCityHallEntities();
+                foreach (var item in db.Disbursements)
+                {
+                    var disbursement = new Disbursement()
+                    {
+                        DisbursementID = item.DisbursementID,
+                        VoucherNo = item.VoucherNo,
+                        PayeeName = item.Payee == null ? item.PayeeName : item.Payee.CompanyName
+                    };
+                    disbursementList.Add(disbursement);
+                }
+                voucherlistdg.ItemsSource = disbursementList;
+                voucherlistdg.SelectedValuePath = "DisbursementID";
+            }
+            else
+            {
+                MessageBox.Show(SystemClass.DBConnectionErrorMessage);
+            }
+
         }
     }
 }
