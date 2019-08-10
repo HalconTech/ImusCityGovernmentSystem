@@ -11,7 +11,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.Model
         public string CheckNo { get; set; }
         public string CheckDescription { get; set; }
         public DateTime CheckDateCreated { get; set; }
-        public double CheckAmount { get; set; }
+        public decimal CheckAmount { get; set; }
         public string ControlNo { get; set; }
         public string Status { get; set; }
         public int StatusID { get; set; }

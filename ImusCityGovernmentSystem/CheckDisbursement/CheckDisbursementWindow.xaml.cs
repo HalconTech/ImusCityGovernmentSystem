@@ -184,5 +184,13 @@ namespace ImusCityGovernmentSystem.Check_Disbursement
                 MessageBox.Show(SystemClass.DBConnectionErrorMessage);
             }
         }
+
+        private void checklistingbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            CheckDisbursement.CheckListingReportWindow check = new CheckDisbursement.CheckListingReportWindow();
+            Mouse.OverrideCursor = null;
+            check.Show();
+        }
     }
 }

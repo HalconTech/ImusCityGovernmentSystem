@@ -1,0 +1,51 @@
+﻿<Controls:MetroWindow x:Class="ImusCityGovernmentSystem.CheckDisbursement.CheckListingReportWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        WindowTitleBrush="#FF001834" TitleCaps="False" WindowState="Maximized"  BorderThickness="0" 
+        GlowBrush="Black" WindowTransitionsEnabled="False" 
+        Loaded="MetroWindow_Loaded"  Background="#FFECECEC" Title="Check Listing Report"  >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Start Date*" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+            <DatePicker VerticalContentAlignment="Center" Grid.Row="1" x:Name="startdatedp"></DatePicker>
+            
+            <TextBlock Grid.Row="2" Text="End Date*" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+            <DatePicker VerticalContentAlignment="Center" Grid.Row="3" x:Name="enddatedp"></DatePicker>
+            
+            <TextBlock Grid.Row="4" Text="Fund" FontWeight="Bold"></TextBlock>
+            <ComboBox Grid.Row="5" Name="fundcb"></ComboBox>
+            
+            <TextBlock Grid.Row="6" Text="Status" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+            <ComboBox Grid.Row="7" Name="statuscb">
+                <ComboBoxItem>Created</ComboBoxItem>
+                <ComboBoxItem>Cancelled</ComboBoxItem>
+                <ComboBoxItem>Released</ComboBoxItem>
+            </ComboBox>
+            <Button x:Name="generatebtn" Grid.Row="10" Content="Generate Report" Margin="0,5,0,0" Click="generatebtn_Click"></Button>
+        </Grid>
+
+        <my:CrystalReportsViewer x:Name="reportviewer" Background="White" Grid.Column="1" >
+
+        </my:CrystalReportsViewer>
+    </Grid>
+    </Controls:MetroWindow>
+
+

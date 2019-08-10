@@ -173,6 +173,9 @@
     <Compile Include="CheckDisbursement\CheckIssuedReportWindow.xaml.cs">
       <DependentUpon>CheckIssuedReportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CheckDisbursement\CheckListingReportWindow.xaml.cs">
+      <DependentUpon>CheckListingReportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CheckDisbursement\CheckListWindow.xaml.cs">
       <DependentUpon>CheckListWindow.xaml</DependentUpon>
     </Compile>
@@ -214,6 +217,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckIssuedReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CheckDisbursement\Report\CheckListingReport.cs">
+      <DependentUpon>CheckListingReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="CheckDisbursement\Report\CheckRegisterReport.cs">
       <AutoGen>True</AutoGen>
@@ -539,6 +548,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CheckDisbursement\CheckListingReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CheckDisbursement\CheckListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -836,6 +849,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CheckIssuedReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="CheckDisbursement\Report\CheckListingReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CheckListingReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="CheckDisbursement\Report\CheckRegisterReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CheckRegisterReport.cs</LastGenOutput>
@@ -867,6 +884,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ImusCityGovernmentData.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
     <None Include="ImusCityGovernmentSystem_TemporaryKey.pfx" />
     <None Include="Model\ImusCityGovernmentData.edmx.diagram">
       <DependentUpon>ImusCityGovernmentData.edmx</DependentUpon>
