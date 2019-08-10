@@ -33,8 +33,8 @@
         <ListBox x:Name="banklb" BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem x:Name="editbtn" Header="Edit Fund" Click="editbtn_Click"/>
-                    <MenuItem  Name="deletebtn" Header="Delete Fund" Click="deletebtn_Click" />
+                    <MenuItem x:Name="editbtn" Header="Edit Bank" Click="editbtn_Click"/>
+                    <MenuItem  Name="deletebtn" Header="Delete Bank" Click="deletebtn_Click" />
 
                 </ContextMenu>
             </ListBox.ContextMenu>

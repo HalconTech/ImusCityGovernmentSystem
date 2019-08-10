@@ -24,6 +24,7 @@ namespace ImusCityGovernmentSystem
     public partial class ReportWindow : MetroWindow
     {
         public int id;
+        public string bankName = string.Empty;
         public ReportWindow()
         {
             InitializeComponent();
@@ -58,7 +59,7 @@ namespace ImusCityGovernmentSystem
                 DVList = new List<DisbursementVoucherModel>();
                 var disburse = db.GetDisbursementVoucher(id).ToList();
                 CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
-             
+
                 foreach (var x in disburse)
                 {
                     DisbursementVoucherModel dvl = new DisbursementVoucherModel();
@@ -114,10 +115,25 @@ namespace ImusCityGovernmentSystem
                 check.Signatory1 = SystemClass.GetSignatory(signatories.CityMayor);
                 check.Signatory2 = SystemClass.GetSignatory(signatories.CityTreasurer);
                 ReportDocument report;
-                report = new CheckReport();
-                report.SetDataSource(new[] { check });
-                reportviewer.ViewerCore.ReportSource = report;
+                switch (bankName)
+                {
+                    case "LB":
+                        report = new LBCheckReport();
+                        report.SetDataSource(new[] { check });
+                        reportviewer.ViewerCore.ReportSource = report;
+                        break;
+                    case "UCPB":
+                        report = new UCPBCheckReport();
+                        report.SetDataSource(new[] { check });
+                        reportviewer.ViewerCore.ReportSource = report;
+                        break;
+                    case "DBP":
+                        report = new DBPCheckReport();
+                        report.SetDataSource(new[] { check });
+                        reportviewer.ViewerCore.ReportSource = report;
+                        break;
 
+                }                           
             }
             else
             {

@@ -220,6 +220,24 @@
       <DependentUpon>CheckRegisterReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CheckDisbursement\Report\DBPCheckReport.cs">
+      <DependentUpon>DBPCheckReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="CheckDisbursement\Report\UCPBCheckReport.cs">
+      <DependentUpon>UCPBCheckReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="CheckDisbursement\Report\LBCheckReport.cs">
+      <DependentUpon>LBCheckReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="CheckDisbursement\Report\CheckReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -835,6 +853,18 @@
     <EmbeddedResource Include="CheckDisbursement\Report\CheckRegisterReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CheckRegisterReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckDisbursement\Report\DBPCheckReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DBPCheckReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckDisbursement\Report\UCPBCheckReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>UCPBCheckReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckDisbursement\Report\LBCheckReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>LBCheckReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CheckDisbursement\Report\CheckReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
