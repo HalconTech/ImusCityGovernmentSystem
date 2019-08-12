@@ -66,6 +66,10 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 }
                 else
                 {
+                    DateTime dateToday = DateTime.Now;
+                    string year = dateToday.Year.ToString().Substring(dateToday.Year.ToString().Length - 2);
+                    string month = dateToday.Month.ToString().PadLeft(2, '0');
+
                     int accountId = (int)fundcb.SelectedValue;
                     ImusCityHallEntities db = new ImusCityHallEntities();
                     CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
@@ -77,6 +81,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         return;
                     }
                     var result = db.GetCheckIssued(startdatedp.SelectedDate, enddatedp.SelectedDate, accountId);
+                    string adviceNo = account.AdviceNo.HasValue ? account.AdviceNo.ToString() : null;
                     foreach (var checkIssued in result)
                     {
                         var check = new CheckIssuedModel
@@ -85,7 +90,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                             EndDate = enddatedp.SelectedDate.Value,
                             BankName = checkIssued.BankName,
                             AccoutNumber = checkIssued.AccountNumber,
-                            ReportNumber = checkIssued.FundPrefix + "-2015-03-",
+                            ReportNumber = string.Join("-", checkIssued.FundPrefix, year, month, adviceNo),
                             DateCreated = checkIssued.DateCreated.Value,
                             CheckNo = checkIssued.CheckNo,
                             VoucherNo = checkIssued.VoucherNo,
