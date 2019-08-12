@@ -914,7 +914,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ImusCityGovernmentData.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ClassDiagram1.cd" />
     <None Include="ImusCityGovernmentSystem_TemporaryKey.pfx" />
     <None Include="Model\ImusCityGovernmentData.edmx.diagram">
       <DependentUpon>ImusCityGovernmentData.edmx</DependentUpon>

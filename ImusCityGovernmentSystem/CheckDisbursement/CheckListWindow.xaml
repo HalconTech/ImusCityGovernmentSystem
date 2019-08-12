@@ -45,7 +45,6 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="editbtn" Header="Edit Check Entry" Click="editbtn_Click" />
-                    <MenuItem x:Name="deletebtn" Header="Delete Check Entry" Click="deletebtn_Click" />
                     <MenuItem x:Name="printbtn" Header="Reprint Check" Click="printbtn_Click"  />
                 </ContextMenu>
             </DataGrid.ContextMenu>

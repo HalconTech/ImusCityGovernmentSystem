@@ -10,6 +10,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
     {
         Created,
         Cancelled,
-        Released
+        Released,
+        Deleted
     }
 }

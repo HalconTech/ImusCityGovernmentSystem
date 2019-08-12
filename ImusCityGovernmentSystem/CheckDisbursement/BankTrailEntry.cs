@@ -11,6 +11,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
         CheckCreated,
         CheckCancelled,
         FundCreation,
-        Adjustment
+        Adjustment,
+        CheckDeleted
     }
 }

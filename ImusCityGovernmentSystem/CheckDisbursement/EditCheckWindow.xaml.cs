@@ -68,7 +68,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     check.CancelledBy = App.EmployeeID;
                     check.CancelledDate = DateTime.Now;
-
+                    
                     ImusCityGovernmentSystem.Model.BankTrail banktrail = new BankTrail();
                     ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(check.DisbursementID);
                     banktrail.DebitCredit = "C";
@@ -85,6 +85,29 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     account.CurrentBalance += Convert.ToDecimal(check.Amount);
 
                 }
+                else if (checkstatuscb.SelectedIndex == (int)CheckStatus.Deleted)
+                {
+                    check.DeletedBy = App.EmployeeID;
+                    check.DeletedDate = DateTime.Now;
+
+                    ImusCityGovernmentSystem.Model.BankTrail banktrail = new BankTrail();
+                    ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(check.DisbursementID);
+                    banktrail.DebitCredit = "C";
+                    banktrail.FundBankID = disbursement.FundBankID;
+                    banktrail.Amount = Convert.ToDecimal(check.Amount);
+                    banktrail.EntryName = nameof(BankTrailEntry.CheckDeleted);
+                    banktrail.CheckID = check.CheckID;
+                    banktrail.EntryNameID = (int)BankTrailEntry.CheckDeleted;
+                    banktrail.EmployeeID = App.EmployeeID;
+                    banktrail.DateCreated = DateTime.Now;
+                    db.BankTrails.Add(banktrail);
+
+                    ImusCityGovernmentSystem.Model.FundBank account = db.FundBanks.Find(disbursement.FundBankID);
+                    account.CurrentBalance += Convert.ToDecimal(check.Amount);
+
+                }
+
+
                 db.SaveChanges();
 
                 var audit = new AuditTrailModel
