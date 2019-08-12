@@ -25,9 +25,9 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> IdentificationCardTypeID { get; set; }
         public string IdentificationCardNumber { get; set; }
     
-        public virtual Check Check { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual IdentificationCardType IdentificationCardType { get; set; }
+        public virtual Check Check { get; set; }
     }
 }

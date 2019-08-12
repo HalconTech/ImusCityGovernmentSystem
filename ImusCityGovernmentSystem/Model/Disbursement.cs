@@ -17,8 +17,8 @@ namespace ImusCityGovernmentSystem.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Disbursement()
         {
-            this.Checks = new HashSet<Check>();
             this.DisbursementItems = new HashSet<DisbursementItem>();
+            this.Checks = new HashSet<Check>();
         }
     
         public int DisbursementID { get; set; }
@@ -39,8 +39,6 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> AdviceNo { get; set; }
         public Nullable<int> CreatedBy { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Check> Checks { get; set; }
         public virtual Department Department { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual FundBank FundBank { get; set; }
@@ -48,5 +46,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual PayeeRepresentative PayeeRepresentative { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementItem> DisbursementItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Check> Checks { get; set; }
     }
 }

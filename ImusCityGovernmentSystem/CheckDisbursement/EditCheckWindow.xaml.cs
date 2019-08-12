@@ -32,7 +32,15 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             {
                 foreach (var item in Enum.GetValues(typeof(CheckStatus)))
                 {
-                    checkstatuscb.Items.Add(item);
+                    if(item.ToString() == "Released" && item.ToString() == "Created")
+                    {
+
+                    }
+                    else
+                    {
+                        checkstatuscb.Items.Add(item);
+                    }
+     
                 }
 
                 ImusCityHallEntities db = new ImusCityHallEntities();
@@ -53,11 +61,14 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
             {
                 ImusCityHallEntities db = new ImusCityHallEntities();
                 ImusCityGovernmentSystem.Model.Check check = db.Checks.Find(CheckID);
-                check.DateCreated = checkdatecreateddp.SelectedDate;
                 check.Status = checkstatuscb.SelectedIndex;
+                
            
                 if(checkstatuscb.SelectedIndex == (int)CheckStatus.Cancelled)
                 {
+                    check.CancelledBy = App.EmployeeID;
+                    check.CancelledDate = DateTime.Now;
+
                     ImusCityGovernmentSystem.Model.BankTrail banktrail = new BankTrail();
                     ImusCityGovernmentSystem.Model.Disbursement disbursement = db.Disbursements.Find(check.DisbursementID);
                     banktrail.DebitCredit = "C";

@@ -18,7 +18,6 @@ namespace ImusCityGovernmentSystem.Model
         public Employee()
         {
             this.BankTrails = new HashSet<BankTrail>();
-            this.Checks = new HashSet<Check>();
             this.CheckReleases = new HashSet<CheckRelease>();
             this.Customers = new HashSet<Customer>();
             this.LicensingCodes = new HashSet<LicensingCode>();
@@ -31,6 +30,7 @@ namespace ImusCityGovernmentSystem.Model
             this.CDSSignatories3 = new HashSet<CDSSignatory>();
             this.CDSSignatories4 = new HashSet<CDSSignatory>();
             this.CDSSignatories5 = new HashSet<CDSSignatory>();
+            this.Checks = new HashSet<Check>();
         }
     
         public int EmployeeID { get; set; }
@@ -93,8 +93,6 @@ namespace ImusCityGovernmentSystem.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BankTrail> BankTrails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Check> Checks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckRelease> CheckReleases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
@@ -121,5 +119,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual ICollection<CDSSignatory> CDSSignatories4 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CDSSignatory> CDSSignatories5 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Check> Checks { get; set; }
     }
 }
