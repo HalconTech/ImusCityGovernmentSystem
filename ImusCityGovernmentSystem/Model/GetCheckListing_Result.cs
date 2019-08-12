@@ -20,6 +20,8 @@ namespace ImusCityGovernmentSystem.Model
         public string ControlNo { get; set; }
         public string Status { get; set; }
         public Nullable<int> StatusID { get; set; }
+        public string CAN_DELETE_DATE { get; set; }
+        public string CAN_DELETE_EMP { get; set; }
         public string CHECK_USER { get; set; }
         public string VoucherNo { get; set; }
         public string ProjectName { get; set; }

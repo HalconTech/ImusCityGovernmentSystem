@@ -23,5 +23,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.Model
         public int FundID { get; set; }
         public string BankName { get; set; }
         public int BankID { get; set; }
+        public string CanDelDate { get; set; }
+        public string CanDelBy { get; set; }
     }
 }

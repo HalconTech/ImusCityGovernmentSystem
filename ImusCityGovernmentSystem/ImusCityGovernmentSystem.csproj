@@ -500,6 +500,14 @@
     <Compile Include="Model\PayeeRepresentativeView.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ReportDataSet.cs">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Model\SecurityQuestionBank.cs">
       <DependentUpon>ImusCityGovernmentData.tt</DependentUpon>
     </Compile>
@@ -917,6 +925,17 @@
     <None Include="ImusCityGovernmentSystem_TemporaryKey.pfx" />
     <None Include="Model\ImusCityGovernmentData.edmx.diagram">
       <DependentUpon>ImusCityGovernmentData.edmx</DependentUpon>
+    </None>
+    <None Include="Model\ReportDataSet.xsc">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Model\ReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Model\ReportDataSet.xss">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

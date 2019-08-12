@@ -1448,10 +1448,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <FunctionImport Name="GetDisbursementVoucher" ReturnType="Collection(ImusCityHallModel.GetDisbursementVoucher_Result)">
           <Parameter Name="DisbursementID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetCheckListing" ReturnType="Collection(ImusCityHallModel.GetCheckListing_Result)">
-            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="Checks" EntityType="ImusCityHallModel.Check" />
           <AssociationSet Name="FK_BankTrail_Check" Association="ImusCityHallModel.FK_BankTrail_Check">
             <End Role="Check" EntitySet="Checks" />
@@ -1469,6 +1465,10 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <End Role="Check" EntitySet="Checks" />
             <End Role="CheckRelease" EntitySet="CheckReleases" />
           </AssociationSet>
+          <FunctionImport Name="GetCheckListing" ReturnType="Collection(ImusCityHallModel.GetCheckListing_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetCheckRegister_Result">
           <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
@@ -2522,23 +2522,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="PaymentType" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="GetCheckListing_Result">
-          <Property Type="String" Name="CheckNo" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CheckDescription" Nullable="true" MaxLength="Max" />
-          <Property Type="DateTime" Name="CheckDateCreated" Nullable="true" Precision="23" />
-          <Property Type="Decimal" Name="CheckAmount" Nullable="true" Precision="19" />
-          <Property Type="String" Name="ControlNo" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Status" Nullable="true" MaxLength="9" />
-          <Property Type="Int32" Name="StatusID" Nullable="true" />
-          <Property Type="String" Name="CHECK_USER" Nullable="true" MaxLength="101" />
-          <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ProjectName" Nullable="true" MaxLength="150" />
-          <Property Type="DateTime" Name="VoucherDateCreated" Nullable="true" Precision="23" />
-          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="FundID" Nullable="true" />
-          <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="BankID" Nullable="false" />
-        </ComplexType>
         <EntityType Name="Check">
           <Key>
             <PropertyRef Name="CheckID" />
@@ -2611,6 +2594,25 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetCheckListing_Result">
+          <Property Type="String" Name="CheckNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CheckDescription" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="CheckDateCreated" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="CheckAmount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="ControlNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="9" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+          <Property Type="String" Name="CAN_DELETE_DATE" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CAN_DELETE_EMP" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="CHECK_USER" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProjectName" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="VoucherDateCreated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FundID" Nullable="true" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="BankID" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3149,27 +3151,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetCheckListing" FunctionName="ImusCityHallModel.Store.GetCheckListing">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ImusCityHallModel.GetCheckListing_Result">
-                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
-                <ScalarProperty Name="CheckDescription" ColumnName="CheckDescription" />
-                <ScalarProperty Name="CheckDateCreated" ColumnName="CheckDateCreated" />
-                <ScalarProperty Name="CheckAmount" ColumnName="CheckAmount" />
-                <ScalarProperty Name="ControlNo" ColumnName="ControlNo" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="CHECK_USER" ColumnName="CHECK_USER" />
-                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-                <ScalarProperty Name="VoucherDateCreated" ColumnName="VoucherDateCreated" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="FundID" ColumnName="FundID" />
-                <ScalarProperty Name="BankName" ColumnName="BankName" />
-                <ScalarProperty Name="BankID" ColumnName="BankID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Checks">
             <EntityTypeMapping TypeName="ImusCityHallModel.Check">
               <MappingFragment StoreEntitySet="Check">
@@ -3191,6 +3172,29 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCheckListing" FunctionName="ImusCityHallModel.Store.GetCheckListing">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ImusCityHallModel.GetCheckListing_Result">
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="CheckDescription" ColumnName="CheckDescription" />
+                <ScalarProperty Name="CheckDateCreated" ColumnName="CheckDateCreated" />
+                <ScalarProperty Name="CheckAmount" ColumnName="CheckAmount" />
+                <ScalarProperty Name="ControlNo" ColumnName="ControlNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CAN_DELETE_DATE" ColumnName="CAN_DELETE_DATE" />
+                <ScalarProperty Name="CAN_DELETE_EMP" ColumnName="CAN_DELETE_EMP" />
+                <ScalarProperty Name="CHECK_USER" ColumnName="CHECK_USER" />
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="VoucherDateCreated" ColumnName="VoucherDateCreated" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="FundID" ColumnName="FundID" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
