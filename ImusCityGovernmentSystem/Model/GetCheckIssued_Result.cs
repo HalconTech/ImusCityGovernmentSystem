@@ -24,5 +24,9 @@ namespace ImusCityGovernmentSystem.Model
         public string PaymentNature { get; set; }
         public string FundPrefix { get; set; }
         public string VoucherNo { get; set; }
+        public string Status { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public string CAN_DELETE_DATE { get; set; }
+        public string CAN_DELETE_EMP { get; set; }
     }
 }

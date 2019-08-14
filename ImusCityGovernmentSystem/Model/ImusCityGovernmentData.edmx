@@ -1241,11 +1241,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
             <Parameter Name="FundBankID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetCheckIssued" ReturnType="Collection(ImusCityHallModel.GetCheckIssued_Result)">
-            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-            <Parameter Name="FundBankID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="GetCustomerTransactions" ReturnType="Collection(ImusCityHallModel.GetCustomerTransactions_Result)">
           <Parameter Name="CustomerID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1469,6 +1464,11 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <Parameter Name="StartDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="GetCheckIssued" ReturnType="Collection(ImusCityHallModel.GetCheckIssued_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="FundBankID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetCheckRegister_Result">
           <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
@@ -1480,19 +1480,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="150" />
           <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
           <Property Type="String" Name="AmountInWords" Nullable="true" MaxLength="8000" />
-        </ComplexType>
-        <ComplexType Name="GetCheckIssued_Result">
-          <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Branch" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
-          <Property Type="String" Name="CheckNo" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="150" />
-          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
-          <Property Type="String" Name="PaymentNature" Nullable="true" MaxLength="5" />
-          <Property Type="String" Name="FundPrefix" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="GetCustomerTransactions_Result">
           <Property Type="String" Name="Activity" Nullable="false" MaxLength="14" />
@@ -2613,6 +2600,23 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="BankID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="GetCheckIssued_Result">
+          <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Branch" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CheckNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="PaymentNature" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="FundPrefix" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="9" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+          <Property Type="String" Name="CAN_DELETE_DATE" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CAN_DELETE_EMP" Nullable="true" MaxLength="101" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2631,23 +2635,6 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="AmountInWords" ColumnName="AmountInWords" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetCheckIssued" FunctionName="ImusCityHallModel.Store.GetCheckIssued">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ImusCityHallModel.GetCheckIssued_Result">
-                <ScalarProperty Name="FundName" ColumnName="FundName" />
-                <ScalarProperty Name="Branch" ColumnName="Branch" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="BankName" ColumnName="BankName" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="PaymentNature" ColumnName="PaymentNature" />
-                <ScalarProperty Name="FundPrefix" ColumnName="FundPrefix" />
-                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3192,6 +3179,27 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="FundID" ColumnName="FundID" />
                 <ScalarProperty Name="BankName" ColumnName="BankName" />
                 <ScalarProperty Name="BankID" ColumnName="BankID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCheckIssued" FunctionName="ImusCityHallModel.Store.GetCheckIssued">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ImusCityHallModel.GetCheckIssued_Result">
+                <ScalarProperty Name="FundName" ColumnName="FundName" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentNature" ColumnName="PaymentNature" />
+                <ScalarProperty Name="FundPrefix" ColumnName="FundPrefix" />
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CAN_DELETE_DATE" ColumnName="CAN_DELETE_DATE" />
+                <ScalarProperty Name="CAN_DELETE_EMP" ColumnName="CAN_DELETE_EMP" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

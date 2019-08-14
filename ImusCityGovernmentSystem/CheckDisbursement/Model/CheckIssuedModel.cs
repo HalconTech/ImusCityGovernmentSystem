@@ -21,5 +21,9 @@ namespace ImusCityGovernmentSystem.CheckDisbursement.Model
         public string ReportNumber { get; set; }
         public string PaymentNature { get; set; }
         public string Center { get; set; }
+        public string Status { get; set; }
+        public int StatusID { get; set; }
+        public string CanDelBy { get; set; }
+        public string CanDelDate { get; set; }
     }
 }
