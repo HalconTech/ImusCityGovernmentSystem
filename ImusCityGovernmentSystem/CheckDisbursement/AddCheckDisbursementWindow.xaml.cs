@@ -69,6 +69,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 try
                 {
                     ImusCityHallEntities db = new ImusCityHallEntities();
+                    CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
                     if (payeecb.SelectedValue == null && optionpayeecb.IsChecked == false)
                     {
                         MessageBox.Show("Please select payee from the dropdown list");
@@ -81,6 +82,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     else if (paymenttypecb.SelectedValue == null)
                     {
                         MessageBox.Show("Please select payment type");
+                    }
+                    else if (signatories == null)
+                    {
+                        Mouse.OverrideCursor = null;
+                        MessageBox.Show("Please add report signatories");
                     }
                     else if (String.IsNullOrEmpty(vouchernotb.Text))
                     {

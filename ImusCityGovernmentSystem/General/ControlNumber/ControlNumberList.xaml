@@ -12,7 +12,7 @@
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
                       GlowBrush="Black"
-                      Width="586" Loaded="MetroWindow_Loaded">
+                      Width="680.667" Loaded="MetroWindow_Loaded">
     <Grid Margin="10">
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -66,7 +66,17 @@
             <TextBlock Grid.Row="10" Text="Current Control Number"></TextBlock>
             <Controls:NumericUpDown Minimum ="0" Maximum = "9999999999"  Grid.Row="11" VerticalAlignment="Center" Name="controlnocurrenttb"/>
             <TextBlock Grid.Row="12" Text="Is Active"></TextBlock>
-            <CheckBox Grid.Row="13" Name="activechk" VerticalContentAlignment="Center" IsEnabled="True" IsChecked="True" Content="Active"></CheckBox>
+            <Grid Grid.Row="13">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <CheckBox Name="activechk" VerticalContentAlignment="Center" IsEnabled="True" IsChecked="True" Content="Active"></CheckBox>
+                <Button x:Name="adddamagetbn" Grid.Column="1" Content="Add Damage Check #" FontSize="7" Click="adddamagetbn_Click" Margin="0,0,2.5,0" ></Button>
+                <Button x:Name="viewdamagechecklistbtn" Grid.Column="2" Content="View Damage Check List" FontSize="7" Margin="2.5,0,0,0" Click="viewdamagechecklistbtn_Click"></Button>
+            </Grid>
+            
             <Grid Grid.Row="14" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>

@@ -307,5 +307,32 @@ namespace ImusCityGovernmentSystem.General.ControlNumber
             return value >= minimum && value <= maximum;
         }
 
+        private void adddamagetbn_Click(object sender, RoutedEventArgs e)
+        {
+            if(accountcb.SelectedValue == null)
+            {
+                MessageBox.Show("Please select an account");
+            }
+            else
+            {
+                AddDamageCheckWindow addDamageCheckWindow = new AddDamageCheckWindow();
+                addDamageCheckWindow.fundBankId = (int)accountcb.SelectedValue;
+                addDamageCheckWindow.ShowDialog();
+            }
+        }
+
+        private void viewdamagechecklistbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (accountcb.SelectedValue == null)
+            {
+                MessageBox.Show("Please select an account");
+            }
+            else
+            {
+                DamageCheckList damageCheckList = new DamageCheckList();
+                damageCheckList.fundBankId = (int)accountcb.SelectedValue;
+                damageCheckList.ShowDialog();
+            }
+        }
     }
 }

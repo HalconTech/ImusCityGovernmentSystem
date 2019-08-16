@@ -136,6 +136,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                             Mouse.OverrideCursor = null;
                             MessageBox.Show("Selected fund have no available check number");
                         }
+                        else if(db.DamageChecks.Where(m => m.FundBankID == fundBankId && m.CheckNumber == checknotb.Text).Count() >= 1)
+                        {
+                            Mouse.OverrideCursor = null;
+                            MessageBox.Show("The current check number is in the list of damage checks");
+                        }
                         else
                         {
                             Check check = new Check();
@@ -213,8 +218,11 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
         void PrintReport(int id)
         {
             Mouse.OverrideCursor = Cursors.Wait;
+            ImusCityHallEntities db = new ImusCityHallEntities();
+            string bankCode = db.Checks.Find(id).Disbursement.FundBank.Bank.BankCode;
             ReportWindow report = new ReportWindow();
             report.id = id;
+            report.bankName = bankCode;
             App.ReportID = 2;
             report.Show();
             Mouse.OverrideCursor = null;
@@ -235,13 +243,25 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 if (controlNumber == null)
                 {
                     MessageBox.Show("Selected fund have no available check number");
+                    checknotb.Clear();
+                }
+                else if(controlNumber.Where(m => m.Active == true).Count() < 1)
+                {
+                    MessageBox.Show("Selected fund have no available check number");
+                    checknotb.Clear();
+                }
+                else if (controlNumber.Where(m => m.Active == true).Count() > 1)
+                {
+                    MessageBox.Show("Selected fund have multiple active check control number. Set only one active control number to be used");
+                    checknotb.Clear();
                 }
                 else
                 {
-                    int checkNo = controlNumber.Where(m => m.Active == true).FirstOrDefault().NextControlNo.HasValue ? controlNumber.Where(m => m.Active == true).FirstOrDefault().NextControlNo.Value : 0;
-                    string formatted = checkNo.ToString("D10");
-                    checknotb.Text = formatted;
-                    currentbalancetb.Text = String.Format("{0:n}", fundBank.CurrentBalance);
+                        int checkNo = controlNumber.Where(m => m.Active == true).FirstOrDefault().NextControlNo.HasValue ? controlNumber.Where(m => m.Active == true).FirstOrDefault().NextControlNo.Value : 0;
+                        string formatted = checkNo.ToString("D10");
+                        checknotb.Text = formatted;
+                        currentbalancetb.Text = String.Format("{0:n}", fundBank.CurrentBalance);
+                                
                 }
             }
 

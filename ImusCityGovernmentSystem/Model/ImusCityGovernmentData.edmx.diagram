@@ -85,6 +85,7 @@
         <AssociationConnector Association="ImusCityHallModel.FK_Check_Disbursement" />
         <AssociationConnector Association="ImusCityHallModel.FK_Check_Employee" />
         <AssociationConnector Association="ImusCityHallModel.FK_CheckRelease_Check" />
+        <EntityTypeShape EntityType="ImusCityHallModel.DamageCheck" Width="1.5" PointX="5.375" PointY="11.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

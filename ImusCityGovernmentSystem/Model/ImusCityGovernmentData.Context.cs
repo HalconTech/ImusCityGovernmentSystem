@@ -63,6 +63,7 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<DisbursementItem> DisbursementItems { get; set; }
         public virtual DbSet<PayeeRepresentativeView> PayeeRepresentativeViews { get; set; }
         public virtual DbSet<Check> Checks { get; set; }
+        public virtual DbSet<DamageCheck> DamageChecks { get; set; }
     
         public virtual ObjectResult<GetCheckRegister_Result> GetCheckRegister(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> fundBankID)
         {

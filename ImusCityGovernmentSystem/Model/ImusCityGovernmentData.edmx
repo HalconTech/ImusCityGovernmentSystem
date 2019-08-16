@@ -178,6 +178,16 @@
           <Property Name="IdentificationCardTypeID" Type="int" />
           <Property Name="IdentificationNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="DamageCheck">
+          <Key>
+            <PropertyRef Name="DamageCheckId" />
+          </Key>
+          <Property Name="DamageCheckId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FundBankID" Type="int" />
+          <Property Name="CheckNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="DepartmentID" />
@@ -1026,6 +1036,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <EntitySet Name="ControlNumber" EntityType="Self.ControlNumber" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerIdentificationCard" EntityType="Self.CustomerIdentificationCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DamageCheck" EntityType="Self.DamageCheck" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disbursement" EntityType="Self.Disbursement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisbursementItem" EntityType="Self.DisbursementItem" Schema="dbo" store:Type="Tables" />
@@ -1469,6 +1480,7 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
             <Parameter Name="StartDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="DamageChecks" EntityType="ImusCityHallModel.DamageCheck" />
           </EntityContainer>
         <ComplexType Name="GetCheckRegister_Result">
           <Property Type="String" Name="FundName" Nullable="true" MaxLength="50" />
@@ -2617,6 +2629,16 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="BankID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="DamageCheck">
+          <Key>
+            <PropertyRef Name="DamageCheckId" />
+          </Key>
+          <Property Name="DamageCheckId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FundBankID" Type="Int32" />
+          <Property Name="CheckNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3203,6 +3225,17 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="DamageChecks">
+            <EntityTypeMapping TypeName="ImusCityHallModel.DamageCheck">
+              <MappingFragment StoreEntitySet="DamageCheck">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+                <ScalarProperty Name="FundBankID" ColumnName="FundBankID" />
+                <ScalarProperty Name="DamageCheckId" ColumnName="DamageCheckId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
