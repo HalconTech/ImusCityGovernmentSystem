@@ -2606,6 +2606,8 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
           <Property Type="String" Name="ControlNo" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Status" Nullable="true" MaxLength="9" />
           <Property Type="Int32" Name="StatusID" Nullable="true" />
+          <Property Type="String" Name="CAN_DELETE_DATE" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CAN_DELETE_EMP" Nullable="true" MaxLength="101" />
           <Property Type="String" Name="CHECK_USER" Nullable="true" MaxLength="101" />
           <Property Type="String" Name="VoucherNo" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="ProjectName" Nullable="true" MaxLength="150" />
@@ -3188,6 +3190,8 @@ warning 6002: The table/view 'ImusCityHall.dbo.PayeeRepresentativeView' does not
                 <ScalarProperty Name="ControlNo" ColumnName="ControlNo" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CAN_DELETE_DATE" ColumnName="CAN_DELETE_DATE" />
+                <ScalarProperty Name="CAN_DELETE_EMP" ColumnName="CAN_DELETE_EMP" />
                 <ScalarProperty Name="CHECK_USER" ColumnName="CHECK_USER" />
                 <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
                 <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
