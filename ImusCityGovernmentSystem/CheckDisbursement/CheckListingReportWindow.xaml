@@ -39,6 +39,7 @@
                 <ComboBoxItem>Cancelled</ComboBoxItem>
                 <ComboBoxItem>Released</ComboBoxItem>
                 <ComboBoxItem>Deleted</ComboBoxItem>
+                <ComboBoxItem>Damaged</ComboBoxItem>
             </ComboBox>
             <Button x:Name="generatebtn" Grid.Row="10" Content="Generate Report" Margin="0,5,0,0" Click="generatebtn_Click"></Button>
         </Grid>
