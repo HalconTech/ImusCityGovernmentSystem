@@ -104,19 +104,6 @@ namespace ImusCityGovernmentSystem.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDisbursementVoucher_Result>("GetDisbursementVoucher", disbursementIDParameter);
         }
     
-        public virtual ObjectResult<GetCheckListing_Result> GetCheckListing(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
-        {
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckListing_Result>("GetCheckListing", startDateParameter, endDateParameter);
-        }
-    
         public virtual ObjectResult<GetCheckIssued_Result> GetCheckIssued(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> fundBankID)
         {
             var startDateParameter = startDate.HasValue ?
@@ -132,6 +119,19 @@ namespace ImusCityGovernmentSystem.Model
                 new ObjectParameter("FundBankID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckIssued_Result>("GetCheckIssued", startDateParameter, endDateParameter, fundBankIDParameter);
+        }
+    
+        public virtual ObjectResult<GetCheckListing_Result> GetCheckListing(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckListing_Result>("GetCheckListing", startDateParameter, endDateParameter);
         }
     }
 }
