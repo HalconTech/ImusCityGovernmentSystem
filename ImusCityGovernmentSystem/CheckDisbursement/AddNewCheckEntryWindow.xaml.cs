@@ -121,7 +121,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                             Mouse.OverrideCursor = null;
                             MessageBox.Show("Please enter check amount");
                         }
-                        else if (db.Checks.Any(m => m.CheckNo == checknotb.Text && m.Status != (int)CheckStatus.Deleted))
+                        else if (db.Checks.Any(m => m.CheckNo == checknotb.Text && m.Status != (int)CheckStatus.Deleted && m.Disbursement.FundBankID == fundBankId))
                         {
                             Mouse.OverrideCursor = null;
                             MessageBox.Show("Check number is already been used");
