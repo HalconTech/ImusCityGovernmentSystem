@@ -77,7 +77,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         MessageBox.Show("There are no record in this selection");
                         return;
                     }
-                    var result = db.GetCheckRegister(startdatedp.SelectedDate, enddatedp.SelectedDate, accountId);
+                    var result = db.GetCheckRegister(startdatedp.SelectedDate, enddatedp.SelectedDate, accountId).Where(m => m.Status == "Released");
                     ReportDataSet ds = new ReportDataSet();
                     ds.Locale = CultureInfo.InvariantCulture;
    

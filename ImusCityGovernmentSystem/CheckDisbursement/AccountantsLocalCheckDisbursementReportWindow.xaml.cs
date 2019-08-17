@@ -77,7 +77,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         MessageBox.Show("There are no record in this selection");
                         return;
                     }
-                    var result = db.GetCheckRegister(startdatedp.SelectedDate,enddatedp.SelectedDate,accountId);
+                    var result = db.GetCheckRegister(startdatedp.SelectedDate,enddatedp.SelectedDate,accountId).Where(m => m.Status == "Created" || m.Status == "Cancelled" || m.Status == "Damaged");
                     CurrencyToWords convert = new CurrencyToWords();
                     double totalAmount = Convert.ToDouble(db.GetCheckRegister(startdatedp.SelectedDate, enddatedp.SelectedDate, accountId).Sum(m => m.Amount).Value);
                     string amountInWords = convert.NumberToWords(totalAmount).ToUpper();

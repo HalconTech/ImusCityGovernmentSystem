@@ -12,7 +12,7 @@
                       WindowTransitionsEnabled="False"
                       ShowIconOnTitleBar="True"
                       ResizeMode="NoResize"
-                      Width="535.497" Loaded="MetroWindow_Loaded" >
+                      Width="630.497" Loaded="MetroWindow_Loaded" >
     <Grid Margin="10">
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -20,7 +20,7 @@
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
@@ -36,7 +36,15 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="City Mayor"></TextBlock>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <RadioButton Content="Use City Mayor" Name="mayorrb"></RadioButton>
+            <RadioButton Grid.Column="1" Content="Use Acting City Mayor" Name="actingrb"></RadioButton>
+        </Grid>
+        
         <ComboBox IsEditable="True" Grid.Row="1" VerticalContentAlignment="Center" Name="mayorcb"></ComboBox>
         <TextBlock Grid.Row="2" Text="City Treasurer"></TextBlock>
         <ComboBox IsEditable="True" Grid.Row="3" Name="treasurercb" VerticalContentAlignment="Center"></ComboBox>

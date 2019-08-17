@@ -105,7 +105,13 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         list = list.Where(m => m.FundID == accountId).ToList();
                     }
                     if (!String.IsNullOrEmpty(statuscb.Text))
-                        list = list.Where(m => m.Status == statuscb.Text).ToList();
+                    {
+                        if(statuscb.Text != "All")
+                        {
+                            list = list.Where(m => m.Status == statuscb.Text).ToList();
+                        }
+                    }
+                       
 
                     ReportDataSet ds = new ReportDataSet();
                     ds.Locale = CultureInfo.InvariantCulture;

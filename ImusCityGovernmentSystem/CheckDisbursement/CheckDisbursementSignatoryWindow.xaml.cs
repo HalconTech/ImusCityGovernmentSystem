@@ -34,6 +34,16 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 {
                     ImusCityGovernmentSystem.Model.CDSSignatory signatory = db.CDSSignatories.FirstOrDefault();
                     signatory.CityMayor = mayorcb.SelectedValue == null ? null : (int?)mayorcb.SelectedValue;
+                    switch (mayorrb.IsChecked)
+                    {
+                        case true:
+                            signatory.UseActingMayor = false;
+                            break;
+                        case false:
+                            signatory.UseActingMayor = true;
+                            break;
+                    }
+
                     signatory.CityTreasurer = treasurercb.SelectedValue == null ? null : (int?)treasurercb.SelectedValue;
                     signatory.CityAccountant = accountantcb.SelectedValue == null ? null : (int?)accountantcb.SelectedValue;
                     signatory.AccountantRepresentative = accountantrepcb.SelectedValue == null ? null : (int?)accountantrepcb.SelectedValue;
@@ -55,6 +65,15 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 else
                 {
                     ImusCityGovernmentSystem.Model.CDSSignatory signatory = new CDSSignatory();
+                    switch (mayorrb.IsChecked)
+                    {
+                        case true:
+                            signatory.UseActingMayor = false;
+                            break;
+                        case false:
+                            signatory.UseActingMayor = true;
+                            break;
+                    }
                     signatory.CityMayor = mayorcb.SelectedValue == null ? null : (int?)mayorcb.SelectedValue;
                     signatory.CityTreasurer = treasurercb.SelectedValue == null ? null : (int?)treasurercb.SelectedValue;
                     signatory.CityAccountant = accountantcb.SelectedValue == null ? null : (int?)accountantcb.SelectedValue;
@@ -95,6 +114,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                                  Name = p.FirstName + " " + p.LastName
                              };
 
+
                 mayorcb.ItemsSource = result.OrderBy(m => m.Name).ToList();
                 mayorcb.DisplayMemberPath = "Name";
                 mayorcb.SelectedValuePath = "ID";
@@ -122,6 +142,18 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 if (db.CDSSignatories.Any())
                 {
                     ImusCityGovernmentSystem.Model.CDSSignatory signatory = db.CDSSignatories.FirstOrDefault();
+                    switch (signatory.UseActingMayor)
+                    {
+                        case true:
+                            mayorrb.IsChecked = false;
+                            actingrb.IsChecked = true;
+                            break;
+                        case false:
+                            mayorrb.IsChecked = true;
+                            actingrb.IsChecked = false;
+                            break;
+                    }
+
                     mayorcb.SelectedValue = signatory.CityMayor;
                     treasurercb.SelectedValue = signatory.CityTreasurer;
                     accountantcb.SelectedValue = signatory.CityAccountant;
@@ -131,7 +163,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                 }
                 else
                 {
-
+                    mayorrb.IsChecked = true;
                 }
             }
             else

@@ -59,11 +59,11 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<SystemSetting> SystemSettings { get; set; }
         public virtual DbSet<UserAccount> UserAccounts { get; set; }
         public virtual DbSet<Disbursement> Disbursements { get; set; }
-        public virtual DbSet<CDSSignatory> CDSSignatories { get; set; }
         public virtual DbSet<DisbursementItem> DisbursementItems { get; set; }
         public virtual DbSet<PayeeRepresentativeView> PayeeRepresentativeViews { get; set; }
         public virtual DbSet<Check> Checks { get; set; }
         public virtual DbSet<DamageCheck> DamageChecks { get; set; }
+        public virtual DbSet<CDSSignatory> CDSSignatories { get; set; }
     
         public virtual ObjectResult<GetCustomerTransactions_Result> GetCustomerTransactions(Nullable<int> customerID)
         {

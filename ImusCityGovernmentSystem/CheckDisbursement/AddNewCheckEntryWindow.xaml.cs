@@ -50,6 +50,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     voucherList.Add(voucherItem);
                 }
                 voucheritemsdg.ItemsSource = voucherList;
+                checkdesctb.Text = voucherList.FirstOrDefault().Explanation;
 
                 LoadFund();
 

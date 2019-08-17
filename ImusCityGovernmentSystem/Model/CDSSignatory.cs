@@ -21,6 +21,7 @@ namespace ImusCityGovernmentSystem.Model
         public Nullable<int> AccountantRepresentative { get; set; }
         public Nullable<int> CityAdministrator { get; set; }
         public Nullable<int> DisbursingOfficer { get; set; }
+        public Nullable<bool> UseActingMayor { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Employee Employee1 { get; set; }
