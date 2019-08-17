@@ -65,23 +65,6 @@ namespace ImusCityGovernmentSystem.Model
         public virtual DbSet<Check> Checks { get; set; }
         public virtual DbSet<DamageCheck> DamageChecks { get; set; }
     
-        public virtual ObjectResult<GetCheckRegister_Result> GetCheckRegister(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> fundBankID)
-        {
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
-    
-            var fundBankIDParameter = fundBankID.HasValue ?
-                new ObjectParameter("FundBankID", fundBankID) :
-                new ObjectParameter("FundBankID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckRegister_Result>("GetCheckRegister", startDateParameter, endDateParameter, fundBankIDParameter);
-        }
-    
         public virtual ObjectResult<GetCustomerTransactions_Result> GetCustomerTransactions(Nullable<int> customerID)
         {
             var customerIDParameter = customerID.HasValue ?
@@ -133,6 +116,23 @@ namespace ImusCityGovernmentSystem.Model
                 new ObjectParameter("EndDate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckListing_Result>("GetCheckListing", startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<GetCheckRegister_Result> GetCheckRegister(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> fundBankID)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var fundBankIDParameter = fundBankID.HasValue ?
+                new ObjectParameter("FundBankID", fundBankID) :
+                new ObjectParameter("FundBankID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckRegister_Result>("GetCheckRegister", startDateParameter, endDateParameter, fundBankIDParameter);
         }
     }
 }

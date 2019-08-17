@@ -14,6 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImusCityGovernmentSystem.Model;
 using CrystalDecisions.CrystalReports.Engine;
+using System.Globalization;
+using System.Data;
+
 namespace ImusCityGovernmentSystem.CheckDisbursement
 {
     /// <summary>
@@ -68,7 +71,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     ImusCityHallEntities db = new ImusCityHallEntities();
                     CDSSignatory signatories = db.CDSSignatories.FirstOrDefault();
                     FundBank account = db.FundBanks.Find(accountId);
-                    List<CheckRegisterModel> list = new List<CheckRegisterModel>();
+
                     if(db.GetCheckRegister(startdatedp.SelectedDate, enddatedp.SelectedDate, accountId).Count() <= 0)
                     {
                         MessageBox.Show("There are no record in this selection");
@@ -78,26 +81,28 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                     CurrencyToWords convert = new CurrencyToWords();
                     double totalAmount = Convert.ToDouble(db.GetCheckRegister(startdatedp.SelectedDate, enddatedp.SelectedDate, accountId).Sum(m => m.Amount).Value);
                     string amountInWords = convert.NumberToWords(totalAmount).ToUpper();
+
+                    ReportDataSet ds = new ReportDataSet();
+                    ds.Locale = CultureInfo.InvariantCulture;
+                    DataTable checkRegisterList = ds.Tables["CheckRegisterDataTable"];
                     foreach (var checkregister in result)
                     {
-                        var check = new CheckRegisterModel
-                        {
-                            //FundName = checkregister.FundName,
-                            FundName = checkregister.BankName,
-                            Branch = checkregister.Branch,
-                            AccoutNumber = checkregister.AccountNumber,
-                            BankName = checkregister.BankName,
-                            DateCreated = checkregister.DateCreated.Value,
-                            CheckNo = checkregister.CheckNo,
-                            CompanyName = checkregister.CompanyName,
-                            Amount = checkregister.Amount.Value,
-                            AmountInWords = amountInWords
-                        };
-                        list.Add(check);
+                        DataRow dr = checkRegisterList.Rows.Add();
+                        dr.SetField("FundName", checkregister.FundName);
+                        dr.SetField("Branch", checkregister.Branch);
+                        dr.SetField("AccountNumber", checkregister.AccountNumber);
+                        dr.SetField("BankName", checkregister.BankName);
+                        dr.SetField("DateCreated", checkregister.DateCreated);
+                        dr.SetField("CheckNo", checkregister.CheckNo);
+                        dr.SetField("CompanyName", checkregister.CompanyName);
+                        dr.SetField("Amount", checkregister.Amount);
+                        dr.SetField("AmountInWords",amountInWords);
+                        dr.SetField("Status", checkregister.Status);
                     }
+
                     ReportDocument report;
                     report = new CheckDisbursement.Report.AccountantCheckDisbursementReport();
-                    report.SetDataSource(list);
+                    report.SetDataSource(checkRegisterList);
                     report.SetParameterValue("Signatory1", SystemClass.GetSignatory(signatories.CityAccountant));
                     report.SetParameterValue("Signatory2", SystemClass.GetSignatory(signatories.AccountantRepresentative));
                     report.SetParameterValue("AdviceNo", account.AdviceNo.HasValue ? account.AdviceNo.ToString() : "");

@@ -22,5 +22,6 @@ namespace ImusCityGovernmentSystem.Model
         public string CompanyName { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public string AmountInWords { get; set; }
+        public string Status { get; set; }
     }
 }
