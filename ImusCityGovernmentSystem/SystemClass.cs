@@ -91,7 +91,7 @@ namespace ImusCityGovernmentSystem
             ImusCityHallEntities db = new ImusCityHallEntities();
             ImusCityGovernmentSystem.Model.Employee employee = db.Employees.Find(id);
             result = employee.FirstName + " " + employee.MiddleName + " " + employee.LastName;
-            return result;
+            return result.ToUpper();
         }
 
         public static string Employee(int id)
