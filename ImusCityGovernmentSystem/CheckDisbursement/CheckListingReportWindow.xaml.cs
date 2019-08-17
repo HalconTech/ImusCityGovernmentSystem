@@ -100,7 +100,7 @@ namespace ImusCityGovernmentSystem.CheckDisbursement
                         list.Add(check);
                     }
                     if (!String.IsNullOrEmpty(fundcb.Text))
-                    {
+                    { 
                         int accountId = (int)fundcb.SelectedValue;
                         list = list.Where(m => m.FundID == accountId).ToList();
                     }
